@@ -96,7 +96,7 @@ Telia IoT palvelulla on helppoa seurata huoneilman lämpötila-, kosteus- ja hii
 
 Telia IoT alustan avulla voi esimerkiksi seurata lämpötilaa ja sen muutoksia. Palvelun avulla voidaan tutkia onko toimistossa esimerkiksi liian kylmä, tai nähdä nousiko lämpötila varastossa liian kuumaksi menemättä itse paikalle. Kosteutta ja hiilidioksiditasoja seuraamalla voidaan päästä jäljille sisäilman muutoksista ja seurata esimerkiksi kokoustilan ilmanlaatua. Myös liikesensoreilla voidaan laskea työpisteiden, tai neuvotteluhuoneiden käyttöaste. 
 
-IoT palvelu on verkkosivu, tai selainpohjainen käyttöliittymä IoT laitteiden tuottaman datan tarkasteluun. Projektin puolesta on määritelty, että sovelluksen tulee toimia pääpiirteittäin kaikilla mahdollisilla mobiililaitteilla, sekä vähintään uusimmilla ja yleisimmillä nettiselaimilla. Projektin tavoitteena oli luoda selkeä käyttöliittymä, jolla seurata huoneilmaa. 
+IoT palvelu on verkkosivu, tai selainpohjainen käyttöliittymä IoT laitteiden tuottaman datan tarkasteluun. Palvelu on ostettavissa ja tilattavissa Telian IoT sivuilta. Projektin puolesta on määritelty, että sovelluksen tulee toimia pääpiirteittäin kaikilla mahdollisilla mobiililaitteilla, sekä vähintään uusimmilla ja yleisimmillä nettiselaimilla. Projektin tavoitteena oli luoda selkeä käyttöliittymä, jolla seurata huoneilmaa. 
 
 Telia halusi projektista myös mobiilisovelluksen. Yhdessä kehittäjätiimin kanssa suoritettiin lyhyt arviointi erilaisista teknologioista ja vaihtoehdoista. Koska projektin kulut haluttiin pitää kurissa, valittiin toteutusteknologiaksi lopulta PWA malli sen yksinkertaisuuden ja monimuotoisuuden vuoksi. PWA mallista ei kuitenkaan ollut vastaavanlaisesta projektista aiempaa kokemusta ja kysymykseksi jäi toisiko se mitään varsinaisia hyötyjä käyttäjille. Ongelmaksi muodostui siis evaluointi miten paljon PWA hyödyttää sovelluksen käyttäjiä.
 
@@ -157,7 +157,7 @@ Tarkastellaan ensiksi millaisia haasteita nykyään natiivi ja Web-sovelluksissa
 \begin{itemize}
   \item \textbf{Internetin nopeus.} Internet ei ole kaikkialla maailmassa nopea. noin 60\% maailmasta käyttää yhä 2G verkkoa [Kapoor] ja paikoitellen verkko on niin ruuhkautunut, että sen tiedonsiirtokyky ei vain ole riittävä.
   \item \textbf{Hidas verkkosivun latautuminen.} Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Jos sovelluksen palvelinpuoli ei ole kunnossa, voi sovellus toimia hitaasti. Tutkimuksen mukaan 53\% käyttäjistä [Kapoor] hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti.
-  \item \textbf{Kynnys asentaa omalle laitteelle on korkea.} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia. Keskimääräinen käyttäjä asentaa 0 sovellusta kuukaudessa.
+  \item \textbf{Kynnys asentaa omalle laitteelle on korkea.} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia [Kapoor]. Keskimääräinen käyttäjä asentaa 1-2 sovellusta kuukaudessa.
   \item \textbf{Käyttäjän sitouttaminen.} Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa, mutta verkkosivujen käyttöaste on lähes kolminkertainen. Lisäksi käyttäjät viettävät 80\% ajastaan kolmen tärkeimmän natiivisovelluksen parissa. 
 \end{itemize}
 
@@ -173,7 +173,7 @@ PWA pyrkii ratkaisemaan näitä ongelmia. Progressiivisen Web-sovelluksen käytt
 
 \subsection{Progressiivisen Web-sovelluksen vaatimukset}
 
-Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota noudattamalla sovelluksesta saadaan progressiivinen. [Google] Käydään listasta läpi minimivaatimukset joiden tulee täyttyä, jotta sovellusta voidaan sanoa progressiiviseksi.
+Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota noudattamalla sovelluksesta saadaan progressiivinen [Google]. Käydään seuraavaksi listasta läpi minimivaatimukset joiden tulee täyttyä, jotta sovellusta voidaan sanoa progressiiviseksi.
 
 \textbf{Web App Manifest}
 
@@ -194,7 +194,7 @@ Kyseessä on tavallinen Json tiedosto, joka pitää sisällään niinsanottua me
 
 Työkalu nimeltään Service Worker on koko progressiivisen sovelluksen pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on tapahtumapohjainen koodinpätkä, joka juoksee sovelluksen taustalla. Skripti toimii niinsanottuna proxyna, eli välittäjänä verkon ja sovelluksen välillä. Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Skripti kopioi verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista, jolloin sovelluksen toiminta nopeutuu huomattavasti. Service Workeria hyödyntämällä sovellus voidaan avata myös Offline tilassa ja näyttää tietoja välimuistista. 
 
-Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Tämä skripti on sovelluksesta irtonainen ja pyörii mobiililaitteen taustalla. Se reagoi Googlen palvelimelta lähetettyyn notifikaatioviestiin ja näyttää push-notifikaation käyttäjän laitteella. Näin ollen sovelluksessa voidaan näyttää notifikaatoita jopa silloin kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, kuten esimerkiksi PhoneGapissa, tai Cordovassa.
+Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Tämä skripti on sovelluksesta irtonainen ja pyörii mobiililaitteen taustalla. Jokainen web-selain hallitsee push-notifikaatiot oman push servicensä kautta. Kun käyttäjä antaa selaimelle luvan lähettää ilmoituksia, voidaan sovellus silloin tilata selaimen push palveluun [Googleb]. Tämä luo objektin joka sisältää päätepisteen (endpoint) tilaukselle, joka on eri jokaisessa selaimessa. Lisäksi tilaukseen tarvitaan julkinen avain. Push notifikaatiot lähetetään selaimen tilaus osoitteeseen kryptattuna julkisella avaimella. Push palvelu lähettää lopulta ilmoituksen käyttäjän mobiililaitteelle. Näin ollen sovelluksessa voidaan näyttää notifikaatoita jopa silloin, kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, kuten esimerkiksi PhoneGapissa, tai Cordovassa, joilla web-sovellus paketoidaan natiivisovellukseksi selainkehystä käyttäen.
 
 \textbf{Ikoni}
 
@@ -221,17 +221,17 @@ PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyt
 \newpage
 \section{Tekninen toteutus}
 
-Projektin laitteet toimittaa ruotsalainen Yanzi. Telian asiakkaille tarjoamaan pakettiin kuuluu 4G-tukiasema ja lisäksi 10-12 sensoria asiakkaan valitsemasta paketista riippuen. Tukiasema käyttää 4G verkkoa datan toimittamisessa pilveen. Tukiaseman mukana toimitetaan myös 4G sim-kortti. Näin asiakkaan ei tarvitse huolehtia laitteiden liittämisestä verkkoon, vaan pelkästään yksi pistorasiapaikka virransaantiin riittää. Tukiasemassa on myös pieni akku, jolla laite pysyy käynnissä noin 8 tuntia hätätapauksia tai sähkökatkoksia varten. Lisäksi tukiasemassa on pieni muisti, johon data voidaan säilöä siihen asti, kunnes verkkoyhteys on taas saatavilla. Myös kaikki liikenne palvelimen ja tukiaseman välillä on salattua.
+Projektin laitteet toimittaa ruotsalainen Yanzi. Telian asiakkaille tarjoamaan pakettiin kuuluu 4G-tukiasema ja lisäksi 10-12 sensoria asiakkaan valitsemasta paketista riippuen. Tukiasema käyttää 4G verkkoa datan toimittamisessa pilveen. Tukiaseman mukana toimitetaan myös 4G sim-kortti. Näin asiakkaan ei tarvitse huolehtia laitteiden liittämisestä verkkoon, vaan pelkästään yksi pistorasiapaikka virransaantiin riittää. Tukiasemassa on myös pieni akku, jolla laite pysyy käynnissä noin 8 tuntia hätätapauksia tai sähkökatkoksia varten. Lisäksi tukiasemassa on pieni muisti, johon data voidaan säilöä siihen asti, kunnes verkkoyhteys on taas saatavilla. Kun verkkoyhteys palaa jälleen tukiasemaan lähetetään muistiin säilötty data palvelimelle. Näin dataa ei hävitetä vaikka verkkoyhteyttä ei olisikaan. Tämä mahdollistaa paljon uusia käyttökohteita ja tapoja. Palvelua on esimerkiksi testattu valtamerilaivalla, jossa verkkoyhteys on poikki useamman viikon. Myös kaikki liikenne palvelimen ja tukiaseman välillä on salattua.
 
 Sensorit saavat virtansa kahdesta AA paristosta. Yanzi lupaa sensoreiden käyttöajaksi noin 10 vuotta kahdella paristolla. Sensorit yhdistetään tukiasemaan, josta data lähetetään aina lopulta palvelimelle. Yhdessä sensorissa voi olla useampi mittapiste. Esimerkiksi yksi sensori voi mitata lämpötilaa, kosteutta ja ilmanpainetta samanaikaisesti. 
 
 Tukiasemaan on mahdollista liittää useita sensoreita. Myös verkon kantavuutta on mahdollista kasvattaa erillisillä toistimilla. Näin koko toimiston alue saadaan katettua. 
 
-Sensorit lähettävät mittaustulokset tukiasemalle, josta data lähetetään salattuna palvelimelle. Cumulocityn palvelun mukana tulevaa APIa hyödyntäen IoT käyttöliittymän data haetaan JavaScriptillä. Application Programming Interface, eli ohjelmointirajapinta tarjoaa sovelluksessa tarvittavat tiedot käyttöliittymälle. Esimerkiksi käyttäjät, laitteet, data ja kaikki palveluun liittyvä tieto saadaan haettua APIa vasten. 
+Sensorit lähettävät mittaustulokset tukiasemalle, josta data lähetetään salattuna palvelimelle. Cumulocityn palvelun mukana tulevaa rajapintaa hyödyntäen IoT käyttöliittymän data haetaan JavaScriptillä. Application Programming Interface, lyhyesti API, eli ohjelmointirajapinta tarjoaa sovelluksessa tarvittavat tiedot käyttöliittymälle. Esimerkiksi käyttäjät, laitteet, data ja kaikki palveluun liittyvä tieto saadaan haettua APIa vasten. 
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=yanzi_gateway.jpg,  width=0.9\textwidth}
+\epsfig{figure=yanzi_gateway.jpg,  width=0.5\textwidth}
 \caption{Yanzi 4G tukiasema ilman antenneja. Kuva: yanzi.se}
 \label{Yanzi tukiasema}
 \end{center}
@@ -239,7 +239,7 @@ Sensorit lähettävät mittaustulokset tukiasemalle, josta data lähetetään sa
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=yanzi_sensor.jpg,  width=0.9\textwidth}
+\epsfig{figure=yanzi_sensor.jpg,  width=0.5\textwidth}
 \caption{Yanzi comfort sensori, joka mittaa: lämpötilaa, kosteutta, ilmanpainetta, äänenvoimakkuutta, hiilidioksiditasoja ja haihtuvia orgaanisia yhdisteitä. Kuva: yanzi.se}
 \label{Yanzi sensori}
 \end{center}
@@ -250,32 +250,22 @@ Sensorit lähettävät mittaustulokset tukiasemalle, josta data lähetetään sa
 
 Telian IoT palvelussa tietokannan, sekä taustapalvelut tarjoaa saksalainen Cumulocity GmbH, Dusseldorfista. Cumulocityn toimittaa projektin rajapinnan ja Yanzin laitteet tuottavat datan. Projektin tarkoituksena oli luoda helppokäyttöinen käyttöliittymä jota voidaan myydä eteenpäin Telian asiakkaille. Myös Cumulocity toimittaa palvelun mukana kattavan hallintapaneelin, sekä työpöytänäkymän. Sovelluksen käyttö kuitenkin osoittautui lopulta hankalaksi. Tämän seurauksena Telia käynnisti vuoden 2016 alussa projektin helposta käyttöliittymästä IoT laitteille. 
 
-Projektin teknologiaksi valikoitui Cumulocityn kehittäjäpaketin mukana toimitettava AngularJS:n versio 1.3. Wikipedian määrittelyn mukaan AngularJS on Googlen ylläpitämä avoimen lähdekoodin JavaScript-ohjelmistokehys, joka avustaa yksisivuisten sovellusten kehittämisessä ja käytössä. AngularJS:n tavoite on lisätä selainpohjaisiin sovelluksiin tuki MVC-arkkitehtuurille, jonka avulla sivustojen kehitys ja testaus helpottuu. 
+Projektin teknologiaksi valikoitui Cumulocityn kehittäjäpaketin mukana toimitettava AngularJS:n versio 1.3. AngularJS on Googlen ylläpitämä avoimen lähdekoodin JavaScript-ohjelmistokehys, joka avustaa yksisivuisten sovellusten kehittämisessä ja käytössä [jain2015angularjs]. AngularJS:n tavoite on lisätä selainpohjaisiin sovelluksiin tuki MVC-arkkitehtuurille, jonka avulla sivustojen kehitys ja testaus helpottuu. 
 
-Sovelluksen versionhallinta työkaluksi valittiin Git. Git on versionhjallintaohjelmisto, joka on suunniteltu toimimaan hajautetusti ja mahdollisimman tehokkaasti. Työkalun on kehittänyt suomalainen Linus Torvalds. Verkossa on useita graafisia käyttöliittymiä Gitin hallintaan. Lähdekoodia ylläpidettiin aluksi suomalaisten kehittämässä Deveossa, mutta myöhemmin siirrettiin käyttämään Telian Github repositoriota. Repositorio on tietovarasto.
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=iotlaitteet.PNG,  width=0.9\textwidth}
+\caption{Miten IoT palvelu toimii yksinkertaisuudessaan. Kuva: Telian dokumentaatio}
+\label{IoT arkkitehtuuri}
+\end{center}
+\end{figure}
 
 \subsection{Työkalut}
 
 Nykyiset JavaScript pohjaiset käyttöliittymät ovat erittäin monimutkaisia. Koska kyseessä on pelkästään selaimella toimiva käyttöliittymä, on projektia laajennettu vuosien aikana useilla kirjastoilla ja sen ympärille on tuotu mukaan myös kehitystä helpottavia työkaluja. Tässä niistä muutamia. 
 
-\begin{itemize}
-  \item Grunt
-  \item Yarn
-  \item Less
-  \item Leaflet
-  \item Babel
-  \item Eslint
-  \item Git
-  \item Bootstrap
-\end{itemize}
 
-\begin{figure}[h]
-\begin{center}
-\epsfig{figure=iotlaitteet.PNG,  width=0.9\textwidth}
-\caption{Miten IoT palvelu toimii yksinkertaisuudessaan. Kuva: Telia}
-\label{IoT arkkitehtuuri}
-\end{center}
-\end{figure}
+
 
 \textbf{Grunt}
 
