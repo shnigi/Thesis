@@ -1,0 +1,453 @@
+% !TEX encoding = UTF-8 Unicode
+% -*- coding: UTF-8; -*-
+% vim: set fenc=utf-8
+
+
+\documentclass{tktltiki}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+
+
+% Kuvien numerointi Luvun mukaan
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+
+
+
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{url}
+
+
+
+\usepackage{xcolor}
+\usepackage{listings}% http://ctan.org/pkg/listings
+\input{code/languageDefinitions}
+
+\renewcommand\lstlistingname{Listaus}
+\renewcommand\lstlistlistingname{Listaukset}
+
+
+\begin{document}
+%\doublespacing  joskus halutaan enemmän kommentointitilaa rivien väliin
+%\onehalfspacing joskus halutaan enemmän kommentointitilaa rivien väliin
+\singlespacing
+
+\title{Progressiivisten web-sovelluksien hyödyt}
+\author{Niki Ahlskog}
+
+\date{\today}
+
+\maketitle
+
+\numberofpagesinformation{\numberofpages\ sivua + \numberofappendixpages\ liitesivua}
+
+\classification{\protect{\ \\
+\  General and reference $\rightarrow$ Document types  $\rightarrow$ Surveys and overviews\  \\
+\  Applied computing  $\rightarrow$ Document management and text processing  $\rightarrow$ Document management  $\rightarrow$ Text editing\ }}
+
+
+
+\keywords{PWA, Progressiiviset web sovellukset, mobiili selainsovellus, progressiivisuus}
+
+\begin{abstract}
+
+Mobiilisovellukset ovat jatkuvasti kehittyvää ja muuttuvaa teknologiaa, kuten myös strategiat niiden rakentamiseksi. Tässä työssä käydään läpi Progressiivisen Web-sovelluksen rakennustekniikoita. Progressiivisen Web-sovelluksen tarkoitus on hämärtää, tai jopa poistaa raja ladattavan sovelluksen ja normaalin verkkosivuston välillä. Lisäksi tarkastellaan tekniikoiden vaikutuksia loppukäyttäjille käytännössä.
+
+Progressiivinen Web-sovellus on kuin mikä tahansa normaali verkkosivusto, mutta se täyttää lisäksi seuraavat kriteerit. Sovellus skaalautuu mille tahansa laitteelle. Sovellus tarjoillaan salatun yhteyden yli. Sovellus on mahdollista asentaa puhelimen kotinäytölle pikakuvakkeeksi, jolloin sovellus avautuu ilman selaimesta tuttuja navigointityökaluja ja lisäksi sovelluksen voi myös avata laitteen ollessa offline tilassa. 
+
+Progressiivisen Web-sovelluksen luomista ja käyttöönottoa tarkastellaan olemassa olevassa yksityisessä asiakasprojektissa. Projektissa kiinnitetään huomiota progressiivisen Web-sovelluksen tuomiin etuihin ja kipupisteisiin. Lisäksi kirjallisuuskatsauksen kautta tarkastellaan PWA:n tulevaisuuden näkymiä ja nykytilannetta. 
+
+Asiakasprojektista otetaan Google Chromen Lighthouse työkalua käyttäen metriikat sovelluksen nopeuden mittaamiseksi. Nopeuden muutosta tarkastellaan PWA ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä. Lisäksi tarkastellaan mobiililaitteiden käyttöä koko sovelluksen käytössä. Analytiikat sovelluksen mobiilikäytöstä saadaan Google Analytics työkalusta. 
+
+\end{abstract}
+
+\mytableofcontents
+
+
+
+
+\section{Johdanto}
+
+Tämän päivän mobiilisovelluksia kehitettäessä on teknologia puolella useita vaihtoehtoja. Kehittäjät voivat valita neljästä eri mallista. Mobiili web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana Progressiivinen Web-sovellus. Jokaisessa vaihtoehdossa on luonnollisesti etuja ja haittoja. Web tekniikoihin panostaminen näyttäisi kuitenkin olevan järkevää, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Google on julkaissut tiedotteen [Gam18] "Progressiivinen Web-sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA malliin on tutustunut, natiivisovelluskehitystä ei enää tarvitse. Mobiili verkkosivu itsessään muodostuu sovellukseksi."
+
+Progressiivinen Web-sovellus, eli PWA termin määritteli Google Chromen insinööri Alex Russel [Rus15] omassa blogikirjoituksessaan vuonna 2015. Progressiivinen Web-sovellus ei ole uusi teknologia, eikä ohjelmointikehys. Progressiivinen Web-sovellus on sovellus, joka muistuttaa mahdollisimman paljon natiivia mobiili-, tai työpöytäsovellusta. Perimmäisenä ajatuksena on, että käyttäjä ei tunnista eroa näiden kahden sovelluksen välillä.
+
+Progressiivinen Web-sovellus voidaan määritellä Alex Russelin sanoin normaaliksi verkkosivuksi, joka on vain ottanut oikeat vitamiinit. Yahoo Developer portaalissa tehdyn tutkimuksen mukaan [Kha15] 90\% mobiililaitteilla vietetystä ajasta käytetään sovellusten parissa ja vain [Kha15] 10\% netin selaamiseen. Progressiivisten Web-sovellusten tarkoitus on hämärtää verkkosovellusten ja natiivisovellusten rajaa. Lisäksi PWA sovellusten etuna on, että IOS- ja Android alustoille ei tarvitse erikseen kehittää sovellusta ja ylläpitää kahta eri lähdekoodia. Yksi ja sama koodi riittää kummallekin alustalle. 
+
+Progressiivisia  Web-sovelluksia ei paketoida, eikä jaella minkään sovelluskaupan kautta. Ne ovat normaaleita verkkosivuja, joihin on tuotu progressiivisia ominaisuuksia. Alex  Russelin ajatuksena [Rus15] PWA sovelluksissa on ollut niiden muotoutuminen sovellukseksi ilman, että käyttäjän tulee heti tehdä päätös sovelluksen asentamisesta ja käyttölupien luovuttamisesta. Esimerkiksi selaimista tuttu lupien kysyminen pysyy ennallaan. Sovellus kysyy mikrofonin, kameran, tai minkä tahansa muun ominaisuuden käyttölupaa vasta kun toimintoa tarvitaan ensimmäisen kerran. Muutaman käyttökerran jälkeen sovellus kysyy käyttäjältä halutaanko puhelimen työpöydälle asentaa pikakuvake sovellukseen ja ilmoituksetkin voidaan joko hyväksyä tai hylätä pyynnöstä. Tämä siis tarkoittaa että käytön myötä verkkosivu muuttuu käyttäjän puhelimessa natiivin mobiilisovelluksen kaltaiseksi ilman suurempaa sitoutumista sovelluksen asentamiseen ja kaikkien käyttölupien luovuttamiseen heti. 
+
+PWA:ta kehitetään tällä hetkellä kovaa vauhtia eri selainvalmistajien toimesta. Firefoxilla ja Safarilla teknologia on tulossa [San18] ja Chromella se on pääosin jo tuettuna. PWA sovellukset eivät kuitenkaan sovellu sellaisiin käyttötarkoituksiin, joissa täytyy päästä käsiksi puhelimen rajapintoihin, kuten vaikkapa kalenteriin, tai osoitekirjaan. PWA:n valintaan vaikuttaa siis sovelluksen käyttötarkoitus. Tämän työn asiakasprojektissa valittiin toteutustekniikaksi PWA, koska se ei vaadi erillistä kehittämistä eri laitealustoille, eikä projektissa ollut tarvetta käyttää puhelimeen sidottuja rajapintoja.
+
+Tässä tutkielmassa selvitetään millaisia vaikutuksia progressiivisuudella saavutetaan ja kuinka helppoa työkalujen käyttöönotto on. Esimerkkiprojektissa mitataan sovelluksen nopeutta välimuistitallennuksen ollessa käytössä, sekä ilman. Mittarina käytetään Google-Chrome selaimen kehittäjätyökaluissa toimitettavaa Lighthouse työkalua. Lisäksi sovelluksen kehittäjä arvioi työkalujen käyttöönottoa noin muutaman vuoden ikäisessä projektissa. 
+
+Tutkielman rakenne on seuraava. Luvussa kaksi esitellään tutkimusongelma. Osiossa kolme esitellään progressiivisten Web-sovellusten vaatimukset, toteutustekniikoita ja selvennetään mitä koko termillä tarkoitetaan. Lisäksi tarkastellaan myös muita mobiilikehitys tekniikoita ja teknologioita. Kappaleessa neljä tehdään sovellukseen tekninen toteutus. Projektissa asennetaan tarvittavat työkalut PWA mallin täyttämiseksi. Kappaleessa viisi suoritetaan nopeusmittaukset käyttämällä Google-Chrome selaimen Lighthouse työkalua. Lisäksi luvussa analysoidaan sovelluksen nopeutta ja esitellään johtopäätökset. Kuudennessa luvussa pohditaan PWA mallin tulevaisuutta ja jatkotutkimusta. 
+
+\newpage
+\section{Tutkimusongelma}
+
+Telia IoT palvelulla on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telio IoT palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen alkuperäinen ja nykyinen tarkoitus on pääpiirteittäin pysynyt samana vuosien aikana. Sen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen, sekä viihtyvyyteen työpaikalla. 
+
+Telia IoT alustan avulla voi esimerkiksi seurata lämpötilaa ja sen muutoksia. Palvelun avulla voidaan tutkia onko toimistossa esimerkiksi liian kylmä, tai nähdä nousiko lämpötila varastossa liian kuumaksi menemättä itse paikalle. Kosteutta ja hiilidioksiditasoja seuraamalla voidaan päästä jäljille sisäilman muutoksista ja seurata esimerkiksi kokoustilan ilmanlaatua. Myös liikesensoreilla voidaan laskea työpisteiden, tai neuvotteluhuoneiden käyttöaste. 
+
+IoT palvelu on verkkosivu, tai selainpohjainen käyttöliittymä IoT laitteiden tuottaman datan tarkasteluun. Projektin puolesta on määritelty, että sovelluksen tulee toimia pääpiirteittäin kaikilla mahdollisilla mobiililaitteilla, sekä vähintään uusimmilla ja yleisimmillä nettiselaimilla. Projektin tavoitteena oli luoda selkeä käyttöliittymä, jolla seurata huoneilmaa. 
+
+Telia halusi projektista myös mobiilisovelluksen. Yhdessä kehittäjätiimin kanssa suoritettiin lyhyt arviointi erilaisista teknologioista ja vaihtoehdoista. Koska projektin kulut haluttiin pitää kurissa, valittiin toteutusteknologiaksi lopulta PWA malli sen yksinkertaisuuden ja monimuotoisuuden vuoksi. PWA mallista ei kuitenkaan ollut vastaavanlaisesta projektista aiempaa kokemusta ja kysymykseksi jäi toisiko se mitään varsinaisia hyötyjä käyttäjille. Ongelmaksi muodostui siis evaluointi miten paljon PWA hyödyttää sovelluksen käyttäjiä.
+
+\subsection{Tutkimuskysymykset}
+
+Olemassa olevan sovelluksen muuttaminen PWA mallin mukaiseksi toi mukanaan useita kysymyksiä. Taipuisivatko esimerkiksi vanhat projektissa käytössä olevat työkalut PWA mallin mukaiseksi? Mitä kaikkea tulisi ottaa huomioon ja mitä oli jo valmiina? Varsinaiset kysymykset koskivat lopulta sitä, mitä etuja PWA tuo mukanaan. Kuinka paljon nopeampi sovellus on käytännössä ja asentavatko käyttäjät sovellusta puhelimeensa?
+
+Tutkielman tutkimuskysymykset ovat seuraavat:
+
+\begin{itemize}
+  \item \textbf{TK1:} Kuinka paljon nopeampi PWA mallia käyttävä verkkosivu on kuin sivu joka ei hyödynnä PWA:ta
+  \item \textbf{TK2:} Miten olemassa oleva verkkosivu voidaan muokata progressiiviseksi web-sovellukseksi?
+  \item \textbf{TK3:} Minkälaisia muita hyötyjä saadaan Progressiivisista Web-sovelluksista? 
+\end{itemize}
+
+\subsection{Tutkimusmenetelmä}
+
+Tutkimus metodiksi valikoitui Design Science menetelmä, eli design-tutkimus. Design-tutkimus on tutkimusstrategia, joka pyrkii kehittämään sekä teoriaa, että käytäntöä [Pön08]. Se ei ole metodologia ja sitä voi käyttää sekä laadulliseen, kuin määrälliseen tutkimukseen. Design-tutkimus on ongelmalähtöistä oppimista, tai tutkivaa oppimista. Olemassa olevan sovelluksen muuttaminen PWA mallia vastaavaksi oli teoreettinen tehtävä, josta muodostui tutkimuskysymys. 
+
+Projektissa oli myös selkeä lähtökohta, eli olemassa oleva sovellus. Sovelluksen rinnalle haluttiin lisäksi myös mobiilisovellus, joten projektissa tehtiin selvitys nykyisistä teknologioista. Seuraavaksi sovellus toteutettiin PWA mallin mukaisesti ja viimeiseksi sitä analysoidaan.
+
+\textbf{Tutkimuksen eteneminen}
+
+Tutkimusprosessin vaiheet ovat pääpiirteittäin seuraavat.
+
+\begin{itemize}
+  \item \textbf{Lähtökohta} Tutkimuskysymys mudostui asiakkaan tarpeista muokata olemassa oleva sovellus mobiilisovellukseksi. Millaisia etuja PWA malli tuo mukanaan nykyisille sovelluksen käyttäjille?
+  \item \textbf{Tutkimuksen suunnittelu} Sovelluksen evaluoimiseksi tarvittiin laatumittarit. Sovelluksesta haluttiin testata nopeutta ja mobiilikäytön määriä. Pääasialliseksi työkaluksi nopeuden mittaamiseksi valittiin Google Lighthouse työkalu, joka antaa sovellukselle PWA pisteet asteikolla 0-100. Käyttäjämääriä seuraamaan valikoitui Google Analytics.
+  \item \textbf{Sovelluksen rakentaminen PWA mallin mukaiseksi} Sovelluksesta rakennetaan PWA mallin mukainen ja tarvittavat työkalut liitetään osaksi nykyistä kehityspalettia.
+  \item \textbf{Analyysi} Valmista sovellusta mitataan käytännössä ennen ja jälkeen PWA mallin muutoksia.
+  \item \textbf{Tulokset ja johtopäätökset} Mittaustulosten jälkeen sovelluksen eri vaiheista voidaan julkaista tulokset ja johtopäätökset. Kuinka paljon nopeampi sovellus on PWA mallin myötä? Kuinka paljon sovelluksen build aika kasvoi?
+\end{itemize}
+
+\newpage
+\section{PWA:n esittely}
+
+Progressiivinen Web-sovellus ei ole ohjelmistokehys, tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kap18] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus, vai verkkosovellus. PWA:n tarkoitus on hämärtää tätä rajaa. 
+
+Alex Russell määritteli blogi kirjoituksessaan progressiivisen Web-sovelluksen ominaisuudet seuraavasti. 
+
+Sovelluksen tulee olla:
+\begin{itemize}
+  \item \textbf{Responsiivinen.} Sovelluksen tulee sopia mihin tahansa ruutuun.
+  \item \textbf{Yhteyksistä riippumaton.} Sovelluksen tulee käynnistyä myös Offline tilassa.
+  \item \textbf{Sovelluksen kaltainen.} Sovelluksessa tulee olla käyttöliittymäkehys, sekä sisältöikkuna.
+  \item \textbf{Tuore.} Sovelluksen pitää hakea aina verkkoyhteyden ollessa päällä uusin versio käyttäjän huomaamatta.
+  \item \textbf{Turvallinen.} Sovellus pitää aina tarjota salattuna Transport Layer Security (TLS) käyttäen.
+  \item \textbf{Löydettävä.} Sovelluksen tulee noudattaa W3C yhteisön määrityksiä ja tarjota manifesti, joka määrittää sovelluksen. Manifesti mahdollistaa hakukoneiden löytää sovellus ja erottaa se muista perinteisistä verkkosivuista.
+  \item \textbf{Koukuttaa käyttäjän, tai muistuttaa palaamaan.} Sovelluksen tulee olla mahdollista muistuttaa olemassaolostaan esimerkiksi notifikaatioilla ja näin saada käyttäjä palaamaan sovelluksen pariin.
+  \item \textbf{Asennettava.} Sovelluksen voi asentaa mobiililaitteen ruudulle pikakuvakkeeksi, jolloin se on nopeasti saatavilla.
+\end{itemize}
+
+\subsection{Miksi progressiivia Web-sovelluksia tarvitaan?}
+\enlargethispage{5mm}
+
+Tarkastellaan ensiksi millaisia haasteita nykyään natiivi ja Web-sovelluksissa on.
+
+\begin{itemize}
+  \item \textbf{Internetin nopeus.} Internet ei ole kaikkialla maailmassa nopea. noin 60\% maailmasta käyttää yhä 2G verkkoa [Kap18] ja paikoitellen verkko on niin ruuhkautunut, että sen tiedonsiirtokyky ei vain ole riittävä.
+  \item \textbf{Hidas verkkosivun latautuminen.} Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Jos sovelluksen palvelinpuoli ei ole kunnossa, voi sovellus toimia hitaasti. Tutkimuksen mukaan 53\% käyttäjistä [Kap18] hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti.
+  \item \textbf{Kynnys asentaa omalle laitteelle on korkea.} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia. Keskimääräinen käyttäjä asentaa 0 sovellusta kuukaudessa.
+  \item \textbf{Käyttäjän sitouttaminen.} Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa, mutta verkkosivujen käyttöaste on lähes kolminkertainen. Lisäksi käyttäjät viettävät 80\% ajastaan kolmen tärkeimmän natiivisovelluksen parissa. 
+\end{itemize}
+
+PWA pyrkii ratkaisemaan näitä ongelmia. Progressiivisen Web-sovelluksen käyttöön on useita syitä. Tässä muutamia:
+
+\begin{itemize}
+  \item \textbf{Nopeus.} PWA tarjoaa välimuistiin tallentamisen, joka mahdollistaa sovelluksen latautumisen välimuistista. Sovelluksen käynnistäminen on siis erityisen nopeaa, vaikka verkkoon ei olisi vielä edes tehty kutsuja.
+  \item \textbf{Saumaton käyttökokemus.} PWA tuntuu ja käyttäytyy kuin natiivisovellus. Sovellus on mahdollista asentaa mobiililaitteen kotinäytölle. Sovellus voi lähettää ilmoituksia (push notifications) ja sovellus voi myös hyödyntää laitteen rajapintoja, kuten kameraa, tai mikrofonia. 
+  \item \textbf{Luotettava käyttökokemus.} Sovellus voidaan avata myös silloin, kun verkkoyhteyttä ei ole saatavilla. Välimuistiin tallennetun tiedon perusteella viimeisimmät muistissa olevat asiat saadaan esitettyä. 
+  \item \textbf{Sitouttava.} Kun sovellukseen voidaan lähettää ilmoituksia, voidaan käyttäjää sitouttaa sovellukseen lähettämällä muistutuksia, tai tärkeitä tietoja. 
+\end{itemize}
+
+
+\subsection{Progressiivisen Web-sovelluksen vaatimukset}
+
+Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota noudattamalla sovelluksesta saadaan progressiivinen. [Goo18] Käydään listasta läpi minimivaatimukset joiden tulee täyttyä, jotta sovellusta voidaan sanoa progressiiviseksi.
+
+\textbf{Web App Manifest}
+
+Jotta projektista saataisiin sovelluksen kaltainen, tulee sovelluksen juureen määritellä manifest.json tiedosto. Tiedosto pitää sisällään tiedot seuraavista asioista:
+
+\begin{itemize}
+  \item Sovelluksen nimi
+  \item Sovelluksen teeman väri
+  \item Taustaväri
+  \item Sovelluksen oletus käyttöasento, joko pysty, tai vaaka
+  \item Aloitustiedosto, yleensä index.html tai index.js
+  \item Ikonitiedot eri resoluutioissa
+\end{itemize}
+
+Kyseessä on tavallinen Json tiedosto, joka pitää sisällään niinsanottua metatietoa sovelluksesta. Kun selain havaitsee manifest.json tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöksen tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen statuskenttä sovelluksen teeman väriä vastaavaksi.  
+
+\textbf{Service Workers}
+
+Työkalu nimeltään Service Worker on koko progressiivisen sovelluksen pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on tapahtumapohjainen koodinpätkä, joka juoksee sovelluksen taustalla. Skripti toimii niinsanottuna proxyna, eli välittäjänä verkon ja sovelluksen välillä. Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Skripti kopioi verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista, jolloin sovelluksen toiminta nopeutuu huomattavasti. Service Workeria hyödyntämällä sovellus voidaan avata myös Offline tilassa ja näyttää tietoja välimuistista. 
+
+Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Tämä skripti on sovelluksesta irtonainen ja pyörii mobiililaitteen taustalla. Se reagoi Googlen palvelimelta lähetettyyn notifikaatioviestiin ja näyttää push-notifikaation käyttäjän laitteella. Näin ollen sovelluksessa voidaan näyttää notifikaatoita jopa silloin kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, kuten esimerkiksi PhoneGapissa, tai Cordovassa.
+
+\textbf{Ikoni}
+
+Kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manifest.json tiedostossa määritelty ikoni käyttäjän mobiililaitteen työpöydälle tai valikkoon. Ikoniksi pitäisi käydä useampi eri formaatti, kunhan vain formaatti on määritelty tiedostoon erikseen. Ikoneita pitää olla useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
+
+\textbf{HTTPS salattu liikenne}
+
+Jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS protokollan ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS protokollaa [Eis18]. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. 
+
+\subsection{Näyttötilat}
+
+PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyttäjältä ylimääräiset valikot ja luoda sovelluksesta näin natiivisovelluksen kaltainen. Näyttötiloja on neljä erilaista [Moz18]
+
+\begin{itemize}
+  \item fullscreen. Koko näytön tila, jolloin laitteen koko näyttö on käytössä ja Chromen user agent on piilotettuna.
+  \item standalone. Standalone tilassa sovellus näyttää ja tuntuu omalta sovellukseltaan. Sovellusta voidaan ajaa omassa ikkunassaan ja sillä voi olla oma ikoni käynnistysvalikossa. Chromen käyttöliittymä on piilotettuna, mutta mobiililaitteen omat valikot ovat esillä, kuten tilapalkki. 
+  \item minimal-ui. Minimal-ui tila on sama kuin standalone, mutta mukana on lisäksi vain minimaalinen määrä UI elementtejä navigointia varten. UI elementtien määrä riippuu laitteella käytettävästä selaimesta. 
+  \item browser. Selaintila on oletustila, jolloin sovellus aukeaa selaimen välilehdellä, tai uudessa ikkunassa, riippuen selaimesta ja laitealustasta. 
+\end{itemize}
+
+
+\subsection{Muut teknologiat ja erot}
+
+\newpage
+\section{Tekninen toteutus}
+
+Projektin laitteet toimittaa ruotsalainen Yanzi. Telian asiakkaille tarjoamaan pakettiin kuuluu 4G-tukiasema ja lisäksi 10-12 sensoria asiakkaan valitsemasta paketista riippuen. Tukiasema käyttää 4G verkkoa datan toimittamisessa pilveen. Tukiaseman mukana toimitetaan myös 4G sim-kortti. Näin asiakkaan ei tarvitse huolehtia laitteiden liittämisestä verkkoon, vaan pelkästään yksi pistorasiapaikka virransaantiin riittää. Tukiasemassa on myös pieni akku, jolla laite pysyy käynnissä noin 8 tuntia hätätapauksia tai sähkökatkoksia varten. Lisäksi tukiasemassa on pieni muisti, johon data voidaan säilöä siihen asti, kunnes verkkoyhteys on taas saatavilla. Myös kaikki liikenne palvelimen ja tukiaseman välillä on salattua.
+
+Sensorit saavat virtansa kahdesta AA paristosta. Yanzi lupaa sensoreiden käyttöajaksi noin 10 vuotta kahdella paristolla. Sensorit yhdistetään tukiasemaan, josta data lähetetään aina lopulta palvelimelle. Yhdessä sensorissa voi olla useampi mittapiste. Esimerkiksi yksi sensori voi mitata lämpötilaa, kosteutta ja ilmanpainetta samanaikaisesti. 
+
+Tukiasemaan on mahdollista liittää useita sensoreita. Myös verkon kantavuutta on mahdollista kasvattaa erillisillä toistimilla. Näin koko toimiston alue saadaan katettua. 
+
+Sensorit lähettävät mittaustulokset tukiasemalle, josta data lähetetään salattuna palvelimelle. Cumulocityn palvelun mukana tulevaa APIa hyödyntäen IoT käyttöliittymän data haetaan JavaScriptillä. Application Programming Interface, eli ohjelmointirajapinta tarjoaa sovelluksessa tarvittavat tiedot käyttöliittymälle. Esimerkiksi käyttäjät, laitteet, data ja kaikki palveluun liittyvä tieto saadaan haettua APIa vasten. 
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=yanzi_gateway.jpg,  width=0.9\textwidth}
+\caption{Yanzi 4G tukiasema ilman antenneja. Kuva: yanzi.se}
+\label{Yanzi sensori}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=yanzi_sensor.jpg,  width=0.9\textwidth}
+\caption{Yanzi comfort sensori, joka mittaa: lämpötilaa, kosteutta, ilmanpainetta, äänenvoimakkuutta, hiilidioksiditasoja ja haihtuvia orgaanisia yhdisteitä. Kuva: yanzi.se}
+\label{Yanzi sensori}
+\end{center}
+\end{figure}
+\clearpage
+
+\subsection{IoT Dashboard}
+
+Telian IoT palvelussa tietokannan, sekä taustapalvelut tarjoaa saksalainen Cumulocity GmbH, Dusseldorfista. Cumulocityn toimittaa projektin rajapinnan ja Yanzin laitteet tuottavat datan. Projektin tarkoituksena oli luoda helppokäyttöinen käyttöliittymä jota voidaan myydä eteenpäin Telian asiakkaille. Myös Cumulocity toimittaa palvelun mukana kattavan hallintapaneelin, sekä työpöytänäkymän. Sovelluksen käyttö kuitenkin osoittautui lopulta hankalaksi. Tämän seurauksena Telia käynnisti vuoden 2016 alussa projektin helposta käyttöliittymästä IoT laitteille. 
+
+Projektin teknologiaksi valikoitui Cumulocityn kehittäjäpaketin mukana toimitettava AngularJS:n versio 1.3. Wikipedian määrittelyn mukaan AngularJS on Googlen ylläpitämä avoimen lähdekoodin JavaScript-ohjelmistokehys, joka avustaa yksisivuisten sovellusten kehittämisessä ja käytössä. AngularJS:n tavoite on lisätä selainpohjaisiin sovelluksiin tuki MVC-arkkitehtuurille, jonka avulla sivustojen kehitys ja testaus helpottuu. 
+
+Sovelluksen versionhallinta työkaluksi valittiin Git. Git on versionhjallintaohjelmisto, joka on suunniteltu toimimaan hajautetusti ja mahdollisimman tehokkaasti. Työkalun on kehittänyt suomalainen Linus Torvalds. Verkossa on useita graafisia käyttöliittymiä Gitin hallintaan. Lähdekoodia ylläpidettiin aluksi suomalaisten kehittämässä Deveossa, mutta myöhemmin siirrettiin käyttämään Telian Github repositoriota. Repositorio on tietovarasto.
+
+\subsection{Työkalut}
+
+Nykyiset JavaScript pohjaiset käyttöliittymät ovat erittäin monimutkaisia. Koska kyseessä on pelkästään selaimella toimiva käyttöliittymä, on projektia laajennettu vuosien aikana useilla kirjastoilla ja sen ympärille on tuotu mukaan myös kehitystä helpottavia työkaluja. Tässä niistä muutamia. 
+
+\begin{itemize}
+  \item Grunt
+  \item Yarn
+  \item Less
+  \item Leaflet
+  \item Babel
+  \item Eslint
+  \item Git
+  \item Bootstrap
+\end{itemize}
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=iotlaitteet.PNG,  width=0.9\textwidth}
+\caption{Miten IoT palvelu toimii yksinkertaisuudessaan. Kuva: Telia}
+\label{Yanzi sensori}
+\end{center}
+\end{figure}
+
+\textbf{Grunt}
+
+Grunt on automaatiotyökalu. Gruntin tarkoitus on tehdä toistuvia tehtäviä automaattisesti kehittäjän puolesta. Grunt toimii sovelluksen tärkeimpänä työkaluna, mutta pelkkä Grunt ei yksistään ole riittävä työkalu projektin tarpeille. Grunt huolehtii esimerkiksi sovelluksen kääntämisestä, paketoinnista, kirjoitusvirheiden tarkastamisesta, kuvien pakkaamisesta, sekä web-palvelimen käynnistämisestä. 
+
+\textbf{Eslint}
+
+Eslint on avoimen lähdekoodin projekti, joka on aloitettu vuonna 2013. Eslintin tarkoitus on toimia koodin tarkkailijana. Eslinttiin voi liittää lukuisia eri liitännäisiä, jotta koodista saa juuri kehittäjälle mieleisen näköistä. Eslint esimerkiksi pitää huolen siitä, että koodilohkot on sisennetty kahdella välilyönnillä ja lohko päättyy aina puolipisteeseen. Mikäli kehittäjä ei noudata Eslinttiin kirjoitettuja sääntöjä, ei sovellusta käännetä ja kehittäjälle annetaan virheilmoitus virheellisestä syntaksista. Eslintin avulla koodia pyritään yhdenmukaistamaan, riippumatta siitä kuinka monta kehittäjää sovellusta on ollut tekemässä. 
+
+\textbf{Yarn}
+
+Yarn on riippuvuuksien hallinta työkalu. Yarn toimii pohjana projektille. Yarnin avulla kaikki kehityksen aikaiseen toimintaan liittyvät skriptit ladataan kehittäjän koneelle. Myös sovelluksessa tarvittavat riippuvuudet ladataan Yarnilla. Yarn on Facebookin kehittäjien luoma työkalu. Sen tarkoitus on yhdenmukaistaa riippuvuuksien hallintaa, jolloin jokaisella kehittäjällä olisi käytössään juuri sama versio kyseisestä paketista mikä projektille on määritelty. Yarn valittiin projektin riippuvuuksien hallinta työkaluksi lähinnä siksi, että projektin kehitystyön aikana siirryttiin Bower nimisestä Front-End riippuvuuksien hallinta työkalusta pois. Yarn osaa automaattisesti asentaa Bower riippuvuuksia ja Bowerin sivuilla on suositeltu Yarnia sen korvaajaksi. 
+
+\textbf{Less}
+
+Less, Leaner Style Sheets on laajennustyökalu perinteiselle CSS kielelle. Less tuo mukanaan muutamia hyödyllisiä laajennuksia, esimerkiksi muuttujat, operaatiot ja sisennykset. Muuttujilla voidaan esimerkiksi määrittää sovelluksen taustaväri, jonka jälkeen vaihtamalla muuttujan väriä saadaan sovelluksen taustaväri vaihtumaan jokaisella sivulla. Tyylien sisennyksellä taas on mahdollista kohdistaa tyylit vain tietyn muuttujan alle. Esimerkiksi hiiren hover efekti voidaan laittaa suoraan alkuperäisen tyylin sisälle, ilman että sitä varten tarvitsee luoda uutta riviä.
+
+\textbf{Babel}
+
+Babel on uuden sukupolven JavaScript kääntäjä. Babel mahdollistaa kirjoitettavan koodin olevan tuoreinta mahdollista JavaScript syntaksia. Babelin avulla JavaScript käännetään vanhojen selaimien ymmärtämään JavaScript muotoon. Babelia on myös mahdollista laajentaa liitännäisillä.
+
+\textbf{Bootstrap}
+
+Bootstrap on maailman suosituin käyttöliittymä kirjasto, jota käyttämällä on helppoa luoda responsiivisia, mobiili edellä kulkevia projekteja. Kirjasto tuo mukanaan esimerkiksi responsiivisen Grid systeemin ja lukuisia käyttövalmiita komponentteja, kuten kuvakarusellin ja tyylitellyt taulukot. 
+
+\textbf{Projektin kasaus}
+
+Grunt työkalu huolehtii projektin kasaamisesta hyödyntäen edellä mainittuja kirjastoja. Grunt vastaa esimerkiksi seuraavista tehtävistä: Ensimmäisen tehtävänä Grunt käynnistää web-palvelimen projektissa määriteltyyn porttiin. Aina kun sovelluksen koodi tallennetaan, käynnistyy Gruntissa sarja komentoja automaattisesti. Ensiksi koodi käydään läpi Eslint työkalulla, joka huolehtii että koodi noudattaa tiettyjä kirjotuskäytäntöjä. Esimerkiksi koodilohkot tulee olla sisennetty kahdella välilyönnillä ja lohkojen lopussa tulee olla puolipiste. Jos näitä ei noudata, kääntäjä antaa virheilmoituksen, eikä sovellus käänny. Seuraavaksi koodi käännetään Babel nimisen työkalun avulla selaimen ymmärtämään JavaScript formaattiin. Kun JavaScript on selaimen ymmärtämässä muodossa, lisätään Angular kehykselle ominaiset annotaatiot, eli riippuvuudet. Sitten kaikki scriptit paketoidaan yhdeksi kokonaisuudeksi, bundleksi, jonka jälkeen koodi minifoidaan ja siirretään kansioon, jossa on käynnissä web-palvelin. Minifoinnilla tarkoitetaan koodin pienentämistä, esimerkiksi kaikki ylimääräiset välilyönnit ja merkit poistetaan, jotta tiedostosta tulee mahdollisimman pieni.
+
+JavaScript koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään .LESS formaatista selaimen ymmärtämään .CSS muotoon. Kaikki tyylitiedostot paketoidaan myös yhdeksi kokonaisuudeksi ja sitten ne minifoidaan. Lisäksi suoritetaan lukuisia muita toimenpiteitä, projektin kaikki kuvat pakataan, kolmannen osapuolen skriptit käydään läpi, paketoidaan ja liitetään projektiin.
+
+
+\subsection{PWA:n käyttöönotto projektissa}
+
+Telian alkuperäinen tarkoitus oli laajentaa IoT projektin käyttöliittymää myös mobiililaitteille. Projektissa tehtiin nopea katsaus nykyisistä teknologioista ja lopulta päädyttiin tekemään sovelluksesta PWA mallin mukainen. Android ja IOS sovellusten haittapuolena olisi ollut kokonaan uusien kehittäjien haaliminen, sekä usean koodin ylläpitäminen. Hybridisovellukselle ei myöskään nähty tarvetta sen hitauden takia. PWA malli oli luonnollinen valinta, sillä IoT Dashboard sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin. Lisäksi suurin osa PWA mallin vaiheista oli jo täytettynä, joten sen lisääminen kävisi yhdeltä kehittäjältä yhdessä päivässä. Palvelua tarjotaan Telian asiakkaille salattuna HTTPS protokollan ylitse, sovellus on responsiivinen Bootstrap kirjaston ansiosta ja sovellus käyttää tarpeeksi moderneja työkaluja, jotta siitä oli mahdollista tehdä PWA. Telian kanssa päädyttiin yhteisymmärryksessä PWA malliin. 
+
+PWA mallin kartoitus alkoi siihen tarvittavilta asioilta, jotka on käsitelty kappaleessa 2.2. Ensiksi sovellukseen luotiin projektiin sopiva sovelluskuvake ja nimi Web App Manifestiin. Seuraava vaihe, eli Service Workerin lisääminen oli isompi ja haastavampi kokonaisuus. Sovellusta päätettiin laajentaa Googlen tarjoamalla Workbox CLI työkalulla. Workbox on NodeJS pohjainen komentoriviohjelma, jolla on helppoa luoda Service Worker nykyiseen olemassa olevaan projektiin. Lisäksi ohjelma tarjoaa käteviä komentoja, joilla toimintaa voidaan mukauttaa omaan projektiin sopivaksi. Workbox asennettiin projektiin käyttämällä NodeJs alustaa. Sovellus asentuu ja tallettuu projektin package.json listaan komennolla: 
+
+\begin{lstlisting}[
+     language=JavaScript,
+     gobble=4,
+     frame=single
+   ]
+    yarn add --dev workbox-cli
+\end{lstlisting}
+
+Seuraavaksi Workboxin käyttöönotossa huomattiin, että Workbox ei ole tuettuna Grunt työkalussa, sillä Grunt on liian vanha. Workboxia on kuitenkin mahdollista ajaa erikseen myös NodeJS skripteillä, joten Grunt työkalua laajennettiin grunt-run nimisellä paketilla, joka mahdollistaa komentojen ajamisen Gruntissa. 
+
+Grunt-run työkalu lisättiin Yarnia käyttämällä. Asennuksen jälkeen Gruntiin luotiin Run tehtävä, jonka tarkoitus oli ajaa Workbox skriptit.
+
+\begin{lstlisting}[
+     language=JavaScript,
+     gobble=4,
+     frame=single
+   ]
+    module.exports = {
+      options: {},
+      generatesw: {
+        cmd: './node_modules/workbox-cli/build/bin.js',
+        args: ['inject:manifest']
+      }
+    };
+\end{lstlisting}
+
+Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lopussa run tehtävän, joka taas ajaa Workbox skriptin. Skripti käyttää projektin juureen generoitua Service Worker konfiguraatiotiedostoa, joka saatiin alunperin käyttämällä Workboxissa toimitettua asennusvelhoa. Workboxin asennusvelho on automaattinen työkalu konfiguraation luomiseen. Konfiguraatiossa määritellään esimerkiksi mistä kansiosta tiedostoja otetaan mukaan Service Workeriin ja millä tiedostopäätteellä olevat tiedostot lasketaan mukaan. Esimerkkinä IoT projektin Service Worker konfiguraatio
+
+\begin{lstlisting}[
+     language=JavaScript,
+     gobble=4,
+     frame=single
+   ]
+    module.exports = {
+      "globDirectory": "dist/",
+      "globPatterns": [
+        "**/*.{css,otf,ttf,eot,woff,woff2,svg,png,html,js,json}"
+      ],
+      "swSrc": "./src/js/service-worker.js",
+      "swDest": "./dist/sw.js",
+      "globIgnores": [
+        "../workbox-cli-config.js",
+        "vendor/bowerbundle.js"
+      ]
+    };
+\end{lstlisting}
+
+Gruntin run tehtävässä on myös määritelty argumenteiksi inject:manifest, joka injektoi, eli lisää konfiguraation mukaiset tiedostot varsinaiseen Service Worker tiedostoon. Injektointikomento on Workboxin mukana tuleva komento. Projektissa on käsin kirjoitettu Service Worker pohja, joka on määritetty konfiguraatiotiedostossa. Tähän varsinaiseen Service Worker tiedostoon Workbox osaa konfiguraation pohjalta liittää tarvittavat tiedostot. Alla pala käsinkirjoitettua Service Workeria, jota Workbox laajentaa automaattisesti.
+
+\begin{lstlisting}[
+     language=JavaScript,
+     gobble=4,
+     frame=single
+   ]
+    workboxSW.precache([]);
+    
+    const cacheOneWeekStrategy = workboxSW.strategies.cacheFirst({
+      cacheName: 'cdn-cache',
+      cacheExpiration: {
+        maxEntries: 20,
+        maxAgeSeconds: 7 * 24 * 60 * 60, // one week
+      },
+      cacheableResponse: {
+        statuses: [0, 200],
+      },
+    });
+    
+    workboxSW.router.registerRoute(
+      /https:\/\/fonts.googleapis.com\/(.*)/,
+      cacheOneWeekStrategy
+    );
+    
+    workboxSW.router.registerRoute(
+      '/',
+      workboxSW.strategies.networkFirst()
+    );
+\end{lstlisting}
+
+Service Workerissa on määritelty workboxSW.precache([]); funktio, jonka parametrina on tyhjä taulukko. Taulukkoon Workbox laajentaa konfiguraatiossa mainitut tiedostot, jotta ne voidaan ottaa Service Workerin cachessa talteen. Service Workeriin on myös määritelty yhden viikon cache strategia ja esimerkiksi Googlen fontit on lisätty tähän yhden viikon strategiaan. Fontit eivät päivity kovin usein ja siksi on hyödyllistä laittaa niille hieman pidempi cache. Itse varsinaiselle sovellukselle taas on laitettu strategiaksi "network first", eli verkko ensin. Koska sovellus tarvitsee käytännössä aina verkkoyhteyden datan hakemiseksi, ei ole järkevää asettaa strategiaksi cachea, vaan käyttäjälle halutaan aina näyttää ensiksi verkosta saatavilla oleva uusin tieto. Vasta verkkoyhteyden ollessa poissa käytöstä, voidaan cachesta näyttää tietoja. 
+
+Manifestin toimintaa sovelluksessa voitiin tarkastella Google-Chrome selaimen kehittäjäkonsolista sovellusvalikon alta löytyvältä Manifest välilehdeltä. Välilehdeltä selviää heti toimiiko manifesti oletetulla tavalla. Mikäli virheitä ilmenee, ne ilmoitetaan tällä sivulla. Sovelluksen identiteetti tiedoissa tulee lukea manifestin vaatimuksissa määritellyt kentät (kappale 2.2) Sovelluksen nimi, sekä lyhytnimi. Presentaatio kohdassa tulee olla määriteltynä sovelluksen käynnistys osoite, teeman väri, sovelluksen orientaatio mobiililaitteella, sekä näyttömuoto. Ikoni kentissä tulee olla sovelluksen ikoni, joka näytetään käyttäjän mobiililaitteella asennuksen jälkeen. Ikoneita tulee olla useammassa eri resoluutiossa. 
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=manifest_console.PNG,  width=0.9\textwidth}
+\caption{Manifest.json tiedosto Google-Chrome kehittäjäkonsolissa.}
+\label{Manifest.json}
+\end{center}
+\end{figure}
+\clearpage
+
+Google-Chromen kehittäjäkonsolin sovellusvälilehdeltä löytyy myös Service Worker ikkuna, josta voidaan tarkistaa Service Workerin asentuminen. Välilehdeltä selviää Service Workerin lähdeskripti, sekä tila. Mikäli Service Worker on tilassa "activated and running" on se asentunut oikein ja käytössä. Service Workerin yhteyteen on myös liitetty valinnat "Offline" "Update on reload" ja "Bypass for network" täpät helpottamaan kehittäjän elämää. Update on reload ja Bypass for network onkin järkevää asettaa päälle kun sovellusta ollaan kehittämässä. Muuten sovellus saattaa näyttää kehittäjälle vanhaa cachessa olevaa tietoa. 
+
+Mikäli Manifest ja Service Worker ovat kunnossa, voidaan sovelluksen toimintaa seuraavaksi tarkastella Google-Chromen audit työkaluilla.
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=serviceworker_console.PNG,  width=0.9\textwidth}
+\caption{Service Workerin asetukset Google-Chromen kehittäjäkonsolissa.}
+\label{Service Worker}
+\end{center}
+\end{figure}
+
+\subsection{Kommunikaatio palvelimen kanssa}
+
+\subsection{Deployment}
+
+
+\clearpage
+\section{Tulokset}
+
+\clearpage
+\section{Yhteenveto}
+
+
+\nocite{*}
+% yksi näistä tai ...
+%\bibliographystyle{plain}
+%\bibliographystyle{acm}
+\bibliographystyle{ieeetr}
+
+% ... tai tämä 
+%\bibliographystyle{apalike}
+
+\clearpage
+\bibliography{lahteet}
+
+\lastpage
+
+\appendices
+
+
+\end{document}
