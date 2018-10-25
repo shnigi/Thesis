@@ -76,15 +76,15 @@ Asiakasprojektista otetaan Google Chromen Lighthouse työkalua käyttäen metrii
 
 \section{Johdanto}
 
-Tämän päivän mobiilisovelluksia kehitettäessä on teknologia puolella useita vaihtoehtoja. Kehittäjät voivat valita ainakin neljästä eri mallista. Mobiili web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana Progressiivinen Web-sovellus, eli PWA. Jokaisessa vaihtoehdossa on luonnollisesti etuja ja haittoja. Web tekniikoihin panostaminen näyttäisi kuitenkin olevan järkevää, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Google on julkaissut tiedotteen [Gam18] "Progressiivinen Web-sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA malliin on tutustunut, natiivisovelluskehitystä ei enää tarvitse. Mobiili verkkosivu itsessään muodostuu sovellukseksi."
+Tämän päivän mobiilisovelluksia kehitettäessä on teknologia puolella useita vaihtoehtoja. Kehittäjät voivat valita ainakin neljästä eri mallista. Mobiili web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana Progressiivinen Web-sovellus (Progressive Web Apps), eli PWA. Jokaisessa vaihtoehdossa on luonnollisesti etuja ja haittoja. Web tekniikoihin panostaminen näyttäisi kuitenkin olevan järkevää, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Google on julkaissut tiedotteen [Gambhir] "Progressiivinen Web-sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA malliin on tutustunut, natiivisovelluskehitystä ei enää tarvitse. Mobiili verkkosivu itsessään muodostuu sovellukseksi."
 
-Progressiivinen Web-sovellus, eli PWA termin määritteli Google Chromen insinööri Alex Russel [Rus15] omassa blogikirjoituksessaan vuonna 2015. PWA ei ole uusi teknologia, eikä ohjelmointikehys. PWA on sovellus, joka muistuttaa mahdollisimman paljon natiivia mobiili-, tai työpöytäsovellusta. Perimmäisenä ajatuksena on, että käyttäjä ei tunnista eroa näiden kahden sovelluksen välillä.
+Progressiivinen Web-sovellus, eli PWA termin määritteli Google Chromen insinööri Alex Russel [Russell] omassa blogikirjoituksessaan vuonna 2015. PWA ei ole uusi teknologia, eikä ohjelmointikehys. PWA on sovellus, joka muistuttaa mahdollisimman paljon natiivia mobiili-, tai työpöytäsovellusta. Perimmäisenä ajatuksena on, että käyttäjä ei tunnista eroa näiden kahden sovelluksen välillä.
 
-PWA voidaan määritellä Alex Russelin sanoin normaaliksi verkkosivuksi, joka on vain ottanut oikeat vitamiinit. Yahoo Developer portaalissa tehdyn tutkimuksen mukaan [Kha15] 90\% mobiililaitteilla vietetystä ajasta käytetään sovellusten parissa ja vain [Kha15] 10\% netin selaamiseen. Progressiivisten Web-sovellusten tarkoitus on hämärtää verkkosovellusten ja natiivisovellusten rajaa. Lisäksi PWA sovellusten etuna on, että IOS- ja Android alustoille ei tarvitse erikseen kehittää sovellusta ja ylläpitää kahta eri lähdekoodia. Yksi ja sama koodi riittää kummallekin alustalle. 
+PWA voidaan määritellä Alex Russelin sanoin normaaliksi verkkosivuksi, joka on vain ottanut oikeat vitamiinit. Yahoo Developer portaalissa tehdyn tutkimuksen mukaan [Khalaf] 90\% mobiililaitteilla vietetystä ajasta käytetään sovellusten parissa ja vain [Khalaf] 10\% netin selaamiseen. Progressiivisten Web-sovellusten tarkoitus on hämärtää verkkosovellusten ja natiivisovellusten rajaa. Lisäksi PWA sovellusten etuna on, että IOS- ja Android alustoille ei tarvitse erikseen kehittää sovellusta ja ylläpitää kahta eri lähdekoodia. Yksi ja sama koodi riittää kummallekin alustalle. 
 
-Progressiivisia  Web-sovelluksia ei paketoida, eikä jaella minkään sovelluskaupan kautta. Ne ovat normaaleita verkkosivuja, joihin on tuotu progressiivisia ominaisuuksia. Alex  Russelin ajatuksena [Rus15] PWA sovelluksissa on ollut niiden muotoutuminen sovellukseksi ilman, että käyttäjän tulee heti tehdä päätös sovelluksen asentamisesta ja käyttölupien luovuttamisesta. Esimerkiksi selaimista tuttu lupien kysyminen pysyy ennallaan. Sovellus kysyy mikrofonin, kameran, tai minkä tahansa muun ominaisuuden käyttölupaa vasta kun toimintoa tarvitaan ensimmäisen kerran. Muutaman käyttökerran jälkeen sovellus kysyy käyttäjältä halutaanko puhelimen työpöydälle asentaa pikakuvake sovellukseen ja ilmoituksetkin voidaan joko hyväksyä tai hylätä pyynnöstä. Tämä siis tarkoittaa että käytön myötä verkkosivu muuttuu käyttäjän puhelimessa natiivin mobiilisovelluksen kaltaiseksi ilman suurempaa sitoutumista sovelluksen asentamiseen ja kaikkien käyttölupien luovuttamiseen heti. 
+Progressiivisia  Web-sovelluksia ei paketoida, eikä jaella minkään sovelluskaupan kautta. Ne ovat normaaleita verkkosivuja, joihin on tuotu progressiivisia ominaisuuksia. Alex  Russelin ajatuksena [Russell] PWA sovelluksissa on ollut niiden muotoutuminen sovellukseksi ilman, että käyttäjän tulee heti tehdä päätös sovelluksen asentamisesta ja käyttölupien luovuttamisesta. Esimerkiksi selaimista tuttu lupien kysyminen pysyy ennallaan. Sovellus kysyy mikrofonin, kameran, tai minkä tahansa muun ominaisuuden käyttölupaa vasta kun toimintoa tarvitaan ensimmäisen kerran. Muutaman käyttökerran jälkeen sovellus kysyy käyttäjältä halutaanko puhelimen työpöydälle asentaa pikakuvake sovellukseen ja ilmoituksetkin voidaan joko hyväksyä tai hylätä pyynnöstä. Tämä siis tarkoittaa että käytön myötä verkkosivu muuttuu käyttäjän puhelimessa natiivin mobiilisovelluksen kaltaiseksi ilman suurempaa sitoutumista sovelluksen asentamiseen ja kaikkien käyttölupien luovuttamiseen heti. 
 
-PWA:ta kehitetään tällä hetkellä kovaa vauhtia eri selainvalmistajien toimesta. Firefoxilla ja Safarilla teknologia on tulossa [San18] ja Chromella se on pääosin jo tuettuna. PWA sovellukset eivät kuitenkaan sovellu sellaisiin käyttötarkoituksiin, joissa täytyy päästä käsiksi puhelimen rajapintoihin, kuten vaikkapa kalenteriin, tai osoitekirjaan. PWA:n valintaan vaikuttaa siis sovelluksen käyttötarkoitus. Tämän työn asiakasprojektissa valittiin toteutustekniikaksi PWA, koska se ei vaadi erillistä kehittämistä eri laitealustoille, eikä projektissa ollut tarvetta käyttää puhelimeen sidottuja rajapintoja.
+PWA:ta kehitetään tällä hetkellä kovaa vauhtia eri selainvalmistajien toimesta. Firefoxilla ja Safarilla teknologia on tulossa [Santoni] ja Chromella se on pääosin jo tuettuna. PWA sovellukset eivät kuitenkaan sovellu sellaisiin käyttötarkoituksiin, joissa täytyy päästä käsiksi puhelimen rajapintoihin, kuten vaikkapa kalenteriin, tai osoitekirjaan. PWA:n valintaan vaikuttaa siis sovelluksen käyttötarkoitus. Tämän työn asiakasprojektissa valittiin toteutustekniikaksi PWA, koska se ei vaadi erillistä kehittämistä eri laitealustoille, eikä projektissa ollut tarvetta käyttää puhelimeen sidottuja rajapintoja.
 
 Tässä tutkielmassa selvitetään millaisia vaikutuksia progressiivisuudella saavutetaan ja kuinka helppoa työkalujen käyttöönotto on. Esimerkkiprojektissa mitataan sovelluksen nopeutta välimuistitallennuksen ollessa käytössä, sekä ilman. Mittarina käytetään Google-Chrome selaimen kehittäjätyökaluissa toimitettavaa Lighthouse työkalua. Lisäksi sovelluksen kehittäjä arvioi työkalujen käyttöönottoa noin muutaman vuoden ikäisessä projektissa. 
 
@@ -115,7 +115,7 @@ Tutkielman tutkimuskysymykset ovat seuraavat:
 
 \subsection{Tutkimusmenetelmä}
 
-Tutkimus metodiksi valikoitui Design Science menetelmä, eli design-tutkimus. Design-tutkimus on tutkimusstrategia, joka pyrkii kehittämään sekä teoriaa, että käytäntöä [Pön08]. Se ei ole metodologia ja sitä voi käyttää sekä laadulliseen, kuin määrälliseen tutkimukseen. Design-tutkimus on ongelmalähtöistä oppimista, tai tutkivaa oppimista. Olemassa olevan sovelluksen muuttaminen PWA mallia vastaavaksi oli teoreettinen tehtävä, josta muodostui tutkimuskysymys. 
+Tutkimus metodiksi valikoitui Design Science menetelmä, eli design-tutkimus. Design-tutkimus on tutkimusstrategia, joka pyrkii kehittämään sekä teoriaa, että käytäntöä [Pönkä]. Se ei ole metodologia ja sitä voi käyttää sekä laadulliseen, kuin määrälliseen tutkimukseen. Design-tutkimus on ongelmalähtöistä oppimista, tai tutkivaa oppimista. Olemassa olevan sovelluksen muuttaminen PWA mallia vastaavaksi oli teoreettinen tehtävä, josta muodostui tutkimuskysymys. 
 
 Projektissa oli myös selkeä lähtökohta, eli olemassa oleva sovellus. Sovelluksen rinnalle haluttiin lisäksi myös mobiilisovellus, joten projektissa tehtiin selvitys nykyisistä teknologioista. Seuraavaksi sovellus toteutettiin PWA mallin mukaisesti ja viimeiseksi sitä analysoidaan.
 
@@ -134,7 +134,7 @@ Tutkimusprosessin vaiheet ovat pääpiirteittäin seuraavat.
 \newpage
 \section{PWA:n esittely}
 
-PWA ei ole ohjelmistokehys, tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kap18] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus, vai verkkosovellus. PWA:n tarkoitus on hämärtää tätä rajaa. 
+PWA ei ole ohjelmistokehys, tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kapoor] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus, vai verkkosovellus. PWA:n tarkoitus on hämärtää tätä rajaa. 
 
 Alex Russell määritteli blogi kirjoituksessaan progressiivisen Web-sovelluksen ominaisuudet seuraavasti. 
 
@@ -156,8 +156,8 @@ Sovelluksen tulee olla:
 Tarkastellaan ensiksi millaisia haasteita nykyään natiivi ja Web-sovelluksissa on.
 
 \begin{itemize}
-  \item \textbf{Internetin nopeus.} Internet ei ole kaikkialla maailmassa nopea. noin 60\% maailmasta käyttää yhä 2G verkkoa [Kap18] ja paikoitellen verkko on niin ruuhkautunut, että sen tiedonsiirtokyky ei vain ole riittävä.
-  \item \textbf{Hidas verkkosivun latautuminen.} Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Jos sovelluksen palvelinpuoli ei ole kunnossa, voi sovellus toimia hitaasti. Tutkimuksen mukaan 53\% käyttäjistä [Kap18] hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti.
+  \item \textbf{Internetin nopeus.} Internet ei ole kaikkialla maailmassa nopea. noin 60\% maailmasta käyttää yhä 2G verkkoa [Kapoor] ja paikoitellen verkko on niin ruuhkautunut, että sen tiedonsiirtokyky ei vain ole riittävä.
+  \item \textbf{Hidas verkkosivun latautuminen.} Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Jos sovelluksen palvelinpuoli ei ole kunnossa, voi sovellus toimia hitaasti. Tutkimuksen mukaan 53\% käyttäjistä [Kapoor] hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti.
   \item \textbf{Kynnys asentaa omalle laitteelle on korkea.} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia. Keskimääräinen käyttäjä asentaa 0 sovellusta kuukaudessa.
   \item \textbf{Käyttäjän sitouttaminen.} Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa, mutta verkkosivujen käyttöaste on lähes kolminkertainen. Lisäksi käyttäjät viettävät 80\% ajastaan kolmen tärkeimmän natiivisovelluksen parissa. 
 \end{itemize}
@@ -174,7 +174,7 @@ PWA pyrkii ratkaisemaan näitä ongelmia. Progressiivisen Web-sovelluksen käytt
 
 \subsection{Progressiivisen Web-sovelluksen vaatimukset}
 
-Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota noudattamalla sovelluksesta saadaan progressiivinen. [Goo18] Käydään listasta läpi minimivaatimukset joiden tulee täyttyä, jotta sovellusta voidaan sanoa progressiiviseksi.
+Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota noudattamalla sovelluksesta saadaan progressiivinen. [Google] Käydään listasta läpi minimivaatimukset joiden tulee täyttyä, jotta sovellusta voidaan sanoa progressiiviseksi.
 
 \textbf{Web App Manifest}
 
@@ -203,11 +203,11 @@ Kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manife
 
 \textbf{HTTPS salattu liikenne}
 
-Jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS protokollan ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS protokollaa [Eis18]. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. 
+Jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS protokollan ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS protokollaa [Eisworth]. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. 
 
 \subsection{Näyttötilat}
 
-PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyttäjältä ylimääräiset valikot ja luoda sovelluksesta näin natiivisovelluksen kaltainen. Näyttötiloja on neljä erilaista [Moz18]
+PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyttäjältä ylimääräiset valikot ja luoda sovelluksesta näin natiivisovelluksen kaltainen. Näyttötiloja on neljä erilaista [Mozilla]
 
 \begin{itemize}
   \item fullscreen. Koko näytön tila, jolloin laitteen koko näyttö on käytössä ja Chromen user agent on piilotettuna.
