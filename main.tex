@@ -38,6 +38,7 @@
 \renewcommand\lstlistlistingname{Listaukset}
 
 
+
 \begin{document}
 %\doublespacing  joskus halutaan enemmän kommentointitilaa rivien väliin
 %\onehalfspacing joskus halutaan enemmän kommentointitilaa rivien väliin
@@ -62,28 +63,24 @@
 
 \begin{abstract}
 
-Mobiilisovellukset ovat jatkuvasti kehittyvää ja muuttuvaa teknologiaa, kuten myös strategiat niiden rakentamiseksi. Tässä työssä käydään läpi Progressiivisen Web-sovelluksen rakennustekniikoita. Progressiivisen Web-sovelluksen tarkoitus on hämärtää, tai jopa poistaa raja ladattavan sovelluksen ja normaalin verkkosivuston välillä. Lisäksi tarkastellaan tekniikoiden vaikutuksia loppukäyttäjille käytännössä.
+Mobiilisovellukset ovat jatkuvasti kehittyvää ja muuttuvaa teknologiaa, kuten myös strategiat niiden rakentamiseksi. Tässä työssä käydään läpi Progressiivisen Web-sovelluksen, eli PWA:n rakennustekniikoita. PWA:n tarkoitus on hämärtää, tai jopa poistaa raja ladattavan sovelluksen ja normaalin verkkosivuston välillä. Lisäksi tarkastellaan tekniikoiden vaikutuksia loppukäyttäjille käytännössä.
 
-Progressiivinen Web-sovellus on kuin mikä tahansa normaali verkkosivusto, mutta se täyttää lisäksi seuraavat kriteerit. Sovellus skaalautuu mille tahansa laitteelle. Sovellus tarjoillaan salatun yhteyden yli. Sovellus on mahdollista asentaa puhelimen kotinäytölle pikakuvakkeeksi, jolloin sovellus avautuu ilman selaimesta tuttuja navigointityökaluja ja lisäksi sovelluksen voi myös avata laitteen ollessa offline tilassa. 
+PWA on kuin mikä tahansa normaali verkkosivusto, mutta se täyttää lisäksi seuraavat kriteerit. Sovellus skaalautuu mille tahansa laitteelle. Sovellus tarjoillaan salatun yhteyden yli. Sovellus on mahdollista asentaa puhelimen kotinäytölle pikakuvakkeeksi, jolloin sovellus avautuu ilman selaimesta tuttuja navigointityökaluja ja lisäksi sovelluksen voi myös avata laitteen ollessa offline tilassa. 
 
-Progressiivisen Web-sovelluksen luomista ja käyttöönottoa tarkastellaan olemassa olevassa yksityisessä asiakasprojektissa. Projektissa kiinnitetään huomiota progressiivisen Web-sovelluksen tuomiin etuihin ja kipupisteisiin. Lisäksi kirjallisuuskatsauksen kautta tarkastellaan PWA:n tulevaisuuden näkymiä ja nykytilannetta. 
+PWA sovelluksen luomista ja käyttöönottoa tarkastellaan olemassa olevassa yksityisessä asiakasprojektissa. Projektissa kiinnitetään huomiota PWA mallin tuomiin etuihin ja kipupisteisiin. Lisäksi kirjallisuuskatsauksen kautta tarkastellaan PWA:n tulevaisuuden näkymiä ja nykytilannetta. 
 
 Asiakasprojektista otetaan Google Chromen Lighthouse työkalua käyttäen metriikat sovelluksen nopeuden mittaamiseksi. Nopeuden muutosta tarkastellaan PWA ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä. Lisäksi tarkastellaan mobiililaitteiden käyttöä koko sovelluksen käytössä. Analytiikat sovelluksen mobiilikäytöstä saadaan Google Analytics työkalusta. 
-
 \end{abstract}
 
 \mytableofcontents
 
-
-
-
 \section{Johdanto}
 
-Tämän päivän mobiilisovelluksia kehitettäessä on teknologia puolella useita vaihtoehtoja. Kehittäjät voivat valita neljästä eri mallista. Mobiili web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana Progressiivinen Web-sovellus. Jokaisessa vaihtoehdossa on luonnollisesti etuja ja haittoja. Web tekniikoihin panostaminen näyttäisi kuitenkin olevan järkevää, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Google on julkaissut tiedotteen [Gam18] "Progressiivinen Web-sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA malliin on tutustunut, natiivisovelluskehitystä ei enää tarvitse. Mobiili verkkosivu itsessään muodostuu sovellukseksi."
+Tämän päivän mobiilisovelluksia kehitettäessä on teknologia puolella useita vaihtoehtoja. Kehittäjät voivat valita ainakin neljästä eri mallista. Mobiili web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana Progressiivinen Web-sovellus, eli PWA. Jokaisessa vaihtoehdossa on luonnollisesti etuja ja haittoja. Web tekniikoihin panostaminen näyttäisi kuitenkin olevan järkevää, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Google on julkaissut tiedotteen [Gam18] "Progressiivinen Web-sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA malliin on tutustunut, natiivisovelluskehitystä ei enää tarvitse. Mobiili verkkosivu itsessään muodostuu sovellukseksi."
 
-Progressiivinen Web-sovellus, eli PWA termin määritteli Google Chromen insinööri Alex Russel [Rus15] omassa blogikirjoituksessaan vuonna 2015. Progressiivinen Web-sovellus ei ole uusi teknologia, eikä ohjelmointikehys. Progressiivinen Web-sovellus on sovellus, joka muistuttaa mahdollisimman paljon natiivia mobiili-, tai työpöytäsovellusta. Perimmäisenä ajatuksena on, että käyttäjä ei tunnista eroa näiden kahden sovelluksen välillä.
+Progressiivinen Web-sovellus, eli PWA termin määritteli Google Chromen insinööri Alex Russel [Rus15] omassa blogikirjoituksessaan vuonna 2015. PWA ei ole uusi teknologia, eikä ohjelmointikehys. PWA on sovellus, joka muistuttaa mahdollisimman paljon natiivia mobiili-, tai työpöytäsovellusta. Perimmäisenä ajatuksena on, että käyttäjä ei tunnista eroa näiden kahden sovelluksen välillä.
 
-Progressiivinen Web-sovellus voidaan määritellä Alex Russelin sanoin normaaliksi verkkosivuksi, joka on vain ottanut oikeat vitamiinit. Yahoo Developer portaalissa tehdyn tutkimuksen mukaan [Kha15] 90\% mobiililaitteilla vietetystä ajasta käytetään sovellusten parissa ja vain [Kha15] 10\% netin selaamiseen. Progressiivisten Web-sovellusten tarkoitus on hämärtää verkkosovellusten ja natiivisovellusten rajaa. Lisäksi PWA sovellusten etuna on, että IOS- ja Android alustoille ei tarvitse erikseen kehittää sovellusta ja ylläpitää kahta eri lähdekoodia. Yksi ja sama koodi riittää kummallekin alustalle. 
+PWA voidaan määritellä Alex Russelin sanoin normaaliksi verkkosivuksi, joka on vain ottanut oikeat vitamiinit. Yahoo Developer portaalissa tehdyn tutkimuksen mukaan [Kha15] 90\% mobiililaitteilla vietetystä ajasta käytetään sovellusten parissa ja vain [Kha15] 10\% netin selaamiseen. Progressiivisten Web-sovellusten tarkoitus on hämärtää verkkosovellusten ja natiivisovellusten rajaa. Lisäksi PWA sovellusten etuna on, että IOS- ja Android alustoille ei tarvitse erikseen kehittää sovellusta ja ylläpitää kahta eri lähdekoodia. Yksi ja sama koodi riittää kummallekin alustalle. 
 
 Progressiivisia  Web-sovelluksia ei paketoida, eikä jaella minkään sovelluskaupan kautta. Ne ovat normaaleita verkkosivuja, joihin on tuotu progressiivisia ominaisuuksia. Alex  Russelin ajatuksena [Rus15] PWA sovelluksissa on ollut niiden muotoutuminen sovellukseksi ilman, että käyttäjän tulee heti tehdä päätös sovelluksen asentamisesta ja käyttölupien luovuttamisesta. Esimerkiksi selaimista tuttu lupien kysyminen pysyy ennallaan. Sovellus kysyy mikrofonin, kameran, tai minkä tahansa muun ominaisuuden käyttölupaa vasta kun toimintoa tarvitaan ensimmäisen kerran. Muutaman käyttökerran jälkeen sovellus kysyy käyttäjältä halutaanko puhelimen työpöydälle asentaa pikakuvake sovellukseen ja ilmoituksetkin voidaan joko hyväksyä tai hylätä pyynnöstä. Tämä siis tarkoittaa että käytön myötä verkkosivu muuttuu käyttäjän puhelimessa natiivin mobiilisovelluksen kaltaiseksi ilman suurempaa sitoutumista sovelluksen asentamiseen ja kaikkien käyttölupien luovuttamiseen heti. 
 
@@ -91,7 +88,7 @@ PWA:ta kehitetään tällä hetkellä kovaa vauhtia eri selainvalmistajien toime
 
 Tässä tutkielmassa selvitetään millaisia vaikutuksia progressiivisuudella saavutetaan ja kuinka helppoa työkalujen käyttöönotto on. Esimerkkiprojektissa mitataan sovelluksen nopeutta välimuistitallennuksen ollessa käytössä, sekä ilman. Mittarina käytetään Google-Chrome selaimen kehittäjätyökaluissa toimitettavaa Lighthouse työkalua. Lisäksi sovelluksen kehittäjä arvioi työkalujen käyttöönottoa noin muutaman vuoden ikäisessä projektissa. 
 
-Tutkielman rakenne on seuraava. Luvussa kaksi esitellään tutkimusongelma. Osiossa kolme esitellään progressiivisten Web-sovellusten vaatimukset, toteutustekniikoita ja selvennetään mitä koko termillä tarkoitetaan. Lisäksi tarkastellaan myös muita mobiilikehitys tekniikoita ja teknologioita. Kappaleessa neljä tehdään sovellukseen tekninen toteutus. Projektissa asennetaan tarvittavat työkalut PWA mallin täyttämiseksi. Kappaleessa viisi suoritetaan nopeusmittaukset käyttämällä Google-Chrome selaimen Lighthouse työkalua. Lisäksi luvussa analysoidaan sovelluksen nopeutta ja esitellään johtopäätökset. Kuudennessa luvussa pohditaan PWA mallin tulevaisuutta ja jatkotutkimusta. 
+Tutkielman rakenne on seuraava. Luvussa kaksi esitellään tutkimusongelma. Osiossa kolme esitellään progressiivisten Web-sovellusten vaatimukset, toteutustekniikoita ja selvennetään mitä koko termillä tarkoitetaan. Lisäksi tarkastellaan myös muita mobiilikehitys tekniikoita ja teknologioita. Kappaleessa neljä tehdään sovellukseen tekninen toteutus. Projektissa asennetaan tarvittavat työkalut PWA mallin täyttämiseksi. Kappaleessa viisi suoritetaan nopeusmittaukset käyttämällä Google-Chrome selaimen Lighthouse työkalua. Lisäksi luvussa analysoidaan sovelluksen nopeutta ja esitellään johtopäätökset. Kuudennessa luvussa pohditaan PWA mallin tulevaisuutta ja tehdään yhteenveto. 
 
 \newpage
 \section{Tutkimusongelma}
@@ -137,7 +134,7 @@ Tutkimusprosessin vaiheet ovat pääpiirteittäin seuraavat.
 \newpage
 \section{PWA:n esittely}
 
-Progressiivinen Web-sovellus ei ole ohjelmistokehys, tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kap18] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus, vai verkkosovellus. PWA:n tarkoitus on hämärtää tätä rajaa. 
+PWA ei ole ohjelmistokehys, tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kap18] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus, vai verkkosovellus. PWA:n tarkoitus on hämärtää tätä rajaa. 
 
 Alex Russell määritteli blogi kirjoituksessaan progressiivisen Web-sovelluksen ominaisuudet seuraavasti. 
 
