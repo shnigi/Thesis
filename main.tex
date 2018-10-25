@@ -69,8 +69,7 @@ PWA on kuin mikä tahansa normaali verkkosivusto, mutta se täyttää lisäksi s
 
 PWA sovelluksen luomista ja käyttöönottoa tarkastellaan olemassa olevassa yksityisessä asiakasprojektissa. Projektissa kiinnitetään huomiota PWA mallin tuomiin etuihin ja kipupisteisiin. Lisäksi kirjallisuuskatsauksen kautta tarkastellaan PWA:n tulevaisuuden näkymiä ja nykytilannetta. 
 
-Asiakasprojektista otetaan Google Chromen Lighthouse työkalua käyttäen metriikat sovelluksen nopeuden mittaamiseksi. Nopeuden muutosta tarkastellaan PWA ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä. Lisäksi tarkastellaan mobiililaitteiden käyttöä koko sovelluksen käytössä. Analytiikat sovelluksen mobiilikäytöstä saadaan Google Analytics työkalusta. 
-\end{abstract}
+Asiakasprojektista otetaan Google Chromen Lighthouse työkalua käyttäen metriikat sovelluksen nopeuden mittaamiseksi. Nopeuden muutosta tarkastellaan PWA ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä. Lisäksi tarkastellaan mobiililaitteiden käyttöä koko sovelluksen käytössä. Analytiikat sovelluksen mobiilikäytöstä saadaan Google Analytics työkalusta. \end{abstract}
 
 \mytableofcontents
 
@@ -110,7 +109,7 @@ Tutkielman tutkimuskysymykset ovat seuraavat:
 \begin{itemize}
   \item \textbf{TK1:} Kuinka paljon nopeampi PWA mallia käyttävä verkkosivu on kuin sivu joka ei hyödynnä PWA:ta
   \item \textbf{TK2:} Miten olemassa oleva verkkosivu voidaan muokata progressiiviseksi web-sovellukseksi?
-  \item \textbf{TK3:} Minkälaisia muita hyötyjä saadaan Progressiivisista Web-sovelluksista? 
+  \item \textbf{TK3:} Minkälaisia hyötyjä tai haittoja saadaan Progressiivisista Web-sovelluksista? 
 \end{itemize}
 
 \subsection{Tutkimusmenetelmä}
@@ -134,9 +133,9 @@ Tutkimusprosessin vaiheet ovat pääpiirteittäin seuraavat.
 \newpage
 \section{PWA:n esittely}
 
-PWA ei ole ohjelmistokehys, tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kapoor] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus, vai verkkosovellus. PWA:n tarkoitus on hämärtää tätä rajaa. 
+PWA ei ole ohjelmistokehys, tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kapoor] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus, vai verkkosovellus. PWA:n tarkoitus on hämärtää natiivisovelluksen ja web-sovelluksen rajaa. Rajaa halutaan hämärtää siksi, että yleensä sovellusten julkaiseminen sovelluskauppoihin on hidasta, aikaa vievää ja lisäksi vielä maksullista. Kehittäjän ja tilaajan näkökulmasta PWA sovelluksen kehittäminen on siis järkevää. Sovellusta ei tarvitse erikseen koodata usealle eri mobiilialustalle [Gazdecki], julkaisusykli on nopeampi ja kehittäminen halvempaa. Sovellus muotoutuu käyttäjän laitteelle alustasta riippumatta, yksi ainoa versio riittää.
 
-Alex Russell määritteli blogi kirjoituksessaan progressiivisen Web-sovelluksen ominaisuudet seuraavasti. 
+Alex Russell määritteli blogikirjoituksessaan PWA:n ominaisuudet seuraavasti. 
 
 Sovelluksen tulee olla:
 \begin{itemize}
@@ -234,7 +233,7 @@ Sensorit lähettävät mittaustulokset tukiasemalle, josta data lähetetään sa
 \begin{center}
 \epsfig{figure=yanzi_gateway.jpg,  width=0.9\textwidth}
 \caption{Yanzi 4G tukiasema ilman antenneja. Kuva: yanzi.se}
-\label{Yanzi sensori}
+\label{Yanzi tukiasema}
 \end{center}
 \end{figure}
 
@@ -274,7 +273,7 @@ Nykyiset JavaScript pohjaiset käyttöliittymät ovat erittäin monimutkaisia. K
 \begin{center}
 \epsfig{figure=iotlaitteet.PNG,  width=0.9\textwidth}
 \caption{Miten IoT palvelu toimii yksinkertaisuudessaan. Kuva: Telia}
-\label{Yanzi sensori}
+\label{IoT arkkitehtuuri}
 \end{center}
 \end{figure}
 
