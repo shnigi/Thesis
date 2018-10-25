@@ -157,7 +157,7 @@ Tarkastellaan ensiksi millaisia haasteita nykyään natiivi ja Web-sovelluksissa
 \begin{itemize}
   \item \textbf{Internetin nopeus.} Internet ei ole kaikkialla maailmassa nopea. noin 60\% maailmasta käyttää yhä 2G verkkoa [Kapoor] ja paikoitellen verkko on niin ruuhkautunut, että sen tiedonsiirtokyky ei vain ole riittävä.
   \item \textbf{Hidas verkkosivun latautuminen.} Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Jos sovelluksen palvelinpuoli ei ole kunnossa, voi sovellus toimia hitaasti. Tutkimuksen mukaan 53\% käyttäjistä [Kapoor] hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti.
-  \item \textbf{Kynnys asentaa omalle laitteelle on korkea.} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia [Kapoor]. Keskimääräinen käyttäjä asentaa 1-2 sovellusta kuukaudessa.
+  \item \textbf{Kynnys asentaa omalle laitteelle on korkea.} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia [Kapoor]. ComScoren mukaan [Perez] Keskimääräinen käyttäjä lataa ja asentaa laitteellensa nolla sovellusta kuukaudessa.
   \item \textbf{Käyttäjän sitouttaminen.} Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa, mutta verkkosivujen käyttöaste on lähes kolminkertainen. Lisäksi käyttäjät viettävät 80\% ajastaan kolmen tärkeimmän natiivisovelluksen parissa. 
 \end{itemize}
 
@@ -302,21 +302,14 @@ JavaScript koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään .LES
 
 \subsection{PWA:n käyttöönotto projektissa}
 
-Telian alkuperäinen tarkoitus oli laajentaa IoT projektin käyttöliittymää myös mobiililaitteille. Projektissa tehtiin nopea katsaus nykyisistä teknologioista ja lopulta päädyttiin tekemään sovelluksesta PWA mallin mukainen. Android ja IOS sovellusten haittapuolena olisi ollut kokonaan uusien kehittäjien haaliminen, sekä usean koodin ylläpitäminen. Hybridisovellukselle ei myöskään nähty tarvetta sen hitauden takia. PWA malli oli luonnollinen valinta, sillä IoT Dashboard sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin. Lisäksi suurin osa PWA mallin vaiheista oli jo täytettynä, joten sen lisääminen kävisi yhdeltä kehittäjältä yhdessä päivässä. Palvelua tarjotaan Telian asiakkaille salattuna HTTPS protokollan ylitse, sovellus on responsiivinen Bootstrap kirjaston ansiosta ja sovellus käyttää tarpeeksi moderneja työkaluja, jotta siitä oli mahdollista tehdä PWA. Telian kanssa päädyttiin yhteisymmärryksessä PWA malliin. 
+Telian alkuperäinen tarkoitus oli laajentaa IoT projektin käyttöliittymää myös mobiililaitteille. Projektissa tehtiin nopea katsaus nykyisistä teknologioista ja lopulta päädyttiin tekemään sovelluksesta PWA mallin mukainen. Android ja IOS sovellusten haittapuolena olisi ollut kokonaan uusien kehittäjien haaliminen, sekä usean koodin ylläpitäminen. Hybridisovellukselle ei myöskään nähty tarvetta sen hitauden takia. IoT Dashboard sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin, kuten kalenteriin, tai yhteystietoihin, joten PWA malli oli luonnollinen valinta. Lisäksi osa PWA mallin vaiheista oli jo täytettynä. Palvelua tarjotaan Telian asiakkaille salattuna HTTPS protokollan ylitse, sovellus on responsiivinen Bootstrap kirjaston ansiosta ja sovellus käyttää tarpeeksi moderneja työkaluja, jotta siitä oli mahdollista tehdä PWA. Telian kanssa päädyttiin yhteisymmärryksessä PWA malliin. 
 
-PWA mallin kartoitus alkoi siihen tarvittavilta asioilta, jotka on käsitelty kappaleessa 2.2. Ensiksi sovellukseen luotiin projektiin sopiva sovelluskuvake ja nimi Web App Manifestiin. Seuraava vaihe, eli Service Workerin lisääminen oli isompi ja haastavampi kokonaisuus. Sovellusta päätettiin laajentaa Googlen tarjoamalla Workbox CLI työkalulla. Workbox on NodeJS pohjainen komentoriviohjelma, jolla on helppoa luoda Service Worker nykyiseen olemassa olevaan projektiin. Lisäksi ohjelma tarjoaa käteviä komentoja, joilla toimintaa voidaan mukauttaa omaan projektiin sopivaksi. Workbox asennettiin projektiin käyttämällä NodeJs alustaa. Sovellus asentuu ja tallettuu projektin package.json listaan komennolla: 
-
-\begin{lstlisting}[
-     language=JavaScript,
-     gobble=4,
-     frame=single
-   ]
-    yarn add --dev workbox-cli
-\end{lstlisting}
+PWA mallin kartoitus alkoi siihen tarvittavilta asioilta. Ensiksi sovellukseen luotiin projektiin sopiva sovelluskuvake ja nimi Web App Manifestiin. Seuraava vaihe, eli Service Workerin lisääminen oli isompi ja haastavampi kokonaisuus. Sovellusta päätettiin laajentaa Googlen tarjoamalla Workbox CLI työkalulla. Workbox on NodeJS pohjainen komentoriviohjelma, jolla on helppoa luoda Service Worker nykyiseen olemassa olevaan projektiin. Lisäksi ohjelma tarjoaa käteviä komentoja, joilla toimintaa voidaan mukauttaa omaan projektiin sopivaksi. Workbox asennettiin projektiin käyttämällä Yarnia.
 
 Seuraavaksi Workboxin käyttöönotossa huomattiin, että Workbox ei ole tuettuna Grunt työkalussa, sillä Grunt on liian vanha. Workboxia on kuitenkin mahdollista ajaa erikseen myös NodeJS skripteillä, joten Grunt työkalua laajennettiin grunt-run nimisellä paketilla, joka mahdollistaa komentojen ajamisen Gruntissa. 
 
-Grunt-run työkalu lisättiin Yarnia käyttämällä. Asennuksen jälkeen Gruntiin luotiin Run tehtävä, jonka tarkoitus oli ajaa Workbox skriptit.
+Grunt-run työkalu lisättiin myös Yarnia käyttämällä. Asennuksen jälkeen Gruntiin luotiin Run tehtävä, jonka tarkoitus oli ajaa Workbox skriptit. Tärkeää run komennossa on liittää argumenteiksi "inject:manifest" [Googlec], jolloin ohjelma tietää liittää lopulliseen Service Worker tiedostoon kaikki tiedostot, jotka pitää lisätä välimuistiin. Näin jokaista tiedostoa tai polkua ei tarvitse kirjoittaa itse. Riittää että konfiguraatiotiedostossa on määritelty välimuistiin tallennettavien tiedostojen päätteet. Injektointikomento on Workboxin mukana tuleva komento.
+
 
 \begin{lstlisting}[
      language=JavaScript,
@@ -353,7 +346,7 @@ Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lop
     };
 \end{lstlisting}
 
-Gruntin run tehtävässä on myös määritelty argumenteiksi inject:manifest, joka injektoi, eli lisää konfiguraation mukaiset tiedostot varsinaiseen Service Worker tiedostoon. Injektointikomento on Workboxin mukana tuleva komento. Projektissa on käsin kirjoitettu Service Worker pohja, joka on määritetty konfiguraatiotiedostossa. Tähän varsinaiseen Service Worker tiedostoon Workbox osaa konfiguraation pohjalta liittää tarvittavat tiedostot. Alla pala käsinkirjoitettua Service Workeria, jota Workbox laajentaa automaattisesti.
+Projektissa on käsin kirjoitettu Service Worker pohja, joka on määritetty konfiguraatiotiedostossa. Tähän varsinaiseen Service Worker tiedostoon Workbox osaa konfiguraation pohjalta liittää tarvittavat tiedostot. Alla pala käsinkirjoitettua Service Workeria, jota Workbox laajentaa automaattisesti injektiokomennolla.
 
 \begin{lstlisting}[
      language=JavaScript,
@@ -386,7 +379,7 @@ Gruntin run tehtävässä on myös määritelty argumenteiksi inject:manifest, j
 
 Service Workerissa on määritelty workboxSW.precache([]); funktio, jonka parametrina on tyhjä taulukko. Taulukkoon Workbox laajentaa konfiguraatiossa mainitut tiedostot, jotta ne voidaan ottaa Service Workerin cachessa talteen. Service Workeriin on myös määritelty yhden viikon cache strategia ja esimerkiksi Googlen fontit on lisätty tähän yhden viikon strategiaan. Fontit eivät päivity kovin usein ja siksi on hyödyllistä laittaa niille hieman pidempi cache. Itse varsinaiselle sovellukselle taas on laitettu strategiaksi "network first", eli verkko ensin. Koska sovellus tarvitsee käytännössä aina verkkoyhteyden datan hakemiseksi, ei ole järkevää asettaa strategiaksi cachea, vaan käyttäjälle halutaan aina näyttää ensiksi verkosta saatavilla oleva uusin tieto. Vasta verkkoyhteyden ollessa poissa käytöstä, voidaan cachesta näyttää tietoja. 
 
-Manifestin toimintaa sovelluksessa voitiin tarkastella Google-Chrome selaimen kehittäjäkonsolista sovellusvalikon alta löytyvältä Manifest välilehdeltä. Välilehdeltä selviää heti toimiiko manifesti oletetulla tavalla. Mikäli virheitä ilmenee, ne ilmoitetaan tällä sivulla. Sovelluksen identiteetti tiedoissa tulee lukea manifestin vaatimuksissa määritellyt kentät (kappale 2.2) Sovelluksen nimi, sekä lyhytnimi. Presentaatio kohdassa tulee olla määriteltynä sovelluksen käynnistys osoite, teeman väri, sovelluksen orientaatio mobiililaitteella, sekä näyttömuoto. Ikoni kentissä tulee olla sovelluksen ikoni, joka näytetään käyttäjän mobiililaitteella asennuksen jälkeen. Ikoneita tulee olla useammassa eri resoluutiossa. 
+Manifestin toimintaa sovelluksessa voitiin tarkastella Google-Chrome selaimen kehittäjäkonsolista sovellusvalikon alta löytyvältä Manifest välilehdeltä. Välilehdeltä selviää heti toimiiko manifesti oletetulla tavalla. Mikäli virheitä ilmenee, ne ilmoitetaan tällä sivulla. Sovelluksen identiteetti tiedoissa tulee lukea manifestin vaatimuksissa määritellyt kentät: sovelluksen nimi, sekä lyhytnimi. Presentaatio kohdassa tulee olla määriteltynä sovelluksen käynnistys osoite, teeman väri, sovelluksen orientaatio mobiililaitteella, sekä näyttömuoto. Ikoni kentissä tulee olla sovelluksen ikoni, joka näytetään käyttäjän mobiililaitteella asennuksen jälkeen. Ikoneita tulee olla useammassa eri resoluutiossa. 
 
 \begin{figure}[h]
 \begin{center}
@@ -436,6 +429,5 @@ Mikäli Manifest ja Service Worker ovat kunnossa, voidaan sovelluksen toimintaa 
 \lastpage
 
 \appendices
-
 
 \end{document}
