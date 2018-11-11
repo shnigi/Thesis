@@ -218,6 +218,61 @@ PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyt
 
 \subsection{Muut teknologiat ja erot}
 
+Vain muutama vuosi takaperin älypuhelimet olivat melko yksinkertaisia. Niillä pystyi korkeintaan selaamaan verkossa tekstiä, linkkejä ja ehkä kuvia. Laitteiden omistajat olivat joko business henkilöitä joilla oli jatkuva tarve sähköpostiin, tai sitten todellisia nörttejä, jotka halusivat vain uusimmat teknologiat käyttöönsä. Mobiililaitteiden kenttä kuitenkin muuttui täysin Applen julkaistua iPhonen. Applen alkuperäinen idea oli käyttää nimenomaan web-teknologioita [charland2011mobile]. Kuitenkin kolme vuotta julkaisun jälkeen natiivisovellukset ovat ottaneet vallan. Natiivisovelluksissa on kuitenkin ongelma. Jokaiselle laitealustalle täytyy luoda oma sovellus, sillä laitealustat käyttävät pohjalla eri ohjelmointikieliä. Lisäksi ohjelmistojen ylläpito usealle laitteelle on kalliimpaa. 3D sovelluksissa ja peleissä natiivikielen käyttö saattaa tuoda etuja, mutta hyvin rakennetuissa verkkosovelluksissa suorituskyky eroa on miltei mahdoton huomata [charland2011mobile]. Seuraavassa taulukossa on lueteltuna eri mobiililaitteille vaadittavat ohjelmointikielet.
+
+\clearpage
+
+\begin{table}[!ht]
+\centering
+\begin{small}
+\caption{Mobiilikäyttöjärjestelmät ja niiden natiiviohjelmointikieli. [charland2011mobile] }
+\begin{tabular}{|L{7cm}|L{7cm}|}
+\hline
+\textbf{Käyttöjärjestelmä} & 
+\textbf{Ohjelmointikieli}
+\\ \hline
+Apple iOS & 
+ C, Objective C
+\\ \hline
+Google Android & 
+Java (Harmony flavored, Dalvik VM) \\ 
+\hline
+RIM BlackBerry & 
+Java (J2ME flavored) \\ 
+\hline
+Symbian & 
+C, C++, Python, HTML/CSS/JS \\ 
+\hline
+Windows Mobile & 
+.NET \\ 
+\hline
+Window 7 Phone & 
+.NET \\ 
+\hline
+HP Palm webOS & 
+HTML/CSS/JS \\ 
+\hline
+MeeGo & 
+C, C++, HTML/CSS/JS \\ 
+\hline
+Samsung bada & 
+C++ \\ 
+\hline
+\end{tabular}
+\label{table:ExampleTable2}
+\end{small}
+\end{table}
+
+Sovelluskehitystä hankaloittaa lisäksi se, että jokaisella laitteella on oltava oma kehitysympäristö ja työkalut. Rajapinnat ovat erilaiset ja sovelluksen paketointi ei ole yhdenmukaista. Jokaisella laitteella on kuitenkin jotain yhteistä. Kaikissa laitteissa on web-selain. Vuonna 2008 iPhoneDevCamp tapahtumassa Eric Oesterle, Rob Ellis ja Brock Whitten [charland2011mobile] esittelivät uuden vallankumouksellisen teknologian. Jokaisella alustalla oli mahdollista käynnistää selain niin sanottuun "Chromeless" tilaan ja kutsua laitteen natiivirajapintaa JavaScriptin ylitse. Tästä muodostui myöhemmin työkalu nimeltään PhoneGap. Työkalu julkaistiin myöhemmin myös Androidille, BlackBerrylle, sekä muille alustoille. PhoneGapia hyödyntäen oli mahdollista kirjoittaa yleisimpiä web-tekniikoita hyödyntäen sovelluksia, joista oli mahdollista kutsua laitteen natiiveja rajapintoja. PhoneGap kehyksessä on natiivikoodilla kirjoitettuja koodin palasia, jotka välittävät tiedon JavaScript sovellukselle.
+
+Adobe lahjoitti PhoneGap työkalun Apache Software Foundationille ja työkalun nimeksi tuli Cordova [Tung]. Cordovalla tavallisia web-sovelluksia voidaan siis paketoida ja kääntää mobiililaitteille. Cordovan toimintaa voidaan laajentaa erilaisilla lisäosilla "plugins", joita löytyy esimerkiksi Android alustalle yli 4000 kappaletta [Cordova]. Lisäosia tai laajennuksia hyödyntäen verkkosovelluksesta voidaan kutsua mobiililaitteen natiiveja rajapintoja. Hybridisovellukset eivät siis ole natiivisovelluksia, vaan ne toimivat laitteen Webview näkymässä web-sovelluksena [bosnic2016development]. Mobiililaitteissa joissa Webview on vanhentunut ei Cordovalla saada täysiä hyötyjä [bosnic2016development]. Ongelmia voi muodostua esimerkiksi suorituskyvyn tai puuttuvien funktioiden muodossa. Hybridisovelluskehitystä tutkivassa artikkelissa Apache Cordovalla käännetty sovellus käytti noin 20\% enemmän prosessoritehoa kuin natiivisovellus [bosnic2016development]. Tulos oli odotettavissa, sillä natiivisovelluksia kehitetään juuri niiden suorituskyvyn takia. Hybridisovellusten etuna on kuitenkin yksi yhtenäinen koodipohja ja ne soveltuvat hyvin yksinkertaisiin sovelluksiin, joissa ei ole raskaita animaatioita tai siirtymäelementtejä. 
+
+Koska Cordovan sovelluksia ajetaan Webview näkymässä, vuonna 2013 Intel aloitti kehittämään Crosswalk nimistä projektia [Crosswalk]. Crosswalk projektin tarkoituksena oli tuoda uusimmat web-selainten ominaisuudet Cordovaan. Joskus vuonna 2017 projekti kuitenkin tuli päätökseensä, sillä PWA sovellukset nostivat päätään ja lisäksi Android käyttöjärjestelmien Webview näkymä päivitettiin jakamaan koodia Chrome selaimen kanssa. Nykyisin Cordovalla käännetyt projektit tukevat siis suoraan uusimpia selainten ominaisuuksia. 
+
+\subsection{React Native}
+
+
+
 \newpage
 \section{Tekninen toteutus}
 
@@ -266,9 +321,6 @@ MVC-arkkitehtuurilla tarkoitetaan suunnittelumallia, jossa näkymä, malli ja oh
 
 Nykyiset JavaScript pohjaiset käyttöliittymät ovat erittäin monimutkaisia. Koska kyseessä on pelkästään selaimella toimiva käyttöliittymä, on projektia laajennettu vuosien aikana useilla kirjastoilla ja sen ympärille on tuotu mukaan myös kehitystä helpottavia työkaluja. Tässä niistä muutamia. 
 
-
-
-
 \textbf{Grunt}
 
 Grunt on automaatiotyökalu. Gruntin tarkoitus on tehdä toistuvia tehtäviä automaattisesti kehittäjän puolesta. Grunt toimii sovelluksen tärkeimpänä työkaluna, mutta pelkkä Grunt ei yksistään ole riittävä työkalu projektin tarpeille. Grunt huolehtii esimerkiksi sovelluksen kääntämisestä, paketoinnista, kirjoitusvirheiden tarkastamisesta, kuvien pakkaamisesta, sekä web-palvelimen käynnistämisestä. 
@@ -299,7 +351,6 @@ Grunt työkalu huolehtii projektin kasaamisesta hyödyntäen edellä mainittuja 
 
 JavaScript koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään .LESS formaatista selaimen ymmärtämään .CSS muotoon. Kaikki tyylitiedostot paketoidaan myös yhdeksi kokonaisuudeksi ja sitten ne minifoidaan. Lisäksi suoritetaan lukuisia muita toimenpiteitä, projektin kaikki kuvat pakataan, kolmannen osapuolen skriptit käydään läpi, paketoidaan ja liitetään projektiin.
 
-
 \subsection{PWA:n käyttöönotto projektissa}
 
 Telian alkuperäinen tarkoitus oli laajentaa IoT projektin käyttöliittymää myös mobiililaitteille. Projektissa tehtiin nopea katsaus nykyisistä teknologioista ja lopulta päädyttiin tekemään sovelluksesta PWA mallin mukainen. Android ja IOS sovellusten haittapuolena olisi ollut kokonaan uusien kehittäjien haaliminen, sekä usean koodin ylläpitäminen. Hybridisovellukselle ei myöskään nähty tarvetta sen hitauden takia. IoT Dashboard sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin, kuten kalenteriin, tai yhteystietoihin, joten PWA malli oli luonnollinen valinta. Lisäksi osa PWA mallin vaiheista oli jo täytettynä. Palvelua tarjotaan Telian asiakkaille salattuna HTTPS protokollan ylitse, sovellus on responsiivinen Bootstrap kirjaston ansiosta ja sovellus käyttää tarpeeksi moderneja työkaluja, jotta siitä oli mahdollista tehdä PWA. Telian kanssa päädyttiin yhteisymmärryksessä PWA malliin. 
@@ -309,7 +360,6 @@ PWA mallin kartoitus alkoi siihen tarvittavilta asioilta. Ensiksi sovellukseen l
 Seuraavaksi Workboxin käyttöönotossa huomattiin, että Workbox ei ole tuettuna Grunt työkalussa, sillä Grunt on liian vanha. Workboxia on kuitenkin mahdollista ajaa erikseen myös NodeJS skripteillä, joten Grunt työkalua laajennettiin grunt-run nimisellä paketilla, joka mahdollistaa komentojen ajamisen Gruntissa. 
 
 Grunt-run työkalu lisättiin myös Yarnia käyttämällä. Asennuksen jälkeen Gruntiin luotiin Run tehtävä, jonka tarkoitus oli ajaa Workbox skriptit. Tärkeää run komennossa on liittää argumenteiksi "inject:manifest" [Googlec], jolloin ohjelma tietää liittää lopulliseen Service Worker tiedostoon kaikki tiedostot, jotka pitää lisätä välimuistiin. Näin jokaista tiedostoa tai polkua ei tarvitse kirjoittaa itse. Riittää että konfiguraatiotiedostossa on määritelty välimuistiin tallennettavien tiedostojen päätteet. Injektointikomento on Workboxin mukana tuleva komento.
-
 
 \begin{lstlisting}[
      language=JavaScript,
