@@ -94,41 +94,41 @@ Tutkielman rakenne on seuraava. Luvussa 2 esitellään progressiivisten Web-sove
 \newpage
 \section{PWA:n esittely}
 
-PWA ei ole ohjelmistokehys tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kapoor] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus vai verkkosovellus. PWA:n tarkoitus on hämärtää natiivisovelluksen ja web-sovelluksen rajaa. Rajaa halutaan hämärtää siksi, että yleensä sovellusten julkaiseminen sovelluskauppoihin on hidasta, aikaa vievää ja lisäksi vielä maksullista. Kehittäjän ja tilaajan näkökulmasta PWA sovelluksen kehittäminen on siis järkevää. Sovellusta ei tarvitse erikseen koodata usealle eri mobiilialustalle [Gazdecki], julkaisusykli on nopeampi ja kehittäminen halvempaa. Sovellus muotoutuu käyttäjän laitteelle alustasta riippumatta, yksi ainoa versio riittää.
+PWA ei ole ohjelmistokehys tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kapoor] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus vai verkkosovellus. PWA:n tarkoitus on hämärtää natiivisovelluksen ja web-sovelluksen rajaa. Rajaa halutaan hämärtää siksi, että yleensä sovellusten julkaiseminen sovelluskauppoihin on hidasta, aikaa vievää ja lisäksi vielä maksullista. Kehittäjän ja tilaajan näkökulmasta PWA sovelluksen kehittäminen on siis järkevää. Sovellusta ei tarvitse erikseen ohjelmoida usealle eri mobiilialustalle [Gazdecki], julkaisusykli on nopeampi ja kehittäminen on halvempaa. Sovellus muotoutuu käyttäjän laitteelle alustasta riippumatta, yksi ainoa versio riittää.
 
 Alex Russell määritteli blogikirjoituksessaan PWA:n ominaisuudet seuraavasti. 
 
 Sovelluksen tulee olla:
 \begin{itemize}
-  \item \textbf{Responsiivinen.} Sovelluksen tulee sopia mihin tahansa ruutuun.
-  \item \textbf{Yhteyksistä riippumaton.} Sovelluksen tulee käynnistyä myös Offline tilassa.
-  \item \textbf{Sovelluksen kaltainen.} Sovelluksessa tulee olla käyttöliittymäkehys, sekä sisältöikkuna.
-  \item \textbf{Tuore.} Sovelluksen pitää hakea aina verkkoyhteyden ollessa päällä uusin versio käyttäjän huomaamatta.
-  \item \textbf{Turvallinen.} Sovellus pitää aina tarjota salattuna Transport Layer Security (TLS) käyttäen.
-  \item \textbf{Löydettävä.} Sovelluksen tulee noudattaa W3C yhteisön määrityksiä ja tarjota manifesti, joka määrittää sovelluksen. Manifesti mahdollistaa hakukoneiden löytää sovellus ja erottaa se muista perinteisistä verkkosivuista.
-  \item \textbf{Koukuttaa käyttäjän, tai muistuttaa palaamaan.} Sovelluksen tulee olla mahdollista muistuttaa olemassaolostaan esimerkiksi notifikaatioilla ja näin saada käyttäjä palaamaan sovelluksen pariin.
-  \item \textbf{Asennettava.} Sovelluksen voi asentaa mobiililaitteen ruudulle pikakuvakkeeksi, jolloin se on nopeasti saatavilla.
+  \item \textbf{Responsiivinen:} Sovelluksen tulee sopia mille tahansa näytölle koosta ja resoluutiosta riippumatta.
+  \item \textbf{Yhteyksistä riippumaton:} Sovelluksen tulee käynnistyä myös Offline-tilassa.
+  \item \textbf{Sovelluksen kaltainen:} Sovelluksessa tulee olla käyttöliittymäkehys, sekä sisältöikkuna.
+  \item \textbf{Tuore:} Sovelluksen pitää hakea aina verkkoyhteyden ollessa päällä uusin versio käyttäjän huomaamatta.
+  \item \textbf{Turvallinen:} Sovellus pitää aina tarjota salattuna Transport Layer Security (TLS) käyttäen.
+  \item \textbf{Löydettävä:} Sovelluksen tulee noudattaa W3C yhteisön määrityksiä ja tarjota manifesti, joka määrittää sovelluksen. Manifesti mahdollistaa hakukoneiden löytää sovellus ja erottaa se muista perinteisistä verkkosivuista.
+  \item \textbf{Koukuttaa käyttäjän, tai muistuttaa palaamaan:} Sovelluksen tulee olla mahdollista muistuttaa olemassaolostaan esimerkiksi notifikaatioilla ja näin saada käyttäjä palaamaan sovelluksen pariin.
+  \item \textbf{Asennettava:} Sovelluksen voi asentaa mobiililaitteen ruudulle pikakuvakkeeksi, jolloin se on nopeasti saatavilla.
 \end{itemize}
 
 \subsection{Miksi progressiivia Web-sovelluksia tarvitaan?}
 \enlargethispage{5mm}
 
-Tarkastellaan ensiksi millaisia haasteita nykyään natiivi ja Web-sovelluksissa on.
+Tarkastellaan ensiksi millaisia haasteita nykyään natiivi- ja Web-sovelluksissa on.
 
 \begin{itemize}
   \item \textbf{Internetin nopeus.} Internet ei ole kaikkialla maailmassa nopea. noin 60\% maailmasta käyttää yhä 2G verkkoa [Kapoor] ja paikoitellen verkko on niin ruuhkautunut, että sen tiedonsiirtokyky ei vain ole riittävä.
-  \item \textbf{Hidas verkkosivun latautuminen.} Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Jos sovelluksen palvelinpuoli ei ole kunnossa, voi sovellus toimia hitaasti. Tutkimuksen mukaan 53\% käyttäjistä [Kapoor] hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti.
-  \item \textbf{Kynnys asentaa omalle laitteelle on korkea.} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia [Kapoor]. ComScoren mukaan [Perez] Keskimääräinen käyttäjä lataa ja asentaa laitteellensa nolla sovellusta kuukaudessa.
+  \item \textbf{Hidas verkkosivun latautuminen.} Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Jos sovelluksen palvelinpuoli ei ole kunnossa, voi sovellus toimia hitaasti. Tutkimuksen mukaan 53\% käyttäjistä hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti [Kapoor].
+  \item \textbf{Kynnys asentaa omalle laitteelle on korkea.} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia [Kapoor]. ComScoren mukaan Keskimääräinen käyttäjä lataa ja asentaa laitteellensa nolla sovellusta kuukaudessa [Perez].
   \item \textbf{Käyttäjän sitouttaminen.} Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa, mutta verkkosivujen käyttöaste on lähes kolminkertainen. Lisäksi käyttäjät viettävät 80\% ajastaan kolmen tärkeimmän natiivisovelluksen parissa. 
 \end{itemize}
 
 PWA pyrkii ratkaisemaan näitä ongelmia. Progressiivisen Web-sovelluksen käyttöön on useita syitä. Tässä muutamia:
 
 \begin{itemize}
-  \item \textbf{Nopeus.} PWA tarjoaa välimuistiin tallentamisen, joka mahdollistaa sovelluksen latautumisen välimuistista. Sovelluksen käynnistäminen on siis erityisen nopeaa, vaikka verkkoon ei olisi vielä edes tehty kutsuja.
-  \item \textbf{Saumaton käyttökokemus.} PWA tuntuu ja käyttäytyy kuin natiivisovellus. Sovellus on mahdollista asentaa mobiililaitteen kotinäytölle. Sovellus voi lähettää ilmoituksia (push notifications) ja sovellus voi myös hyödyntää laitteen rajapintoja, kuten kameraa, tai mikrofonia. 
-  \item \textbf{Luotettava käyttökokemus.} Sovellus voidaan avata myös silloin, kun verkkoyhteyttä ei ole saatavilla. Välimuistiin tallennetun tiedon perusteella viimeisimmät muistissa olevat asiat saadaan esitettyä. 
-  \item \textbf{Sitouttava.} Kun sovellukseen voidaan lähettää ilmoituksia, voidaan käyttäjää sitouttaa sovellukseen lähettämällä muistutuksia, tai tärkeitä tietoja. 
+  \item \textbf{Nopeus:} PWA tarjoaa välimuistiin tallentamisen, joka mahdollistaa sovelluksen latautumisen välimuistista. Sovelluksen käynnistäminen on siis erityisen nopeaa, vaikka verkkoon ei olisi vielä edes tehty kutsuja.
+  \item \textbf{Saumaton käyttökokemus:} PWA tuntuu ja käyttäytyy kuin natiivisovellus. Sovellus on mahdollista asentaa mobiililaitteen kotinäytölle. Sovellus voi lähettää ilmoituksia (push notifications) ja sovellus voi myös hyödyntää laitteen rajapintoja, kuten kameraa, tai mikrofonia. 
+  \item \textbf{Luotettava käyttökokemus:} Sovellus voidaan avata myös silloin, kun verkkoyhteyttä ei ole saatavilla. Välimuistiin tallennetun tiedon perusteella viimeisimmät muistissa olevat asiat saadaan esitettyä. 
+  \item \textbf{Sitouttava:} Kun sovellukseen voidaan lähettää ilmoituksia, voidaan käyttäjää sitouttaa sovellukseen lähettämällä muistutuksia, tai tärkeitä tietoja. 
 \end{itemize}
 
 
@@ -147,28 +147,37 @@ Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota n
   \item Ikonitiedot eri resoluutioissa
 \end{itemize}
 
-Kyseessä on tavallinen Json tiedosto, joka pitää sisällään niinsanottua metatietoa sovelluksesta. Kun selain havaitsee manifest.json tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöksen tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen statuskenttä sovelluksen teeman väriä vastaavaksi.  
+Kyseessä on tavallinen Json-tiedosto, joka pitää sisällään niin sanottua metatietoa sovelluksesta. Kun selain havaitsee manifest.json tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöksen tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen statuskenttä sovelluksen teeman väriä vastaavaksi.  
 
-\textbf{Service Workers} on työkalu, joka on koko progressiivisen sovelluksen pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on tapahtumapohjainen koodinpätkä, joka juoksee sovelluksen taustalla. Skripti toimii niinsanottuna proxyna, eli välittäjänä verkon ja sovelluksen välillä. Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Skripti kopioi verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista, jolloin sovelluksen toiminta nopeutuu huomattavasti. Service Workeria hyödyntämällä sovellus voidaan avata myös Offline-tilassa ja näyttää tietoja välimuistista. 
+\textbf{Service Workers} on työkalu, joka on koko progressiivisen sovelluksen pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on tapahtumapohjainen koodinpätkä, jota ajetaan sovelluksen taustalla. Skripti toimii niinsanottuna proxyna, eli välittäjänä verkon ja sovelluksen välillä. Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Skripti kopioi verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista, jolloin sovelluksen toiminta nopeutuu huomattavasti. Service Workeria hyödyntämällä sovellus voidaan avata myös Offline-tilassa ja näyttää tietoja välimuistista. 
 
-Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Tämä skripti on sovelluksesta irtonainen ja pyörii mobiililaitteen taustalla. Jokainen web-selain hallitsee push-notifikaatiot oman push servicensä kautta. Kun käyttäjä antaa selaimelle luvan lähettää ilmoituksia, voidaan sovellus silloin tilata selaimen push palveluun [Googleb]. Tämä luo objektin joka sisältää päätepisteen (endpoint) tilaukselle, joka on eri jokaisessa selaimessa. Lisäksi tilaukseen tarvitaan julkinen avain. Push notifikaatiot lähetetään selaimen tilaus osoitteeseen kryptattuna julkisella avaimella. Push palvelu lähettää lopulta ilmoituksen käyttäjän mobiililaitteelle. Näin ollen sovelluksessa voidaan näyttää notifikaatoita jopa silloin, kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, kuten esimerkiksi PhoneGapissa, tai Cordovassa, joilla web-sovellus paketoidaan natiivisovellukseksi selainkehystä käyttäen.
+Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Tämä skripti on sovelluksesta irtonainen ja suoritetaan mobiililaitteen taustalla. Jokainen web-selain hallitsee push-notifikaatiot oman push servicensä kautta. Kun käyttäjä antaa selaimelle luvan lähettää ilmoituksia, voidaan sovellus silloin tilata selaimen push palveluun [Googleb]. Tämä luo objektin joka sisältää päätepisteen (endpoint) tilaukselle, joka on eri jokaisessa selaimessa. Lisäksi tilaukseen tarvitaan julkinen avain. Push notifikaatiot lähetetään selaimen tilausosoitteeseen kryptattuna julkisella avaimella. Push-palvelu lähettää lopulta ilmoituksen käyttäjän mobiililaitteelle. Näin ollen sovelluksessa voidaan näyttää notifikaatoita jopa silloin, kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, kuten esimerkiksi PhoneGapissa tai Cordovassa, joilla web-sovellus paketoidaan natiivisovellukseksi selainkehystä käyttäen.
 
 \textbf{Ikoni, sovelluskuvake}, kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manifest.json tiedostossa määritelty ikoni käyttäjän mobiililaitteen työpöydälle tai valikkoon. Ikoniksi pitäisi käydä useampi eri formaatti, kunhan vain formaatti on määritelty tiedostoon erikseen. Ikoneita pitää olla useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
 
-\textbf{HTTPS salattu liikenne}, jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS protokollan ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS protokollaa [Eisworth]. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. 
+\textbf{HTTPS salattu liikenne}, jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS-protokollan ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa [Eisworth]. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. 
 
 \subsection{Näyttötilat}
 
-PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyttäjältä ylimääräiset valikot ja luoda sovelluksesta näin natiivisovelluksen kaltainen. Näyttötiloja on neljä erilaista [Mozilla]
+PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyttäjältä ylimääräiset valikot ja luoda sovelluksesta näin natiivisovelluksen kaltainen. Näyttötiloja on neljä erilaista [Mozilla]:
 
 \begin{itemize}
-  \item fullscreen. Koko näytön tila, jolloin laitteen koko näyttö on käytössä ja Chromen user agent on piilotettuna.
-  \item standalone. Standalone tilassa sovellus näyttää ja tuntuu omalta sovellukseltaan. Sovellusta voidaan ajaa omassa ikkunassaan ja sillä voi olla oma ikoni käynnistysvalikossa. Chromen käyttöliittymä on piilotettuna, mutta mobiililaitteen omat valikot ovat esillä, kuten tilapalkki. 
-  \item minimal-ui. Minimal-ui tila on sama kuin standalone, mutta mukana on lisäksi vain minimaalinen määrä UI elementtejä navigointia varten. UI elementtien määrä riippuu laitteella käytettävästä selaimesta. 
-  \item browser. Selaintila on oletustila, jolloin sovellus aukeaa selaimen välilehdellä, tai uudessa ikkunassa, riippuen selaimesta ja laitealustasta. 
+  \item \textbf{Fullscreen:} Koko näytön tila, jolloin laitteen koko näyttö on käytössä ja selaimen user agent on piilotettuna.
+  \item \textbf{Standalone:} Standalone tilassa sovellus näyttää ja tuntuu omalta sovellukseltaan. Sovellusta voidaan ajaa omassa ikkunassaan ja sillä voi olla oma ikoni käynnistysvalikossa. selaimen käyttöliittymä on piilotettuna, mutta mobiililaitteen omat valikot ovat esillä, kuten tilapalkki. 
+  \item \textbf{Minimal-ui:} Minimal-ui tila on sama kuin standalone, mutta mukana on vain minimaalinen määrä käyttöliittymäelementtejä navigointia varten. Käyttöliittymäelementtien määrä riippuu laitteella käytettävästä selaimesta. 
+  \item \textbf{Browser:} Selaintila on oletustila, jolloin sovellus aukeaa selaimen välilehdellä, tai uudessa ikkunassa, riippuen selaimesta ja laitealustasta. 
 \end{itemize}
 
-\textbf{Muut teknologiat ja erot}
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=nayttotilat.png,  width=0.9\textwidth}
+\caption{Näyttötilat vasemmalta oikealle: Browser, standalone / minimal-ui, fullscreen}
+\label{Näyttötilat}
+\end{center}
+\end{figure}
+\clearpage
+
+\subsection{Muut teknologiat ja erot}
 
 Vain muutama vuosi takaperin älypuhelimet olivat melko yksinkertaisia. Niillä pystyi korkeintaan selaamaan verkossa tekstiä, linkkejä ja ehkä kuvia. Laitteiden omistajat olivat joko business henkilöitä joilla oli jatkuva tarve sähköpostiin, tai sitten todellisia nörttejä, jotka halusivat vain uusimmat teknologiat käyttöönsä. Mobiililaitteiden kenttä kuitenkin muuttui täysin Applen julkaistua iPhonen. Applen alkuperäinen idea oli käyttää nimenomaan web-teknologioita [charland2011mobile]. Kuitenkin kolme vuotta julkaisun jälkeen natiivisovellukset ovat ottaneet vallan. Natiivisovelluksissa on kuitenkin ongelma. Jokaiselle laitealustalle täytyy luoda oma sovellus, sillä laitealustat käyttävät pohjalla eri ohjelmointikieliä. Lisäksi ohjelmistojen ylläpito usealle laitteelle on kalliimpaa. 3D sovelluksissa ja peleissä natiivikielen käyttö saattaa tuoda etuja, mutta hyvin rakennetuissa verkkosovelluksissa suorituskyky eroa on miltei mahdoton huomata [charland2011mobile]. Sovelluskehitystä hankaloittaa lisäksi se, että jokaisella laitteella on oltava oma kehitysympäristö ja työkalut. Rajapinnat ovat erilaiset ja sovelluksen paketointi ei ole yhdenmukaista. Kun sovelluksen ylläpitoon ja kehitykseen täytyy käyttää useampia ympäristöjä se nostaa luonnollisesti sovelluskehityksen kuluja [xanthopoulos2013comparative]. Mobiilisovelluksien kasvava tarve on ajanut yritykset ahdinkoon, sillä samaa sovellusta tulee kehittää usealle laitealustalle [xanthopoulos2013comparative]. Natiivisovelluskehitys olisi järkevintä, mutta sen haittana on että mitään koodista ei voida käyttää muilla alustoilla. Saman sovelluksen joutuu kehittämään alusta alkaen toiselle laitteelle. Loppukäyttäjän näkökulmasta natiivisovellus tarjoaa kuitenkin yleensä parhaan käyttökokemuksen.
 
@@ -177,7 +186,7 @@ Yhteistä kaikille näille teknologioille on se, että natiivisovellus, hybridis
 Hybridisovellukset tulivat paikkaamaan tätä pirstoutumista. Hybridisovellusten idea on yksinkertaistaa kehitystyötä ja ylläpitoa, sekä säästää aikaa ja rahaa.  Hybridisovelluksen tarkoituksena on tarjota lähes natiivisovelluksen kaltainen käyttökokemus ja toimia mahdollisimman monella laitteella. "Kirjoita kerran, aja missä vain" ei oikeastaan päde natiivisovelluksissa. Hybridisovellukset siis kirjoitetaan kerran ja käännetään sen jälkeen mahdollisimman monelle laitteelle. 
 
 
-Seuraavassa taulukossa on lueteltuna eri mobiililaitteille vaadittavat ohjelmointikielet.
+Taulukossa 1 on lueteltuna eri mobiililaitteille vaadittavat ohjelmointikielet.
 
 \clearpage
 
@@ -376,7 +385,7 @@ JavaScript koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään .LES
 
 \subsection{PWA:n käyttöönotto projektissa}
 
-Telian alkuperäinen tarkoitus oli laajentaa IoT projektin käyttöliittymää myös mobiililaitteille. Projektissa tehtiin nopea katsaus nykyisistä teknologioista ja lopulta päädyttiin tekemään sovelluksesta PWA-mallin mukainen. Android ja IOS sovellusten haittapuolena olisi ollut kokonaan uusien kehittäjien haaliminen, sekä usean koodin ylläpitäminen. Hybridisovellukselle ei myöskään nähty tarvetta sen hitauden takia. IoT Dashboard sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin, kuten kalenteriin, tai yhteystietoihin, joten PWA malli oli luonnollinen valinta. Lisäksi osa PWA-mallin vaiheista oli jo täytettynä. Palvelua tarjotaan Telian asiakkaille salattuna HTTPS protokollan ylitse, sovellus on responsiivinen Bootstrap kirjaston ansiosta ja sovellus käyttää tarpeeksi moderneja työkaluja, jotta siitä oli mahdollista tehdä PWA. Telian kanssa päädyttiin yhteisymmärryksessä PWA malliin. 
+Telian alkuperäinen tarkoitus oli laajentaa IoT projektin käyttöliittymää myös mobiililaitteille. Projektissa tehtiin nopea katsaus nykyisistä teknologioista ja lopulta päädyttiin tekemään sovelluksesta PWA-mallin mukainen. Android ja IOS sovellusten haittapuolena olisi ollut kokonaan uusien kehittäjien haaliminen, sekä usean koodin ylläpitäminen. Hybridisovellukselle ei myöskään nähty tarvetta sen hitauden takia. IoT Dashboard sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin, kuten kalenteriin, tai yhteystietoihin, joten PWA malli oli luonnollinen valinta. Lisäksi osa PWA-mallin vaiheista oli jo täytettynä. Palvelua tarjotaan Telian asiakkaille salattuna HTTPS-protokollan ylitse, sovellus on responsiivinen Bootstrap kirjaston ansiosta ja sovellus käyttää tarpeeksi moderneja työkaluja, jotta siitä oli mahdollista tehdä PWA. Telian kanssa päädyttiin yhteisymmärryksessä PWA malliin. 
 
 PWA-mallin kartoitus alkoi siihen tarvittavilta asioilta. Ensiksi sovellukseen luotiin projektiin sopiva sovelluskuvake ja nimi Web App Manifestiin. Seuraava vaihe, eli Service Workerin lisääminen oli isompi ja haastavampi kokonaisuus. Sovellusta päätettiin laajentaa Googlen tarjoamalla Workbox CLI työkalulla. Workbox on NodeJS pohjainen komentoriviohjelma, jolla on helppoa luoda Service Worker nykyiseen olemassa olevaan projektiin. Lisäksi ohjelma tarjoaa käteviä komentoja, joilla toimintaa voidaan mukauttaa omaan projektiin sopivaksi. Workbox asennettiin projektiin käyttämällä Yarnia.
 
