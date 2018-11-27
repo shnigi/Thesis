@@ -44,7 +44,7 @@
 %\onehalfspacing joskus halutaan enemmän kommentointitilaa rivien väliin
 \singlespacing
 
-\title{Progressiivisten web-sovelluksien hyödyt}
+\title{Progressiivisten web-sovelluksien kehittäminen}
 \author{Niki Ahlskog}
 
 \date{\today}
@@ -63,72 +63,33 @@
 
 \begin{abstract}
 
-Mobiilisovellukset ovat jatkuvasti kehittyvää ja muuttuvaa teknologiaa, kuten myös strategiat niiden rakentamiseksi. Tässä työssä käydään läpi Progressiivisen Web-sovelluksen, eli PWA:n rakennustekniikoita. PWA:n tarkoitus on hämärtää, tai jopa poistaa raja ladattavan sovelluksen ja normaalin verkkosivuston välillä. Lisäksi tarkastellaan tekniikoiden vaikutuksia loppukäyttäjille käytännössä.
+Mobiilisovellukset ovat jatkuvasti kehittyvää ja muuttuvaa teknologiaa, kuten myös strategiat niiden rakentamiseksi. Tässä työssä käydään läpi Progressiivisen Web-sovelluksen (PWA) rakennustekniikoita. PWA:n tarkoitus on hämärtää, tai jopa poistaa raja ladattavan sovelluksen ja normaalin verkkosivuston välillä. Lisäksi tarkastellaan tekniikoiden vaikutuksia loppukäyttäjille käytännössä.
 
 PWA on kuin mikä tahansa normaali verkkosivusto, mutta se täyttää lisäksi seuraavat kriteerit. Sovellus skaalautuu mille tahansa laitteelle. Sovellus tarjoillaan salatun yhteyden yli. Sovellus on mahdollista asentaa puhelimen kotinäytölle pikakuvakkeeksi, jolloin sovellus avautuu ilman selaimesta tuttuja navigointityökaluja ja lisäksi sovelluksen voi myös avata laitteen ollessa offline tilassa. 
 
-PWA sovelluksen luomista ja käyttöönottoa tarkastellaan olemassa olevassa yksityisessä asiakasprojektissa. Projektissa kiinnitetään huomiota PWA mallin tuomiin etuihin ja kipupisteisiin. Lisäksi kirjallisuuskatsauksen kautta tarkastellaan PWA:n tulevaisuuden näkymiä ja nykytilannetta. 
+PWA sovelluksen luomista ja käyttöönottoa tarkastellaan olemassa olevassa yksityisessä asiakasprojektissa. Projektissa kiinnitetään huomiota PWA-mallin tuomiin etuihin ja kipupisteisiin. Lisäksi kirjallisuuskatsauksen kautta tarkastellaan PWA:n tulevaisuuden näkymiä ja nykytilannetta. 
 
-Asiakasprojektista otetaan Google Chromen Lighthouse työkalua käyttäen metriikat sovelluksen nopeuden mittaamiseksi. Nopeuden muutosta tarkastellaan PWA ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä. Lisäksi tarkastellaan mobiililaitteiden käyttöä koko sovelluksen käytössä. Analytiikat sovelluksen mobiilikäytöstä saadaan Google Analytics työkalusta. \end{abstract}
+Asiakasprojektista otetaan Google Chromen Lighthouse työkalua käyttäen metriikat sovelluksen nopeuden mittaamiseksi. Nopeuden muutosta tarkastellaan progressiivisten ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä. Lisäksi tarkastellaan mobiililaitteiden käyttöä koko sovelluksen käytössä. Analytiikat sovelluksen mobiilikäytöstä saadaan Google Analytics työkalusta. \end{abstract}
 
 \mytableofcontents
 
 \section{Johdanto}
 
-Tämän päivän mobiilisovelluksia kehitettäessä on teknologia puolella useita vaihtoehtoja. Kehittäjät voivat valita ainakin neljästä eri mallista. Mobiili web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana Progressiivinen Web-sovellus (Progressive Web Apps), eli PWA. Jokaisessa vaihtoehdossa on luonnollisesti etuja ja haittoja. Web tekniikoihin panostaminen näyttäisi kuitenkin olevan järkevää, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Google on julkaissut tiedotteen [Gambhir] "Progressiivinen Web-sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA malliin on tutustunut, natiivisovelluskehitystä ei enää tarvitse. Mobiili verkkosivu itsessään muodostuu sovellukseksi."
+Tämän päivän mobiilisovelluksia kehitettäessä on teknologia puolella useita vaihtoehtoja. Kehittäjät voivat valita ainakin neljästä eri mallista: mobiili web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana Progressiivinen Web-sovellus (Progressive Web App), PWA. Jokaisessa vaihtoehdossa on luonnollisesti etuja ja haittoja. Web tekniikoihin panostaminen näyttäisi kuitenkin olevan järkevää, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Googlen julkaiseman tiedotteen mukaan [Gambhir] PWA sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA malliin on tutustunut, natiivisovelluskehitystä ei enää tarvita. Mobiili verkkosivu itsessään muodostuu sovellukseksi käyttäen verkon parhaita tekniikoita. PWA sovellus on siis tavallinen verkkosivu, joka hyödyntää selainten uusimpia ominaisuuksia.
 
-Progressiivinen Web-sovellus, eli PWA termin määritteli Google Chromen insinööri Alex Russel [Russell] omassa blogikirjoituksessaan vuonna 2015. PWA ei ole uusi teknologia, eikä ohjelmointikehys. PWA on sovellus, joka muistuttaa mahdollisimman paljon natiivia mobiili-, tai työpöytäsovellusta. Perimmäisenä ajatuksena on, että käyttäjä ei tunnista eroa näiden kahden sovelluksen välillä.
+Progressiivisen Web-sovelluksen, eli PWA termin määritteli Google Chromen insinööri Alex Russel [Russell] omassa blogikirjoituksessaan vuonna 2015. PWA voidaan määritellä Alex Russelin sanoin normaaliksi verkkosivuksi, joka on vain ottanut oikeat vitamiinit. Yahoo Developer portaalissa tehdyn tutkimuksen mukaan [Khalaf] 90\% mobiililaitteilla vietetystä ajasta käytetään sovellusten parissa ja vain 10\% netin selaamiseen. 
 
-PWA voidaan määritellä Alex Russelin sanoin normaaliksi verkkosivuksi, joka on vain ottanut oikeat vitamiinit. Yahoo Developer portaalissa tehdyn tutkimuksen mukaan [Khalaf] 90\% mobiililaitteilla vietetystä ajasta käytetään sovellusten parissa ja vain [Khalaf] 10\% netin selaamiseen. Progressiivisten Web-sovellusten tarkoitus on hämärtää verkkosovellusten ja natiivisovellusten rajaa. Lisäksi PWA sovellusten etuna on, että IOS- ja Android alustoille ei tarvitse erikseen kehittää sovellusta ja ylläpitää kahta eri lähdekoodia. Yksi ja sama koodi riittää kummallekin alustalle. 
+Progressiivisten Web-sovellusten tarkoitus on hämärtää verkkosovellusten ja natiivisovellusten rajaa. Lisäksi PWA sovellusten etuna on, että IOS- ja Android alustoille ei tarvitse erikseen kehittää sovellusta ja ylläpitää kahta eri lähdekoodia. Yksi ja sama ohjelma riittää kummallekin alustalle. PWA ei siis ole uusi teknologia, eikä ohjelmointikehys. PWA on verkkosivu, tai web-selaimella toimiva sovellus, joka muistuttaa mahdollisimman paljon natiivia mobiili-, tai työpöytäsovellusta. Perimmäisenä ajatuksena on, että käyttäjä ei tunnista eroa näiden kahden sovelluksen välillä.
 
-Progressiivisia  Web-sovelluksia ei paketoida, eikä jaella minkään sovelluskaupan kautta. Ne ovat normaaleita verkkosivuja, joihin on tuotu progressiivisia ominaisuuksia. Alex  Russelin ajatuksena [Russell] PWA sovelluksissa on ollut niiden muotoutuminen sovellukseksi ilman, että käyttäjän tulee heti tehdä päätös sovelluksen asentamisesta ja käyttölupien luovuttamisesta. Esimerkiksi selaimista tuttu lupien kysyminen pysyy ennallaan. Sovellus kysyy mikrofonin, kameran, tai minkä tahansa muun ominaisuuden käyttölupaa vasta kun toimintoa tarvitaan ensimmäisen kerran. Muutaman käyttökerran jälkeen sovellus kysyy käyttäjältä halutaanko puhelimen työpöydälle asentaa pikakuvake sovellukseen ja ilmoituksetkin voidaan joko hyväksyä tai hylätä pyynnöstä. Tämä siis tarkoittaa että käytön myötä verkkosivu muuttuu käyttäjän puhelimessa natiivin mobiilisovelluksen kaltaiseksi ilman suurempaa sitoutumista sovelluksen asentamiseen ja kaikkien käyttölupien luovuttamiseen heti. 
+PWA sovelluksia ei paketoida, eikä jaella minkään sovelluskaupan kautta, ainakaan vielä, sillä ne ovat normaaleita verkkosivuja, joihin on tuotu progressiivisia ominaisuuksia. Alex  Russelin ajatuksena [Russell] PWA sovelluksissa on ollut niiden muotoutuminen sovellukseksi ilman, että käyttäjän tulee heti tehdä päätös sovelluksen asentamisesta ja käyttölupien luovuttamisesta. Esimerkiksi selaimista tuttu lupien kysyminen pysyy ennallaan. Sovellus kysyy mikrofonin, kameran, tai minkä tahansa muun ominaisuuden käyttölupaa vasta kun toimintoa tarvitaan ensimmäisen kerran. Muutaman käyttökerran jälkeen sovellus kysyy käyttäjältä, halutaanko puhelimen työpöydälle asentaa pikakuvake sovellukseen, ja ilmoituksetkin voidaan joko hyväksyä tai hylätä pyynnöstä. Tämä siis tarkoittaa että käytön myötä verkkosivu muuttuu käyttäjän puhelimessa natiivin mobiilisovelluksen kaltaiseksi ilman suurempaa sitoutumista sovelluksen asentamiseen ja kaikkien käyttölupien luovuttamiseen heti. 
 
-PWA:ta kehitetään tällä hetkellä kovaa vauhtia eri selainvalmistajien toimesta. Firefoxilla ja Safarilla teknologia on tulossa [Santoni] ja Chromella se on pääosin jo tuettuna. PWA sovellukset eivät kuitenkaan sovellu sellaisiin käyttötarkoituksiin, joissa täytyy päästä käsiksi puhelimen rajapintoihin, kuten vaikkapa kalenteriin, tai osoitekirjaan. PWA:n valintaan vaikuttaa siis sovelluksen käyttötarkoitus. Tämän työn asiakasprojektissa valittiin toteutustekniikaksi PWA, koska se ei vaadi erillistä kehittämistä eri laitealustoille, eikä projektissa ollut tarvetta käyttää puhelimeen sidottuja rajapintoja.
+PWA:ta kehitetään tällä hetkellä kovaa vauhtia eri selainvalmistajien toimesta. Firefoxilla ja Safarilla teknologia on tulossa [Santoni], ja Chromella se on pääosin jo tuettuna. 
 
-Tässä tutkielmassa selvitetään millaisia vaikutuksia progressiivisuudella saavutetaan ja kuinka helppoa työkalujen käyttöönotto on. Esimerkkiprojektissa mitataan sovelluksen nopeutta välimuistitallennuksen ollessa käytössä, sekä ilman. Mittarina käytetään Google-Chrome selaimen kehittäjätyökaluissa toimitettavaa Lighthouse työkalua. Lisäksi sovelluksen kehittäjä arvioi työkalujen käyttöönottoa noin muutaman vuoden ikäisessä projektissa. 
+PWA sovellukset eivät kuitenkaan sovellu sellaisiin käyttötarkoituksiin, joissa täytyy päästä käsiksi puhelimen rajapintoihin, kuten vaikkapa kalenteriin, tai osoitekirjaan. PWA:n valintaan vaikuttaa siis sovelluksen käyttötarkoitus. Tämän työn asiakasprojektissa, joka on IoT pohjainen web-sovellus, valittiin toteutustekniikaksi PWA, koska se ei vaadi erillistä kehittämistä eri laitealustoille, eikä projektissa ollut tarvetta käyttää puhelimeen sidottuja rajapintoja.
 
-Tutkielman rakenne on seuraava. Luvussa kaksi esitellään tutkimusongelma. Osiossa kolme esitellään progressiivisten Web-sovellusten vaatimukset, toteutustekniikoita ja selvennetään mitä koko termillä tarkoitetaan. Lisäksi tarkastellaan myös muita mobiilikehitys tekniikoita ja teknologioita. Kappaleessa neljä tehdään sovellukseen tekninen toteutus. Projektissa asennetaan tarvittavat työkalut PWA mallin täyttämiseksi. Kappaleessa viisi suoritetaan nopeusmittaukset käyttämällä Google-Chrome selaimen Lighthouse työkalua. Lisäksi luvussa analysoidaan sovelluksen nopeutta ja esitellään johtopäätökset. Kuudennessa luvussa pohditaan PWA mallin tulevaisuutta ja tehdään yhteenveto. 
+Tässä tutkielmassa selvitetään millaisia vaikutuksia progressiivisuudella saavutetaan ja kuinka helppoa työkalujen käyttöönotto on. Esimerkin projektissa mitataan sovelluksen nopeutta välimuistitallennuksen ollessa käytössä, sekä ilman. Mittarina käytetään Google-Chrome selaimen kehittäjätyökaluissa toimitettavaa Lighthouse työkalua. Lisäksi sovelluksen kehittäjä arvioi työkalujen käyttöönottoa noin muutaman vuoden ikäisessä projektissa. 
 
-\newpage
-\section{Tutkimusongelma}
-
-Telia IoT palvelulla on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telio IoT palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen alkuperäinen ja nykyinen tarkoitus on pääpiirteittäin pysynyt samana vuosien aikana. Sen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen, sekä viihtyvyyteen työpaikalla. 
-
-Telia IoT alustan avulla voi esimerkiksi seurata lämpötilaa ja sen muutoksia. Palvelun avulla voidaan tutkia onko toimistossa esimerkiksi liian kylmä, tai nähdä nousiko lämpötila varastossa liian kuumaksi menemättä itse paikalle. Kosteutta ja hiilidioksiditasoja seuraamalla voidaan päästä jäljille sisäilman muutoksista ja seurata esimerkiksi kokoustilan ilmanlaatua. Myös liikesensoreilla voidaan laskea työpisteiden, tai neuvotteluhuoneiden käyttöaste. 
-
-IoT palvelu on verkkosivu, tai selainpohjainen käyttöliittymä IoT laitteiden tuottaman datan tarkasteluun. Palvelu on ostettavissa ja tilattavissa Telian IoT sivuilta. Projektin puolesta on määritelty, että sovelluksen tulee toimia pääpiirteittäin kaikilla mahdollisilla mobiililaitteilla, sekä vähintään uusimmilla ja yleisimmillä nettiselaimilla. Projektin tavoitteena oli luoda selkeä käyttöliittymä, jolla seurata huoneilmaa. 
-
-Telia halusi projektista myös mobiilisovelluksen. Yhdessä kehittäjätiimin kanssa suoritettiin lyhyt arviointi erilaisista teknologioista ja vaihtoehdoista. Koska projektin kulut haluttiin pitää kurissa, valittiin toteutusteknologiaksi lopulta PWA malli sen yksinkertaisuuden ja monimuotoisuuden vuoksi. PWA mallista ei kuitenkaan ollut vastaavanlaisesta projektista aiempaa kokemusta ja kysymykseksi jäi toisiko se mitään varsinaisia hyötyjä käyttäjille. Ongelmaksi muodostui siis evaluointi miten paljon PWA hyödyttää sovelluksen käyttäjiä.
-
-\subsection{Tutkimuskysymykset}
-
-Olemassa olevan sovelluksen muuttaminen PWA mallin mukaiseksi toi mukanaan useita kysymyksiä. Taipuisivatko esimerkiksi vanhat projektissa käytössä olevat työkalut PWA mallin mukaiseksi? Mitä kaikkea tulisi ottaa huomioon ja mitä oli jo valmiina? Varsinaiset kysymykset koskivat lopulta sitä, mitä etuja PWA tuo mukanaan. Kuinka paljon nopeampi sovellus on käytännössä ja asentavatko käyttäjät sovellusta puhelimeensa?
-
-Tutkielman tutkimuskysymykset ovat seuraavat:
-
-\begin{itemize}
-  \item \textbf{TK1:} Kuinka paljon nopeampi PWA mallia käyttävä verkkosivu on kuin sivu joka ei hyödynnä PWA:ta
-  \item \textbf{TK2:} Miten olemassa oleva verkkosivu voidaan muokata progressiiviseksi web-sovellukseksi?
-  \item \textbf{TK3:} Minkälaisia hyötyjä tai haittoja saadaan Progressiivisista Web-sovelluksista? 
-\end{itemize}
-
-\subsection{Tutkimusmenetelmä}
-
-Tutkimus metodiksi valikoitui Design Science menetelmä, eli design-tutkimus. Design-tutkimus on tutkimusstrategia, joka pyrkii kehittämään sekä teoriaa, että käytäntöä [Pönkä]. Se ei ole metodologia ja sitä voi käyttää sekä laadulliseen, kuin määrälliseen tutkimukseen. Design-tutkimus on ongelmalähtöistä oppimista, tai tutkivaa oppimista. Olemassa olevan sovelluksen muuttaminen PWA mallia vastaavaksi oli teoreettinen tehtävä, josta muodostui tutkimuskysymys. 
-
-Projektissa oli myös selkeä lähtökohta, eli olemassa oleva sovellus. Sovelluksen rinnalle haluttiin lisäksi myös mobiilisovellus, joten projektissa tehtiin selvitys nykyisistä teknologioista. Seuraavaksi sovellus toteutettiin PWA mallin mukaisesti ja viimeiseksi sitä analysoidaan.
-
-\textbf{Tutkimuksen eteneminen}
-
-Tutkimusprosessin vaiheet ovat pääpiirteittäin seuraavat.
-
-\begin{itemize}
-  \item \textbf{Lähtökohta} Tutkimuskysymys mudostui asiakkaan tarpeista muokata olemassa oleva sovellus mobiilisovellukseksi. Millaisia etuja PWA malli tuo mukanaan nykyisille sovelluksen käyttäjille?
-  \item \textbf{Tutkimuksen suunnittelu} Sovelluksen evaluoimiseksi tarvittiin laatumittarit. Sovelluksesta haluttiin testata nopeutta ja mobiilikäytön määriä. Pääasialliseksi työkaluksi nopeuden mittaamiseksi valittiin Google Lighthouse työkalu, joka antaa sovellukselle PWA pisteet asteikolla 0-100. Käyttäjämääriä seuraamaan valikoitui Google Analytics.
-  \item \textbf{Sovelluksen rakentaminen PWA mallin mukaiseksi} Sovelluksesta rakennetaan PWA mallin mukainen ja tarvittavat työkalut liitetään osaksi nykyistä kehityspalettia.
-  \item \textbf{Analyysi} Valmista sovellusta mitataan käytännössä ennen ja jälkeen PWA mallin muutoksia.
-  \item \textbf{Tulokset ja johtopäätökset} Mittaustulosten jälkeen sovelluksen eri vaiheista voidaan julkaista tulokset ja johtopäätökset. Kuinka paljon nopeampi sovellus on PWA mallin myötä? Kuinka paljon sovelluksen build aika kasvoi?
-\end{itemize}
+Tutkielman rakenne on seuraava. Luvussa 2 esitellään progressiivisten Web-sovelluksien vaatimukset, toteutustekniikoita ja selvennetään mitä koko termillä tarkoitetaan. Luvussa tarkastellaan myös muita mobiilikehitys tekniikoita ja teknologioita. Luvussa 3 käydään läpi tutkimusongelma ja luvussa 4 tehdään sovellukseen tekninen toteutus. Projektissa asennetaan tarvittavat työkalut PWA-mallin täyttämiseksi. Luvussa 5 suoritetaan nopeusmittaukset käyttämällä Google-Chrome selaimen Lighthouse työkalua ja arvioidaan kuinka paljon vaikutuksia progressiivisilla ominaisuuksilla oli sovelluksen nopeuteen. Luvussa myös arvioidaan PWA:ta toteustekniikkana. Luvussa 6 tehdään yhteenveto.
 
 \newpage
 \section{PWA:n esittely}
@@ -215,8 +176,7 @@ PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyt
   \item browser. Selaintila on oletustila, jolloin sovellus aukeaa selaimen välilehdellä, tai uudessa ikkunassa, riippuen selaimesta ja laitealustasta. 
 \end{itemize}
 
-\clearpage
-\section{Muut teknologiat ja erot}
+\textbf{Muut teknologiat ja erot}
 
 Vain muutama vuosi takaperin älypuhelimet olivat melko yksinkertaisia. Niillä pystyi korkeintaan selaamaan verkossa tekstiä, linkkejä ja ehkä kuvia. Laitteiden omistajat olivat joko business henkilöitä joilla oli jatkuva tarve sähköpostiin, tai sitten todellisia nörttejä, jotka halusivat vain uusimmat teknologiat käyttöönsä. Mobiililaitteiden kenttä kuitenkin muuttui täysin Applen julkaistua iPhonen. Applen alkuperäinen idea oli käyttää nimenomaan web-teknologioita [charland2011mobile]. Kuitenkin kolme vuotta julkaisun jälkeen natiivisovellukset ovat ottaneet vallan. Natiivisovelluksissa on kuitenkin ongelma. Jokaiselle laitealustalle täytyy luoda oma sovellus, sillä laitealustat käyttävät pohjalla eri ohjelmointikieliä. Lisäksi ohjelmistojen ylläpito usealle laitteelle on kalliimpaa. 3D sovelluksissa ja peleissä natiivikielen käyttö saattaa tuoda etuja, mutta hyvin rakennetuissa verkkosovelluksissa suorituskyky eroa on miltei mahdoton huomata [charland2011mobile]. Sovelluskehitystä hankaloittaa lisäksi se, että jokaisella laitteella on oltava oma kehitysympäristö ja työkalut. Rajapinnat ovat erilaiset ja sovelluksen paketointi ei ole yhdenmukaista. Kun sovelluksen ylläpitoon ja kehitykseen täytyy käyttää useampia ympäristöjä se nostaa luonnollisesti sovelluskehityksen kuluja [xanthopoulos2013comparative]. Mobiilisovelluksien kasvava tarve on ajanut yritykset ahdinkoon, sillä samaa sovellusta tulee kehittää usealle laitealustalle [xanthopoulos2013comparative]. Natiivisovelluskehitys olisi järkevintä, mutta sen haittana on että mitään koodista ei voida käyttää muilla alustoilla. Saman sovelluksen joutuu kehittämään alusta alkaen toiselle laitteelle. Loppukäyttäjän näkökulmasta natiivisovellus tarjoaa kuitenkin yleensä parhaan käyttökokemuksen.
 
@@ -297,11 +257,52 @@ Natiivisovelluksen ongelmia on etsiä oikeat kehittäjät, jotka ymmärtävät a
 
 \subsection{Erot PWA sovellukseen}
 
-PWA sovellus on muista sovelluksista täysin erilainen, sillä sitä ei jaella missään sovelluskaupassa. Sovelluksen löydettävyys tapahtuu esimerkiksi verkon hakukoneilla. PWA sovellus on siis verkkosovellus, joka noudattaa verkon parhaita teknologioita. Sovellusta ei ole pakko asentaa, mutta halutessaan siitä voi luoda pikakuvakkeen laitteen sovellusvalikkoon. PWA:n suurin ongelma toistaiseksi on sen pääsy laitteiden natiiveihin rajapintoihin. PWA sovellus on aina ajan tasalla, sillä se on selainpohjainen sovellus ja uusimmat tiedot käydään hakemassa palvelimelta. PWA sovellus on myös mahdollista kääntää hybridisovellukseksi, mikäli sen haluaa julkaista sovelluskaupassa. Sovelluskaupassa julkaisemiselle ei välttämättä ole kuitenkaan tarvetta. Mikäli esimerkiksi sovelluksen brändi on tarpeeksi hyvä, löytävät käyttäjät sivustolle ilman sovelluskauppoja. Hyvänä esimerkkinä on verkkokauppa.com. Verkkokauppa.comilla ei ole omaa erillistä sovellusta verkkokaupalleen, vaan verkkosivuilla toistamiseen vierailu ehdottaa käyttäjälle sovelluksen asentamista. Kun Verkkokaupan sovelluksen avaa asennetusta kuvakkeesta häviää selaimen käyttöliittymä näkyvistä ja jäljelle jää ikäänkuin Verkkokaupan mobiilisovellus. Verkkokauppa.comilla on siis käytössään PWA sovellus. PWA mallin käyttäminen Verkkokauppa.comilla on ollut varmasti järkevää, sillä erillisen sovelluksen kehittäminen pelkkää verkkokauppaa varten olisi todella työlästä ja kallista. Verkkokauppa palvelussa ei myöskään ole mitään tarpeita käyttää mobiililaitteen natiiveja rajapintoja. Kaikki kauppaan liittyvät toiminnot saadaan suoritettua verkkosivulla.
+PWA sovellus on muista sovelluksista täysin erilainen, sillä sitä ei jaella missään sovelluskaupassa. Sovelluksen löydettävyys tapahtuu esimerkiksi verkon hakukoneilla. PWA sovellus on siis verkkosovellus, joka noudattaa verkon parhaita teknologioita. Sovellusta ei ole pakko asentaa, mutta halutessaan siitä voi luoda pikakuvakkeen laitteen sovellusvalikkoon. PWA:n suurin ongelma toistaiseksi on sen pääsy laitteiden natiiveihin rajapintoihin. PWA sovellus on aina ajan tasalla, sillä se on selainpohjainen sovellus ja uusimmat tiedot käydään hakemassa palvelimelta. PWA sovellus on myös mahdollista kääntää hybridisovellukseksi, mikäli sen haluaa julkaista sovelluskaupassa. Sovelluskaupassa julkaisemiselle ei välttämättä ole kuitenkaan tarvetta. Mikäli esimerkiksi sovelluksen brändi on tarpeeksi hyvä, löytävät käyttäjät sivustolle ilman sovelluskauppoja. Hyvänä esimerkkinä on verkkokauppa.com. Verkkokauppa.comilla ei ole omaa erillistä sovellusta verkkokaupalleen, vaan verkkosivuilla toistamiseen vierailu ehdottaa käyttäjälle sovelluksen asentamista. Kun Verkkokaupan sovelluksen avaa asennetusta kuvakkeesta häviää selaimen käyttöliittymä näkyvistä ja jäljelle jää ikäänkuin Verkkokaupan mobiilisovellus. Verkkokauppa.comilla on siis käytössään PWA sovellus. PWA-mallin käyttäminen Verkkokauppa.comilla on ollut varmasti järkevää, sillä erillisen sovelluksen kehittäminen pelkkää verkkokauppaa varten olisi todella työlästä ja kallista. Verkkokauppa palvelussa ei myöskään ole mitään tarpeita käyttää mobiililaitteen natiiveja rajapintoja. Kaikki kauppaan liittyvät toiminnot saadaan suoritettua verkkosivulla.
 
 PWA ja hybridisovellusten erot alkavat olla melko lähellä toisiaan, sillä ainakin Androidin nykyinen WebView näkymä käyttää taustalla pääosin Chrome selainta [Crosswalk]. Erona Hybridisovelluksella ja PWA mallilla on, että hybridisovelluksesta on laajempi pääsy laitteen rajapintoihin. Hybridisovellus myös paketoidaan tietylle laitealustalle ja julkaistaan laittevalmistajan jakelukanavalla. PWA sovellusta sen sijaan ei tarvitse julkaista missään. Sovellus alkaa ehdottamaan asennusta mikäli käyttäjä vierailee sivustolla useamman kerran. PWA:n etuna on siis esimerkiksi se, että kehittäjien ei tarvitse noudattaa minkään sovelluskaupan käyttöehtoja. Sovelluksen julkaisusta ei myöskään tarvitse maksaa mitään. Esimerkiksi Androidin Google Play kaupan lisenssi maksaa 25 dollaria koko elämäksi ja Applen App Store lisenssi maksaa kehittäjälle 99 dollaria vuodessa, tai 299e dollaria vuodessa yritykselle. PWA sovelluksen etuna voi myös olla löydettävyys. Ihmiset etsivät useimmiten tietoa verkon hakukoneista. Jotta yksittäinen käyttäjä etsisi sovellusta sovelluskaupasta, täytyy brändin tai sovelluksen olla tuttu muuta kautta. 
 
 Yksi suuri etu PWA sovelluksissa on niiden koko. Pinterestin tekemässä case study tutkimuksessa [Osmani] Pinterestin sovelluskaupoissa julkaiseman sovelluksen koko oli Android alustalla noin 10 megatavua ja iOS alustalla jopa 56 megatavua. Pinterestin tekemän PWA muutosten myötä PWA sovelluksen koko oli vain 150 kilotavua. Vaikka Pinterest edelleen jakelee mobiilisovellusta Android ja iOS alustoille, he pystyivät tekemään PWA sovelluksella saman kuin mobiilisovelluksilla, mutta vain murto-osalla sovelluksen koosta. Tämä on käyttäjälle etu, suurta sovellusta ei tarvitse ladata jotta sitä pääsee käyttämään. Sovellusta voi käyttää verkossa heti, ilman että on ladannut yhtään mitään, tai edes tehnyt päätöstä sovelluksen asennuksesta. PWA:n etuna myös normaaliin verkkosivuun on välimuistin hyödyntäminen. Pinterestin suorituskykymittauksen mukaan sovelluksen kääntäminen nopeutui 30\% ja parsiminen 25\% toisella vierailulla.  
+
+\newpage
+\section{Tutkimusongelma}
+
+Telia IoT palvelulla on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telio IoT palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen alkuperäinen ja nykyinen tarkoitus on pääpiirteittäin pysynyt samana vuosien aikana. Sen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen, sekä viihtyvyyteen työpaikalla. 
+
+Telia IoT alustan avulla voi esimerkiksi seurata lämpötilaa ja sen muutoksia. Palvelun avulla voidaan tutkia onko toimistossa esimerkiksi liian kylmä, tai nähdä nousiko lämpötila varastossa liian kuumaksi menemättä itse paikalle. Kosteutta ja hiilidioksiditasoja seuraamalla voidaan päästä jäljille sisäilman muutoksista ja seurata esimerkiksi kokoustilan ilmanlaatua. Myös liikesensoreilla voidaan laskea työpisteiden, tai neuvotteluhuoneiden käyttöaste. 
+
+IoT palvelu on verkkosivu, tai selainpohjainen käyttöliittymä IoT laitteiden tuottaman datan tarkasteluun. Palvelu on ostettavissa ja tilattavissa Telian IoT sivuilta. Projektin puolesta on määritelty, että sovelluksen tulee toimia pääpiirteittäin kaikilla mahdollisilla mobiililaitteilla, sekä vähintään uusimmilla ja yleisimmillä nettiselaimilla. Projektin tavoitteena oli luoda selkeä käyttöliittymä, jolla seurata huoneilmaa. 
+
+Telia halusi projektista myös mobiilisovelluksen. Yhdessä kehittäjätiimin kanssa suoritettiin lyhyt arviointi erilaisista teknologioista ja vaihtoehdoista. Koska projektin kulut haluttiin pitää kurissa, valittiin toteutusteknologiaksi lopulta PWA malli sen yksinkertaisuuden ja monimuotoisuuden vuoksi. PWA mallista ei kuitenkaan ollut vastaavanlaisesta projektista aiempaa kokemusta ja kysymykseksi jäi toisiko se mitään varsinaisia hyötyjä käyttäjille. Ongelmaksi muodostui siis evaluointi miten paljon PWA hyödyttää sovelluksen käyttäjiä.
+
+\subsection{Tutkimuskysymykset}
+
+Olemassa olevan sovelluksen muuttaminen PWA-mallin mukaiseksi toi mukanaan useita kysymyksiä. Taipuisivatko esimerkiksi vanhat projektissa käytössä olevat työkalut PWA-mallin mukaiseksi? Mitä kaikkea tulisi ottaa huomioon ja mitä oli jo valmiina? Varsinaiset kysymykset koskivat lopulta sitä, mitä etuja PWA tuo mukanaan. Kuinka paljon nopeampi sovellus on käytännössä ja asentavatko käyttäjät sovellusta puhelimeensa?
+
+Tutkielman tutkimuskysymykset ovat seuraavat:
+
+\begin{itemize}
+  \item \textbf{TK1:} Kuinka paljon nopeampi PWA mallia käyttävä verkkosivu on kuin sivu joka ei hyödynnä PWA:ta
+  \item \textbf{TK2:} Miten olemassa oleva verkkosivu voidaan muokata progressiiviseksi web-sovellukseksi?
+  \item \textbf{TK3:} Minkälaisia hyötyjä tai haittoja saadaan Progressiivisista Web-sovelluksista? 
+\end{itemize}
+
+\subsection{Tutkimusmenetelmä}
+
+Tutkimus metodiksi valikoitui Design Science menetelmä, eli design-tutkimus. Design-tutkimus on tutkimusstrategia, joka pyrkii kehittämään sekä teoriaa, että käytäntöä [Pönkä]. Se ei ole metodologia ja sitä voi käyttää sekä laadulliseen, kuin määrälliseen tutkimukseen. Design-tutkimus on ongelmalähtöistä oppimista, tai tutkivaa oppimista. Olemassa olevan sovelluksen muuttaminen PWA mallia vastaavaksi oli teoreettinen tehtävä, josta muodostui tutkimuskysymys. 
+
+Projektissa oli myös selkeä lähtökohta, eli olemassa oleva sovellus. Sovelluksen rinnalle haluttiin lisäksi myös mobiilisovellus, joten projektissa tehtiin selvitys nykyisistä teknologioista. Seuraavaksi sovellus toteutettiin PWA-mallin mukaisesti ja viimeiseksi sitä analysoidaan.
+
+\textbf{Tutkimuksen eteneminen}
+
+Tutkimusprosessin vaiheet ovat pääpiirteittäin seuraavat.
+
+\begin{itemize}
+  \item \textbf{Lähtökohta} Tutkimuskysymys mudostui asiakkaan tarpeista muokata olemassa oleva sovellus mobiilisovellukseksi. Millaisia etuja PWA malli tuo mukanaan nykyisille sovelluksen käyttäjille?
+  \item \textbf{Tutkimuksen suunnittelu} Sovelluksen evaluoimiseksi tarvittiin laatumittarit. Sovelluksesta haluttiin testata nopeutta ja mobiilikäytön määriä. Pääasialliseksi työkaluksi nopeuden mittaamiseksi valittiin Google Lighthouse työkalu, joka antaa sovellukselle PWA pisteet asteikolla 0-100. Käyttäjämääriä seuraamaan valikoitui Google Analytics.
+  \item \textbf{Sovelluksen rakentaminen PWA-mallin mukaiseksi} Sovelluksesta rakennetaan PWA-mallin mukainen ja tarvittavat työkalut liitetään osaksi nykyistä kehityspalettia.
+  \item \textbf{Analyysi} Valmista sovellusta mitataan käytännössä ennen ja jälkeen PWA-mallin muutoksia.
+  \item \textbf{Tulokset ja johtopäätökset} Mittaustulosten jälkeen sovelluksen eri vaiheista voidaan julkaista tulokset ja johtopäätökset. Kuinka paljon nopeampi sovellus on PWA-mallin myötä? Kuinka paljon sovelluksen build aika kasvoi?
+\end{itemize}
 
 \newpage
 \section{Tekninen toteutus}
@@ -383,9 +384,9 @@ JavaScript koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään .LES
 
 \subsection{PWA:n käyttöönotto projektissa}
 
-Telian alkuperäinen tarkoitus oli laajentaa IoT projektin käyttöliittymää myös mobiililaitteille. Projektissa tehtiin nopea katsaus nykyisistä teknologioista ja lopulta päädyttiin tekemään sovelluksesta PWA mallin mukainen. Android ja IOS sovellusten haittapuolena olisi ollut kokonaan uusien kehittäjien haaliminen, sekä usean koodin ylläpitäminen. Hybridisovellukselle ei myöskään nähty tarvetta sen hitauden takia. IoT Dashboard sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin, kuten kalenteriin, tai yhteystietoihin, joten PWA malli oli luonnollinen valinta. Lisäksi osa PWA mallin vaiheista oli jo täytettynä. Palvelua tarjotaan Telian asiakkaille salattuna HTTPS protokollan ylitse, sovellus on responsiivinen Bootstrap kirjaston ansiosta ja sovellus käyttää tarpeeksi moderneja työkaluja, jotta siitä oli mahdollista tehdä PWA. Telian kanssa päädyttiin yhteisymmärryksessä PWA malliin. 
+Telian alkuperäinen tarkoitus oli laajentaa IoT projektin käyttöliittymää myös mobiililaitteille. Projektissa tehtiin nopea katsaus nykyisistä teknologioista ja lopulta päädyttiin tekemään sovelluksesta PWA-mallin mukainen. Android ja IOS sovellusten haittapuolena olisi ollut kokonaan uusien kehittäjien haaliminen, sekä usean koodin ylläpitäminen. Hybridisovellukselle ei myöskään nähty tarvetta sen hitauden takia. IoT Dashboard sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin, kuten kalenteriin, tai yhteystietoihin, joten PWA malli oli luonnollinen valinta. Lisäksi osa PWA-mallin vaiheista oli jo täytettynä. Palvelua tarjotaan Telian asiakkaille salattuna HTTPS protokollan ylitse, sovellus on responsiivinen Bootstrap kirjaston ansiosta ja sovellus käyttää tarpeeksi moderneja työkaluja, jotta siitä oli mahdollista tehdä PWA. Telian kanssa päädyttiin yhteisymmärryksessä PWA malliin. 
 
-PWA mallin kartoitus alkoi siihen tarvittavilta asioilta. Ensiksi sovellukseen luotiin projektiin sopiva sovelluskuvake ja nimi Web App Manifestiin. Seuraava vaihe, eli Service Workerin lisääminen oli isompi ja haastavampi kokonaisuus. Sovellusta päätettiin laajentaa Googlen tarjoamalla Workbox CLI työkalulla. Workbox on NodeJS pohjainen komentoriviohjelma, jolla on helppoa luoda Service Worker nykyiseen olemassa olevaan projektiin. Lisäksi ohjelma tarjoaa käteviä komentoja, joilla toimintaa voidaan mukauttaa omaan projektiin sopivaksi. Workbox asennettiin projektiin käyttämällä Yarnia.
+PWA-mallin kartoitus alkoi siihen tarvittavilta asioilta. Ensiksi sovellukseen luotiin projektiin sopiva sovelluskuvake ja nimi Web App Manifestiin. Seuraava vaihe, eli Service Workerin lisääminen oli isompi ja haastavampi kokonaisuus. Sovellusta päätettiin laajentaa Googlen tarjoamalla Workbox CLI työkalulla. Workbox on NodeJS pohjainen komentoriviohjelma, jolla on helppoa luoda Service Worker nykyiseen olemassa olevaan projektiin. Lisäksi ohjelma tarjoaa käteviä komentoja, joilla toimintaa voidaan mukauttaa omaan projektiin sopivaksi. Workbox asennettiin projektiin käyttämällä Yarnia.
 
 Seuraavaksi Workboxin käyttöönotossa huomattiin, että Workbox ei ole tuettuna Grunt työkalussa, sillä Grunt on liian vanha. Workboxia on kuitenkin mahdollista ajaa erikseen myös NodeJS skripteillä, joten Grunt työkalua laajennettiin grunt-run nimisellä paketilla, joka mahdollistaa komentojen ajamisen Gruntissa. 
 
@@ -488,7 +489,7 @@ Mikäli Manifest ja Service Worker ovat kunnossa, voidaan sovelluksen toimintaa 
 
 
 \clearpage
-\section{Tulokset}
+\section{Arviointi}
 
 PWA:n käyttöönotossa esiintyi muutamia ongelmia projektin aikana. Projektin työkalut olivat vanhentuneet, joten ensimmäinen varsinainen ongelma oli yhteensopivuusongelma Service Worker työkalun käytössä. Työkalujen kanssa tehtiin jonkin verran töitä, jotta ne saatiin pelaamaan yhteen. Toinen kehityksen aikana ilmennyt ongelma oli sovelluksen näyttäytyminen välimuistista kun Service Worker oli saatu käyttöön. Google Chromen kehittäjäkonsolissa on Service Worker välilehdellä täpät "update on reload" ja "Bypass for network" jotka ruksattiin käyttöön. Näin kehittäjä näkee aina uusimmat muutokset selaimessaan. Muutoin koodiin tehdyillä muutoksilla ei välttämättä olisi vaikutusta, sillä Service Worker näyttäisi tiedostoja ja koodia välimuistista. 
 
