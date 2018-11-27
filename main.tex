@@ -94,7 +94,7 @@ Tutkielman rakenne on seuraava. Luvussa 2 esitellään progressiivisten Web-sove
 \newpage
 \section{PWA:n esittely}
 
-PWA ei ole ohjelmistokehys, tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kapoor] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus, vai verkkosovellus. PWA:n tarkoitus on hämärtää natiivisovelluksen ja web-sovelluksen rajaa. Rajaa halutaan hämärtää siksi, että yleensä sovellusten julkaiseminen sovelluskauppoihin on hidasta, aikaa vievää ja lisäksi vielä maksullista. Kehittäjän ja tilaajan näkökulmasta PWA sovelluksen kehittäminen on siis järkevää. Sovellusta ei tarvitse erikseen koodata usealle eri mobiilialustalle [Gazdecki], julkaisusykli on nopeampi ja kehittäminen halvempaa. Sovellus muotoutuu käyttäjän laitteelle alustasta riippumatta, yksi ainoa versio riittää.
+PWA ei ole ohjelmistokehys tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä [Kapoor] ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus vai verkkosovellus. PWA:n tarkoitus on hämärtää natiivisovelluksen ja web-sovelluksen rajaa. Rajaa halutaan hämärtää siksi, että yleensä sovellusten julkaiseminen sovelluskauppoihin on hidasta, aikaa vievää ja lisäksi vielä maksullista. Kehittäjän ja tilaajan näkökulmasta PWA sovelluksen kehittäminen on siis järkevää. Sovellusta ei tarvitse erikseen koodata usealle eri mobiilialustalle [Gazdecki], julkaisusykli on nopeampi ja kehittäminen halvempaa. Sovellus muotoutuu käyttäjän laitteelle alustasta riippumatta, yksi ainoa versio riittää.
 
 Alex Russell määritteli blogikirjoituksessaan PWA:n ominaisuudet seuraavasti. 
 
@@ -136,9 +136,7 @@ PWA pyrkii ratkaisemaan näitä ongelmia. Progressiivisen Web-sovelluksen käytt
 
 Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota noudattamalla sovelluksesta saadaan progressiivinen [Google]. Käydään seuraavaksi listasta läpi minimivaatimukset joiden tulee täyttyä, jotta sovellusta voidaan sanoa progressiiviseksi.
 
-\textbf{Web App Manifest}
-
-Jotta projektista saataisiin sovelluksen kaltainen, tulee sovelluksen juureen määritellä manifest.json tiedosto. Tiedosto pitää sisällään tiedot seuraavista asioista:
+\textbf{Web App Manifest}: Jotta projektista saataisiin sovelluksen kaltainen, tulee sovelluksen juureen määritellä manifest.json tiedosto. Tiedosto pitää sisällään tiedot seuraavista asioista:
 
 \begin{itemize}
   \item Sovelluksen nimi
@@ -151,19 +149,13 @@ Jotta projektista saataisiin sovelluksen kaltainen, tulee sovelluksen juureen m�
 
 Kyseessä on tavallinen Json tiedosto, joka pitää sisällään niinsanottua metatietoa sovelluksesta. Kun selain havaitsee manifest.json tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöksen tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen statuskenttä sovelluksen teeman väriä vastaavaksi.  
 
-\textbf{Service Workers}
-
-Työkalu nimeltään Service Worker on koko progressiivisen sovelluksen pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on tapahtumapohjainen koodinpätkä, joka juoksee sovelluksen taustalla. Skripti toimii niinsanottuna proxyna, eli välittäjänä verkon ja sovelluksen välillä. Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Skripti kopioi verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista, jolloin sovelluksen toiminta nopeutuu huomattavasti. Service Workeria hyödyntämällä sovellus voidaan avata myös Offline tilassa ja näyttää tietoja välimuistista. 
+\textbf{Service Workers} on työkalu, joka on koko progressiivisen sovelluksen pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on tapahtumapohjainen koodinpätkä, joka juoksee sovelluksen taustalla. Skripti toimii niinsanottuna proxyna, eli välittäjänä verkon ja sovelluksen välillä. Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Skripti kopioi verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista, jolloin sovelluksen toiminta nopeutuu huomattavasti. Service Workeria hyödyntämällä sovellus voidaan avata myös Offline-tilassa ja näyttää tietoja välimuistista. 
 
 Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Tämä skripti on sovelluksesta irtonainen ja pyörii mobiililaitteen taustalla. Jokainen web-selain hallitsee push-notifikaatiot oman push servicensä kautta. Kun käyttäjä antaa selaimelle luvan lähettää ilmoituksia, voidaan sovellus silloin tilata selaimen push palveluun [Googleb]. Tämä luo objektin joka sisältää päätepisteen (endpoint) tilaukselle, joka on eri jokaisessa selaimessa. Lisäksi tilaukseen tarvitaan julkinen avain. Push notifikaatiot lähetetään selaimen tilaus osoitteeseen kryptattuna julkisella avaimella. Push palvelu lähettää lopulta ilmoituksen käyttäjän mobiililaitteelle. Näin ollen sovelluksessa voidaan näyttää notifikaatoita jopa silloin, kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, kuten esimerkiksi PhoneGapissa, tai Cordovassa, joilla web-sovellus paketoidaan natiivisovellukseksi selainkehystä käyttäen.
 
-\textbf{Ikoni}
+\textbf{Ikoni, sovelluskuvake}, kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manifest.json tiedostossa määritelty ikoni käyttäjän mobiililaitteen työpöydälle tai valikkoon. Ikoniksi pitäisi käydä useampi eri formaatti, kunhan vain formaatti on määritelty tiedostoon erikseen. Ikoneita pitää olla useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
 
-Kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manifest.json tiedostossa määritelty ikoni käyttäjän mobiililaitteen työpöydälle tai valikkoon. Ikoniksi pitäisi käydä useampi eri formaatti, kunhan vain formaatti on määritelty tiedostoon erikseen. Ikoneita pitää olla useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
-
-\textbf{HTTPS salattu liikenne}
-
-Jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS protokollan ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS protokollaa [Eisworth]. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. 
+\textbf{HTTPS salattu liikenne}, jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS protokollan ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS protokollaa [Eisworth]. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. 
 
 \subsection{Näyttötilat}
 
@@ -266,31 +258,31 @@ Yksi suuri etu PWA sovelluksissa on niiden koko. Pinterestin tekemässä case st
 \newpage
 \section{Tutkimusongelma}
 
-Telia IoT palvelulla on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telio IoT palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen alkuperäinen ja nykyinen tarkoitus on pääpiirteittäin pysynyt samana vuosien aikana. Sen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen, sekä viihtyvyyteen työpaikalla. 
+Telia IoT-palvelulla on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telio IoT-palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen alkuperäinen ja nykyinen tarkoitus on pääpiirteittäin pysynyt samana vuosien aikana. Sen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen, sekä viihtyvyyteen työpaikalla. 
 
-Telia IoT alustan avulla voi esimerkiksi seurata lämpötilaa ja sen muutoksia. Palvelun avulla voidaan tutkia onko toimistossa esimerkiksi liian kylmä, tai nähdä nousiko lämpötila varastossa liian kuumaksi menemättä itse paikalle. Kosteutta ja hiilidioksiditasoja seuraamalla voidaan päästä jäljille sisäilman muutoksista ja seurata esimerkiksi kokoustilan ilmanlaatua. Myös liikesensoreilla voidaan laskea työpisteiden, tai neuvotteluhuoneiden käyttöaste. 
+Telia IoT-alustan avulla voi esimerkiksi seurata lämpötilaa ja sen muutoksia. Palvelun avulla voidaan tutkia onko toimistossa esimerkiksi liian kylmä, tai nähdä nousiko lämpötila varastossa liian kuumaksi menemättä itse paikalle. Kosteutta ja hiilidioksiditasoja seuraamalla voidaan päästä jäljille sisäilman muutoksista ja seurata esimerkiksi kokoustilan ilmanlaatua. Liikesensoreilla voidaan laskea työpisteiden, tai neuvotteluhuoneiden käyttöaste. 
 
-IoT palvelu on verkkosivu, tai selainpohjainen käyttöliittymä IoT laitteiden tuottaman datan tarkasteluun. Palvelu on ostettavissa ja tilattavissa Telian IoT sivuilta. Projektin puolesta on määritelty, että sovelluksen tulee toimia pääpiirteittäin kaikilla mahdollisilla mobiililaitteilla, sekä vähintään uusimmilla ja yleisimmillä nettiselaimilla. Projektin tavoitteena oli luoda selkeä käyttöliittymä, jolla seurata huoneilmaa. 
+IoT-palvelu on verkkosivu, tai selainpohjainen käyttöliittymä IoT-laitteiden tuottaman datan tarkasteluun. Palvelu on ostettavissa ja tilattavissa Telian IoT-sivuilta. Telia on määritellyt, että sovelluksen tulee toimia pääpiirteittäin kaikilla mahdollisilla mobiililaitteilla, sekä vähintään uusimmilla ja yleisimmillä nettiselaimilla. IoT hankkeen tavoitteena oli luoda selkeä käyttöliittymä, jolla seurata huoneilmaa. 
 
-Telia halusi projektista myös mobiilisovelluksen. Yhdessä kehittäjätiimin kanssa suoritettiin lyhyt arviointi erilaisista teknologioista ja vaihtoehdoista. Koska projektin kulut haluttiin pitää kurissa, valittiin toteutusteknologiaksi lopulta PWA malli sen yksinkertaisuuden ja monimuotoisuuden vuoksi. PWA mallista ei kuitenkaan ollut vastaavanlaisesta projektista aiempaa kokemusta ja kysymykseksi jäi toisiko se mitään varsinaisia hyötyjä käyttäjille. Ongelmaksi muodostui siis evaluointi miten paljon PWA hyödyttää sovelluksen käyttäjiä.
+Telia halusi projektista myös mobiilisovelluksen. Yhdessä kehittäjätiimin kanssa suoritettiin lyhyt arviointi erilaisista teknologioista ja vaihtoehdoista. Koska projektin kulut haluttiin pitää kurissa, valittiin toteutusteknologiaksi lopulta PWA-malli sen yksinkertaisuuden ja monimuotoisuuden vuoksi. PWA-mallista ei kuitenkaan ollut vastaavanlaisesta projektista aiempaa kokemusta ja kysymykseksi jäi toisiko se mitään varsinaisia hyötyjä käyttäjille. Ongelmaksi muodostui siis evaluointi miten paljon PWA hyödyttää sovelluksen käyttäjiä.
 
 \subsection{Tutkimuskysymykset}
 
-Olemassa olevan sovelluksen muuttaminen PWA-mallin mukaiseksi toi mukanaan useita kysymyksiä. Taipuisivatko esimerkiksi vanhat projektissa käytössä olevat työkalut PWA-mallin mukaiseksi? Mitä kaikkea tulisi ottaa huomioon ja mitä oli jo valmiina? Varsinaiset kysymykset koskivat lopulta sitä, mitä etuja PWA tuo mukanaan. Kuinka paljon nopeampi sovellus on käytännössä ja asentavatko käyttäjät sovellusta puhelimeensa?
+Olemassa olevan sovelluksen muuttaminen PWA-mallin mukaiseksi toi mukanaan useita kysymyksiä. Ovatko esimerkiksi vanhat projektissa käytössä olevat työkalut riittäviä PWA-mallin luomiseksi? Mitä kaikkea tulisi ottaa huomioon ja mitä oli jo valmiina? Varsinaiset kysymykset koskivat lopulta sitä, mitä etuja PWA tuo mukanaan. Kuinka paljon nopeampi sovellus on käytännössä, ja asentavatko käyttäjät sovellusta puhelimeensa?
 
 Tutkielman tutkimuskysymykset ovat seuraavat:
 
 \begin{itemize}
-  \item \textbf{TK1:} Kuinka paljon nopeampi PWA mallia käyttävä verkkosivu on kuin sivu joka ei hyödynnä PWA:ta
+  \item \textbf{TK1:} Kuinka paljon nopeampi PWA-mallia käyttävä verkkosivu on kuin sivu joka ei hyödynnä PWA:ta?
   \item \textbf{TK2:} Miten olemassa oleva verkkosivu voidaan muokata progressiiviseksi web-sovellukseksi?
-  \item \textbf{TK3:} Minkälaisia hyötyjä tai haittoja saadaan Progressiivisista Web-sovelluksista? 
+  \item \textbf{TK3:} Minkälaisia hyötyjä tai haittoja saadaan käyttämällä PWA-mallia? 
 \end{itemize}
 
 \subsection{Tutkimusmenetelmä}
 
-Tutkimus metodiksi valikoitui Design Science menetelmä, eli design-tutkimus. Design-tutkimus on tutkimusstrategia, joka pyrkii kehittämään sekä teoriaa, että käytäntöä [Pönkä]. Se ei ole metodologia ja sitä voi käyttää sekä laadulliseen, kuin määrälliseen tutkimukseen. Design-tutkimus on ongelmalähtöistä oppimista, tai tutkivaa oppimista. Olemassa olevan sovelluksen muuttaminen PWA mallia vastaavaksi oli teoreettinen tehtävä, josta muodostui tutkimuskysymys. 
+PWA-mallin vaikutuksia käytännössä tarkastellaan Design Science-menetelmällä, eli design-tutkimuksella. Design-tutkimus on tutkimusstrategia, joka pyrkii kehittämään sekä teoriaa että käytäntöä [Pönkä]. Se ei ole metodologia ja sitä voi käyttää niin laadulliseen kuin määrälliseen tutkimukseen. Design-tutkimus on ongelmalähtöistä oppimista, tai tutkivaa oppimista. Olemassa olevan sovelluksen muuttaminen PWA-mallia vastaavaksi oli teoreettinen tehtävä, josta muodostui tutkimuskysymys. 
 
-Projektissa oli myös selkeä lähtökohta, eli olemassa oleva sovellus. Sovelluksen rinnalle haluttiin lisäksi myös mobiilisovellus, joten projektissa tehtiin selvitys nykyisistä teknologioista. Seuraavaksi sovellus toteutettiin PWA-mallin mukaisesti ja viimeiseksi sitä analysoidaan.
+IoT-sovelluksessa oli myös selkeä lähtökohta, eli olemassa oleva sovellus, jonka rinnalle haluttiin lisäksi myös mobiilisovellus. IoT-projektissa tehtiin selvitys nykyisistä teknologioista ja seuraavaksi sovellus toteutettiin PWA-mallin mukaisesti. Viimeiseksi sovelluksen toimintaa analysoitiin muutoksien jälkeen.
 
 \textbf{Tutkimuksen eteneminen}
 
@@ -298,7 +290,7 @@ Tutkimusprosessin vaiheet ovat pääpiirteittäin seuraavat.
 
 \begin{itemize}
   \item \textbf{Lähtökohta} Tutkimuskysymys mudostui asiakkaan tarpeista muokata olemassa oleva sovellus mobiilisovellukseksi. Millaisia etuja PWA malli tuo mukanaan nykyisille sovelluksen käyttäjille?
-  \item \textbf{Tutkimuksen suunnittelu} Sovelluksen evaluoimiseksi tarvittiin laatumittarit. Sovelluksesta haluttiin testata nopeutta ja mobiilikäytön määriä. Pääasialliseksi työkaluksi nopeuden mittaamiseksi valittiin Google Lighthouse työkalu, joka antaa sovellukselle PWA pisteet asteikolla 0-100. Käyttäjämääriä seuraamaan valikoitui Google Analytics.
+  \item \textbf{Tutkimuksen suunnittelu} Sovelluksen arvioimiseksi tarvittiin laatumittarit. Sovelluksesta haluttiin testata nopeutta ja mobiilikäytön määriä. Pääasialliseksi työkaluksi nopeuden mittaamiseksi valittiin Google Lighthouse työkalu, joka antaa sovellukselle PWA-pisteet asteikolla 0-100. Käyttäjämääriä seuraamaan valikoitui Google Analytics.
   \item \textbf{Sovelluksen rakentaminen PWA-mallin mukaiseksi} Sovelluksesta rakennetaan PWA-mallin mukainen ja tarvittavat työkalut liitetään osaksi nykyistä kehityspalettia.
   \item \textbf{Analyysi} Valmista sovellusta mitataan käytännössä ennen ja jälkeen PWA-mallin muutoksia.
   \item \textbf{Tulokset ja johtopäätökset} Mittaustulosten jälkeen sovelluksen eri vaiheista voidaan julkaista tulokset ja johtopäätökset. Kuinka paljon nopeampi sovellus on PWA-mallin myötä? Kuinka paljon sovelluksen build aika kasvoi?
