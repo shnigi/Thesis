@@ -7,7 +7,7 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-
+\usepackage{pdflscape}
 
 
 % Kuvien numerointi Luvun mukaan
@@ -89,7 +89,7 @@ PWA sovellukset eivät kuitenkaan sovellu sellaisiin käyttötarkoituksiin, jois
 
 Tässä tutkielmassa selvitetään millaisia vaikutuksia progressiivisuudella saavutetaan ja kuinka helppoa työkalujen käyttöönotto on. Esimerkin projektissa mitataan sovelluksen nopeutta välimuistitallennuksen ollessa käytössä, sekä ilman. Mittarina käytetään Google-Chrome selaimen kehittäjätyökaluissa toimitettavaa Lighthouse työkalua. Lisäksi sovelluksen kehittäjä arvioi työkalujen käyttöönottoa noin muutaman vuoden ikäisessä projektissa. 
 
-Tutkielman rakenne on seuraava. Luvussa 2 esitellään progressiivisten Web-sovelluksien vaatimukset, toteutustekniikoita ja selvennetään mitä koko termillä tarkoitetaan. Luvussa tarkastellaan myös muita mobiilikehitys tekniikoita ja teknologioita. Luvussa 3 käydään läpi tutkimusongelma ja luvussa 4 tehdään sovellukseen tekninen toteutus. Projektissa asennetaan tarvittavat työkalut PWA-mallin täyttämiseksi. Luvussa 5 suoritetaan nopeusmittaukset käyttämällä Google-Chrome selaimen Lighthouse työkalua ja arvioidaan kuinka paljon vaikutuksia progressiivisilla ominaisuuksilla oli sovelluksen nopeuteen. Luvussa myös arvioidaan PWA:ta toteustekniikkana. Luvussa 6 tehdään yhteenveto.
+Tutkielman rakenne on seuraava. Luvussa 2 esitellään progressiivisten Web-sovelluksien vaatimukset, toteutustekniikoita ja selvennetään mitä koko termillä tarkoitetaan. Luvussa tarkastellaan myös muita mobiilikehitys tekniikoita ja teknologioita. Luvussa 3 käydään läpi tutkimusongelma ja luvussa 4 tehdään sovellukseen tekninen toteutus. Projektissa asennetaan tarvittavat työkalut PWA-mallin täyttämiseksi. Luvussa 5 suoritetaan nopeusmittaukset käyttämällä Google-Chrome selaimen Lighthouse työkalua ja arvioidaan kuinka paljon vaikutuksia progressiivisilla ominaisuuksilla oli sovelluksen nopeuteen. Luvussa 6 pohditaan PWA:ta toteustekniikkana.
 
 \newpage
 \section{PWA:n esittely}
@@ -263,6 +263,48 @@ PWA sovellus on muista sovelluksista täysin erilainen, sillä sitä ei jaella m
 PWA ja hybridisovellusten erot alkavat olla melko lähellä toisiaan, sillä ainakin Androidin nykyinen WebView näkymä käyttää taustalla pääosin Chrome selainta [Crosswalk]. Erona Hybridisovelluksella ja PWA mallilla on, että hybridisovelluksesta on laajempi pääsy laitteen rajapintoihin. Hybridisovellus myös paketoidaan tietylle laitealustalle ja julkaistaan laittevalmistajan jakelukanavalla. PWA sovellusta sen sijaan ei tarvitse julkaista missään. Sovellus alkaa ehdottamaan asennusta mikäli käyttäjä vierailee sivustolla useamman kerran. PWA:n etuna on siis esimerkiksi se, että kehittäjien ei tarvitse noudattaa minkään sovelluskaupan käyttöehtoja. Sovelluksen julkaisusta ei myöskään tarvitse maksaa mitään. Esimerkiksi Androidin Google Play kaupan lisenssi maksaa 25 dollaria koko elämäksi ja Applen App Store lisenssi maksaa kehittäjälle 99 dollaria vuodessa, tai 299e dollaria vuodessa yritykselle. PWA sovelluksen etuna voi myös olla löydettävyys. Ihmiset etsivät useimmiten tietoa verkon hakukoneista. Jotta yksittäinen käyttäjä etsisi sovellusta sovelluskaupasta, täytyy brändin tai sovelluksen olla tuttu muuta kautta. 
 
 Yksi suuri etu PWA sovelluksissa on niiden koko. Pinterestin tekemässä case study tutkimuksessa [Osmani] Pinterestin sovelluskaupoissa julkaiseman sovelluksen koko oli Android alustalla noin 10 megatavua ja iOS alustalla jopa 56 megatavua. Pinterestin tekemän PWA muutosten myötä PWA sovelluksen koko oli vain 150 kilotavua. Vaikka Pinterest edelleen jakelee mobiilisovellusta Android ja iOS alustoille, he pystyivät tekemään PWA sovelluksella saman kuin mobiilisovelluksilla, mutta vain murto-osalla sovelluksen koosta. Tämä on käyttäjälle etu, suurta sovellusta ei tarvitse ladata jotta sitä pääsee käyttämään. Sovellusta voi käyttää verkossa heti, ilman että on ladannut yhtään mitään, tai edes tehnyt päätöstä sovelluksen asennuksesta. PWA:n etuna myös normaaliin verkkosivuun on välimuistin hyödyntäminen. Pinterestin suorituskykymittauksen mukaan sovelluksen kääntäminen nopeutui 30\% ja parsiminen 25\% toisella vierailulla.  
+
+\clearpage
+
+\begin{landscape}
+\begin{table}[!ht]
+\centering
+\begin{small}
+\caption{ Teknologioiden erot }
+\begin{tabular}{|L{4cm}|L{4cm}|L{4cm}|L{4cm}| L{4cm}|}
+\hline
+\textbf{} &
+\textbf{Natiivi} & 
+\textbf{React Native} &
+\textbf{Hybrid} & 
+\textbf{PWA}
+\\ \hline
+\textbf{Koodin uudelleenkäytettävyys} & Huono &	Keskiverto & Hyvä & Erinomainen
+\\ \hline
+\textbf{Suosio} & Erinomainen & Keskiverto & Keskiverto & Keskiverto
+\\ \hline
+\textbf{Rajapinnat} & Erinomainen &	Hyvä & Keskiverto &	Huono
+\\ \hline
+\textbf{Oppimiskäyrä} & Huono &	Keskiverto & Hyvä &	Erinomainen
+\\ \hline
+\textbf{Jakelukanava} & Sovelluskauppa & Sovelluskauppa & Sovelluskauppa & URL
+\\ \hline
+\textbf{Ohjelmointikieli} & Natiivikieli, Java / Swift & JavaScript, React, tarvittaessa Natiivikieli &	JavaScript, HTML, CSS, Natiivikieli laajennuksille & JavaScript, HTML, CSS
+\\ \hline
+\textbf{Renderöinti} & Natiivi & Natiivi & Selain / Webview & Selain
+\\ \hline
+\textbf{Time To Market} & Huono	& Keskiverto & Hyvä & Erinomainen
+\\ \hline
+\textbf{Hintaluokka} & Kallis &	Kallis & Normaali &	Halvin
+\\ \hline
+\textbf{Testattavuus} & Fyysinen Laite & Fyysinen Laite & Selain & Selain
+\\ \hline
+\end{tabular}
+\label{table:ExampleTable2}
+\end{small}
+\end{table}
+
+\end{landscape}
 
 \newpage
 \section{Tutkimusongelma}
@@ -483,7 +525,7 @@ PWA:n käyttöönotossa esiintyi muutamia ongelmia projektin aikana. Projektin t
 Kolmas haaste liittyi Lighthouse työkalun mittauksiin. Nykyisessä sovelluksessa on paljon koodia jota ei ajeta ohjelman käynnistyessä. Tästä syystä Lighthousen auditointityökalu antoi huonot suorituskykypisteet sovellukselle. Koodien pakkaamiseen tehtiin joitakin muutoksia työkalujen käyttömahdollisuuksien mukaan ja tilannetta saatiin hieman parannettua. Myös tietokantakyselyitä koitettiin vähentää. Kyselyiden vähentäminen on kuitenkin haastavaa palvelussa, joka perustuu reaaliaikaiseen dataan. 
 
 \clearpage
-\section{Yhteenveto}
+\section{Pohdinta}
 
 
 \nocite{*}
