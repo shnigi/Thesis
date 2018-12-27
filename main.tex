@@ -360,6 +360,14 @@ Sensorit lähettävät mittaustulokset tukiasemalle, josta data lähetetään sa
 
 \begin{figure}[h]
 \begin{center}
+\epsfig{figure=cumulocity_architecture.png,  width=1.0\textwidth}
+\caption{Telia IoT arkkitehtuurikuvaus. Tämä työ koskee punaisella ympyrällä merkittyä osaa.}
+\label{Arkkitehtuurikuvaus}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
 \epsfig{figure=yanzi_gateway.jpg,  width=0.5\textwidth}
 \caption{Yanzi 4G tukiasema ilman antenneja. Kuva: yanzi.se}
 \label{Yanzi tukiasema}
@@ -502,8 +510,6 @@ Manifestin toimintaa sovelluksessa voitiin tarkastella Google-Chrome selaimen ke
 
 Google-Chromen kehittäjäkonsolin sovellusvälilehdeltä löytyy myös Service Worker ikkuna, josta voidaan tarkistaa Service Workerin asentuminen. Välilehdeltä selviää Service Workerin lähdeskripti, sekä tila. Mikäli Service Worker on tilassa “activated and running“ on se asentunut oikein ja käytössä. Service Workerin yhteyteen on myös liitetty valinnat “Offline“ “Update on reload“ ja “Bypass for network“ täpät. Update on reload ja Bypass for network onkin järkevää asettaa päälle kun sovellusta ollaan kehittämässä. Muuten sovellus saattaa näyttää kehittäjälle vanhaa välimuistissa olevaa tietoa. Täppien toiminta on loogista, Service Worker päivitetään aina sivuston latautuessa uudestaan “Update on reload“ täpän ollessa valittuna ja välimuisti saadaan ohitettua “Bypass for network“ täpällä.
 
-Mikäli Manifest ja Service Worker ovat kunnossa, voidaan sovelluksen toimintaa seuraavaksi tarkastella Google-Chromen audit työkaluilla.
-
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=serviceworker_console.PNG,  width=0.9\textwidth}
@@ -512,20 +518,58 @@ Mikäli Manifest ja Service Worker ovat kunnossa, voidaan sovelluksen toimintaa 
 \end{center}
 \end{figure}
 
-\subsection{Kommunikaatio palvelimen kanssa}
+Joulukuussa 2018 projektin kehitystyökaluja haluttiin päivittää. Projektin kasaava Grunt työkalu on kehitetty vuonna 2012 ja se haluttiin korvata yksinkertaisemmalla konfiguraatiolla ja samalla siirtyä nykyaikaiseen modulaariseen kehitykseen. Nykyinen malli ei salli uusien JavaScript pakettien lataamista ja niiden tuomista projektiin helposti. Uudeksi build työkaluksi valittiin Webpack, joka on tarkoitettu modulaarista ja nykyaikaista kehittämistä varten. Paketinhallintatyökaluksi päätettiin vaihtaa jälleen NPM:n, eli Node Package Manageriin, joka on ottanut Yarnin kehityksessä kiinni. 
 
-\subsection{Deployment}
+Työkalujen muutos aloitettiin siirtymällä Yarn työkalusta NPM:n käyttöön. Suurin osa paketeista asentui NPM työkalulla suoraan. Yarnilla erityisesti asennettavia pakettaja olivat erittäin vanhasta Bower työkalusta asennetut kirjastot, jotka joko korvattiin uusilla NPM rekisteristä löytyvillä paketeilla, tai asennettiin suoraan Githubin URL osoitteella. 
 
+Seuraava vaihe oli vaihtaa vanha 500 rivinen konfiguraatio Webpackille. Lopullisesta Webpack konfiguraatiosta tuli noin 120 riviä, eli huomattavasti yksinkertaisempi ja lisäksi Webpack toi mukanaan lukuisia uusia hyödyllisiä toimintoja. Nyt uusia kirjastoja ja moduuleita voitaisiin ottaa käyttöön suoraan NPM rekisteristä, sekä Webpackin myötä sovelluksen kokoa saataisiin hieman pienennettyä. Sovelluksen optimointiin ei käytetty kuitenkaan paljon aikaa. Tärkeimpänä uudistuksena saatiin päivitettyä Googlen Workbox kirjasto, jolla PWA:lle vaadittava Service Worker skripti saataisiin luotua automaattisesti.
+
+
+\begin{lstlisting}[
+     language=JavaScript,
+     gobble=4,
+     frame=single
+   ]
+    new GenerateSW({
+      skipWaiting: true,
+      swDest: 'sw.js',
+      include: [/\.html$/, /\.js$/, /\.png$/, /\.jpg$/],
+    })
+\end{lstlisting}
+
+Webpack luo Workbox lisäosalla automaattisesti sopivan Service Worker scriptin kun Webpack käynnistetään. Parametreiksi on asetettu skipWaiting, joka pakottaa odottavan Service Workerin aktivoitumaan, Service Workerin nimeksi on asetettu sw.js ja etukäteis välimuistiin talletettaviksi tiedostoiksi on määritelty kaikki .html, .js, .png ja .jpg päätteiset tiedostot. Näillä tiedoilla Service Worker generoituu automaattisesti ja sen välimuistissa on valmiiksi sovelluksen tiedostot. Aikaisempi usean rivin konfiguraatio saatiin nyt mahtumaan vain neljälle riville. 
 
 \clearpage
 \section{Arviointi}
 
-PWA:n käyttöönotossa esiintyi muutamia ongelmia projektin aikana. Projektin työkalut olivat vanhentuneet, joten ensimmäinen varsinainen ongelma oli yhteensopivuusongelma Service Worker työkalun käytössä. Työkalujen kanssa tehtiin jonkin verran töitä, jotta ne saatiin pelaamaan yhteen. Toinen kehityksen aikana ilmennyt ongelma oli sovelluksen näyttäytyminen välimuistista kun Service Worker oli saatu käyttöön. Google Chromen kehittäjäkonsolissa on Service Worker välilehdellä täpät “update on reload“ ja “Bypass for network“ jotka ruksattiin käyttöön. Näin kehittäjä näkee aina uusimmat muutokset selaimessaan. Muutoin koodiin tehdyillä muutoksilla ei välttämättä olisi vaikutusta, sillä Service Worker näyttäisi tiedostoja ja koodia välimuistista. 
+Mikäli sovelluksen Manifest ja Service Worker ovat kunnossa, voidaan Google Chrome selaimen Lighthouse auditointi työkalaulla tarkastella sivun toimintaa ja katsoa täyttääkö se PWA mallin vaatimukset. Pisteytys tulee väliltä 0-100. Lighthouse on avoimen lähdekoodin työkalu [Google2], jonka pääasiallinen tarkoitus on parantaa verkkosivujen laatua antamalla pisteytyksen erilaisista kategorioista. Kategorioita ovat muunmuassa: suorituskyky, PWA, hakukoneoptimointi, parhaat käytännöt ja saavutettavuus. Jokaisesta kategoriasta annetaan pisteytys ja joko hylätyt, tai hyväksytyt toimenpiteet. Lighthouse generoi raportin toimenpiteistä ja eritysesti hylättyihin testeihin kannattaa kiinnittää huomiota sovellusta parannettaessa. Jokaisen auditin kohdalla on myös linkki dokumentaatioon miksi kyseinen kohta on tärkeä ja miksi siihen tulisi kiinnittää huomiota. Lisäksi raportissa on mukana erityisesti kehittäjää kiinnostava tieto miten ongelman voi korjata. Lighthousea voi ajaa mitä tahansa nettisivua vasten joko Chrome selaimen kehittäjätyökaluista, komentoriviltä tai node moduulina.
 
-Kolmas haaste liittyi Lighthouse työkalun mittauksiin. Nykyisessä sovelluksessa on paljon koodia jota ei ajeta ohjelman käynnistyessä. Tästä syystä Lighthousen auditointityökalu antoi huonot suorituskykypisteet sovellukselle. Koodien pakkaamiseen tehtiin joitakin muutoksia työkalujen käyttömahdollisuuksien mukaan ja tilannetta saatiin hieman parannettua. Myös tietokantakyselyitä koitettiin vähentää. Kyselyiden vähentäminen on kuitenkin haastavaa palvelussa, joka perustuu reaaliaikaiseen dataan. 
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=audits_panel.png,  width=0.5\textwidth}
+\caption{Kuvakaappaus Google Chrome selaimen kehittäjätyökaluista: Lighthouse työkalun oletus asetukset.}
+\label{Lighthouse}
+\end{center}
+\end{figure}
+
+Sovellusta auditoitiin suoraan loppupalvelimelta. Vaihtoehtona olisi ollut auditoida sivua myös kehittäjän koneelta, mutta tällöin ei saada oikeita tuloksia loppukäyttäjän näkökulmasta. Esimerkiksi serverin nopeutta ei voida testata, sekä serverin hyödyntämä GZIP toiminto, joka paketoi skriptit pienemmiksi ei ole käytössä. Ensiksi auditoitiin sovelluksen versiota 1.7.0 joka oli kasattu vanhalla Grunt työkalulla, sekä vanhalla Service Worker skriptillä. 
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=audit1_grunt.png,  width=0.5\textwidth}
+\caption{Lighthouse raportti Grunt työkalulla paketoidusta sovelluksesta vanhalla Service Worker skriptillä.}
+\label{Lighthouse raportti 1}
+\end{center}
+\end{figure}
+
+
 
 \clearpage
 \section{Pohdinta}
+
+PWA:n käyttöönotossa esiintyi muutamia ongelmia projektin aikana. Projektin työkalut olivat vanhentuneet, joten ensimmäinen varsinainen ongelma oli yhteensopivuusongelma Service Worker työkalun käytössä. Työkalujen kanssa tehtiin jonkin verran töitä, jotta ne saatiin pelaamaan yhteen. Toinen kehityksen aikana ilmennyt ongelma oli sovelluksen näyttäytyminen välimuistista kun Service Worker oli saatu käyttöön. Google Chromen kehittäjäkonsolissa on Service Worker välilehdellä täpät “update on reload“ ja “Bypass for network“ jotka ruksattiin käyttöön. Näin kehittäjä näkee aina uusimmat muutokset selaimessaan. Muutoin koodiin tehdyillä muutoksilla ei välttämättä olisi vaikutusta, sillä Service Worker näyttäisi tiedostoja ja koodia välimuistista. 
+
+Kolmas haaste liittyi Lighthouse työkalun mittauksiin. Nykyisessä sovelluksessa on paljon koodia jota ei ajeta ohjelman käynnistyessä. Tästä syystä Lighthousen auditointityökalu antoi huonot suorituskykypisteet sovellukselle. Koodien pakkaamiseen tehtiin joitakin muutoksia työkalujen käyttömahdollisuuksien mukaan ja tilannetta saatiin hieman parannettua. Myös tietokantakyselyitä koitettiin vähentää. Kyselyiden vähentäminen on kuitenkin haastavaa palvelussa, joka perustuu reaaliaikaiseen dataan. 
 
 
 \nocite{*}
