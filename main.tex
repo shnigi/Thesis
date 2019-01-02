@@ -562,6 +562,90 @@ Sovellusta auditoitiin suoraan loppupalvelimelta. Vaihtoehtona olisi ollut audit
 \end{center}
 \end{figure}
 
+Sovelluksen koko on kasvanut vuosien aikana erittäin laajaksi. Vuoden 2015 lopulla aloitettu projekti ei ole modulaarinen ja sen skriptien lataaminen on selaimessa hidasta. Tästä syystä suorituskykypisteet jäivät hyvin pieniksi. Suorituskykypisteet lasketaan Lightouse työkalun "Time to Interactive" pisteistä, joka tarkoittaa milloin sivu on ensimmäisen kerran käytettävissä ja reagoi käyttäjän toimenpiteisiin. Toinen pisteisiin suoraan vaikuttava asia on "First Meaningful Paint" joka tarkoittaa ensimmäistä järkevää näkymää käyttäjälle. Tuloksia analysoimalla saatiin selville, että sovellus täyttää kaikki tarvittavat kriteerit PWA mallin täyttämiseksi, paitsi suorituskykypisteet jonka takia pistemäärä jäi 73 pisteeseen. PWA sovelluksille on erittäin tärkeää latautua nopeasti. 
+
+Sovellusta lähdettiin optimoimaan vaihtamalla projektin kasaava vanha Grunt työkalu modernimpaan Webpackkiin, joka on modulaarinen paketointityökalu. Moduulien ansiosta osa skripteistä pystyttiin lataamaan vain tarvittaessa. Ongelmaksi muodostui kuitenkin se, että osa skripteistä oli liian vanhoja ja niitä ei ollut mahdollista ladata moduuleina. Kun sovellus oli saatu kääntymään Webpackilla näitä vanhoja skriptejä lukuunottamatta otettiin sovelluksesta uudet mittaukset.
+
+\begin{figure}[!h]
+\begin{center}
+\epsfig{figure=audit1_webpack.png,  width=0.9\textwidth}
+\caption{Lighthouse raportti Webpack työkalulla paketoidusta sovelluksesta uudella Workboxin generoimalla Service Worker skriptillä.}
+\label{Lighthouse raportti 2}
+\end{center}
+\end{figure}
+
+\clearpage
+
+Webpackin hyödyt nähtiin heti. Pelkästään siirtämällä nämä muutamat skriptit ladattavaksi moduuleina, saatiin sovelluksen lataamista nopeammaksi. Sovelluksen "Time to Interactive" laski yli sekunnin. Myös "First Meaningful Paint" tippui yli 0,5 sekuntia. Web-sovelluksista puhuttaessa on kyse huomattavasti ajasta. Sovelluksen kokonaiskäynnistymisaika on kuitenkin edelleen hidas verrattuna hyvin optimoituihin nykyaikaisiin modulaarisiin sivustoihin. Sekunnon nopeusmuutos antoi kuitenkin täydet 100 pistettä PWA kategoriasta. Sovellus siis täyttää kaikki PWA mallin kriteerit. Sovelluksen nopeutta mitattiin vielä uudestaan, jotta saataisiin tulokset Service Workerin muodostamasta välimuistin käytöstä.
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=audit2_webpack.png,  width=0.9\textwidth}
+\caption{Lighthouse raportti Service Workerin cachen kanssa.}
+\label{Lighthouse raportti 3}
+\end{center}
+\end{figure}
+
+
+Toisella kerralla auditoitaessa Lighthousesta täpättiin "Clear storage" valinta pois päältä, jotta sovelluksen välimuistia ei tyhjennettäisi. Sovellus sai toisesta auditoinnista vielä yhden pisteen lisää suorituskykyyn. "First Meaningful Paint" tippui vain 0.1 sekunttia. Miten Service Worker siis vaikutti käyttökokemukseen ja sivun latautumiseen?
+
+Service Workerin tärkein toiminta liittyy suorituskykyyn, tiedostojen tallentamiseen välimuistiin. Web-sovellus joka lataa välimuistiin kaiken tiedon sivulta, pitäisi olla huomattavasti nopeampi kuin sovellus, joka ei hyödynnä välimuistia [Walton]. Waltonin artikkelissa Googlen developer dokumentaatiossa Case Studies osastolla on mitattu Google Analyticsiä hyödyntäen Googlen omaa I/O web sovelluksen nopeutta. Hyödyntämällä Google Analytics työkalua yhdessä Service Workerin kanssa saadaan vastaus, miten Service Workerin käyttö näkyy loppukäyttäjälle. Pelkästään Lighthouse työkalua hyödyntämällä ei saada tarpeeksi vastauksia. Telia IoT hankkeessa ei kuitenkaan keretty tehdä tarpeellisia analytiikkamittauksia. Käytetään Googlen mittaustuloksia kertomaan, miten sovelluksen käyttö eroaa loppukäyttäjälle. Kysymykset ovat seuraavat.
+
+1. Onko Service Workerin välimuisti parempi kuin selaimessa jo oleva HTTP välimuisti?
+
+Oletus on, että sivustolle uudelleenpalaava käyttäjä saa sivun ladattua nopeammin kuin ensimmäistä kertaa sivustolla vieraileva käyttäjä, sillä selain tallettaa joitain pyyntöjä välimuistiin oletuksena. Service Workerin avulla kehittäjä voi valita mitä tiedostoja sovelluksesta talletetaan. Kuinka paljon nopeampi Service Workerin välimuistitallennus on verrattuna selaimen omaan välimuistiin?
+
+2. Kuinka paljon Service Workerin käyttö vaikuttaa sivun käytettävyyteen ja latausaikaan?
+
+Kuinka nopealta sivu tuntuu käyttäjälle, riippumatta oikeasta latausajasta ja perinteisistä latausmetriikoista? Kysymykseen ei ole helppoa vastata ja Walton sanookin, että mikään metriikka ei ole täydellinen näin subjektiiviseen kysymykseen. Osa mittauksista on kuitenkin järkevämpiä kuin toiset ja tärkeintä onkin valita oikea metriikka.
+
+Waltonin Case Studyssä mitattiin sivuston latausaikaa, joka on hyvä mittaus ensimmäiseen kysymykseen, samaan tapaan kuin Lighthousen auditointi sivuston piirtämiseksi. Se ei kuitenkaan vastaa toiseen kysymykseen. Huomioidaan vielä, että sivuston latausaika ei ole sama asia kuin milloin käyttäjä voi alkaa käyttämään sovellusta. Kaksi sovellusta täysin samalla latausajalla voi tuntua täysin erilaiselta. Esimerkiksi sovellus joka näyttää aloitusruudun, tai latausindikaattorin voi tuntua käyttäjästä huomattavasti nopeammalta kuin sovellus joka näyttää vain tyhjää sivua muutaman sekunnin. Waltonin esimerkissä metriikaksi valittiin "Time to First Paint". Tämä mittaus on tärkeä, sillä se määrittelee ensikokemuksen käyttäjälle. Hyvä ensikokemus voi vaikuttaa positiivisesti sovelluksen loppukäyttöön. 
+
+Latausajan mittaukset jaettiin Case Studyssa kolmeen eri kategoriaan.
+
+\begin{itemize}
+  \item \textbf{Controlled:} Service Worker määrittelee välimuistiin talletettavat asiat ja sovellusta voi käyttää Offline tilassa.
+  \item \textbf{Supported:} Service Worker on tuettuna selaimessa, mutta se ei ole vielä tallettanut mitään. Ensimmäistä kertaa vieraileva käyttäjä.
+  \item \textbf{Unsupported:} Käyttäjä jonka selain ei tue Service Workeria 
+\end{itemize}
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=google_case_study_1.png,  width=1.0\textwidth}
+\caption{Keskimääräiset latausajat Googlen IOWA sovelluksessa. Kuvakaappaus Google Developer portaalista.}
+\label{Google AVG load times}
+\end{center}
+\end{figure}
+
+Kuvaajasta 5.5 nähdään, että Service Workerin hallitsema välimuisti (sininen pylväs) lataa sivut nopeammin kuin käyttäjillä, joilla on selaimen välimuistissa jo tietoa (punainen pylväs).
+
+\begin{table}[!ht]
+\centering
+\begin{small}
+\caption{Keskimääräinen sivuston lataamisaika tietokoneella IOWA Case Studyssa [Walton] }
+\begin{tabular}{|L{5cm}|L{5cm}|L{5cm}|}
+\hline
+\textbf{Service Workerin tila} & 
+\textbf{Käyttäjätyyppi} &
+\textbf{Keskimääräinen latausaika (ms)}
+\\ \hline
+Käytössä & 
+Palaava käyttäjä &
+2568
+\\ \hline
+Tuettu, ei käytössä & 
+Palaava käyttäjä &
+3612
+\\ \hline
+Tuettu, ei käytössä & 
+Uusi käyttäjä &
+4664
+\\ \hline
+\end{tabular}
+\label{table:ExampleTable2}
+\end{small}
+\end{table}
+
 
 
 \clearpage
