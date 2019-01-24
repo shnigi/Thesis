@@ -251,7 +251,7 @@ C++ \\
 \end{table}
 
 
-\subsection{Hybridisovellukset}
+\subsubsection{Hybridisovellukset}
 
 Jokaisella laitteella on kuitenkin jotain yhteistä. Kaikissa laitteissa on web-selain. Vuonna 2008 iPhoneDevCamp tapahtumassa Eric Oesterle, Rob Ellis ja Brock Whitten [charland2011mobile] esittelivät uuden vallankumouksellisen teknologian. Jokaisella alustalla oli mahdollista käynnistää selain niin sanottuun “Chromeless“ tilaan ja kutsua laitteen natiivirajapintaa JavaScriptin ylitse. Tästä muodostui myöhemmin työkalu nimeltään PhoneGap. Työkalu julkaistiin myöhemmin myös Androidille, BlackBerrylle, sekä muille alustoille. PhoneGapia hyödyntäen oli mahdollista kirjoittaa yleisimpiä web-tekniikoita hyödyntäen sovelluksia, joista oli mahdollista kutsua laitteen natiiveja rajapintoja. PhoneGap kehyksessä on natiivikoodilla kirjoitettuja koodin palasia, jotka välittävät tiedon JavaScript sovellukselle.
 
@@ -261,7 +261,7 @@ Koska Cordovan sovelluksia ajetaan Webview näkymässä, vuonna 2013 Intel aloit
 
 Hybridisovellukset ovat siis HTML ja JavaScript pohjaisia sovelluksia, jossa laitealustan tietoja ja ohjelmointikieltä ei välttämättä tarvita ollenkaan. Hybridisovellukset upottavat näkymän natiivin kehyksen sisään. UIWebView iOS laitteille ja WebView Android laitteilla [xanthopoulos2013comparative]. Kuten verkkosovelluksissa, myös hybridisovelluksissa koodi suoritetaan selaimessa, joka lopulta vain paketoidaan sovellukseksi. 
 
-\subsection{React Native}
+\subsubsection{React Native}
 
 React Native on Facebookin kehittämä natiivisovelluskehys. React nativella ei tehdä web-sovelluksia, ei hybridisovelluksia, eikä HTML5 sovelluksia. React Nativella rakennetaan natiiveja sovelluksia, joiden käyttöliittymä kasataan JavaScriptillä ja Reactilla [Facebook]. React Nativella on mahdollista kirjoittaa koko sovellus käyttäen Reactia ja JavaScriptiä, tai vain osa ja kirjoittaa loput natiivikoodilla. Esimerkiksi Facebook sovellus toimii React Nativella ja muita React Nativea käyttäviä yhtiöitä ovat esimerkiksi Instagram, Uber ja Skype. Tämä kertoo sen, että teknologia on todettu hyvin toimivaksi ja se soveltuu hyvin vaativiin projekteihin, joissa ei ole varaa heikkoon suorituskykyyn.
 
@@ -269,7 +269,7 @@ React Native eroaa hybridisovelluksista ja web-sovelluksista siten, että kun so
 
 React Nativen etuna on natiivisovelluksen nopeus ja yksi ja sama koodipohja molemmille käyttöjärjestelmille. Sovelluksen kirjoittamiseen kuluu huomattavasti vähemmän aikaa ja rahaa. Sovellus voidaan luoda vain käyttäen yhtä ohjelmointikieltä (JavaScript), eikä ole tarvetta etsiä erikseen iOS tai Android kehittäjää. React Native on siis täysiverinen ohjelmistokehys, jota voi itse laajentaa kirjoittamalla natiivikoodia. Mikäli kehys ei suoraan tue jotain toimintoa, voidaan sellainen kirjoittaa ilman sen kummempia vaatimuksia mitä iOS ja Android alustoilla on.
 
-\subsection{Natiivisovellus}
+\subsubsection{Natiivisovellus}
 
 Android ja iOS alustojen ohjelmointikieli on täysin eri, joten molemmille alustoille tarvitaan oma kehittäjä, omat kehitysympäristöt ja kääntäjät. Androidille julkaistuja sovelluksia jaellaan Google Play kaupassa ja iOS:lle Apple Storessa [Haikonen]. Mikäli sovelluksen mielii kehittää molemille, tai vielä useammalle laitteelle saattavat kehityskustannukset kasvaa suuriksi. Sovelluskehityksen näkökulmasta molemmat alustat ovat hyvin vakaita ja ne ovat olleet käytössä usean vuoden. Tästä on etua, mikäli soveluksen on tarkoitus olla pitkäikäinen.  
 
@@ -360,10 +360,10 @@ Tutkimusprosessin vaiheet ovat pääpiirteittäin seuraavat.
 
 \begin{itemize}
   \item \textbf{Lähtökohta} Tutkimuskysymys mudostui asiakkaan tarpeista muokata olemassa oleva sovellus mobiilisovellukseksi. Millaisia etuja PWA malli tuo mukanaan nykyisille sovelluksen käyttäjille?
-  \item \textbf{Tutkimuksen suunnittelu} Sovelluksen arvioimiseksi tarvittiin laatumittarit. Sovelluksesta haluttiin testata nopeutta ja mobiilikäytön määriä. Pääasialliseksi työkaluksi nopeuden mittaamiseksi valittiin Google Lighthouse työkalu, joka antaa sovellukselle PWA-pisteet asteikolla 0-100. Käyttäjämääriä seuraamaan valikoitui Google Analytics.
+  \item \textbf{Tutkimuksen suunnittelu} Sovelluksen arvioimiseksi tarvittiin laatumittarit. Sovelluksesta haluttiin testata nopeutta ja progresiivisuutta. Progressiivisuuden mittaamis työkaluksi valittiin Googlen Lighthouse työkalu, joka antaa sovellukselle PWA-pisteet asteikolla 0-100. Lighthouse antaa myös sovelluksen suorituskykypisteet, mutta ne eivät ole helposti verrannollisia keskenään. Puppeteer kirjastoa hyödyntämällä sovellus avattiin useita kertoja kahdella tavalla. Ensimmäisessä ajossa selaimen annettiin tallettaa välimuistiin tietoa. Toisessa ajossa selain käynnistettiin aina uudestaan tyhjältä pöydältä. Näin saatiin kirjattua ylös aika mikä selaimelta kestää kääntää sovellus ja milloin se on valmis vastaanottamaan käyttäjän syötteitä. 
   \item \textbf{Sovelluksen rakentaminen PWA-mallin mukaiseksi} Sovelluksesta rakennetaan PWA-mallin mukainen ja tarvittavat työkalut liitetään osaksi nykyistä kehityspalettia.
-  \item \textbf{Analyysi} Valmista sovellusta mitataan käytännössä ennen ja jälkeen PWA-mallin muutoksia.
-  \item \textbf{Tulokset ja johtopäätökset} Mittaustulosten jälkeen sovelluksen eri vaiheista voidaan julkaista tulokset ja johtopäätökset. Kuinka paljon nopeampi sovellus on PWA-mallin myötä? Kuinka paljon sovelluksen build aika kasvoi?
+  \item \textbf{Analyysi} Valmista sovellusta mitataan välimuistitallennuksen ollessa käytössä ja ilman. Service Workerin vaikutuksia analysoidaan havainnollistavilla graafeilla, sekä taulukoilla.
+  \item \textbf{Tulokset ja johtopäätökset} Mittaustulosten jälkeen sovelluksen eri vaiheista voidaan julkaista tulokset ja johtopäätökset. Kuinka paljon nopeampi sovellus on PWA-mallin myötä? Onko Service Workerin käyttäminen järkevää? Millaisia heikkouksia tai haittoja siitä voidaan saada?
 \end{itemize}
 
 PWAstats [PWAstats] on julkaissut tilastoja miten yritysten nykyisten sivujen muuttaminen PWA malliin on tuottanut lisätuloja tai käyttäjiä. Tämän työn tarkoituksena on selvittää mitä hyötyjä PWA malli tuo mukanaan.
@@ -387,13 +387,6 @@ Sensorit lähettävät mittaustulokset tukiasemalle, josta data lähetetään sa
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
-\begin{center}
-\epsfig{figure=yanzi_gateway.jpg,  width=0.5\textwidth}
-\caption{Yanzi 4G tukiasema ilman antenneja. Kuva: yanzi.se}
-\label{Yanzi tukiasema}
-\end{center}
-\end{figure}
 
 \begin{figure}[h]
 \begin{center}
@@ -424,7 +417,7 @@ MVC-arkkitehtuurilla tarkoitetaan suunnittelumallia, jossa näkymä, malli ja oh
 
 Nykyiset JavaScript pohjaiset käyttöliittymät ovat erittäin monimutkaisia. Koska kyseessä on pelkästään selaimella toimiva käyttöliittymä, on projektia laajennettu vuosien aikana useilla kirjastoilla ja sen ympärille on tuotu mukaan myös kehitystä helpottavia työkaluja. Tässä niistä muutamia. 
 
-\textbf{Grunt} on automaatiotyökalu. Gruntin tarkoitus on tehdä toistuvia tehtäviä automaattisesti kehittäjän puolesta. Grunt toimii sovelluksen tärkeimpänä työkaluna, mutta pelkkä Grunt ei yksistään ole riittävä työkalu projektin tarpeille. Grunt huolehtii esimerkiksi sovelluksen kääntämisestä, paketoinnista, kirjoitusvirheiden tarkastamisesta, kuvien pakkaamisesta, sekä web-palvelimen käynnistämisestä. 
+\textbf{Grunt} on automaatiotyökalu. Gruntin tarkoitus on tehdä toistuvia tehtäviä automaattisesti kehittäjän puolesta. Grunt toimii sovelluksen tärkeimpänä työkaluna, mutta pelkkä Grunt ei yksistään ole riittävä työkalu projektin tarpeille. Grunt huolehtii esimerkiksi sovelluksen kääntämisestä, paketoinnista, kirjoitusvirheiden tarkastamisesta, kuvien pakkaamisesta, sekä web-palvelimen käynnistämisestä. Grunttiin on ladattu lukuisia laajentavia moduuleita.
 
 \textbf{Eslint} on avoimen lähdekoodin projekti, joka on aloitettu vuonna 2013. Eslintin tarkoitus on toimia koodin tarkkailijana. Eslinttiin voi liittää lukuisia eri liitännäisiä, jotta koodista saa juuri kehittäjälle mieleisen näköistä. Eslint esimerkiksi pitää huolen siitä, että koodilohkot on sisennetty kahdella välilyönnillä ja lohko päättyy aina puolipisteeseen. Mikäli kehittäjä ei noudata Eslinttiin kirjoitettuja sääntöjä, ei sovellusta käännetä ja kehittäjälle annetaan virheilmoitus virheellisestä syntaksista. Eslintin avulla koodia pyritään yhdenmukaistamaan, riippumatta siitä kuinka monta kehittäjää sovellusta on ollut tekemässä. 
 
@@ -440,7 +433,25 @@ Nykyiset JavaScript pohjaiset käyttöliittymät ovat erittäin monimutkaisia. K
 
 JavaScript-koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään .LESS formaatista selaimen ymmärtämään .CSS muotoon. Kaikki tyylitiedostot paketoidaan myös yhdeksi kokonaisuudeksi ja sitten ne minifoidaan. Lisäksi suoritetaan lukuisia muita toimenpiteitä, projektin kaikki kuvat pakataan, kolmannen osapuolen skriptit käydään läpi, paketoidaan ja liitetään projektiin.
 
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=angulararkkitehtuuri.jpg,  width=0.9\textwidth}
+\caption{Sovelluksen arkkitehtuuri. Sovellus koostuu ulkoisista kirjastoista, sekä lähdekoodista. Grunt huolehtii sovelluksen paketoimisesta ja serveristä. Selain tekee kutsuja joko taustapalveluihin, tai Service Workerin kautta lokaaleihin tiedostoihin. Sen jälkeen selain evaluoi skriptit ja kääntää ne näkymäksi.}
+\label{angulararkkitehtuuri}
+\end{center}
+\end{figure}
+
 \textbf{Webpack}. Joulukuussa 2018 projektiin asennettiin Gruntin tilalle Webpack, joka on modulaarinen paketointityökalu nykyaikaisille web-sovelluksille. Webpackin avulla kirjastoja voidaan ladata modulaarisesti projektin käyttöön ja tämä tuo huomattavia parannuksia sovelluksen nopeuteen. 
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=what-is-webpack.png,  width=0.9\textwidth}
+\caption{Webpackin perusperiaate on yksinkertainen. Sovellus koostuu moduuleista ja on ikäänkuin modulaarinen puu, jonka perusteella Webpack osaa rakentaa selaimen ymmärtämän rakenteen ja suorittaa tarvittavat toimenpiteet tiedostoille. Kuva: webpack.github.io}
+\label{whatiswebpack}
+\end{center}
+\end{figure}
+
+
 
 \subsection{PWA:n käyttöönotto projektissa}
 
@@ -562,9 +573,13 @@ Seuraava vaihe oli vaihtaa vanha 500 rivinen konfiguraatio Webpackille. Webpack 
 Webpack luo Workbox lisäosalla automaattisesti sopivan Service Worker scriptin kun Webpack käynnistetään. Parametreiksi on asetettu skipWaiting, joka pakottaa odottavan Service Workerin aktivoitumaan, Service Workerin nimeksi on asetettu sw.js ja etukäteis välimuistiin talletettaviksi tiedostoiksi on määritelty kaikki .html, .js, .png ja .jpg päätteiset tiedostot. Näillä tiedoilla Service Worker generoituu automaattisesti ja sen välimuistissa on valmiiksi sovelluksen tiedostot. Aikaisempi usean rivin konfiguraatio saatiin nyt mahtumaan vain neljälle riville. 
 
 \clearpage
-\section{Arviointi}
+\section{Suorituskyvyn arviointi}
 
-Mikäli sovelluksen Manifest ja Service Worker ovat kunnossa, voidaan Google Chrome selaimen Lighthouse auditointi työkalaulla tarkastella sivun toimintaa ja katsoa täyttääkö se PWA mallin vaatimukset. Pisteytys tulee väliltä 0-100. Lighthouse on avoimen lähdekoodin työkalu [Google2], jonka pääasiallinen tarkoitus on parantaa verkkosivujen laatua antamalla pisteytyksen erilaisista kategorioista. Kategorioita ovat muunmuassa: suorituskyky, PWA, hakukoneoptimointi, parhaat käytännöt ja saavutettavuus. Jokaisesta kategoriasta annetaan pisteytys ja joko hylätyt, tai hyväksytyt toimenpiteet. Lighthouse generoi raportin toimenpiteistä ja eritysesti hylättyihin testeihin kannattaa kiinnittää huomiota sovellusta parannettaessa. Jokaisen auditin kohdalla on myös linkki dokumentaatioon miksi kyseinen kohta on tärkeä ja miksi siihen tulisi kiinnittää huomiota. Lisäksi raportissa on mukana erityisesti kehittäjää kiinnostava tieto miten ongelman voi korjata. Lighthousea voi ajaa mitä tahansa nettisivua vasten joko Chrome selaimen kehittäjätyökaluista, komentoriviltä tai node moduulina.
+Tässä kappaleessa arvioidaan PWA sovelluksen nopeutta verrattuna normaaliin verkkosivustoon. Mittarina käytetään Googlen Lighthouse työkalua progressiivisuuden ja suorituskyvyn mittaukseen. Lighthousen pisteytys on asteikolla 0-100. Lisäksi otetaan Puppeteer kirjastoa hyödyntäen talteen sovelluksen kääntämiseen kuluva aika, jonka jälkeen sovellus on ensimmäisen kerran valmis vastaanottamaan käyttäjän syötteitä. Mittaukset otetaan Ilman Service Workeria, sekä Service Workerin välimuistin kanssa, jotta saadaan vertailukelpoiset tulokset.
+
+\subsection{Lighthouse pisteet, suorituskyky ja progressiivisuus}
+
+Mikäli sovelluksen Manifest ja Service Worker ovat kunnossa, voidaan Google Chrome selaimen Lighthouse auditointi työkalaulla tarkastella sivun toimintaa ja katsoa täyttääkö se PWA mallin vaatimukset. Lighthouse on avoimen lähdekoodin työkalu [Google2], jonka pääasiallinen tarkoitus on parantaa verkkosivujen laatua antamalla pisteytyksen erilaisista kategorioista. Kategorioita ovat muunmuassa: suorituskyky, PWA, hakukoneoptimointi, parhaat käytännöt ja saavutettavuus. Jokaisesta kategoriasta annetaan pisteytys ja joko hylätyt, tai hyväksytyt toimenpiteet. Lighthouse generoi raportin toimenpiteistä ja eritysesti hylättyihin testeihin kannattaa kiinnittää huomiota sovellusta parannettaessa. Jokaisen auditin kohdalla on myös linkki dokumentaatioon miksi kyseinen kohta on tärkeä ja miksi siihen tulisi kiinnittää huomiota. Lisäksi raportissa on mukana erityisesti kehittäjää kiinnostava tieto miten ongelman voi korjata. Lighthousea voi ajaa mitä tahansa nettisivua vasten joko Chrome selaimen kehittäjätyökaluista, komentoriviltä tai node moduulina.
 
 \begin{figure}[h]
 \begin{center}
@@ -612,6 +627,8 @@ Seuraava auditointi tehtiin Webpackin käännöksellä ja sen hyödyt nähtiin h
 \end{figure}
 
 Toisella kerralla auditoitaessa Lighthousesta täpättiin "Clear storage" valinta pois päältä, jotta sovelluksen välimuistia ei tyhjennettäisi. Sovellus sai toisesta auditoinnista vielä yhden pisteen lisää suorituskykyyn. "First Meaningful Paint" tippui vain 0.1 sekunttia. Miten Service Worker siis vaikutti käyttökokemukseen ja sivun latautumiseen?
+
+\subsection{PWA sivun toistuva avaaminen välimuistista verrattuna ensimmäiseen lataukseen}
 
 Jotta Service Workerin vaikutuksista saataisiin vielä tarkempia tuloksia tehtiin seuraavaksi yksinkertainen toistuva sivulataus sovellukselle. Sovellus avattiin selaimessa ja siitä laskettiin "Dom Interactive" aika. Eli aika, joka selaimelta menee sovelluksen suorittamiseen niin, että selain on ensimmäistä kertaa valmis vastaanottamaan käyttäjän syötteitä ja reagoi toimenpiteisiin. Sovellusta vasten ajettiin yksinkertainen rasitustesti kahdella eri mallilla. Ensimmäisessä mallissa selain käynnistettiin joka kerta uudestaan, jotta selaimen välimuistissa ei olisi aikaisempaa tietoa. Seuraavassa mallissa selainta ei käynnistetty uudestaan ja sivulataus tehtiin kun Service Workerin välimuistiin oli talletettu tietoa. Tulokset olivat seuraavat:
 
@@ -670,7 +687,7 @@ Testin tulos on selkeä. Service Workerin välimuistista ladattu sivu aukeaa huo
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=dom_interactive_time.png,  width=0.7\textwidth}
-\caption{Dom Interactive keskiarvoistettu aika. Grunt ei SW, Grunt SW, Webpack ei SW, Webpack SW.}
+\caption{Dom Interactive keskiarvoistettu aika. Build: Grunt, ei välimuistia, Build: Grunt, välimuistissa, Build: Webpack ei välimuistia, Build: Webpack, välimuistissa.}
 \label{Dom Interactive palkit}
 \end{center}
 \end{figure}
@@ -685,7 +702,9 @@ Testien perusteella Service Workerin välimuistia hyödyntämällä sovelluksen 
 \end{center}
 \end{figure}
 
-Telian tuottamasta analytiikkaraportista selviää vain, että suurin osa käyttäjistä tulee joko Google-Chrome, tai Firefox selaimien kautta. Kyseiset selaimet ovat oletettavasti tarpeeksi uusia tukemaan service workeria.
+Telian tuottamasta analytiikkaraportista selviää vain, että suurin osa käyttäjistä tulee joko Google-Chrome, tai Firefox selaimien kautta. Kyseiset selaimet ovat oletettavasti tarpeeksi uusia tukemaan Service Workeria.
+
+\subsection{Muut PWA sovelluksen mahdolliset mittauskohteet}
 
 Googlen developer dokumentaatiossa Case Studies osastolla on mitattu Google Analyticsiä hyödyntäen Googlen omaa I/O web sovelluksen nopeutta tuotannossa oikeilla käyttäjillä. Hyödyntämällä Google Analytics työkalua yhdessä Service Workerin kanssa saadaan vastaus, miten Service Workerin käyttö näkyy loppukäyttäjälle. Pelkästään Lighthouse työkalua hyödyntämällä, tai ajamalla kehittäjän koneella testejä ei saada tarpeeksi kattavia vastauksia. Testien tuloksiin vaikuttaa esimerkiksi se onko käyttäjän Service Worker aktiivinen selaimessa. Mikäli selain on tallettanut useita Service Workereita se sammuttaa niitä tarpeen mukaan. Kun käyttäjä palaa takaisin sivulle jonka Service Worker on jo olemassa, menee sen käynnistymisessä pieni hetki joka taas hetkellisesti nostaa latausaikaa. Chrome Dev Summit konferenssissa oli mitattu Service Workerin käynnistysaikaa tietokoneella ja mobiililaitteella [GoogleDevSummit]. 
 
