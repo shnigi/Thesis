@@ -485,18 +485,19 @@ Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lop
      frame=single
    ]
     module.exports = {
-      “globDirectory“: “dist/“,
-      “globPatterns“: [
-        “**/*.{css,otf,ttf,eot,woff,woff2,svg,png,html,js,json}“
+      globDirectory: 'dist/',
+      globPatterns: [
+        '**/*.{css,otf,ttf,eot,woff,woff2,svg,png,html,js,json}'
       ],
-      “swSrc“: “./src/js/service-worker.js“,
-      “swDest“: “./dist/sw.js“,
-      “globIgnores“: [
-        “../workbox-cli-config.js“,
-        “vendor/bowerbundle.js“
+      swSrc: './src/js/service-worker.js',
+      swDest: './dist/sw.js',
+      globIgnores: [
+        '../workbox-cli-config.js',
+        'vendor/bowerbundle.js'
       ]
     };
 \end{lstlisting}
+
 
 Projektissa on käsin kirjoitettu Service Worker pohja, joka on määritetty konfiguraatiotiedostossa. Tähän varsinaiseen Service Worker tiedostoon Workbox osaa konfiguraation pohjalta liittää tarvittavat tiedostot. Alla pala käsinkirjoitettua Service Workeria, jota Workbox laajentaa automaattisesti injektiokomennolla.
 
@@ -887,8 +888,6 @@ PWA:n käyttöönotossa esiintyi muutamia ongelmia projektin aikana. Projektin t
 
 Kolmas haaste liittyi Lighthouse työkalun mittauksiin. Nykyisessä sovelluksessa on paljon koodia jota ei ajeta ohjelman käynnistyessä. Tästä syystä Lighthousen auditointityökalu antoi huonot suorituskykypisteet sovellukselle. Koodien pakkaamiseen tehtiin joitakin muutoksia työkalujen käyttömahdollisuuksien mukaan ja tilannetta saatiin hieman parannettua. Myös tietokantakyselyitä koitettiin vähentää. Kyselyiden vähentäminen on kuitenkin haastavaa palvelussa, joka perustuu reaaliaikaiseen dataan. 
 
-
-\nocite{*}
 % yksi näistä tai ...
 %\bibliographystyle{plain}
 %\bibliographystyle{acm}
