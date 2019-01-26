@@ -652,7 +652,9 @@ Toisella kerralla auditoitaessa Lighthousesta täpättiin "Clear storage" valint
 
 \subsection{PWA sivun toistuva avaaminen välimuistista verrattuna ensimmäiseen lataukseen}
 
-Jotta Service Workerin vaikutuksista saataisiin vielä tarkempia tuloksia tehtiin seuraavaksi yksinkertainen toistuva sivulataus sovellukselle. Sovellus avattiin selaimessa ja siitä laskettiin "Dom Interactive" aika. Eli aika, joka selaimelta menee sovelluksen suorittamiseen niin, että selain on ensimmäistä kertaa valmis vastaanottamaan käyttäjän syötteitä ja reagoi toimenpiteisiin. Sovellusta vasten ajettiin yksinkertainen rasitustesti kahdella eri mallilla. Ensimmäisessä mallissa selain käynnistettiin joka kerta uudestaan, jotta selaimen välimuistissa ei olisi aikaisempaa tietoa. Seuraavassa mallissa selainta ei käynnistetty uudestaan ja sivulataus tehtiin kun Service Workerin välimuistiin oli talletettu tietoa. Tulokset olivat seuraavat:
+Jotta Service Workerin vaikutuksista saataisiin vielä tarkempia tuloksia tehtiin seuraavaksi yksinkertainen toistuva sivulataus sovellukselle. Sovellus avattiin selaimessa ja siitä laskettiin "Dom Interactive" aika. Eli aika, joka selaimelta menee sovelluksen suorittamiseen niin, että selain on ensimmäistä kertaa valmis vastaanottamaan käyttäjän syötteitä ja reagoi toimenpiteisiin. Sovellusta vasten ajettiin yksinkertainen rasitustesti kahdella eri mallilla. Ensimmäisessä mallissa selain käynnistettiin joka kerta uudestaan, jotta selaimen välimuistissa ei olisi aikaisempaa tietoa. Seuraavassa mallissa selainta ei käynnistetty uudestaan ja sivulataus tehtiin kun Service Workerin välimuistiin oli talletettu tietoa. 
+
+Testi suoritettiin käyttämällä Googlen kehittämää Puppeteer kirjastoa. \cite{Google3} Puppeteer on Node kirjasto, joka tarjoaa korkean tason rajapinnan päättömään, eli headless tilassa ajettavaan Chrome, tai Chromium selaimeen kehittäjätyökalu protokollan kautta. Testissä määriteltiin yksinkertaisesti kymmenen ajoa kummallekin tavalle. Selaimen objekteista löytyy performance timing tieto, josta saadaan latenssiin liittyvää suorituskyky tietoa. Testeihin määriteltiin kerättäväksi edellä mainittu "Dom Interactive" aika. Jälkimmäisessä testitapauksessa jossa selainta ei käynnistetty uudestaan testit ajettiin 11 kertaa. Ensimmäistä ajokertaa ei huomioitu, sillä silloin välimuistissa ei vielä ollut mitään tietoa sivusta. Puppeteer aloittaa ajon aina tyhjältä pöydältä. Tulokset olivat seuraavat:
 
 \begin{table}[!ht]
 \centering
@@ -660,10 +662,10 @@ Jotta Service Workerin vaikutuksista saataisiin vielä tarkempia tuloksia tehtii
 \caption{Sovelluksen latausajat yksinkertaisessa AB testissä Telia IoT palvelussa. }
 \begin{tabular}{|L{3cm}|L{3cm}|L{3cm}|L{3cm}|}
 \hline
-\textbf{Grunt ei SW} & 
-\textbf{Grunt SW} &
-\textbf{Webpack ei SW} &
-\textbf{Webpack SW}
+\textbf{Grunt ei Välimuistia} & 
+\textbf{Grunt Välimuistilla} &
+\textbf{Webpack ei Välimuistia} &
+\textbf{Webpack Välimuistilla}
 \\ \hline
 544 & 215 &	492 & 183
 \\ \hline
@@ -708,8 +710,8 @@ Testin tulos on selkeä. Service Workerin välimuistista ladattu sivu aukeaa huo
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=dom_interactive_time.png,  width=0.7\textwidth}
-\caption{Dom Interactive keskiarvoistettu aika. Build: Grunt, ei välimuistia, Build: Grunt, välimuistissa, Build: Webpack ei välimuistia, Build: Webpack, välimuistissa.}
+\epsfig{figure=dominteractive.png,  width=0.7\textwidth}
+\caption{Dom Interactive keskiarvoistettu aika.}
 \label{Dom Interactive keskiarvoistettu aika}
 \end{center}
 \end{figure}
