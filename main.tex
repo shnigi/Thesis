@@ -69,7 +69,10 @@ PWA on kuin mikä tahansa normaali verkkosivusto, mutta se täyttää lisäksi s
 
 PWA sovelluksen luomista ja käyttöönottoa tarkastellaan olemassa olevassa yksityisessä asiakasprojektissa. Projektissa kiinnitetään huomiota PWA-mallin tuomiin etuihin ja kipupisteisiin.
 
-Asiakasprojektista otetaan Google Chromen Lighthouse työkalua käyttäen metriikat sovelluksen nopeuden mittaamiseksi. Lisäksi sovellusta vasten ajetaan latausnopeuden laskeva testi useita kertoja ja tarkastellaan PWA mallin vaikutuksia käyttökokemukseen, sekä latausaikaan. Nopeuden muutosta tarkastellaan progressiivisten ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä, jotta välimuistin käytöstä voidaan tehdä johtopäätökset. Lisäksi tarkastellaan Googlen Case Studyn kautta Service Workerin vaikutuksia sovelluksen nopeuteen. \end{abstract}
+Asiakasprojektista otetaan Google Chromen Lighthouse työkalua käyttäen metriikat sovelluksen nopeuden mittaamiseksi. Lisäksi sovellusta vasten ajetaan latausnopeuden
+laskeva testi useita kertoja ja tarkastellaan PWA sovelluksen välimuistin hyödyllisyyttä suorituskyvyn ja latausajan kannalta. Nopeuden muutosta tarkastellaan 
+progressiivisten ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä, jotta välimuistin käytöstä voidaan tehdä johtopäätökset. Lisäksi tarkastellaan Googlen 
+Case Studyn kautta Service Workerin vaikutuksia sovelluksen nopeuteen. \end{abstract}
 
 \mytableofcontents
 
@@ -77,7 +80,7 @@ Asiakasprojektista otetaan Google Chromen Lighthouse työkalua käyttäen metrii
 
 Tämän päivän mobiilisovelluksia kehitettäessä on teknologia puolella useita vaihtoehtoja. Kehittäjät voivat valita ainakin neljästä eri mallista: mobiili web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana Progressiivinen Web-sovellus (Progressive Web App), PWA. Jokaisessa vaihtoehdossa on luonnollisesti etuja ja haittoja. Web tekniikoihin panostaminen näyttäisi kuitenkin olevan järkevää, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Googlen julkaiseman tiedotteen mukaan \cite{Gambhir} PWA sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA malliin on tutustunut, natiivisovelluskehitystä ei enää tarvita. Mobiili verkkosivu itsessään muodostuu sovellukseksi käyttäen verkon parhaita tekniikoita. PWA sovellus on siis tavallinen verkkosivu, joka hyödyntää selainten uusimpia ominaisuuksia.
 
-Progressiivisen Web-sovelluksen, eli PWA termin määritteli Google Chromen insinööri Alex Russel \cite{Russell} omassa blogikirjoituksessaan vuonna 2015. PWA voidaan määritellä Alex Russelin sanoin normaaliksi verkkosivuksi, joka on vain ottanut oikeat vitamiinit. Yahoo Developer portaalissa tehdyn tutkimuksen mukaan \cite{Khalaf} 90\% mobiililaitteilla vietetystä ajasta käytetään sovellusten parissa ja vain 10\% netin selaamiseen. 
+Progressiivisen Web-sovelluksen, eli PWA termin määritteli Google Chromen insinööri Alex Russel \cite{Russell} \cite{biorn2017progressive} omassa blogikirjoituksessaan vuonna 2015. PWA voidaan määritellä Alex Russelin sanoin normaaliksi verkkosivuksi, joka on vain ottanut oikeat vitamiinit. Yahoo Developer portaalissa tehdyn tutkimuksen mukaan \cite{Khalaf} 90\% mobiililaitteilla vietetystä ajasta käytetään sovellusten parissa ja vain 10\% netin selaamiseen. 
 
 Progressiivisten Web-sovellusten tarkoitus on hämärtää verkkosovellusten ja natiivisovellusten rajaa. Lisäksi PWA sovellusten etuna on, että IOS- ja Android alustoille ei tarvitse erikseen kehittää sovellusta ja ylläpitää kahta eri lähdekoodia. Yksi ja sama ohjelma riittää kummallekin alustalle. PWA ei siis ole uusi teknologia, eikä ohjelmointikehys. PWA on verkkosivu, tai web-selaimella toimiva sovellus, joka muistuttaa mahdollisimman paljon natiivia mobiili-, tai työpöytäsovellusta. Perimmäisenä ajatuksena on, että käyttäjä ei tunnista eroa näiden kahden sovelluksen välillä.
 
@@ -94,7 +97,9 @@ Tutkielman rakenne on seuraava. Luvussa 2 esitellään progressiivisten Web-sove
 \newpage
 \section{PWA:n esittely}
 
-PWA ei ole ohjelmistokehys tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä \cite{Kapoor} ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus vai verkkosovellus. PWA:n tarkoitus on hämärtää natiivisovelluksen ja web-sovelluksen rajaa. Rajaa halutaan hämärtää siksi, että yleensä sovellusten julkaiseminen sovelluskauppoihin on hidasta, aikaa vievää ja lisäksi vielä maksullista. Kehittäjän ja tilaajan näkökulmasta PWA sovelluksen kehittäminen on siis järkevää. Sovellusta ei tarvitse erikseen ohjelmoida usealle eri mobiilialustalle \cite{Gazdecki}, julkaisusykli on nopeampi ja kehittäminen on halvempaa. Sovellus muotoutuu käyttäjän laitteelle alustasta riippumatta, yksi ainoa versio riittää.
+PWA ei ole ohjelmistokehys tai uusi teknologia. PWA on kokoelma verkon parhaita käytäntöjä \cite{Kapoor} ja pyrkii toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan onko sovellus natiivisovellus vai verkkosovellus. PWA:n tarkoitus on hämärtää natiivisovelluksen ja web-sovelluksen rajaa. Rajaa halutaan hämärtää siksi, että yleensä sovellusten julkaiseminen sovelluskauppoihin on hidasta, aikaa vievää ja lisäksi vielä maksullista. Kehittäjän ja tilaajan näkökulmasta PWA sovelluksen kehittäminen on siis järkevää. Sovellusta ei tarvitse erikseen ohjelmoida usealle eri mobiilialustalle \cite{Gazdecki}, julkaisusykli on nopeampi ja kehittäminen on halvempaa. Sovellus muotoutuu käyttäjän laitteelle alustasta riippumatta, yksi ainoa versio riittää. 
+
+Esimerkiksi yritys jolla ei ole resursseja tai haluja palkata erikseen mobiilikehittäjiä on niin sanotusta cross-platform kehittämisestä tullut suosittua. \cite{biorn2017progressive} Sovelluskehityksen aika pienenee kun sovellusta ei tarvitse kehittää erikseen jokaiselle laitealustalle jolloin tuote saadaan nopeammin markkinoille.
 
 Alex Russell määritteli blogikirjoituksessaan PWA:n ominaisuudet seuraavasti. 
 
@@ -136,7 +141,7 @@ PWA pyrkii ratkaisemaan näitä ongelmia. Progressiivisen Web-sovelluksen käytt
 
 Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota noudattamalla sovelluksesta saadaan progressiivinen \cite{Google}. Käydään seuraavaksi listasta läpi minimivaatimukset joiden tulee täyttyä, jotta sovellusta voidaan sanoa progressiiviseksi.
 
-\textbf{Web App Manifest}: Jotta projektista saataisiin sovelluksen kaltainen, tulee sovelluksen juureen määritellä manifest.json tiedosto. Tiedosto pitää sisällään tiedot seuraavista asioista:
+\textbf{Web App Manifest}: Jotta projektista saataisiin sovelluksen kaltainen, tulee sovelluksen juureen määritellä manifest.json tiedosto. Tiedosto voi pitää sisällään esimerkiksi tiedot seuraavista asioista:
 
 \begin{itemize}
   \item Sovelluksen nimi
@@ -145,9 +150,10 @@ Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota n
   \item Sovelluksen oletus käyttöasento, joko pysty, tai vaaka
   \item Aloitustiedosto, yleensä index.html tai index.js
   \item Ikonitiedot eri resoluutioissa
+  \item Splash ikkuna
 \end{itemize}
 
-Kyseessä on tavallinen Json-tiedosto, joka pitää sisällään niin sanottua metatietoa sovelluksesta. Kun selain havaitsee manifest.json tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöksen tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen statuskenttä sovelluksen teeman väriä vastaavaksi.  
+Kyseessä on tavallinen Json-tiedosto, joka pitää sisällään niin sanottua metatietoa sovelluksesta. Kun selain havaitsee manifest.json tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöksen tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen statuskenttä sovelluksen teeman väriä vastaavaksi mikäli sellainen on määritelty. Manifestin tarkoitus on tarjota muutettavia asetuksia kehittäjille yhdessä konfiguraatiotiedostossa. \cite{biorn2017progressive} Manifestia voidaan siis käyttää määrittämään sovelluksen käyttäytyminen ja tyyli.
 
 \textbf{Service Workers} on työkalu, joka on koko progressiivisen sovelluksen pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on tapahtumapohjainen koodinpätkä, jota ajetaan sovelluksen taustalla. Skripti toimii niinsanottuna proxyna, eli välittäjänä verkon ja sovelluksen välillä. Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Skripti kopioi verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista, jolloin sovelluksen toiminta nopeutuu huomattavasti. Service Workeria hyödyntämällä sovellus voidaan avata myös Offline-tilassa ja näyttää tietoja välimuistista. 
 
@@ -159,6 +165,8 @@ Kyseessä on tavallinen Json-tiedosto, joka pitää sisällään niin sanottua m
 \end{center}
 \end{figure}
 \clearpage
+
+Service worker on siis kokoelma erilaisia rajapintoja \cite{malavolta2017assessing}, jotta kehittäjä voi ohjelmallisesti määritellä välimuistiin ladattavat asiat, sekä ladata etukäteen assetteja, kuten kuvia ja muuta ennalta tiedettyä dataa. Service Workerin standardi on määritelty vuonna 2009 W3C toimesta. Service Workeria ajetaan rinnakkain JavaScriptin pääthreadin kanssa.
 
 Service Workerin päällimmäiset hyödyt ovat \cite{GoogleDevSummit}:
 
@@ -195,7 +203,7 @@ Syksyllä 2017 Microsoft Edge Web Summitissa selainvalmistajat sopivat keskenä�
 
 \textbf{Ikoni, sovelluskuvake}, kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manifest.json tiedostossa määritelty ikoni käyttäjän mobiililaitteen työpöydälle tai valikkoon. Ikoniksi pitäisi käydä useampi eri formaatti, kunhan vain formaatti on määritelty tiedostoon erikseen. Ikoneita pitää olla useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
 
-\textbf{HTTPS salattu liikenne}, jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS-protokollan ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. 
+\textbf{HTTPS salattu liikenne}, jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS-protokollan ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. Tietoturvan takia Service Workeria ei pysty rekisteröimään mikäli liikenne ei ole salattu. \cite{biorn2017progressive} Service Workerilla voitaisiin salaamattomassa liikenteessä esimerkiksi kaapata verkkokutsuja ja suodattaa tai filtteröidä vastauksia.
 
 \subsection{Näyttötilat}
 
@@ -310,7 +318,7 @@ Yksi suuri etu PWA sovelluksissa on niiden koko. Pinterestin tekemässä case st
 \begin{table}[!ht]
 \centering
 \begin{small}
-\caption{ Teknologioiden erot }
+\caption{ Teknologioiden erot \cite{biorn2017progressive} }
 \begin{tabular}{|L{4cm}|L{4cm}|L{4cm}|L{4cm}| L{4cm}|}
 \hline
 \textbf{} &
@@ -327,7 +335,7 @@ Yksi suuri etu PWA sovelluksissa on niiden koko. Pinterestin tekemässä case st
 \\ \hline
 \textbf{Oppimiskäyrä} & Huono &	Keskiverto & Hyvä &	Erinomainen
 \\ \hline
-\textbf{Jakelukanava} & Sovelluskauppa & Sovelluskauppa & Sovelluskauppa & URL
+\textbf{Jakelukanava} & Sovelluskauppa & Sovelluskauppa & Sovelluskauppa & URL / Windows marketplace
 \\ \hline
 \textbf{Ohjelmointikieli} & Natiivikieli, Java / Swift & JavaScript, React, tarvittaessa Natiivikieli &	JavaScript, HTML, CSS, Natiivikieli laajennuksille & JavaScript, HTML, CSS
 \\ \hline
@@ -339,12 +347,26 @@ Yksi suuri etu PWA sovelluksissa on niiden koko. Pinterestin tekemässä case st
 \\ \hline
 \textbf{Testattavuus} & Fyysinen Laite & Fyysinen Laite & Selain & Selain
 \\ \hline
+\textbf{Asennettavissa} & Kyllä & Kyllä & Kyllä & Kyllä
+\\ \hline
+\textbf{Offline tuki} & Kyllä & Kyllä & Kyllä & Kyllä
+\\ \hline
+\textbf{Testattavissa ennen asennusta} & Ei & Ei & Ei & Kyllä
+\\ \hline
+\textbf{Pushnotifikaatiot} & Kyllä & Kyllä & Kyllä & Kyllä
+\\ \hline
+\textbf{Laiterajapinta API} & Kyllä & Kyllä & Kyllä & Rajoitettu
+\\ \hline
+\textbf{Synkronointi taustalla} & Kyllä & Kyllä & Kyllä & Kyllä
+\\ \hline
 \end{tabular}
 \label{table:teknologiaerot}
 \end{small}
 \end{table}
 
 \end{landscape}
+
+PWA sovellukset tullaan automaattisesti julkaisemaan Windows 10 App sovelluskaupassa. \cite{Rossi} Sovelluksista tulee niin sanottuja ensiluokan kansalaisia Windows kaupassa. 
 
 \newpage
 \section{Tutkimusongelma}
@@ -373,7 +395,7 @@ Tutkielman tutkimuskysymykset ovat seuraavat:
 
 PWA-mallin vaikutuksia käytännössä tarkastellaan Design Science-menetelmällä, eli design-tutkimuksella. Design-tutkimus on tutkimusstrategia, joka pyrkii kehittämään sekä teoriaa että käytäntöä \cite{Pönkä}. Se ei ole metodologia ja sitä voi käyttää niin laadulliseen kuin määrälliseen tutkimukseen. Design-tutkimus on ongelmalähtöistä oppimista, tai tutkivaa oppimista. Olemassa olevan sovelluksen muuttaminen PWA-mallia vastaavaksi oli teoreettinen tehtävä, josta muodostui tutkimuskysymys. 
 
-IoT-sovelluksessa oli myös selkeä lähtökohta, eli olemassa oleva sovellus, jonka rinnalle haluttiin lisäksi myös mobiilisovellus. IoT-projektissa tehtiin selvitys nykyisistä teknologioista ja seuraavaksi sovellus toteutettiin PWA-mallin mukaisesti. Viimeiseksi sovelluksen toimintaa analysoitiin muutoksien jälkeen.
+IoT-sovelluksessa oli myös selkeä lähtökohta, eli olemassa oleva sovellus, jonka rinnalle haluttiin lisäksi myös mobiilisovellus. IoT-projektissa tehtiin selvitys nykyisistä teknologioista ja seuraavaksi sovellus toteutettiin PWA-mallin mukaisesti. Viimeiseksi sovelluksen toimintaa analysoitiin muutoksien jälkeen. Onko PWA mallilla positiivisia vaikutuksia sovelluksen nopeuteen?
 
 \textbf{Tutkimuksen eteneminen}
 
@@ -387,7 +409,11 @@ Tutkimusprosessin vaiheet ovat pääpiirteittäin seuraavat.
   \item \textbf{Tulokset ja johtopäätökset} Mittaustulosten jälkeen sovelluksen eri vaiheista voidaan julkaista tulokset ja johtopäätökset. Kuinka paljon nopeampi sovellus on PWA-mallin myötä? Onko Service Workerin käyttäminen järkevää? Millaisia heikkouksia tai haittoja siitä voidaan saada?
 \end{itemize}
 
-PWAstats \cite{PWAstats} on julkaissut tilastoja miten yritysten nykyisten sivujen muuttaminen PWA malliin on tuottanut lisätuloja tai käyttäjiä. Tämän työn tarkoituksena on selvittää mitä hyötyjä PWA malli tuo mukanaan.
+PWAstats \cite{PWAstats} on julkaissut tilastoja miten yritysten nykyisten sivujen muuttaminen PWA malliin on tuottanut lisätuloja tai käyttäjiä. Tämän työn tarkoituksena on selvittää mitä hyötyjä PWA malli tuo mukanaan ja onko PWA sovellus nopeampi kuin normaali verkkosovellus.
+
+Kirjallisuuskatsaus tuotti syksyllä 2018 ja keväällä 2019 rajallisen määrän akateemisia hakutuloksia. Hakusanoina käytettiin "progressive web app" ja "progressive web app service worker". Tietoa haettiin Google Scholarista kumpanakin ajankohtana. Haku tuotti 4-5 kappaletta järkeviä aiheeseen liittyviä tuloksia.  IEEE Xplore tuotti saman määrän hakutuloksia ja ainakin yksi hakutulos oli molemmissa hakukoneissa sama. Hakusana "Service Worker" taas palautti suuremman määrän hakutuloksia, mutta aiheet eivät liittyneet tietotekniikkaan. Hakutuloksissa oli artikkeleita pääosin muilta aloilta.  
+
+Jotta Service Workerin hyödyistä ja PWA sovelluksen luomisesta saataisiin parempi käsitys luotiin olemassa olevasta sovelluksesta PWA sovellus. Työssä päätettiin jättää vertailu muiden teknologioiden kanssa pois, sillä sovelluksen muuttaminen muille teknologioille sopivaksi olisi ollut liian haasteellista tai aikaa vievää. Tarkoituksena on esitellä PWA:n konseptia ja siihen liittyviä teknisiä vaatimuksia. 
 
 \newpage
 \section{Tekninen toteutus}
