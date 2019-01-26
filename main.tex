@@ -700,7 +700,7 @@ Testi suoritettiin käyttämällä Googlen kehittämää Puppeteer kirjastoa. \c
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=dom_interactive_time_kaikki.png,  width=0.7\textwidth}
+\epsfig{figure=dominteractive_kaikki.png,  width=0.9\textwidth}
 \caption{Dom Interactive kaikki ajat.}
 \label{Dom Interactive palkit}
 \end{center}
@@ -708,7 +708,7 @@ Testi suoritettiin käyttämällä Googlen kehittämää Puppeteer kirjastoa. \c
 
 Testin tulos on selkeä. Service Workerin välimuistista ladattu sivu aukeaa huomattavasti nopeammin kuin ilman Service Workeria. Pyöristettynä Service Workerin välimuistista ladattava sovellus aukeaa 300 millisekuntia nopeammin kuin puhtaalta pöydältä. Eroa Webpackin ja vanhan Grunt työkalun välillä taas ei ollut merkittävästi. Latausaika tuntui vaihtelevan hieman suuntaan tai toiseen. Laskemalla keskiarvo kummastakin ajosta selviää, että Webpackilla tehty ratkaisu oli lopulta hieman nopeampi. Pieni ero Webpackin ja Gruntin välillä johtui siitä, että sovellusta ei oltu optimoitu tarpeeksi modulaariseksi. 
 
-\begin{figure}[h]
+\begin{figure}[!h]
 \begin{center}
 \epsfig{figure=dominteractive.png,  width=0.7\textwidth}
 \caption{Dom Interactive keskiarvoistettu aika.}
@@ -718,7 +718,7 @@ Testin tulos on selkeä. Service Workerin välimuistista ladattu sivu aukeaa huo
 
 Testien perusteella Service Workerin välimuistia hyödyntämällä sovelluksen latausaikaa saadaan pienennettyä huomattavasti. 
 
-\begin{figure}[h]
+\begin{figure}[!h]
 \begin{center}
 \epsfig{figure=google_analytics_teliaiot.png,  width=0.9\textwidth}
 \caption{Telia IoT analytiikkaraportti Google Analytics työkalusta.}
@@ -727,6 +727,8 @@ Testien perusteella Service Workerin välimuistia hyödyntämällä sovelluksen 
 \end{figure}
 
 Telian tuottamasta analytiikkaraportista selviää vain, että suurin osa käyttäjistä tulee joko Google-Chrome, tai Firefox selaimien kautta. Kyseiset selaimet ovat oletettavasti tarpeeksi uusia tukemaan Service Workeria.
+
+\clearpage
 
 \subsection{Muut PWA sovelluksen mahdolliset mittauskohteet}
 
