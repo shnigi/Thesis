@@ -155,6 +155,16 @@ Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota n
 
 Kyseessä on tavallinen Json-tiedosto, joka pitää sisällään niin sanottua metatietoa sovelluksesta. Kun selain havaitsee manifest.json tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöksen tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen statuskenttä sovelluksen teeman väriä vastaavaksi mikäli sellainen on määritelty. Manifestin tarkoitus on tarjota muutettavia asetuksia kehittäjille yhdessä konfiguraatiotiedostossa. \cite{biorn2017progressive} Manifestia voidaan siis käyttää määrittämään sovelluksen käyttäytyminen ja tyyli.
 
+\begin{figure}[!ht]
+\begin{center}
+\epsfig{figure=install_banner.jpg,  width=0.5\textwidth}
+\caption{Telia IoT PWA sovelluksen asennusbanneri. Laitteen taustaväri on sama kuin sovelluksen väriteema, sekä sovellusluetteloon tuleva kuvake on määritelty manifestissa.}
+\label{asennusbanneri}
+\end{center}
+\end{figure}
+
+\clearpage
+
 \textbf{Service Workers} on työkalu, joka on koko progressiivisen sovelluksen pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on tapahtumapohjainen koodinpätkä, jota ajetaan sovelluksen taustalla. Skripti toimii niinsanottuna proxyna, eli välittäjänä verkon ja sovelluksen välillä. Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Skripti kopioi verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista, jolloin sovelluksen toiminta nopeutuu huomattavasti. Service Workeria hyödyntämällä sovellus voidaan avata myös Offline-tilassa ja näyttää tietoja välimuistista. 
 
 \begin{figure}[h]
@@ -424,7 +434,7 @@ Tutkimusprosessin vaiheet ovat pääpiirteittäin seuraavat.
 
 PWAstats \cite{PWAstats} on julkaissut tilastoja miten yritysten nykyisten sivujen muuttaminen PWA malliin on tuottanut lisätuloja tai käyttäjiä. Esimerkkinä \cite{INPROCEEDINGS} Uberin PWA sovellus lupaa toimia nopeammin jopa 2G verkossa. PWA sovelluksella kestää vain 3 sekuntia ladata sovellus huonolla verkkoyhteydellä. Suosittu deittipalvelu Tinder taas pienensi latausaikaa vajaasta 12 sekunnista alle 5 sekuntiin, joka vaikutti suoraan käyttäjäkokemukseen ja käyttäjän sitoutumiseen. Tämän työn tarkoituksena on selvittää mitä hyötyjä PWA malli tuo mukanaan ja onko PWA sovellus nopeampi kuin normaali verkkosovellus.
 
-Kirjallisuuskatsaus tuotti syksyllä 2018 ja keväällä 2019 rajallisen määrän akateemisia hakutuloksia. Hakusanoina käytettiin "progressive web app" ja "progressive web app service worker". Tietoa haettiin Google Scholarista kumpanakin ajankohtana. Haku tuotti 4-5 kappaletta järkeviä aiheeseen liittyviä tuloksia.  IEEE Xplore tuotti saman määrän hakutuloksia ja ainakin yksi hakutulos oli molemmissa hakukoneissa sama. Hakusana "Service Worker" taas palautti suuremman määrän hakutuloksia, mutta aiheet eivät liittyneet tietotekniikkaan. Hakutuloksissa oli artikkeleita pääosin muilta aloilta.  
+Kirjallisuuskatsaus tuotti syksyllä 2018 ja keväällä 2019 rajallisen määrän akateemisia hakutuloksia. Hakusanoina käytettiin "progressive web app" ja "progressive web app service worker". Tietoa haettiin Google Scholarista kumpanakin ajankohtana. Haku tuotti 4-5 kappaletta järkeviä aiheeseen liittyviä tuloksia.  IEEE Xplore tuotti saman määrän hakutuloksia ja ainakin yksi hakutulos oli molemmissa hakukoneissa sama. Hakusana "Service Worker" taas palautti suuremman määrän hakutuloksia, mutta aiheet eivät liittyneet tietotekniikkaan. Hakutuloksissa oli artikkeleita pääosin muilta aloilta. 
 
 Jotta Service Workerin hyödyistä ja PWA sovelluksen luomisesta saataisiin parempi käsitys luotiin olemassa olevasta sovelluksesta PWA sovellus. Työssä päätettiin jättää vertailu muiden teknologioiden kesken pois, sillä sovelluksen muuttaminen muille teknologioille sopivaksi olisi ollut liian haasteellista, tai aikaa vievää. Tarkoituksena on esitellä PWA:n konseptia, siihen liittyviä teknisiä vaatimuksia ja sovelluksen nopeuden muutosta.
 
