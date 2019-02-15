@@ -157,8 +157,8 @@ Kyseessä on tavallinen Json-tiedosto, joka pitää sisällään niin sanottua m
 
 \begin{figure}[!ht]
 \begin{center}
-\epsfig{figure=install_banner.jpg,  width=0.5\textwidth}
-\caption{Telia IoT PWA sovelluksen asennusbanneri. Laitteen taustaväri on sama kuin sovelluksen väriteema, sekä sovellusluetteloon tuleva kuvake on määritelty manifestissa.}
+\epsfig{figure=install_banners.jpg,  width=0.7\textwidth}
+\caption{Telia IoT PWA sovelluksen asennusbanneri. Vasemmalla Google Chrome- ja oikealla Firefox banneri Android laitteella. Laitteen taustaväri on sama kuin sovelluksen väriteema, sekä sovellusluetteloon tuleva kuvake on määritelty manifestissa.}
 \label{asennusbanneri}
 \end{center}
 \end{figure}
@@ -219,13 +219,13 @@ Syksyllä 2017 Microsoft Edge Web Summitissa selainvalmistajat sopivat keskenä�
 
 \textbf{HTTPS salattu liikenne}, jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS-protokollan ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. Tietoturvan takia Service Workeria ei pysty rekisteröimään mikäli liikenne ei ole salattu. \cite{biorn2017progressive} Service Workerilla voitaisiin salaamattomassa liikenteessä esimerkiksi kaapata verkkokutsuja ja suodattaa tai filtteröidä vastauksia.
 
-Salatun liikenteen lisäksi PWA malli hyödyntää niin sanottua turvallisuus ensin politiikkaa. Kun PWA sovellus käynnistetään sillä ei ole mitään oikeuksia käyttäjän laitteeseen \cite{8287006}. Tarvittavat oikeudet tulevat käyttöön progressiivisesti sitä mukaa kun niitä tarvitaan ja käyttäjä antaa sovellukselle tarvittavat luvat. Esimerkiksi siirryttäessä GPS:ää käyttävään kohtaan sovelluksessa tulee käyttäjälle pyyntö päästä GPS anturiin käsiksi. Mikäli käyttäjä sallii tämän, saadaan sovellukselle käyttöokeuksia lisää pikkuhiljaa. Sivusto siis muodostuu pikkuhiljaa täysiveriseksi sovellukseksi kun se saa käyttöoikeuksia lisää.
+Salatun liikenteen lisäksi PWA malli hyödyntää niin sanottua turvallisuus ensin politiikkaa. Kun PWA sovellus käynnistetään sillä ei ole mitään oikeuksia käyttäjän laitteeseen \cite{8287006}. Tarvittavat oikeudet tulevat käyttöön progressiivisesti sitä mukaa kun niitä tarvitaan ja käyttäjä antaa sovellukselle tarvittavat luvat. Esimerkiksi siirryttäessä GPS:ää käyttävään kohtaan sovelluksessa tulee käyttäjälle pyyntö päästä GPS anturiin käsiksi. Mikäli käyttäjä sallii tämän, saadaan sovellukselle käyttöokeuksia lisää pikkuhiljaa. Sivusto siis muodostuu pikkuhiljaa täysiveriseksi sovellukseksi kun se saa käyttöoikeuksia lisää \cite{von2018progressive}. Sovellusta parannetaan käytön aikana progressiivisesti selaimen PWA tuen mukaan.
 
 \subsection{Sovelluskehys / Application Shell}
 
-Yksi PWA sovelluksen keskeisimmistä arkkitehtuurillisista patterneista on, että tietyt resurssit, kuten esimerkiksi navigaatiopalkki on ladattu niin sanotuksi kehykseksi. \cite{8441701} Sovelluksella on siis ikäänkuin luuranko, tai kehys, jonka sisään ladataan dynaamisia näkymiä Service Workerin avulla. Kehys avautuu aina, myös laitteen ollessa offline tilassa. Kehys on yksi PWA sovelluksen perus pilareista, mutta se ei ole pakollinen vaatimus. Tarkoituksena on saada ladattua sovelluksen käyttöliittymä lähes välittömästi. Etuna kehyksessä on se, että sitä ei tarvitse aina ladata uudestaan mikäli käyttäjä vierailee sivustolla usein. Dynaamista sisältöä voidaan ladata jälkikäteen ja myös taustalla. 
+Yksi PWA sovelluksen keskeisimmistä arkkitehtuurillisista patterneista on, että tietyt resurssit, kuten esimerkiksi navigaatiopalkki on ladattu niin sanotuksi kehykseksi. \cite{8441701} Sovelluksella on siis ikäänkuin luuranko, tai kehys, jonka sisään ladataan dynaamisia näkymiä Service Workerin avulla. Kehys avautuu aina, myös laitteen ollessa offline tilassa. Kehys on yksi PWA sovelluksen perus pilareista, mutta se ei ole pakollinen vaatimus. Tarkoituksena on saada ladattua sovelluksen käyttöliittymä lähes välittömästi. Etuna kehyksessä on se, että sitä ei tarvitse aina ladata uudestaan mikäli käyttäjä vierailee sivustolla usein. Dynaamista sisältöä voidaan ladata jälkikäteen ja myös taustalla. PWA sovelluksen tulisi aina näyttää käyttäjälleen jotakin \cite{von2018progressive}. Sovelluskehystä hyödyntämällä voidaan sisältö erotella käyttöliittymästä. Vaikka sisältöä ei saataisi ladattua voidaan kehyksessä näyttää jotain välimuistista, tai vähintään virheviesti verkkoyhteyden puuttumisesta.
 
-PWA sovelluksen on tarkoitus lyhentää latausaikaa jokaisella kerralla kun käyttäjä vierailee sivustolla. Behlin ja Rajn työssä oli otettu mittaukset viidestä eri PWA sovelluksesta ja latausajat oli otettu talteen jokaiselta kerralta. Työssä olevasta kuvaajasta nähtiin että latausaika peräkkäisillä vierailuilla tippui jokaisella kerralla hieman. Riippuen verkkoyhteydestä ja palvelimesta latausaika saattoi hieman vaihdella. Kehyksen tarkoitus on siis tarjota käyttöliittymä lähes välittömästi käyttäjän laitteen välimuistista ja vain data on tarkoitus hakea dynaamisesti palvelimelta. Kehysmalli tekee sovelluksesta nopean ja luotettavan. Sovellus latautuu nopeammin perättäisillä vierailuilla kehyksen takia kun JavaScriptit, HTML ja CSS tiedostot ladataan suoraan välimuistista.
+PWA sovelluksen on tarkoitus lyhentää latausaikaa jokaisella kerralla kun käyttäjä vierailee sivustolla. Behlin ja Rajn työssä \cite{8441701} oli otettu mittaukset viidestä eri PWA sovelluksesta ja latausajat oli otettu talteen jokaiselta kerralta. Työssä olevasta kuvaajasta nähtiin että latausaika peräkkäisillä vierailuilla tippui jokaisella kerralla hieman. Riippuen verkkoyhteydestä ja palvelimesta latausaika saattoi hieman vaihdella. Kehyksen tarkoitus on siis tarjota käyttöliittymä lähes välittömästi käyttäjän laitteen välimuistista ja vain data on tarkoitus hakea dynaamisesti palvelimelta. Kehysmalli tekee sovelluksesta nopean ja luotettavan. Sovellus latautuu nopeammin perättäisillä vierailuilla kehyksen takia kun JavaScriptit, HTML ja CSS tiedostot ladataan suoraan välimuistista.
 
 
 \subsection{Näyttötilat}
@@ -475,6 +475,8 @@ Projektin teknologiaksi valikoitui Cumulocityn kehittäjäpaketin mukana toimite
 
 MVC-arkkitehtuurilla tarkoitetaan suunnittelumallia, jossa näkymä, malli ja ohjain on jaettu omiksi osioikseen \cite{deacon2009model}. Model, eli malli on ikäänkuin tietomalli, joka ratkoo pellin alla olevia ongelmia. Mallin ei tarvitse olla tietoinen ulkomaailmasta. View, eli näkymä taas voi olla käyttöliittymä, rajapinta tai komentoriviohjelma. Controller, eli ohjain taas kontrolloi näkymää. Ohjain käsittelee syötteet ja näkymä tulosteet, kun malli huolehtii datasta. 
 
+AngularJS toteuttaa niin sanotun Single-Page-Application mallin, eli SPA mallin. SPA sovellus koostuu useista komponenteista, joita on mahdollista vaihtaa tai päivittää itsenäisesti ilman että koko sivu täytyy ladata uudestaan \cite{jadhav2015single}. Tämä säästää latausaikaa, kun kaikkia kirjastoja ei tarvitse ladata uudestaan. SPA mallin tarkoitus on tehdä sovelluksesta modulaarinen, jolloin sovelluksen ylläpito ja kehitys helpottuu. Projektin loppupuolella AngularJS:n versio päivitettiin versioon 1.5.9.
+
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=iotlaitteet.PNG,  width=0.9\textwidth}
@@ -646,7 +648,7 @@ Webpack luo Workbox lisäosalla automaattisesti sopivan Service Worker scriptin 
 \clearpage
 \section{Suorituskyvyn arviointi}
 
-Tässä kappaleessa arvioidaan PWA sovelluksen nopeutta verrattuna normaaliin verkkosivustoon. Mittarina käytetään Googlen Lighthouse työkalua progressiivisuuden ja suorituskyvyn mittaukseen. Lighthousen pisteytys on asteikolla 0-100. Lisäksi otetaan Puppeteer kirjastoa hyödyntäen talteen sovelluksen kääntämiseen kuluva aika, jonka jälkeen sovellus on ensimmäisen kerran valmis vastaanottamaan käyttäjän syötteitä. Mittaukset otetaan Ilman Service Workeria, sekä Service Workerin välimuistin kanssa, jotta saadaan vertailukelpoiset tulokset.
+Tässä kappaleessa arvioidaan PWA sovelluksen nopeutta verrattuna normaaliin verkkosivustoon. Mittarina käytetään Googlen Lighthouse työkalua progressiivisuuden ja suorituskyvyn mittaukseen. Lighthousen pisteytys on asteikolla 0-100. Lisäksi otetaan Puppeteer kirjastoa hyödyntäen talteen sovelluksen kääntämiseen kuluva aika, jonka jälkeen sovellus on ensimmäisen kerran valmis vastaanottamaan käyttäjän syötteitä. Mittaukset otetaan Ilman Service Workeria, sekä Service Workerin välimuistin kanssa, jotta saadaan vertailukelpoiset tulokset. Lighthouse suosittelee lisäksi, että sovellusta testataan manuaalisesti useilla eri selaimilla ja alustoilla, jotta käyttökokemuksesta saadaan haluttu \cite{von2018progressive}.
 
 \subsection{Lighthouse pisteet, suorituskyky ja progressiivisuus}
 
@@ -766,6 +768,8 @@ Testin tulos on selkeä. Service Workerin välimuistista ladattu sivu aukeaa huo
 \end{figure}
 
 Testien perusteella Service Workerin välimuistia hyödyntämällä sovelluksen latausaikaa saadaan pienennettyä huomattavasti. 
+
+Sovelluksen latautumista testattiin myös käsin Firefox ja Chrome selaimilla Lighthousen suositusten mukaisesti. Sovelluksen latausaika tuntui lähes välittömältä Service Workerin lisäämisen jälkeen. Sekä automaattiset, että manuaaliset testit osoittavat sovelluksen toimivan nopeammin PWA implementaation myötä. 
 
 \begin{figure}[!h]
 \begin{center}
