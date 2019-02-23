@@ -103,6 +103,17 @@ PWA ei ole ohjelmistokehys tai uusi teknologia. PWA on kokoelma verkon parhaita 
 
 Vuonna 2014 verkon käyttö mobiililaitteilla ohitti työasemat \cite{tandelimpact}. Tämä osoittaa, että verkkosovellusten tekeminen mobiililaitteille sopiviksi on tärkeämpää kuin koskaan. Yritykset usein näkevät, että sovelluksesta täytyy tehdä natiivisovellus, jotta verkon rajoitukset voidaan ohittaa. Useissa tapauksissa yrityksen täytyy tällöin kehittää erikseen natiivisovellus kullekin laitealustalle ja ohjelmoida se käyttäen laitealustalle tarkoitettua ohjelmointikieltä. Tällöin ongelmaksi muodostuu usein resurssien rajallisuus, kehittäjiä ei ole, tai sovelluskehitys maksaa liikaa. Yritys jolla ei ole resursseja tai haluja palkata erikseen mobiilikehittäjiä on niin sanotusta cross-platform kehittämisestä tullut suosittua. \cite{biorn2017progressive} Sovelluskehityksen aika ja hinta pienenee, kun sovellusta ei tarvitse kehittää erikseen jokaiselle laitealustalle jolloin tuote saadaan nopeammin markkinoille. PWA sovellus pyrkii ratkaisemaan laitealusta ongelman.
 
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=html5apis.jpg,  width=0.9\textwidth}
+\caption{Google Chrome Version 72 tukemat rajapinnat. Kuvakaappaus https://whatwebcando.today/ }
+\label{Selaimen rajapinnat}
+\end{center}
+\end{figure}
+\clearpage
+
+Verkkoselaimen rajapinnat ovat jo melkoisen kattavat. Selaimesta päästään helposti käsiksi mobiililaitteen toimintoihin kuten esimerkiksi kameraan ja GPS anturiin. PWA sovellukset pyrkivät hyödyntämään näitä selaimen tukemia rajapintoja. Mikäli sovelluksessa on tarkoitus käyttää jotain osa-aluetta mitä selain ei tue, silloin on luonnollista tehdä natiivisovellus. Esimerkiksi jos on tarkoitus päästä käsiksi käyttäjän yhteystietoihin sitä ei voida järkevästi toteuttaa PWA teknologialla, ainakaan vielä.
+
 Alex Russell määritteli blogikirjoituksessaan PWA:n ominaisuudet seuraavasti. 
 
 Sovelluksen tulee olla:
