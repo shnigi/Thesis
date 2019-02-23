@@ -138,6 +138,13 @@ PWA pyrkii ratkaisemaan näitä ongelmia. Progressiivisen Web-sovelluksen käytt
   \item \textbf{Sitouttava:} Kun sovellukseen voidaan lähettää ilmoituksia, voidaan käyttäjää sitouttaa sovellukseen lähettämällä muistutuksia, tai tärkeitä tietoja. 
 \end{itemize}
 
+Tal Aterin julkaisemassa kirjassa "Building Progressive Web Apps" \cite{ater2017building} viitataan vuoden 2016 comScoren raporttiin, jonka mukaan keskiverto henkilö viettää 84\% ajastaan käyttäen vain viittä tärkeintä sovellusta. Samasta raportista selviää myös, että on paljon helpompaa tavoittaa suurempi yleisö mobiililla verkkosivulla, kuin natiivisovelluksella. 
+
+Jotta käyttäjän saisi asentamaan mobiilisovelluksen, täytyy sovelluksesta ensin saada tietää jostain. Sen jälkeen täytyy etsiä kyseinen sovellus sovelluskaupasta, ladata ja asentaa se. Sovellukselle täytyy antaa tarvittavat käyttöoikeudet heti. Viimeiseksi käyttäjä voi vasta avata sovelluksen ja ehkä jopa tehdä sillä jotain. Näiden toimenpiteiden suorittaminen ei kuulosta pahalta, jos kyseessä on jokin käyttäjän tykkäämä ja luotettava sovellus, kuten esimerkiksi Facebook tai Twitter. Useat tutkimukset kuitenkin todistavat, että keskimäärin 20\% käyttäjistä hävitetään tässä mallissa. 
+
+Tästä on seurannut seuraavanlainen ongelma. Kun käyttäjä vierailee haluamansa sovelluksen sivulla, ensimmäinen asia mikä käyttäjälle näytetään on mainos uudesta mobiilisovelluksesta. Esimerkiksi jos käyttäjä haluaa tarkistaa päivän sään joltakin verkkosivulta, tulisi eteen koko ruudun kokoinen mainos sääsovelluksesta ja linkki sovelluskauppaan. Tämä peittää varsinaisen sisällön josta käyttäjä on kiinnostunut ja tieto olisi heti saatavilla. 
+
+PWA sovellukset ovat onneksi kääntämässä suunnan. Käyttäjä voi alkaa käyttämään palvelua heti ja sovellus pyytää lisäämään pikakuvakkeen käyttäjän työpöydälle mikäli hän vierailee sivustolla useamman kerran. Myös käyttöoikeuksia lisätään progressiivisesti sitä mukaa kun niitä tarvitaan. 
 
 \subsection{Progressiivisen Web-sovelluksen vaatimukset}
 
@@ -199,6 +206,42 @@ Service Worker on siis sovelluksen ja verkon välissä käyttäjän koneella. Py
 Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Tämä skripti on sovelluksesta irtonainen ja suoritetaan mobiililaitteen taustalla. Jokainen web-selain hallitsee push-notifikaatiot oman push servicensä kautta. Kun käyttäjä antaa selaimelle luvan lähettää ilmoituksia, voidaan sovellus silloin tilata selaimen push palveluun \cite{Googleb}. Tämä luo objektin joka sisältää päätepisteen (endpoint) tilaukselle, joka on eri jokaisessa selaimessa. Lisäksi tilaukseen tarvitaan julkinen avain. Push notifikaatiot lähetetään selaimen tilausosoitteeseen kryptattuna julkisella avaimella. Push-palvelu lähettää lopulta ilmoituksen käyttäjän mobiililaitteelle. Näin ollen sovelluksessa voidaan näyttää notifikaatoita jopa silloin, kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, kuten esimerkiksi PhoneGapissa tai Cordovassa, joilla web-sovellus paketoidaan natiivisovellukseksi selainkehystä käyttäen.
 
 Push notifikaatiot tarjoavat käyttäjälle aika ajoittain päivityksiä tai hyödyllistä tietoa ja tätä kautta lisäävät sovelluksen käyttöä, sekä sitouttavat käyttäjää sovelluksen pariin. \cite{8441701}
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=serviceworker.jpg,  width=0.9\textwidth}
+\caption{Service Workerin elinkaari yksinkertaistettuna. }
+\label{Service workerin elinkaari}
+\end{center}
+\end{figure}
+\clearpage
+
+Service Worker on vielä joissain selaimissa merkitty kokeelliseksi ominaisuudeksi, joten ennen Service Workerin asentamista on syytä tarkistaa että selain tukee ominaisuutta \cite{hiltunen2018creating}. Jos selain tukee Service Workeria, alkaa asennusvaihe. Service Worker asennetaan tietylle alueelle sovellusta. Service Worker voidaan asentaa koko sovellukselle, tai vain tiettyyn osaan, esimerkiksi /users polkuun. Asennuksen jälkeen Service Worker on aktivoituneena aina kun sitä tarvitaan. Service Workerilla on kaksi tilaa. Pysäytetty ja aktiivinen. Service Worker on tyhjäkäynnillä "idle" tilassa kunnes sitä kutsutaan jonka jälkeen Service Worker reagoi pyyntöihin.  
+
+\begin{lstlisting}[
+     language=JavaScript,
+     gobble=4,
+     frame=single
+   ]
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js');
+      });
+    }
+\end{lstlisting}
+
+Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle kertoa mistä tiedostosta Service Worker löytyy. Service Worker APIn saatavuus tarkistetaan if lausekkeen sisällä ja mikäli tuki löytyy selaimesta, Service Worker rekisteröidään kunnes sivu on latautunut. 
+
+\begin{figure}[h]
+\begin{center}
+\epsfig{figure=caniuse_serviceworker.jpg,  width=0.9\textwidth}
+\caption{Service Workerin selaintuki caniuse.com sivuston mukaan. }
+\label{Service workerin selaintuki}
+\end{center}
+\end{figure}
+
+
+Service Worker on pääosin tuettuna kaikissa yleisimmissä selaimissa. 
 
 \textbf{Service Workerin tallennustila}
 
@@ -1040,7 +1083,9 @@ Huomioon otettavaa on myös, että mikäli Service Workerin ja PWA sovelluksen s
 
 Lopputulemana Telia IoT projektissa saatiin sovelluksesta toteutettua 100\% PWA sovellus Googlen Lighthouse työkalun pisteytyksen mukaan. Sovellus oli mahdollista asentaa puhelimeen, sovellus tarjosi asennusikkunan sivustolla vierailtaessa. Service Workerin välimuistiin oli määritetty tallennettavaksi kaikki sovelluksen skriptit, kuvat ja näkymät ennalta. Service Worker siis nopeutti sovelluksen näkymien lataamista huomattavasti. Lisäksi olisi ollut mahdollista lähettää myös push notifikaatioita, mutta siihen ei ollut tarvetta. Sovellusta ei voi käyttää offline tilassa, sillä data perustuu reaaliaikaiseen tietoon. Offline näkymäksi asetettiin vain viesti, sovellusta ei voi käyttää offline tilassa. Mahdollisuutena offline käytössä olisi ollut tallettaa datakutsuja Service Workeriin ja näyttää offline tilassa vanhoja mittapisteitä ilmanlaadusta. Tätä ei myöskään toteutettu.
 
-Useat yritykset ovat alkaneet huomata PWA sovelluksen hyötyjä. Nopeat ja natiivin kaltaiset palvelut sitouttavat käyttäjiä tehokkaammin kuin hitaat ja kömpelöt sovellukset. PWA sovelluksen turvallisuus HTTPS protokollan ylitse yhdessä nopeuden kanssa ovat sen kaltaisia muuttujia, että PWA sovellukset eivät tule katoamaan lähitulevaisuudessa. \cite{8441701} PWA sovelluskehitys myös mahdollistaa saman kehittäjän käyttämisen kaikille laitealustoille mikä on kustannustehokkaampaa ja time-to-market aikaa saadaan pienennettyä. PWA sovellus pitää siis sisällään parhaat puolet natiiveista sovelluksista ja normaaleista verkkosovelluksista. 
+Useat yritykset ovat alkaneet huomata PWA sovelluksen hyötyjä. Nopeat ja natiivin kaltaiset palvelut sitouttavat käyttäjiä tehokkaammin kuin hitaat ja kömpelöt sovellukset. PWA sovelluksen turvallisuus HTTPS protokollan ylitse yhdessä nopeuden kanssa ovat sen kaltaisia muuttujia, että PWA sovellukset eivät tule katoamaan lähitulevaisuudessa. \cite{8441701} 
+
+PWA sovelluskehitys myös mahdollistaa saman kehittäjän käyttämisen kaikille laitealustoille mikä on kustannustehokkaampaa ja time-to-market aikaa saadaan pienennettyä. PWA sovellus pitää siis sisällään parhaat puolet natiiveista sovelluksista ja normaaleista verkkosovelluksista. 
 
 Yksi mielenkiintoinen seikka PWA maailmassa on artikkelissa \cite{8287006} mainitut älytelevisiot. Älytelevisioiden sovelluskehitys on hyvin pirstoutunutta tällä hetkellä. Jokaisella laitevalmistajalla on oma käyttöliittymä ja ohjelmistokehys. Lisäksi televisioita voidaan laajentaa erilaisilla lisävarusteilla, kuten Apple TV tai Chromecast tyyppisillä streaming laitteilla. Lähes jokaisessa modernissa televisiossa on kuitenkin verkkoselain. PWA voisi olla yksi ratkaisu televisioiden parissa. Jokaiselle televisiolle voitaisiin järkevästi kehittää sovelluksia hyödyntämällä selainta. Teknologian idea ei päde pelkästään televisioihin. Samalla tavalla PWA mallia voisi hyödyntää autoissa, tai muissa kodin internet of things laitteissa. Yhteistyö laitevalmistajien kesken olisi tärkeää, sillä mikään ekosysteemi tai yritys ei voi tehdä kaikkea itse. Myös käyttöliittymät ja käyttökokemus kulkevat käsi kädessä suorituskyvyn ja laitealustojen kanssa. PWA:n käyttömahdollisuudet ovat tulevaisuudessa lähes rajattomat, mikäli laitevalmistajat ja yritykset ymmärtävät tehdä yhteistyötä ja omaksua uuden teknologian. 
 
