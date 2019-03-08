@@ -152,16 +152,16 @@ Google on julkaissut Progressiivisille Web-sovelluksille tarkastuslistan, jota n
 \textbf{Web App Manifest}: Jotta projektista saataisiin sovelluksen kaltainen, tulee sovelluksen juureen määritellä manifest.json tiedosto. Tiedosto voi pitää sisällään esimerkiksi tiedot seuraavista asioista:
 
 \begin{itemize}
-  \item Sovelluksen nimi
-  \item Sovelluksen teeman väri
-  \item Taustaväri
-  \item Sovelluksen oletus käyttöasento. Joko pysty, tai vaaka
-  \item Aloitustiedosto, yleensä index.html tai index.js
-  \item Ikonitiedot eri resoluutioissa
-  \item Splash ikkuna
+  \item sovelluksen nimi,
+  \item sovelluksen teeman väri,
+  \item taustaväri,
+  \item sovelluksen oletus käyttöasento, joko pysty-, tai vaaka-asento,
+  \item aloitustiedosto, yleensä index.html tai index.js,
+  \item ikonitiedot eri resoluutioissa,
+  \item splash-ikkuna.
 \end{itemize}
 
-Kyseessä on tavallinen Json-tiedosto, joka pitää sisällään niin sanottua metatietoa sovelluksesta. Kun selain havaitsee manifest.json tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöksen tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen statuskenttä sovelluksen teeman väriä vastaavaksi mikäli sellainen on määritelty. Manifestin tarkoitus on tarjota muutettavia asetuksia kehittäjille yhdessä konfiguraatiotiedostossa. \cite{biorn2017progressive} Manifestia voidaan siis käyttää määrittämään sovelluksen käyttäytyminen ja tyyli. Kun kaikki PWA sovelluksen ehdot on täytetty tulee käyttäjän ruudulle kuvan \ref{asennusbanneri} kaltainen asennusbanneri ilmoitus.
+Kyseessä on tavallinen Json-tiedosto, joka pitää sisällään metatietoa sovelluksesta. Kun selain havaitsee manifest.json tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöksen tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen statuskenttä sovelluksen teeman väriä vastaavaksi mikäli sellainen on määritelty. Manifestin tarkoitus on tarjota muutettavia asetuksia kehittäjille yhdessä konfiguraatiotiedostossa. \cite{biorn2017progressive} Manifestia voidaan siis käyttää määrittämään sovelluksen käyttäytyminen ja tyyli. Kun kaikki PWA sovelluksen ehdot on täytetty tulee käyttäjän ruudulle kuvan \ref{asennusbanneri} kaltainen ponnahdusikkuna.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -175,11 +175,17 @@ Kun sovelluskuvaketta klikataan mobiililaitteen sovellusvalikosta, kestää sela
 
 Manifestissa määritelty nimi on sovelluksen nimi mobiililaitteen valikossa. Short name tietoa käytetään silloin, kun sovellusvalikon näkymä on pieni, esimerkiksi matkapuhelimissa.
 
-aloitustiedosto on usein index.html tai index.js. Joissain tapauksissa voi olla hyödyllistä ohjata käyttäjä sivulle, jossa pystyy tekemään jotakin. Esimerkiksi sellaisessa tapauksessa missä indexi sivu on esimerkiksi sisäänheittosivu tai sovelluksen mainossivu. Tässä tapauksessa voi olla järkevää ohjata käyttäjä vaikka sovelluksen kirjautumis ikkunaan.
+Aloitustiedosto on usein index.html tai index.js. Joissain tapauksissa voi olla hyödyllistä ohjata käyttäjä sivulle, jossa pystyy tekemään jotakin. Esimerkiksi sellaisessa tapauksessa missä indexi sivu on esimerkiksi sisäänheittosivu tai sovelluksen mainossivu. Tässä tapauksessa voi olla järkevää ohjata käyttäjä vaikka sovelluksen kirjautumisikkunaan.
 
 \clearpage
 
-\textbf{Service Workers} on työkalu, joka on koko progressiivisen sovelluksen pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on tapahtumapohjainen koodinpätkä, jota ajetaan sovelluksen taustalla. Skripti toimii niin sanottuna proxyna, eli välittäjänä verkon ja sovelluksen välillä. Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Skripti kopioi verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista, jolloin sovelluksen toiminta nopeutuu huomattavasti. Service Workeria hyödyntämällä sovellus voidaan avata myös Offline-tilassa ja näyttää tietoja välimuistista. 
+\textbf{Service Workers} on teknologia, joka on koko progressiivisen sovelluksen pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on kokoelma erilaisia rajapintoja \cite{malavolta2017assessing}. Service Worker toimii sovelluksen ja verkon välissä käyttäjän laitteella, proxyna, eli välittäjänä verkon ja sovelluksen välillä.
+
+Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Service Workerilla voidaan kopioida verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista. Web-sovellus joka lataa välimuistiin kaiken tiedon sivustolta, pitäisi olla huomattavasti nopeampi kuin sovellus, joka ei hyödynnä välimuistia \cite{Walton}.
+
+Pyynnöt voidaan ohjata välimuististrategiasta riippuen joko välimuistiin, tai verkkoon sovelluksen palvelimelle. Service Workeria käyttämällä kehittäjä voi ohjelmallisesti määritellä välimuistiin ladattavat asiat, sekä ladata etukäteen välimuistiin määriteltyjä tiedostoja, kuten kuvia ja muuta ennalta tiedettyä dataa tai tiedostoja.  Service Workeria hyödyntämällä sovellus voidaan avata myös Offline-tilassa ja näyttää pyydettävät tiedot laitteen välimuistista.
+
+Service Workerin standardi on määritelty vuonna 2009 W3C toimesta. Service Workeria suoritetaan rinnakkain JavaScriptin pääsäikeen kanssa.
 
 \begin{figure}[h]
 \begin{center}
@@ -190,19 +196,15 @@ aloitustiedosto on usein index.html tai index.js. Joissain tapauksissa voi olla 
 \end{figure}
 \clearpage
 
-Service worker on siis kokoelma erilaisia rajapintoja \cite{malavolta2017assessing}, jotta kehittäjä voi ohjelmallisesti määritellä välimuistiin ladattavat asiat, sekä ladata etukäteen assetteja, kuten kuvia ja muuta ennalta tiedettyä dataa. Service Workerin standardi on määritelty vuonna 2009 W3C toimesta. Service Workeria ajetaan rinnakkain JavaScriptin pääthreadin kanssa.
-
 Service Workerin päällimmäiset hyödyt ovat \cite{GoogleDevSummit}:
 
 \begin{itemize}
-  \item Kaikki pyynnöt voivat suoraan ohittaa verkon
-  \item Vanhat välimuistissa olevat asiat voidaan näyttää heti, kun uusia tietoja haetaan taustalla
-  \item Service Workerilla voidaan hakea vain osittaista tietoa sen sijaan että haettaisiin kaikki mahdollinen
+  \item kaikki pyynnöt voivat suoraan ohittaa verkon, jolloin tiedot haetaan käyttäjän laitteen välimuistista,
+  \item vanhat välimuistissa olevat asiat voidaan näyttää heti, sillä aikaa kun uusia tietoja haetaan taustalla,
+  \item service Workerilla voidaan hakea vain osittaista tietoa sen sijaan että haettaisiin kaikki mahdollinen
 \end{itemize}
 
-Service Worker on siis sovelluksen ja verkon välissä käyttäjän koneella. Pyynnöt voidaan ohjata välimuististrategiasta riippuen joko välimuistiin tai verkkoon sovelluksen palvelimelle. Service Workerin tärkein toiminta liittyy suorituskykyyn, tiedostojen tallentamiseen välimuistiin. Web-sovellus joka lataa välimuistiin kaiken tiedon sivulta, pitäisi olla huomattavasti nopeampi kuin sovellus, joka ei hyödynnä välimuistia \cite{Walton}.
-
-Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Tämä skripti on sovelluksesta irtonainen ja suoritetaan mobiililaitteen taustalla. Jokainen web-selain hallitsee push-notifikaatiot oman push servicensä kautta. Kun käyttäjä antaa selaimelle luvan lähettää ilmoituksia, voidaan sovellus silloin tilata selaimen push palveluun \cite{Googleb}. Tämä luo objektin joka sisältää päätepisteen (endpoint) tilaukselle, joka on eri jokaisessa selaimessa. Lisäksi tilaukseen tarvitaan julkinen avain. Push notifikaatiot lähetetään selaimen tilausosoitteeseen kryptattuna julkisella avaimella. Push-palvelu lähettää lopulta ilmoituksen käyttäjän mobiililaitteelle. Näin ollen sovelluksessa voidaan näyttää notifikaatoita jopa silloin, kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, kuten esimerkiksi PhoneGapissa tai Cordovassa, joilla web-sovellus paketoidaan natiivisovellukseksi selainkehystä käyttäen.
+Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Koska Service Worker skriptiä suoritetaan mobiililaitteen taustalla, vaikka varsinainen sovellus olisi suljettuna, voidaan Service Workerin toiminta herättää push-palvelun kautta. Jokainen web-selain hallitsee push-notifikaatiot oman push servicensä kautta. Kun käyttäjä antaa selaimelle luvan lähettää ilmoituksia, voidaan sovellus silloin tilata selaimen push palveluun \cite{Googleb}. Tämä luo objektin joka sisältää päätepisteen (endpoint) tilaukselle, joka on eri jokaisessa selaimessa. Lisäksi tilaukseen tarvitaan julkinen avain (VAPID,  Voluntary Application Server Identification for Web Push). Push notifikaatiot lähetetään selaimen tilausosoitteeseen kryptattuna julkisella avaimella. Push-palvelu lähettää lopulta ilmoituksen käyttäjän mobiililaitteelle. Näin ollen sovelluksessa voidaan näyttää notifikaatoita jopa silloin, kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, kuten esimerkiksi PhoneGapissa tai Cordovassa, joilla web-sovellus paketoidaan natiivisovellukseksi selainkehystä käyttäen.
 
 Push notifikaatiot voivat tarjota käyttäjälle aika ajoittain päivityksiä tai hyödyllistä tietoa ja tätä kautta lisätä sovelluksen käyttöä, sekä sitouttaa käyttäjää sovelluksen pariin. \cite{8441701}
 
@@ -243,7 +245,7 @@ Service Worker on pääosin tuettuna kaikissa yleisimmissä selaimissa ja niiss�
 
 \textbf{Service Workerin tallennustila}
 
-Syksyllä 2017 Microsoft Edge Web Summitissa selainvalmistajat sopivat keskenään selaimen tallennustilan koosta. \cite{Love} Yleiskooksi sovittiin 50 megatavua aina yli 20 gigabitin tallennustilaan. 20 gigatavua ei kuitenkaan päde aina. Nyrkkisääntönä on, että kovalevyn tilasta voidaan varata korkeintaan 4\% tai 20 gigatavua, kumpi vain on pienempi. Seuraava taulukko kuvaa tallennustilan varaamista erikokoisilla kiintolevyillä.
+Syksyllä 2017 Microsoft Edge Web Summitissa selainvalmistajat sopivat keskenään selaimen tallennustilan koosta. \cite{Love} Yleiskooksi sovittiin 50 megatavua aina yli 20 gigabitin tallennustilaan. 20 gigatavua ei kuitenkaan päde aina. Nyrkkisääntönä on, että kovalevyn tilasta voidaan varata korkeintaan 4\% tai 20 gigatavua, kumpi vain on pienempi. Taulukossa \ref{table:selaimentallennustila} on esitetty tallennustilan varaamista erikokoisilla kiintolevyillä.
 
 \begin{table}[!ht]
 \begin{center}
@@ -260,6 +262,7 @@ Syksyllä 2017 Microsoft Edge Web Summitissa selainvalmistajat sopivat keskenä�
     \hline
   \end{tabular}
 \end{center}
+\caption{Service Workerin tallennustilan koko massamuistista riippuen.}
 \label{table:selaimentallennustila}
 \end{table}
 
@@ -280,7 +283,7 @@ PWA sovelluksen on tarkoitus lyhentää latausaikaa jokaisella kerralla kun käy
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=appshell.png,  width=0.9\textwidth}
-\caption{App Shell määritys. Kuvakaappaus Google Developer portaalista. }
+\caption{App Shell määritys. Kuvakaappaus Google Developer portaalista \cite{Google4}. }
 \label{App shell}
 \end{center}
 \end{figure}
@@ -472,11 +475,9 @@ Progressiivinen työasemasovellus voidaan asentaa mille tahansa työasemalle (Li
 Google Developer portaalin työasema artikkelin mukaan \cite{Google}(Linkki vasemmalla) mobiililaitteiden käyttö ajoittuu yleensä iltoihin ja aamuihin kun ihmiset ovat vapaalla. Päivällä ihmisten ollessa töissä käytetään yleensä enimmäkseen työasema sovelluksia. Googlen mukaan työasemalle asennettu sovellus tuntuu käyttäjän mielestä luotettavammalta ja nopeammalta mikäli se löytyy suoraan työaseman sovellusvalikosta. Työasema sovelluksia ohjelmoitaessa tulee ottaa huomioon samat vaatimukset kuin mobiililaitteilla. Myös sovelluksen responsiiviseen suunnitteluun tulee kiinnittää huomiota, sillä käyttäjä saattaa venyttää työasemalla sovelluksen mihin tahansa kokoon. Esimerkki asennetusta työasemasovelluksesta Windows työasemalla kuva: \ref{teliaiot_windowsissa_asennettuna}
 
 \newpage
-\section{Tutkimusongelma}
+\section{Tutkimusongelma ja tutkimusmenetelmät}
 
-Tässä luvussa käydään läpi tutkimusongelma, tutkimuskysymykset ja työssä käytettävät menetelmät.
-
-Telia IoT-palvelulla on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telio IoT-palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen alkuperäinen ja nykyinen käyttötarkoitus on pääpiirteittäin pysynyt samana vuosien aikana. Sovelluksen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen, sekä viihtyvyyteen työpaikalla. 
+Telia IoT-palvelulla on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telia IoT-palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen alkuperäinen ja nykyinen käyttötarkoitus on pääpiirteittäin pysynyt samana vuosien aikana. Sovelluksen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen, sekä viihtyvyyteen työpaikalla. 
 
 Telia IoT-palvelun avulla voi esimerkiksi seurata lämpötilaa ja sen muutoksia. Palvelun avulla voidaan tutkia onko toimistossa esimerkiksi liian kylmä, tai nähdä nousiko lämpötila varastossa liian kuumaksi menemättä itse paikalle. Kosteutta ja hiilidioksiditasoja seuraamalla voidaan päästä jäljille sisäilman muutoksista ja seurata esimerkiksi kokoustilan ilmanlaatua. Liikesensoreilla voidaan laskea työpisteiden, tai neuvotteluhuoneiden käyttöaste. 
 
@@ -502,9 +503,9 @@ PWA-mallin vaikutuksia käytännössä tarkastellaan Design Science-menetelmäll
 
 IoT-sovelluksessa oli myös selkeä lähtökohta, eli olemassa oleva sovellus, jonka rinnalle haluttiin lisäksi myös mobiilisovellus. IoT-projektissa tehtiin selvitys nykyisistä teknologioista ja seuraavaksi sovellus toteutettiin PWA-mallin mukaisesti. Viimeiseksi sovelluksen toimintaa analysoitiin muutoksien jälkeen. Onko PWA mallilla positiivisia vaikutuksia sovelluksen nopeuteen?
 
-\textbf{Tutkimuksen eteneminen}
+\subsection{Tutkimuksen eteneminen}
 
-Tutkimusprosessin vaiheet ovat seuraavat.
+Tutkimusprosessin vaiheet ovat seuraavat:
 
 \begin{itemize}
   \item \textbf{Lähtökohta} Tutkimuskysymys mudostui asiakkaan tarpeista muokata olemassa oleva sovellus mobiilisovellukseksi. Millaisia etuja PWA malli tuo mukanaan nykyisille sovelluksen käyttäjille?
@@ -523,7 +524,7 @@ Jotta Service Workerin hyödyistä ja PWA sovelluksen luomisesta saataisiin pare
 \newpage
 \section{Tekninen toteutus}
 
-Tässä luvussa esitellään yleisesti projektia ja sitä koskevaa arkkitehtuuria. Projektissa käytettyjä kirjastoja ja työkaluja esitellään lyhyesti. Alaluvussa 4.3 käydään läpi miten PWA malli otettiin projektissa käyttöön ja miten Service Workerin sekä manifestin toiminta voidaan tarkastaa kehittäjätyökaluista. 
+Tässä luvussa esitellään yleisesti projektia ja sitä koskevaa arkkitehtuuria. Projektissa käytettyjä kirjastoja ja työkaluja esitellään lyhyesti. Luvussa Käydään läpi miten PWA malli otettiin projektissa käyttöön ja miten Service Workerin sekä manifestin toiminta voitiin varmistaa kehittäjätyökaluista. 
 
 Projektin laitteet toimittaa ruotsalainen Yanzi. Telian asiakkaille tarjoamaan pakettiin kuuluu 4G-tukiasema ja lisäksi 10-12 sensoria asiakkaan valitsemasta paketista riippuen. Tukiasema käyttää 4G verkkoa datan toimittamisessa pilveen. Tukiaseman mukana toimitetaan myös 4G sim-kortti. Näin asiakkaan ei tarvitse huolehtia laitteiden liittämisestä verkkoon, vaan pelkästään yksi pistorasiapaikka virransaantiin riittää. Tukiasemassa on myös pieni akku, jolla laite pysyy käynnissä noin 8 tuntia hätätapauksia tai sähkökatkoksia varten. Jos verkkoyhteys on jostain syystä katki on tukiasemassa pieni muisti, johon data voidaan säilöä siihen asti, kunnes verkkoyhteys on taas saatavilla. Kun verkkoyhteys palaa jälleen tukiasemaan lähetetään muistiin säilötty data palvelimelle. Näin dataa ei hävitetä vaikka verkkoyhteyttä ei olisikaan. Tämä mahdollistaa paljon uusia käyttökohteita ja tapoja. Palvelua on esimerkiksi testattu valtamerilaivalla, jossa verkkoyhteys on poikki useamman viikon. Data lähetetään vasta satamassa. Myös kaikki liikenne palvelimen ja tukiaseman välillä on salattua.
 
@@ -573,17 +574,17 @@ AngularJS toteuttaa niin sanotun Single-Page-Application mallin, eli SPA mallin.
 
 Nykyiset JavaScript pohjaiset käyttöliittymät ovat erittäin monimutkaisia. Koska kyseessä on pelkästään selaimella toimiva käyttöliittymä, on projektia laajennettu vuosien aikana useilla kirjastoilla ja sen ympärille on tuotu mukaan myös kehitystä helpottavia työkaluja. Tässä niistä muutamia. 
 
-\textbf{Grunt} on automaatiotyökalu. Gruntin tarkoitus on tehdä toistuvia tehtäviä automaattisesti kehittäjän puolesta. Grunt toimii sovelluksen tärkeimpänä työkaluna, mutta pelkkä Grunt ei yksistään ole riittävä työkalu projektin tarpeille. Grunt huolehtii esimerkiksi sovelluksen kääntämisestä, paketoinnista, kirjoitusvirheiden tarkastamisesta, kuvien pakkaamisesta, sekä web-palvelimen käynnistämisestä. Grunttiin on ladattu lukuisia laajentavia moduuleita.
+\textbf{Grunt} on automaatiotyökalu \cite{cryer2015pro}. Gruntin tarkoitus on tehdä toistuvia tehtäviä automaattisesti kehittäjän puolesta. Grunt toimii sovelluksen tärkeimpänä työkaluna, mutta pelkkä Grunt ei yksistään ole riittävä työkalu projektin tarpeille. Grunt huolehtii esimerkiksi sovelluksen kääntämisestä, paketoinnista, kirjoitusvirheiden tarkastamisesta, kuvien pakkaamisesta, sekä web-palvelimen käynnistämisestä. Grunttiin on ladattu lukuisia laajentavia moduuleita.
 
-\textbf{Eslint} on avoimen lähdekoodin projekti, joka on aloitettu vuonna 2013. Eslintin tarkoitus on toimia koodin tarkkailijana. Eslinttiin voi liittää lukuisia eri liitännäisiä, jotta koodista saa juuri kehittäjälle mieleisen näköistä. Eslint esimerkiksi pitää huolen siitä, että koodilohkot on sisennetty kahdella välilyönnillä ja lohko päättyy aina puolipisteeseen. Mikäli kehittäjä ei noudata Eslinttiin kirjoitettuja sääntöjä, ei sovellusta käännetä ja kehittäjälle annetaan virheilmoitus virheellisestä syntaksista. Eslintin avulla koodia pyritään yhdenmukaistamaan, riippumatta siitä kuinka monta kehittäjää sovellusta on ollut tekemässä. 
+\textbf{Eslint} on avoimen lähdekoodin projekti, joka on aloitettu vuonna 2013. Eslint on yhä edelleen suosituin linting työkalu \cite{tomasdottir2018adoption} Eslintin tarkoitus on toimia koodin tarkkailijana. Eslinttiin voi liittää lukuisia eri liitännäisiä, jotta koodista saa juuri kehittäjälle mieleisen näköistä. Eslint esimerkiksi pitää huolen siitä, että koodilohkot on sisennetty kahdella välilyönnillä ja lohko päättyy aina puolipisteeseen. Mikäli kehittäjä ei noudata Eslinttiin kirjoitettuja sääntöjä, ei sovellusta käännetä ja kehittäjälle annetaan virheilmoitus virheellisestä syntaksista. Eslintin avulla koodia pyritään yhdenmukaistamaan, riippumatta siitä kuinka monta kehittäjää sovellusta on ollut tekemässä. 
 
-\textbf{Yarn} on riippuvuuksien hallinta työkalu. Yarn toimii pohjana projektille. Yarnin avulla kaikki kehityksen aikaiseen toimintaan liittyvät skriptit ladataan kehittäjän koneelle. Myös sovelluksessa tarvittavat riippuvuudet ladataan Yarnilla. Yarn on Facebookin kehittäjien luoma työkalu. Sen tarkoitus on yhdenmukaistaa riippuvuuksien hallintaa, jolloin jokaisella kehittäjällä olisi käytössään juuri sama versio kyseisestä paketista mikä projektille on määritelty. Yarn valittiin projektin riippuvuuksien hallinta työkaluksi lähinnä siksi, että projektin kehitystyön aikana siirryttiin Bower nimisestä Front-End riippuvuuksien hallinta työkalusta pois. Yarn osaa automaattisesti asentaa Bower riippuvuuksia ja Bowerin sivuilla on suositeltu Yarnia sen korvaajaksi.
+\textbf{Yarn} on riippuvuuksien hallinta työkalu \cite{McKenzie}. Yarn toimii pohjana projektille. Yarnin avulla kaikki kehityksen aikaiseen toimintaan liittyvät skriptit ladataan kehittäjän koneelle. Myös sovelluksessa tarvittavat riippuvuudet ladataan Yarnilla. Yarn on Facebookin kehittäjien luoma työkalu. Sen tarkoitus on yhdenmukaistaa riippuvuuksien hallintaa, jolloin jokaisella kehittäjällä olisi käytössään juuri sama versio kyseisestä paketista mikä projektille on määritelty. Yarn valittiin projektin riippuvuuksien hallinta työkaluksi lähinnä siksi, että projektin kehitystyön aikana siirryttiin Bower nimisestä Front-End riippuvuuksien hallinta työkalusta pois. Yarn osaa automaattisesti asentaa Bower riippuvuuksia ja Bowerin sivuilla on suositeltu Yarnia sen korvaajaksi.
 
-\textbf{Less}, Leaner Style Sheets on laajennustyökalu perinteiselle CSS kielelle. Less tuo mukanaan muutamia hyödyllisiä laajennuksia, esimerkiksi muuttujat, operaatiot ja sisennykset. Muuttujilla voidaan esimerkiksi määrittää sovelluksen taustaväri, jonka jälkeen vaihtamalla muuttujan väriä saadaan sovelluksen taustaväri vaihtumaan jokaisella sivulla. Tyylien sisennyksellä taas on mahdollista kohdistaa tyylit vain tietyn muuttujan alle. Esimerkiksi hiiren hover efekti voidaan laittaa suoraan alkuperäisen tyylin sisälle, ilman että sitä varten tarvitsee luoda uutta riviä.
+\textbf{Less}, Leaner Style Sheets on laajennustyökalu perinteiselle CSS kielelle \cite{7476640}. Less tuo mukanaan muutamia hyödyllisiä laajennuksia, esimerkiksi muuttujat, operaatiot ja sisennykset. Muuttujilla voidaan esimerkiksi määrittää sovelluksen taustaväri, jonka jälkeen vaihtamalla muuttujan väriä saadaan sovelluksen taustaväri vaihtumaan jokaisella sivulla. Tyylien sisennyksellä taas on mahdollista kohdistaa tyylit vain tietyn muuttujan alle. Esimerkiksi hiiren hover efekti voidaan laittaa suoraan alkuperäisen tyylin sisälle, ilman että sitä varten tarvitsee luoda uutta riviä.
 
-\textbf{Babel} on uuden sukupolven JavaScript kääntäjä. Babelia käyttämällä sovelluskehittäjä voi kirjoittaa tuoreinta mahdollista JavaScript syntaksia. Babelin avulla uusi JavaScript syntaksi käännetään vanhojen selaimien ymmärtämään JavaScript muotoon. Babelia on myös mahdollista laajentaa liitännäisillä.
+\textbf{Babel} on uuden sukupolven JavaScript kääntäjä \cite{maynard2017getting}. Babelia käyttämällä sovelluskehittäjä voi kirjoittaa tuoreinta mahdollista JavaScript syntaksia, ilman että selainvalmistajat ovat implementoineet uusia toimintoja selaimeen. Babelin avulla uusi JavaScript syntaksi käännetään vanhojen selaimien ymmärtämään JavaScript muotoon. Babelia on myös mahdollista laajentaa liitännäisillä. Sitä mukaa kun selaimien JavaScript tuki laajenee voidaan Babelista poistaa liitännäisiä kehityksen jatkuessa.
 
-\textbf{Bootstrap} on maailman suosituin käyttöliittymä kirjasto, jota käyttämällä on helppoa luoda responsiivisia, mobiili edellä kulkevia projekteja. Kirjasto tuo mukanaan esimerkiksi responsiivisen Grid systeemin ja lukuisia käyttövalmiita komponentteja, kuten kuvakarusellin ja tyylitellyt taulukot. 
+\textbf{Bootstrap} on tehokas käyttöliittymä kirjasto, jota käyttämällä on helppoa luoda responsiivisia, mobiili edellä kulkevia projekteja \cite{balasubramanee2013twitter}. Kirjasto tuo mukanaan esimerkiksi responsiivisen Grid systeemin ja lukuisia käyttövalmiita komponentteja, kuten kuvakarusellin ja tyylitellyt taulukot. Kirjaston käyttäminen vähentää CSS:n parissa tapahtuvaa työskentelyä, sillä käyttämällä valmiita muuttujia sovelluksesta saadaan responsiivinen, joka näyttää oikealta kaiken kokoisilla näytöillä.
 
 \textbf{Projektin rakentamisessa} Grunt työkalu huolehtii projektin kasaamisesta ja riippuvuuksien paketoimisesta hyödyntäen edellä mainittuja kirjastoja. Grunt vastaa esimerkiksi seuraavista tehtävistä: Ensimmäisen tehtävänä Grunt käynnistää web-palvelimen projektissa määriteltyyn porttiin. Aina kun sovelluksen koodi tallennetaan, käynnistyy Gruntissa sarja komentoja automaattisesti. Ensiksi koodi käydään läpi Eslint työkalulla, joka huolehtii että koodi noudattaa tiettyjä kirjotuskäytäntöjä. Koodilohkot tulee olla sisennetty kahdella välilyönnillä ja lohkojen lopussa tulee olla puolipiste. Jos näitä ei noudata, kääntäjä antaa virheilmoituksen, eikä sovellus käänny. 
 
@@ -599,7 +600,7 @@ JavaScript-koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään .LES
 \end{center}
 \end{figure}
 
-\textbf{Webpack}. Joulukuussa 2018 projektiin asennettiin Gruntin tilalle Webpack, joka on modulaarinen paketointityökalu nykyaikaisille web-sovelluksille. Webpackin avulla kirjastoja voidaan ladata modulaarisesti projektin käyttöön ja tämä tuo huomattavia parannuksia sovelluksen nopeuteen. 
+\textbf{Webpack}. Joulukuussa 2018 projektiin asennettiin Gruntin tilalle Webpack, joka on modulaarinen paketointityökalu nykyaikaisille web-sovelluksille \cite{subramanian2017modularization}. Webpackin avulla kirjastoja voidaan ladata modulaarisesti projektin käyttöön. Ennen kirjastoja ylläpiti kehittäjä lisäämällä <script> tagin aina HTML sivun alkuun. Nyt Webpack huolehtii moduulien lataamisesta. Ainoa työvaihe on lisätä moduulien lataaminen automaatiotyökaluun, Webpackkiin, joka valitsee oikeat moduulit. Valitsemalla mitä palasia moduuleista ladataan saadaan sovelluksen kokoa pienennettyä. Tämä vaikuttaa suoraan sovelluksen nopeuteen.
 
 \begin{figure}[h]
 \begin{center}
