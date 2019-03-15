@@ -168,13 +168,23 @@ Aloitustiedosto on usein index.html tai index.js. Joissain tapauksissa voi olla 
 
 \clearpage
 
-\textbf{Service Workers} on teknologia, joka on koko PWA:n pohja. Service Worker on myös kokonaan uusi työkalu verkkosovelluksissa. Service Worker on kokoelma erilaisia rajapintoja \cite{malavolta2017assessing}. Service Worker toimii sovelluksen ja verkon välissä käyttäjän laitteella, proxyna, eli välittäjänä verkon ja sovelluksen välillä.
+\textbf{Service Workers} on teknologia, joka on koko PWA-sovelluksen pohja. Service Worker on uusi rajapinta verkkoselaimissa. Service Worker on kokoelma erilaisia rajapintoja \cite{malavolta2017assessing}. Service Worker toimii sovelluksen ja verkon välissä käyttäjän laitteella välittäjänä (proxy).
 
 Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Service Workerilla voidaan kopioida verkosta haetut tiedot välimuistiin ja seuraavalla kerralla kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista. Web-sovellus joka lataa välimuistiin kaiken tiedon sivustolta, pitäisi olla huomattavasti nopeampi kuin sovellus, joka ei hyödynnä välimuistia \cite{Walton}.
 
-Pyynnöt voidaan ohjata välimuististrategiasta riippuen joko välimuistiin, tai verkkoon sovelluksen palvelimelle. Service Workeria käyttämällä kehittäjä voi ohjelmallisesti määritellä välimuistiin ladattavat asiat, sekä ladata etukäteen välimuistiin määriteltyjä tiedostoja, kuten kuvia ja muuta ennalta tiedettyä dataa tai tiedostoja.  Service Workeria hyödyntämällä sovellus voidaan avata myös Offline-tilassa ja näyttää pyydettävät tiedot laitteen välimuistista.
+Service Workeriin voidaan ohjelmallisesti määrittää mitä tiedostoja tallennetaan ja kuinka niitä käsitellään. Tapoja kutsutaan välimuististrategiaksi. Välimuististrategia voi olla käyttää esimerkiksi pelkkää välimuistia, tai pelkkää verkkoyhteyttä tiedostoa haettaessa. Mikäli pyydetty tiedosto on epäolennainen ja ei muutu kovin usein, esimerkiksi tekstityypit, voidaan pyynnöt ohjata aina välimuistiin. Välimuististrategiaan voidaan myös määrittää, että tekstityypit tulee kuitenkin päivittää kerran viikossa. Pyynnöt voidaan siis ohjata välimuististrategiasta riippuen joko välimuistiin, tai verkkoon sovelluksen palvelimelle. Service Workeria käyttämällä kehittäjä voi ohjelmallisesti määritellä välimuistiin ladattavat asiat, sekä ladata etukäteen välimuistiin määriteltyjä tiedostoja, kuten kuvia ja muuta ennalta tiedettyä dataa.  Service Workeria hyödyntämällä sovellus voidaan avata myös Offline-tilassa ja näyttää pyydettävät tiedot laitteen välimuistista. Välimuististrategiassa voidaan määrittää esimerkiksi kuville että ne haetaan aina välimuistista ja mikäli kuvaa ei löydy välimuistista se haetaankin verkosta. Välimuististrategioita ovat seuraavat \cite{Google5}:
 
-Service Workerin standardi on määritelty vuonna 2009 W3C toimesta. Service Workeria suoritetaan rinnakkain JavaScriptin pääsäikeen kanssa.
+\begin{itemize}
+  \item tiedosto haetaan pelkästään välimuistista,
+  \item tiedosto haetaan pelkästään verkosta,
+  \item tiedosto haetaan välimuistista tai vaihtoehtoisesti verkosta jos sitä ei löydy välimuistista,
+  \item tiedosto haetaan verkosta tai vaihtoehtoisesti välimuistista jos sitä ei löydy verkosta,
+  \item verkon ja välimuistin kilpailu. Joskus pienten tiedostojen hakeminen verkosta voi olla nopeampaa kuin hitaalta massamuistilta,
+  \item välimuisti, sitten verkko. Hyödyllinen silloin kun jokin tieto päivittyy useasti. Välimuistista voidaan nopeasti ladata vanha tieto ja taustalla päivittää uusi tieto verkosta,
+  \item Yleinen varasuunnitelma: kun tiedostoa ei löydy välimuistista eikä verkosta näytetään tilalla vaihtoehtoinen kuva tai esimerkiksi teksti: "ei käytettävissä ilman verkkoyhteyttä".
+\end{itemize}
+
+Service Workerin standardi on määritelty vuonna 2009 W3C toimesta. Service Workeria suoritetaan rinnakkain JavaScriptin pääsäikeen (main thread) kanssa.
 
 \begin{figure}[h]
 \begin{center}
@@ -188,9 +198,9 @@ Service Workerin standardi on määritelty vuonna 2009 W3C toimesta. Service Wor
 Service Workerin päällimmäiset hyödyt ovat \cite{GoogleDevSummit}:
 
 \begin{itemize}
-  \item kaikki pyynnöt voivat suoraan ohittaa verkon, jolloin tiedot haetaan käyttäjän laitteen välimuistista,
+  \item kaikki uudet pyynnöt voivat suoraan ohittaa verkon, mikäli pyydettävä tiedosto on tallennettu käyttäjän laitteen välimuistiin,
   \item vanhat välimuistissa olevat asiat voidaan näyttää heti, sillä aikaa kun uusia tietoja haetaan taustalla,
-  \item service Workerilla voidaan hakea vain osittaista tietoa sen sijaan että haettaisiin kaikki mahdollinen
+  \item Service Workerilla voidaan hakea vain osittaista tietoa sen sijaan että haettaisiin kaikki mahdollinen
 \end{itemize}
 
 Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Koska Service Worker skriptiä suoritetaan mobiililaitteen taustalla, vaikka varsinainen sovellus olisi suljettuna, voidaan Service Workerin toiminta herättää push-palvelun kautta. Jokainen web-selain hallitsee push-notifikaatiot oman push servicensä kautta. Kun käyttäjä antaa selaimelle luvan lähettää ilmoituksia, voidaan sovellus silloin tilata selaimen push palveluun \cite{Googleb}. Tämä luo objektin joka sisältää päätepisteen (endpoint) tilaukselle, joka on eri jokaisessa selaimessa. Lisäksi tilaukseen tarvitaan julkinen avain (VAPID,  Voluntary Application Server Identification for Web Push). Push notifikaatiot lähetetään selaimen tilausosoitteeseen kryptattuna julkisella avaimella. Push-palvelu lähettää lopulta ilmoituksen käyttäjän mobiililaitteelle. Näin ollen sovelluksessa voidaan näyttää notifikaatoita jopa silloin, kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, kuten esimerkiksi PhoneGapissa tai Cordovassa, joilla web-sovellus paketoidaan natiivisovellukseksi selainkehystä käyttäen.
@@ -304,7 +314,7 @@ Kun kaikki PWA-sovelluksen ehdot on täytetty tulee käyttäjän ruudulle kuvan 
 \begin{figure}[!ht]
 \begin{center}
 \epsfig{figure=install_banners.jpg,  width=0.7\textwidth}
-\caption{Telia IoT PWA sovelluksen asennusbanneri. Vasemmalla Google Chrome- ja oikealla Firefox banneri Android laitteella. Laitteen taustaväri on sama kuin sovelluksen väriteema, sekä sovellusluetteloon tuleva kuvake on määritelty manifestissa.}
+\caption{Telia IoT PWA sovelluksen ponnahdusikkuna Google-Chrome ja Firefox mobiiliselaimissa.}
 \label{asennusbanneri}
 \end{center}
 \end{figure}
