@@ -166,6 +166,8 @@ Manifestissa määritelty nimi on sovelluksen nimi mobiililaitteen valikossa. Sh
 
 Aloitustiedosto on usein index.html tai index.js. Joissain tapauksissa voi olla hyödyllistä ohjata käyttäjä sivulle, jossa pystyy tekemään jotakin. Esimerkiksi sellaisessa tapauksessa missä indexi sivu on esimerkiksi sisäänheittosivu tai sovelluksen mainossivu. Tässä tapauksessa voi olla järkevää ohjata käyttäjä vaikka sovelluksen kirjautumisikkunaan.
 
+\textbf{Ikoni, sovelluskuvake}, kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manifest.json tiedostossa määritelty ikoni käyttäjän mobiililaitteen työpöydälle tai valikkoon. Ikoniksi pitäisi käydä useampi eri kuvaformaatti, kunhan vain tiedostomuoto on määritelty erikseen. Ikoneita pitää olla lisäksi useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
+
 \clearpage
 
 \textbf{Service Workers} on teknologia, joka on koko PWA-sovelluksen pohja. Service Worker on uusi rajapinta verkkoselaimissa. Service Worker on kokoelma erilaisia rajapintoja \cite{malavolta2017assessing}. Service Worker toimii sovelluksen ja verkon välissä käyttäjän laitteella välittäjänä (proxy).
@@ -248,14 +250,14 @@ Kuvaan \ref{Service workerin selaintuki} viitaten Service Worker on pääosin tu
 
 \textbf{Service Workerin tallennustila}
 
-Syksyllä 2017 Microsoft Edge Web Summitissa selainvalmistajat sopivat keskenään selaimen tallennustilan koosta. \cite{Love} Yleiskooksi sovittiin 50 megatavua aina yli 20 gigabitin tallennustilaan. 20 gigatavua ei kuitenkaan päde aina. Nyrkkisääntönä on, että kovalevyn tilasta voidaan varata korkeintaan 4\% tai 20 gigatavua, kumpi vain on pienempi. Taulukossa \ref{table:selaimentallennustila} on esitetty tallennustilan varaamista erikokoisilla kiintolevyillä.
+Syksyllä 2017 Microsoft Edge Web Summitissa selainvalmistajat sopivat keskenään selaimen tallennustilan koosta. \cite{Love} Yleiskooksi sovittiin 50 megatavua aina yli 20 gigabitin tallennustilaan. 20 gigatavua ei kuitenkaan päde aina. Nyrkkisääntönä on, että kovalevyn tilasta voidaan varata korkeintaan 4\% tai 20 gigatavua, kumpi vain on pienempi. Taulukossa \ref{table:selaimentallennustila} on esitetty tallennustilan varaamista erikokoisilla kiintolevyillä. Sivuston raja tarkoittaa samasta verkkotunnuksesta olevia sovelluksia. Mikäli saman verkkotunnuksen alta asennetaan useampi sovellus on tallennustila yhteinen kaikille sen tunnuksen sovelluksille. 
 
 \begin{table}[!ht]
 \begin{center}
   \begin{tabular}{|L{5cm}|L{5cm}|L{5cm}|}
     \hline
     \textbf{Tallennustilan koko} & 
-    \textbf{Domain raja} &
+    \textbf{Sivuston raja} &
     \textbf{Kokonaisraja}
     \\ \hline
     < 8GB & 20\% & 50MB \\ \hline
@@ -269,24 +271,38 @@ Syksyllä 2017 Microsoft Edge Web Summitissa selainvalmistajat sopivat keskenä�
 \label{table:selaimentallennustila}
 \end{table}
 
-Service Workerin tallennustrategioita miettiessä on syytä kiinnittää huomiota tallennustilan rajallisuuteen. Kaikkea tietoa ei välttämättä ole järkevää tallettaa käyttäjän laitteelle.
+Service Workerin tallennustrategioita miettiessä on syytä kiinnittää huomiota tallennustilan rajallisuuteen. Kaikkea tietoa ei välttämättä ole järkevää tallettaa käyttäjän laitteelle. Esimerkiksi Apple on päättänyt rajoittaa PWA-sovellusten välimuistin koon vain 50 megatavuun \cite{Love}. Selaimen tallennusrajapintaa hyödyntämällä voidaan tarkistaa tallennustilan suuruus \ref{tallennustilankokoselaimessa}.
 
-\textbf{Ikoni, sovelluskuvake}, kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manifest.json tiedostossa määritelty ikoni käyttäjän mobiililaitteen työpöydälle tai valikkoon. Ikoniksi pitäisi käydä useampi eri kuva formaatti, kunhan vain formaatti on määritelty tiedostoon erikseen. Ikoneita pitää olla lisäksi useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
+\begin{lstlisting} [
+     language=JavaScript,
+     frame=single,
+     caption={Selaimen tallennustilan koko tavuina. },
+     label={tallennustilankokoselaimessa},
+     gobble=4
+   ]
+if ('storage' in navigator && 'estimate' in navigator.storage) {
+    navigator.storage.estimate()
+      .then(function(estimate){
+        console.log(`Using ${estimate.usage} out 
+        of ${estimate.quota} bytes.`);
+      });
+ }
+\end{lstlisting}
 
-\textbf{HTTPS salattu liikenne}, jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS-protokollan ylitse (Hypertext Transfer Protocol Secure). Salatun liikenteen käyttäminen on nykyisin hyvä ja lähes pakollinen tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös rankannut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen ranking on Googlen haussa huonompi, kuin salattua liikennettä käyttävien sivustojen. Tietoturvan takia Service Workeria ei pysty rekisteröimään mikäli liikenne ei ole salattu. \cite{biorn2017progressive} Service Workerilla voitaisiin salaamattomassa liikenteessä esimerkiksi kaapata verkkokutsuja ja suodattaa tai filtteröidä vastauksia.
+\textbf{HTTPS salattu liikenne}, jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS:n (Hypertext Transfer Protocol Secure) ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös arvioinut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen arviointi on Googlen hakutuloksissa huonompi, kuin salattua liikennettä käyttävien sivustojen. Tietoturvan takia Service Workeria ei pysty rekisteröimään mikäli liikenne ei ole salattu. \cite{biorn2017progressive} Service Workerilla voitaisiin salaamattomassa liikenteessä esimerkiksi kaapata verkkokutsuja.
 
-Salatun liikenteen lisäksi PWA-sovellus hyödyntää niin sanottua turvallisuus ensin politiikkaa. Kun PWA-sovellus käynnistetään sillä ei ole mitään oikeuksia käyttäjän laitteeseen \cite{8287006}. Tarvittavat oikeudet tulevat käyttöön progressiivisesti sitä mukaa kun niitä tarvitaan ja käyttäjä antaa sovellukselle tarvittavat luvat. Esimerkiksi siirryttäessä GPS:ää käyttävään kohtaan sovelluksessa tulee käyttäjälle pyyntö päästä GPS anturiin käsiksi. Mikäli käyttäjä sallii tämän, saadaan sovellukselle käyttöokeuksia lisää pikkuhiljaa. Sivusto siis muodostuu vähitellen täysiveriseksi sovellukseksi kun se saa käyttöoikeuksia lisää \cite{von2018progressive}. Sovellusta parannetaan käytön aikana progressiivisesti selaimen PWA tuen mukaan.
+Salatun liikenteen lisäksi PWA-sovellus hyödyntää niin sanottua "turvallisuus-ensin"-politiikkaa. Kun PWA-sovellus käynnistetään, sillä ei ole mitään oikeuksia käyttäjän laitteeseen \cite{8287006}. Tarvittavat oikeudet tulevat käyttöön sitä mukaa kun niitä tarvitaan ja käyttäjä antaa sovellukselle tarvittavat luvat. Esimerkiksi siirryttäessä GPS:ää käyttävään kohtaan sovelluksessa tulee käyttäjälle pyyntö päästä GPS-anturiin käsiksi. Mikäli käyttäjä sallii tämän, saadaan sovellukselle käyttöokeuksia lisää. Sivusto siis muodostuu vähitellen täysiveriseksi sovellukseksi kun se saa käyttöoikeuksia lisää selaimen tukemien PWA-ominaisuuksien rajoissa \cite{von2018progressive}.
 
-\subsection{Sovelluskehys / Application Shell}
+\subsection{Sovelluskehys}
 
-Yksi PWA sovelluksen keskeisimmistä arkkitehtuurillisista patterneista on, että tietyt resurssit, kuten esimerkiksi navigaatiopalkki on ladattu niin sanotuksi kehykseksi. \cite{8441701} Sovelluksella on siis ikäänkuin luuranko, tai kehys, jonka sisään ladataan dynaamisia näkymiä Service Workerin avulla. Kehys avautuu aina, myös laitteen ollessa offline tilassa. Kehys on yksi PWA sovelluksen perus pilareista, mutta se ei ole pakollinen vaatimus. Tarkoituksena on saada ladattua sovelluksen käyttöliittymä lähes välittömästi. Etuna kehyksessä on se, että sitä ei tarvitse aina ladata uudestaan mikäli käyttäjä vierailee sivustolla usein. Dynaamista sisältöä voidaan ladata jälkikäteen ja myös taustalla. PWA sovelluksen tulisi aina näyttää käyttäjälleen jotakin \cite{von2018progressive}. Sovelluskehystä hyödyntämällä voidaan sisältö erotella käyttöliittymästä. Vaikka sisältöä ei saataisi ladattua voidaan kehyksessä näyttää jotain välimuistista, tai vähintäänkin virheviesti verkkoyhteyden puuttumisesta.
+Yksi PWA-sovelluksen keskeisimmistä arkkitehtuurillisista suunnittelumalleista on, että tietyt resurssit, kuten esimerkiksi navigaatio-palkki on ladattu niin sanotuksi kehykseksi. \cite{8441701} Sovelluksella on siis kehys, jossa voidaan näyttää esimerkiksi sovelluksen navigaatio ja kehyksen sisään ladataan dynaamisia näkymiä Service Workerin avulla. Kehys avautuu aina, myös laitteen ollessa verkkoyhteydettömässä tilassa. Kehys on yksi PWA-sovelluksen lähtökohdista, mutta se ei ole pakollinen vaatimus. Tarkoituksena on saada ladattua sovelluksen käyttöliittymä lähes välittömästi. Etuna kehyksessä on se, että sitä ei tarvitse aina ladata uudestaan mikäli käyttäjä vierailee sivustolla usein, dynaamista sisältöä voidaan ladata jälkikäteen ja myös taustalla. PWA-sovelluksen tulisi aina näyttää käyttäjälleen jotakin \cite{von2018progressive}. Esimerkiksi verkkoyhteyden puuttuessa voitaisiin kehyksessä näyttää virheviesti verkkoyhteyden puuttumisesta, tai vanhaa sisältöä välimuistista. Sovelluksen latautuessa näytetään latausikkuna- tai animaatio.
 
-PWA sovelluksen on tarkoitus lyhentää latausaikaa jokaisella kerralla kun käyttäjä vierailee sivustolla. Behlin ja Rajn työssä \cite{8441701} oli otettu mittaukset viidestä eri PWA sovelluksesta ja latausajat oli otettu talteen jokaiselta kerralta. Työssä olevasta kuvaajasta nähtiin että latausaika peräkkäisillä vierailuilla tippui jokaisella kerralla hieman. Riippuen verkkoyhteydestä ja palvelimesta latausaika saattoi hieman vaihdella. Kehyksen tarkoitus on siis tarjota käyttöliittymä lähes välittömästi käyttäjän laitteen välimuistista ja vain data on tarkoitus hakea dynaamisesti palvelimelta. Kehysmalli tekee sovelluksesta nopean ja luotettavan. Sovellus latautuu nopeammin perättäisillä vierailuilla kehyksen takia kun JavaScriptit, HTML ja CSS tiedostot ladataan suoraan välimuistista.
+PWA-sovelluksen on tarkoitus lyhentää latausaikaa jokaisella kerralla kun käyttäjä vierailee sivustolla. Behlin ja Rajn työssä \cite{8441701} oli otettu mittaukset viidestä eri PWA-sovelluksesta ja latausajat oli otettu talteen jokaiselta kerralta. Työssä esiteltiin kuva, josta nähtiin että latausaika peräkkäisillä vierailuilla tippui jokaisella kerralla hieman. Riippuen verkkoyhteydestä ja palvelimesta, latausaika saattoi hieman vaihdella. Kehyksen tarkoitus on siis tarjota käyttöliittymä lähes välittömästi käyttäjän laitteen välimuistista ja vain data on tarkoitus hakea dynaamisesti palvelimelta. Kehysmalli tekee sovelluksesta nopean ja luotettavan.
 
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=appshell.png,  width=0.9\textwidth}
-\caption{App Shell määritys. Kuvakaappaus Google Developer portaalista \cite{Google4}. }
+\caption{App Shell määritys. \cite{Google4}. }
 \label{App shell}
 \end{center}
 \end{figure}
