@@ -184,8 +184,6 @@ Service Workeriin voidaan ohjelmallisesti määrittää mitä tiedostoja tallenn
   \item Yleinen varasuunnitelma: kun tiedostoa ei löydy välimuistista eikä verkosta näytetään tilalla vaihtoehtoinen kuva tai esimerkiksi teksti: "ei käytettävissä ilman verkkoyhteyttä".
 \end{itemize}
 
-Service Workerin standardi on määritelty vuonna 2009 W3C toimesta. Service Workeria suoritetaan rinnakkain JavaScriptin pääsäikeen (main thread) kanssa.
-
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=serviceworker_explained.png,  width=0.9\textwidth}
@@ -207,6 +205,10 @@ Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Koska Service Wor
 
 Sovellusilmoitukset voivat tarjota käyttäjälle aika ajoittain päivityksiä tai hyödyllistä tietoa ja tätä kautta lisätä sovelluksen käyttöä, sekä sitouttaa käyttäjää sovelluksen pariin. \cite{8441701}
 
+Service Workerin standardi on määritelty vuonna 2009 W3C toimesta. Service Workeria suoritetaan rinnakkain JavaScriptin pääsäikeen (main thread) kanssa. Service Workerin elinkaari on seuraavanlainen. Kun käyttäjä vierailee verkkosivustolla ensimmäisen kerran Service Workerin olemassaolo, sekä selaimen tuki Service Workerille tarkistetaan ja jos sitä ei löydy se asennetaan. Service Worker rekisteröidään toimimaan sovelluksen tietyllä osa-alueella, tai koko sovelluksessa. Tietyissä tapauksissa Service Workerin käyttöä voi olla järkevää rajoittaa sovelluksen tietylle osa-alueelle, esimerkiksi pelkkään käyttäjän näkymään \cite{hiltunen2018creating}. Rekisteröinnin, eli asentamisen jälkeen Service Worker on aktiivinen ja vastaa verkkokutsuihin. 
+
+Service Workerilla on kaksi tilaa, aktiivinen ja pysäytetty. Service Worker ei ole aina aktiivisena selaimessa vaan se menee lepotilaan kunnes sitä tarvitaan uudestaan. Service Worker aktivoituu uudestaan verkkopyynnöistä. Service Workerin elinkaari on havainnollistettu kuvassa \ref{Service workerin elinkaari}.
+
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=serviceworker.jpg,  width=0.9\textwidth}
@@ -216,12 +218,14 @@ Sovellusilmoitukset voivat tarjota käyttäjälle aika ajoittain päivityksiä t
 \end{figure}
 \clearpage
 
-Service Worker on vielä joissain selaimissa merkitty kokeelliseksi ominaisuudeksi, joten ennen Service Workerin asentamista on syytä tarkistaa että selain tukee ominaisuutta \cite{hiltunen2018creating}. Jos selain tukee Service Workeria, alkaa asennusvaihe. Service Worker asennetaan tietylle alueelle sovellusta. Service Worker voidaan asentaa koko sovellukselle, tai vain tiettyyn osaan, esimerkiksi /users polkuun. Asennuksen jälkeen Service Worker on aktivoituneena aina kun sitä tarvitaan. Service Workerilla on kaksi tilaa. Pysäytetty ja aktiivinen. Service Worker on tyhjäkäynnillä "idle" tilassa kunnes sitä kutsutaan, jonka jälkeen Service Worker reagoi pyyntöihin.  
+Service Worker on vielä joissain selaimissa kokeellinen ominaisuus, joten ennen Service Workerin asentamista on syytä tarkistaa että selain tukee ominaisuutta \cite{hiltunen2018creating}. Selaimen Service Workerin tuki ja rekisteröinti tapahtuu listauksen \ref{serviceworkerinasennus} mukaisesti. Service Workerin tukea eri selaimilla on havainnollistettu kuvassa \ref{Service workerin selaintuki}.
 
-\begin{lstlisting}[
+\begin{lstlisting} [
      language=JavaScript,
-     gobble=4,
-     frame=single
+     frame=single,
+     caption={Service Workerin tuen tarkistus ja rekisteröinti selaimessa. },
+     label={serviceworkerinasennus},
+     gobble=4
    ]
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
@@ -230,17 +234,17 @@ Service Worker on vielä joissain selaimissa merkitty kokeelliseksi ominaisuudek
     }
 \end{lstlisting}
 
-Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle kertoa mistä tiedostosta Service Worker löytyy. Service Worker APIn saatavuus tarkistetaan if lausekkeen sisällä ja mikäli tuki löytyy selaimesta, Service Worker rekisteröidään kunnes sivu on latautunut. 
+Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle kertoa mistä tiedostosta Service Worker löytyy. Service Worker APIn saatavuus tarkistetaan if-lausekkeen sisällä ja mikäli tuki löytyy selaimesta, Service Worker rekisteröidään kunnes sivu on latautunut. 
 
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=caniuse_serviceworker.jpg,  width=0.9\textwidth}
-\caption{Service Workerin selaintuki caniuse.com sivuston mukaan. }
+\caption{Service Workerin selaintuki \cite{caniuseServiceWorker}. }
 \label{Service workerin selaintuki}
 \end{center}
 \end{figure}
 
-Service Worker on pääosin tuettuna kaikissa yleisimmissä selaimissa ja niissä joissa tukea ei vielä ole, se on luultavasti tuloillaan.
+Kuvaan \ref{Service workerin selaintuki} viitaten Service Worker on pääosin tuettuna kaikissa yleisimmissä selaimissa. Selaimissa joissa tukea ei vielä ole, täytyy Service Workerin rekisteröinti jättää tekemättä. Tuki Service Workerille on tulossa kaikkiin yleisimpiin verkkoselaimiin.
 
 \textbf{Service Workerin tallennustila}
 
@@ -261,7 +265,7 @@ Syksyllä 2017 Microsoft Edge Web Summitissa selainvalmistajat sopivat keskenä�
     \hline
   \end{tabular}
 \end{center}
-\caption{Service Workerin tallennustilan koko massamuistista riippuen.}
+\caption{Service Workerin tallennustilan koko massamuistista riippuen \cite{Love}.}
 \label{table:selaimentallennustila}
 \end{table}
 
