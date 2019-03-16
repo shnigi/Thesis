@@ -516,17 +516,17 @@ Google Developer portaalin työasema-artikkelin mukaan \cite{Google} mobiililait
 \newpage
 \section{Tutkimusongelma ja tutkimusmenetelmät}
 
-Telia IoT-palvelulla (Internet of Things, IoT, esineiden internet) on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telia IoT-palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen alkuperäinen ja nykyinen käyttötarkoitus on pääpiirteittäin pysynyt samana vuosien aikana. Sovelluksen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen, sekä viihtyvyyteen työpaikalla. 
+Telia IoT-palvelulla (Internet of Things, IoT, esineiden internet) on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telia IoT-palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen, sekä viihtyvyyteen työpaikalla. 
 
 Telia IoT-palvelun avulla voi esimerkiksi seurata lämpötilaa ja sen muutoksia. Palvelun avulla voidaan tutkia onko toimistossa esimerkiksi liian kylmä, tai nähdä nousiko lämpötila varastossa liian kuumaksi menemättä itse paikalle. Kosteutta ja hiilidioksiditasoja seuraamalla voidaan päästä jäljille sisäilman muutoksista ja seurata esimerkiksi kokoustilan ilmanlaatua. Liikesensoreilla voidaan laskea työpisteiden, tai neuvotteluhuoneiden käyttöaste. 
 
-IoT-palvelu on verkkosivu, tai selainpohjainen käyttöliittymä IoT-laitteiden tuottaman datan tarkasteluun. Palvelu on ostettavissa ja tilattavissa Telian IoT-sivuilta. Telia on määritellyt, että sovelluksen tulee toimia pääpiirteittäin kaikilla mahdollisilla mobiililaitteilla, sekä vähintään uusimmilla ja yleisimmillä nettiselaimilla. IoT hankkeen tavoitteena oli luoda selkeä käyttöliittymä, jolla seurata huoneilmaa. 
+IoT-palvelu on verkkosivu IoT-laitteiden tuottaman datan tarkasteluun. Sovelluksen tulee toimia pääpiirteittäin kaikilla mahdollisilla mobiililaitteilla, sekä vähintään uusimmilla ja yleisimmillä verkkoselaimilla.
 
-Telia halusi projektista myös mobiilisovelluksen. Yhdessä kehittäjätiimin kanssa suoritettiin lyhyt arviointi erilaisista teknologioista ja vaihtoehdoista. Koska projektin kulut haluttiin pitää kurissa, valittiin toteutusteknologiaksi lopulta PWA-sovellus sen yksinkertaisuuden ja monimuotoisuuden vuoksi. PWA-sovelluksesta ei kuitenkaan ollut vastaavanlaisesta projektista aiempaa kokemusta ja kysymykseksi jäi toisiko se mitään varsinaisia hyötyjä käyttäjille. Ongelmaksi muodostui siis evaluointi miten paljon PWA hyödyttää sovelluksen käyttäjiä.
+Kehittäjätiimin kesken suoritettiin lyhyt arviointi erilaisista teknologioista ja vaihtoehdoista. Koska projektin kulut haluttiin pitää kurissa, valittiin toteutusteknologiaksi lopulta PWA-sovellus sen yksinkertaisuuden ja monimuotoisuuden vuoksi. Kehittäjillä ei kuitenkaan ollut PWA-sovelluksista aiempaa kokemusta, eikä PWA-sovelluksia ole vielä tutkittu paljon tieteellisesti. Kysymykseksi jäi mitä varsinaisia hyötyjä PWA tuo käyttäjille. Kuinka arvioidaan PWA-sovelluksen tuomat edut?
 
 \subsection{Tutkimuskysymykset}
 
-Olemassa olevan sovelluksen muuttaminen PWA-sovelluksen mukaiseksi toi mukanaan useita kysymyksiä. Ovatko esimerkiksi vanhat projektissa käytössä olevat työkalut riittäviä PWA-sovelluksen luomiseksi? Mitä kaikkea tulisi ottaa huomioon ja mitä oli jo valmiina? Varsinaiset kysymykset koskivat lopulta sitä, mitä etuja PWA tuo mukanaan. Kuinka paljon nopeampi sovellus on käytännössä, ja asentavatko käyttäjät sovellusta puhelimeensa?
+Sovelluksen muuttaminen PWA-sovellukseksi toi mukanaan useita kysymyksiä. Ovatko esimerkiksi vanhat projektissa käytössä olevat työkalut riittäviä PWA-sovelluksen luomiseksi? Mitä kaikkea tulisi ottaa huomioon ja mitä oli jo valmiina? Kuinka paljon nopeampi sovellus on käytännössä, ja asentavatko käyttäjät sovellusta puhelimeensa?
 
 Tutkielman tutkimuskysymykset ovat seuraavat:
 
@@ -538,45 +538,45 @@ Tutkielman tutkimuskysymykset ovat seuraavat:
 
 \subsection{Tutkimusmenetelmä}
 
-PWA-sovelluksen vaikutuksia käytännössä tarkastellaan Design Science-menetelmällä, eli design-tutkimuksella. Design-tutkimus on tutkimusstrategia, joka pyrkii kehittämään sekä teoriaa että käytäntöä \cite{ponka}. Se ei ole metodologia ja sitä voi käyttää niin laadulliseen kuin määrälliseen tutkimukseen. Design-tutkimus on ongelmalähtöistä oppimista, tai tutkivaa oppimista. Olemassa olevan sovelluksen muuttaminen PWA-sovellukseksi oli teoreettinen tehtävä, josta muodostui tutkimuskysymys. 
+PWA-sovelluksen vaikutuksia käytännössä tarkastellaan Design Science tutkimuksella. Design-tutkimus on tutkimusstrategia, joka pyrkii kehittämään sekä teoriaa että käytäntöä \cite{wieringa2010design}. Design Science tutkimusta voi käyttää niin laadulliseen kuin määrälliseen tutkimukseen. Design-tutkimus on ongelmalähtöistä oppimista, tai tutkivaa oppimista. Olemassa olevan sovelluksen muuttaminen PWA-sovellukseksi oli teoreettinen tehtävä, josta muodostui tutkimuskysymys. 
 
-IoT-sovelluksessa oli myös selkeä lähtökohta, eli olemassa oleva sovellus, jonka rinnalle haluttiin lisäksi myös mobiilisovellus. IoT-projektissa tehtiin selvitys nykyisistä teknologioista ja seuraavaksi sovellus toteutettiin PWA-sovelluksena. Viimeiseksi sovelluksen toimintaa analysoitiin muutoksien jälkeen. Onko PWA-sovelluksella positiivisia vaikutuksia sovelluksen nopeuteen?
 
 \subsection{Tutkimuksen eteneminen}
 
 Tutkimusprosessin vaiheet ovat seuraavat:
 
-\begin{itemize}
-  \item \textbf{Lähtökohta} Tutkimuskysymys mudostui asiakkaan tarpeista muokata olemassa oleva sovellus mobiilisovellukseksi. Millaisia etuja PWA-sovellus tuo mukanaan nykyisille sovelluksen käyttäjille?
-  \item \textbf{Tutkimuksen suunnittelu} Sovelluksen arvioimiseksi tarvittiin laatumittarit. Sovelluksesta haluttiin testata nopeutta ja progresiivisuutta. Progressiivisuuden mittaamis työkaluksi valittiin Googlen Lighthouse työkalu, joka antaa sovellukselle PWA-pisteet asteikolla 0-100. Lighthouse antaa myös sovelluksen suorituskykypisteet, mutta ne eivät ole helposti verrannollisia keskenään. Puppeteer kirjastoa hyödyntämällä sovellus avattiin selaimessa useita kertoja kahdella eri tavalla. Ensimmäisessä ajossa selaimen annettiin tallettaa välimuistiin tietoa. Toisessa ajossa selain käynnistettiin aina uudestaan tyhjältä pöydältä. Näin saatiin kirjattua ylös aika mikä selaimelta kestää kääntää sovellus ja milloin se on valmis vastaanottamaan käyttäjän syötteitä. 
-  \item \textbf{Sovelluksen rakentaminen PWA-sovelluksen mukaiseksi} Sovelluksesta rakennetaan PWA-sovellus ja tarvittavat työkalut liitetään osaksi nykyistä kehityspalettia.
-  \item \textbf{Analyysi} Valmista sovellusta mitataan välimuistitallennuksen ollessa käytössä ja ilman. Service Workerin vaikutuksia analysoidaan havainnollistavilla graafeilla, sekä taulukoilla.
-  \item \textbf{Tulokset ja johtopäätökset} Mittaustulosten jälkeen sovelluksen eri vaiheista voidaan julkaista tulokset ja johtopäätökset. Kuinka paljon nopeampi PWA-sovellus on? Onko Service Workerin käyttäminen järkevää? Millaisia heikkouksia tai haittoja siitä voidaan saada?
-\end{itemize}
+Lähtökohtainen tutkimuskysymys mudostui asiakkaan tarpeista muokata olemassa oleva sovellus mobiilisovellukseksi. Millaisia etuja PWA-sovellus tuo mukanaan nykyisille sovelluksen käyttäjille?
 
-PWAstats \cite{PWAstats} on julkaissut tilastoja miten yritysten nykyisten sivujen muuttaminen PWA-sovellukseksi on tuottanut lisätuloja tai käyttäjiä. Esimerkkinä Uberin PWA sovellus lupaa toimia nopeammin jopa 2G verkossa. PWA-sovelluksella kestää vain 3 sekuntia ladata sovellus huonolla verkkoyhteydellä. Suosittu deittipalvelu Tinder taas pienensi latausaikaa vajaasta 12 sekunnista alle 5 sekuntiin, joka vaikutti suoraan käyttäjäkokemukseen ja käyttäjän sitoutumiseen. Tämän työn tarkoituksena on selvittää mitä hyötyjä PWA-sovellus tuo mukanaan ja onko PWA-sovellus nopeampi kuin normaali verkkosovellus.
+Tutkimuksen suunnitteluvaiheessa sovelluksen arvioimisen laatumittareiksi valittiin nopeus ja progresiivisuus. Progressiivisuuden mittaamistyökaluksi valittiin Googlen Lighthouse-työkalu, joka antaa sovellukselle pisteet asteikolla 0-100. Lighthouse antaa sovellukselle suorituskykypisteet, mutta ne eivät ole helposti verrannollisia keskenään, sillä tulokset vaihtelevat hieman palvelimen ja testiä suorittavan koneen tehoista riippuen. Puppeteer-kirjastoa hyödyntämällä sovellus avattiin selaimessa useita kertoja kahdella eri tavalla. Ensimmäisessä ajossa selaimen annettiin tallettaa välimuistiin tietoa. Toisessa ajossa selain käynnistettiin aina uudestaan välimuisti tyhjennettynä. Näin saatiin tallennettua aika mikä selaimelta kestää kääntää sovellus ja milloin se on valmis vastaanottamaan käyttäjän syötteitä. 
+
+Toteutusvaiheessa sovelluksesta rakennetaan PWA-sovellus ja PWA-sovellukseen liittyvät työkalut liitetään osaksi nykyisiä työkaluja.
+
+Valmista sovellusta mitataan välimuistitallennuksen ollessa käytössä ja ilman. Service Workerin vaikutuksia tarkastellaan nopeusmittauksen tuloksista muodostetuilla taulukoilla.
+
+Nopeusmittausten jälkeen sovelluksen käyttäytymisesta saadaan tulokset. Kuinka paljon nopeampi PWA-sovellus on, onko Service Workerin käyttäminen järkevää ja millaisia heikkouksia tai haittoja siitä voidaan saada?
+
+
+PWAstats \cite{PWAstats} on julkaissut tilastoja miten yritysten nykyisten sivujen muuttaminen PWA-sovellukseksi on tuottanut lisätuloja tai käyttäjiä. Esimerkiksi Uberin PWA-sovellus on nopea jopa 2G-verkossa. Uberin PWA-sovellus latautuu 2G-verkossa alle kolmessa sekunnissa. Suosittu deittipalvelu Tinder taas pienensi latausaikaa vajaasta 12 sekunnista alle viiteen sekuntiin, joka vaikutti suoraan käyttäjäkokemukseen ja käyttäjän sitoutumiseen. Tutkimuksen mukaan \cite{Osmani} Tinderin käyttäjät pyyhkäisivät, viestittelivät ja muokkasivat tietojaan useammin PWA-sovelluksessa kuin natiivisovelluksessa.
 
 Kirjallisuuskatsaus tuotti syksyllä 2018 ja keväällä 2019 rajallisen määrän akateemisia hakutuloksia. Hakusanoina käytettiin "progressive web app" ja "progressive web app service worker". Tietoa haettiin Google Scholarista kumpanakin ajankohtana. Haku tuotti 4-5 kappaletta järkeviä aiheeseen liittyviä tuloksia.  IEEE Xplore tuotti saman määrän hakutuloksia ja ainakin yksi hakutulos oli molemmissa hakukoneissa sama. Hakusana "Service Worker" taas palautti suuremman määrän hakutuloksia, mutta aiheet eivät liittyneet tietotekniikkaan. Hakutuloksissa oli artikkeleita pääosin muilta aloilta. 
 
-Jotta Service Workerin hyödyistä ja PWA sovelluksen luomisesta saataisiin parempi käsitys luotiin olemassa olevasta sovelluksesta PWA sovellus. Työssä päätettiin jättää vertailu muiden teknologioiden kesken pois, sillä sovelluksen muuttaminen muille teknologioille sopivaksi olisi ollut liian haasteellista, tai aikaa vievää. Tarkoituksena on esitellä PWA:n konseptia, siihen liittyviä teknisiä vaatimuksia ja sovelluksen nopeuden muutosta.
+Telia IoT-sovellukseta luotiin PWA-sovellus, jota mittaamalla saatiin tulokset PWA-sovelluksen hyödyistä. Projektin aikana saatiin myös käsitys tarvittavista työkaluista ja työmäärästä. Työssä päätettiin jättää vertailu hybridi- ja natiivisovellusten kesken pois, sillä sovelluksen muuttaminen kyseisille teknologioille sopivaksi olisi ollut liian haasteellista tai aikaa vievää.
 
 \newpage
 \section{Tekninen toteutus}
 
-Tässä luvussa esitellään yleisesti projektia ja sitä koskevaa arkkitehtuuria. Projektissa käytettyjä kirjastoja ja työkaluja esitellään lyhyesti. Luvussa Käydään läpi miten PWA-sovellus otettiin projektissa käyttöön ja miten Service Workerin sekä manifestin toiminta voitiin varmistaa kehittäjätyökaluista. 
+Tässä luvussa esitellään yleisesti projektia ja sitä koskevaa arkkitehtuuria. Projektissa käytettyjä kirjastoja ja työkaluja esitellään lyhyesti. Luvussa käydään läpi miten PWA-sovellus otettiin projektissa käyttöön.
 
-Projektin laitteet toimittaa ruotsalainen Yanzi. Telian asiakkaille tarjoamaan pakettiin kuuluu 4G-tukiasema ja lisäksi 10-12 sensoria asiakkaan valitsemasta paketista riippuen. Tukiasema käyttää 4G verkkoa datan toimittamisessa pilveen. Tukiaseman mukana toimitetaan myös 4G sim-kortti. Näin asiakkaan ei tarvitse huolehtia laitteiden liittämisestä verkkoon, vaan pelkästään yksi pistorasiapaikka virransaantiin riittää. Tukiasemassa on myös pieni akku, jolla laite pysyy käynnissä noin 8 tuntia hätätapauksia tai sähkökatkoksia varten. Jos verkkoyhteys on jostain syystä katki on tukiasemassa pieni muisti, johon data voidaan säilöä siihen asti, kunnes verkkoyhteys on taas saatavilla. Kun verkkoyhteys palaa jälleen tukiasemaan lähetetään muistiin säilötty data palvelimelle. Näin dataa ei hävitetä vaikka verkkoyhteyttä ei olisikaan. Tämä mahdollistaa paljon uusia käyttökohteita ja tapoja. Palvelua on esimerkiksi testattu valtamerilaivalla, jossa verkkoyhteys on poikki useamman viikon. Data lähetetään vasta satamassa. Myös kaikki liikenne palvelimen ja tukiaseman välillä on salattua.
+Projektin laitteet toimittaa ruotsalainen Yanzi\footnote[1]{(https://www.yanzi.se/)}. Telian asiakkaille tarjoamaan pakettiin kuuluu 4G-tukiasema ja lisäksi 10-12 sensoria asiakkaan valitsemasta paketista riippuen. Tukiasema käyttää 4G-verkkoa datan toimittamisessa tietovarastoon palvelimelle. Tukiaseman mukana toimitetaan myös 4G SIM-kortti. Tukiasemassa on myös pieni akku, jolla laite pysyy käynnissä noin 8 tuntia hätätapauksien tai sähkökatkoksen aikana. Jos verkkoyhteyttä ei jostain syystä ole on tukiasemassa pieni muisti, johon data voidaan tallentaa siihen asti, kunnes verkkoyhteys on taas saatavilla. Kun verkkoyhteys palaa tukiasemaan lähetetään muistiin tallennettu data palvelimelle. Tiedon tallentaminen tukiasemaan väliaikaisesti mahdollistaa paljon uusia käyttökohteita ja tapoja. Palvelua on esimerkiksi testattu valtamerilaivalla, jossa verkkoyhteys on poikki useamman viikon. Data lähetetään vasta satamassa. Kaikki liikenne palvelimen ja tukiaseman välillä on salattua.
 
-Sensorit saavat virtansa kahdesta AA paristosta. Yanzi lupaa sensoreiden käyttöajaksi noin 10 vuotta kahdella paristolla \cite{Yanzi}. Sensorit yhdistetään tukiasemaan, josta data lähetetään aina lopulta palvelimelle. Yhdessä sensorissa voi olla useampi mittapiste. Esimerkiksi yksi sensori voi mitata lämpötilaa, kosteutta ja ilmanpainetta samanaikaisesti. 
+Sensorit \ref{Yanzi sensori} saavat virtansa kahdesta AA-paristosta. Yanzi lupaa sensoreiden käyttöajaksi noin kymmenen vuotta kahdella paristolla \cite{Yanzi}. Yhdessä sensorissa voi olla useita mittatyyppejä. Sensori voi esimerkiksi mitata lämpötilaa, kosteutta ja ilmanpainetta samanaikaisesti. Sensorialueen kantavuutta on mahdollista kasvattaa erillisillä toistimilla. Näin koko toimiston alue saadaan katettua. 
 
-Tukiasemaan on mahdollista liittää useita sensoreita. Myös verkon kantavuutta on mahdollista kasvattaa erillisillä toistimilla. Näin koko toimiston alue saadaan katettua. 
-
-Sensorit lähettävät mittaustulokset tukiasemalle, josta data lähetetään salattuna palvelimelle. Taustapalvelut toimittaa saksalainen Cumulocity. Cumulocityn palvelun mukana tulevaa rajapintaa hyödyntäen IoT käyttöliittymän data haetaan JavaScriptillä. Application Programming Interface, lyhyesti API, eli ohjelmointirajapinta tarjoaa sovelluksessa tarvittavat tiedot käyttöliittymälle. Esimerkiksi käyttäjät, laitteet, data ja kaikki palveluun liittyvä tieto saadaan haettua APIa vasten. 
+Taustapalvelut toimittaa saksalainen Cumulocity GmbH. Cumulocityn toimittamaa rajapintaa hyödyntäen IoT-käyttöliittymän data haetaan JavaScriptillä. 
 
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=cumulocity_architecture.png,  width=1.0\textwidth}
-\caption{Telia IoT arkkitehtuurikuvaus. Tämä työ koskee punaisella ympyrällä merkittyä osaa.}
+\caption{Telia IoT-arkkitehtuurikuvaus. Tämä työ koskee punaisella ympyrällä merkittyä osaa.}
 \label{Arkkitehtuurikuvaus}
 \end{center}
 \end{figure}
@@ -584,34 +584,27 @@ Sensorit lähettävät mittaustulokset tukiasemalle, josta data lähetetään sa
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=yanzi_sensor.jpg,  width=0.5\textwidth}
-\caption{Yanzi comfort sensori, joka mittaa: lämpötilaa, kosteutta, ilmanpainetta, äänenvoimakkuutta, hiilidioksiditasoja ja haihtuvia orgaanisia yhdisteitä. Kuva: yanzi.se}
+\epsfig{figure=yanzisensori.jpg,  width=0.5\textwidth}
+\caption{Yanzi motion sensori, joka mittaa: liikettä, kosteutta, lämpötilaa, valoisuutta ja äänenvoimakkuutta.}
 \label{Yanzi sensori}
 \end{center}
 \end{figure}
+
 \clearpage
 
 \subsection{IoT Dashboard}
 
-Telian IoT palvelussa tietokannan, sekä taustapalvelut tarjoaa saksalainen Cumulocity GmbH, Dusseldorfista. Cumulocityn toimittaa projektin rajapinnan ja Yanzin laitteet tuottavat datan. Projektin tarkoituksena oli luoda helppokäyttöinen käyttöliittymä, jota voidaan myydä eteenpäin Telian asiakkaille. Myös Cumulocity toimittaa palvelun mukana kattavan hallintapaneelin, sekä työpöytänäkymän. Sovelluksen käyttö kuitenkin osoittautui lopulta hankalaksi. Tämän seurauksena Telia käynnisti vuoden 2016 alussa projektin helposta käyttöliittymästä IoT laitteille. 
+Cumulocity toimittaa palvelun mukana kattavan hallintapaneelin, sekä työpöytänäkymän. Sovelluksen käyttö kuitenkin osoittautui lopulta hankalaksi. Tämän seurauksena Telia käynnisti vuoden 2016 alussa projektin helposta käyttöliittymästä IoT laitteille. 
 
-Projektin teknologiaksi valikoitui Cumulocityn kehittäjäpaketin mukana toimitettava AngularJS:n versio 1.3. AngularJS on Googlen ylläpitämä avoimen lähdekoodin JavaScript-ohjelmistokehys, joka avustaa yksisivuisten sovellusten kehittämisessä ja käytössä \cite{jain2015angularjs}. AngularJS:n tavoite on lisätä selainpohjaisiin sovelluksiin tuki MVC-arkkitehtuurille, jonka avulla sivustojen kehitys ja testaus helpottuu. 
+Projektin teknologiaksi valikoitui Cumulocityn kehittäjäpaketin mukana toimitettava AngularJS:n versio 1.3. AngularJS on Googlen ylläpitämä avoimen lähdekoodin JavaScript-ohjelmistokehys, joka avustaa yksisivuisten sovellusten kehittämisessä ja käytössä \cite{jain2015angularjs}. AngularJS:n tavoite on lisätä selainpohjaisiin sovelluksiin tuki MVC-arkkitehtuurille, jonka avulla sivustojen kehitys helpottuu. 
 
 MVC-arkkitehtuurilla tarkoitetaan suunnittelumallia, jossa näkymä, malli ja ohjain on jaettu omiksi osioikseen \cite{deacon2009model}. Model, eli malli on ikäänkuin tietomalli, joka ratkoo pellin alla olevia ongelmia. Mallin ei tarvitse olla tietoinen ulkomaailmasta. View, eli näkymä taas voi olla käyttöliittymä, rajapinta tai komentoriviohjelma. Controller, eli ohjain taas kontrolloi näkymää. Ohjain käsittelee syötteet ja näkymä tulosteet, kun malli huolehtii datasta. 
 
 AngularJS toteuttaa niin sanotun Single-Page-Application sovelluksen, eli SPA-sovelluksen. SPA-sovellus koostuu useista komponenteista, joita on mahdollista vaihtaa tai päivittää itsenäisesti ilman että koko sivu täytyy ladata uudestaan \cite{jadhav2015single}. Tämä säästää latausaikaa, kun kaikkia kirjastoja ei tarvitse ladata uudestaan. SPA-sovelluksen tarkoitus on tehdä sovelluksesta modulaarinen, jolloin sovelluksen ylläpito ja kehitys helpottuu. Projektin loppupuolella AngularJS:n versio päivitettiin versioon 1.5.9.
 
-\begin{figure}[h]
-\begin{center}
-\epsfig{figure=iotlaitteet.PNG,  width=0.9\textwidth}
-\caption{Miten IoT palvelu toimii yksinkertaisuudessaan. Kuva: Telian dokumentaatio}
-\label{IoT arkkitehtuuri}
-\end{center}
-\end{figure}
-
 \subsection{Työkalut}
 
-Nykyiset JavaScript pohjaiset käyttöliittymät ovat erittäin monimutkaisia. Koska kyseessä on pelkästään selaimella toimiva käyttöliittymä, on projektia laajennettu vuosien aikana useilla kirjastoilla ja sen ympärille on tuotu mukaan myös kehitystä helpottavia työkaluja. Tässä niistä muutamia. 
+Nykyiset JavaScript-pohjaiset käyttöliittymät ovat erittäin monimutkaisia. Koska kyseessä on pelkästään selaimella toimiva käyttöliittymä, on projektia laajennettu vuosien aikana useilla kirjastoilla ja sen ympärille on tuotu mukaan myös kehitystä helpottavia työkaluja.
 
 \textbf{Grunt} on automaatiotyökalu \cite{cryer2015pro}. Gruntin tarkoitus on tehdä toistuvia tehtäviä automaattisesti kehittäjän puolesta. Grunt toimii sovelluksen tärkeimpänä työkaluna, mutta pelkkä Grunt ei yksistään ole riittävä työkalu projektin tarpeille. Grunt huolehtii esimerkiksi sovelluksen kääntämisestä, paketoinnista, kirjoitusvirheiden tarkastamisesta, kuvien pakkaamisesta, sekä web-palvelimen käynnistämisestä. Grunttiin on ladattu lukuisia laajentavia moduuleita.
 
@@ -625,46 +618,35 @@ Nykyiset JavaScript pohjaiset käyttöliittymät ovat erittäin monimutkaisia. K
 
 \textbf{Bootstrap} on tehokas käyttöliittymä kirjasto, jota käyttämällä on helppoa luoda responsiivisia, mobiili edellä kulkevia projekteja \cite{balasubramanee2013twitter}. Kirjasto tuo mukanaan esimerkiksi responsiivisen Grid systeemin ja lukuisia käyttövalmiita komponentteja, kuten kuvakarusellin ja tyylitellyt taulukot. Kirjaston käyttäminen vähentää CSS:n parissa tapahtuvaa työskentelyä, sillä käyttämällä valmiita muuttujia sovelluksesta saadaan responsiivinen, joka näyttää oikealta kaiken kokoisilla näytöillä.
 
-\textbf{Projektin rakentamisessa} Grunt työkalu huolehtii projektin kasaamisesta ja riippuvuuksien paketoimisesta hyödyntäen edellä mainittuja kirjastoja. Grunt vastaa esimerkiksi seuraavista tehtävistä: Ensimmäisen tehtävänä Grunt käynnistää web-palvelimen projektissa määriteltyyn porttiin. Aina kun sovelluksen koodi tallennetaan, käynnistyy Gruntissa sarja komentoja automaattisesti. Ensiksi koodi käydään läpi Eslint työkalulla, joka huolehtii että koodi noudattaa tiettyjä kirjotuskäytäntöjä. Koodilohkot tulee olla sisennetty kahdella välilyönnillä ja lohkojen lopussa tulee olla puolipiste. Jos näitä ei noudata, kääntäjä antaa virheilmoituksen, eikä sovellus käänny. 
-
-Seuraavaksi koodi käännetään Babel nimisen työkalun avulla selaimen ymmärtämään JavaScript formaattiin. Kun JavaScript on selaimen ymmärtämässä muodossa, lisätään Angular kehykselle ominaiset annotaatiot, eli riippuvuudet. Sitten kaikki scriptit paketoidaan yhdeksi kokonaisuudeksi, bundleksi, jonka jälkeen koodi minifoidaan ja siirretään kansioon, jossa on käynnissä web-palvelin. Minifoinnilla tarkoitetaan koodin pienentämistä, esimerkiksi kaikki ylimääräiset välilyönnit ja merkit poistetaan, jotta tiedostosta tulee mahdollisimman pieni. Pieni tiedosto vähentää sovelluksen latausaikaa.
-
-JavaScript-koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään .LESS formaatista selaimen ymmärtämään .CSS muotoon. Kaikki tyylitiedostot paketoidaan myös yhdeksi kokonaisuudeksi ja sitten ne minifoidaan. Lisäksi suoritetaan lukuisia muita toimenpiteitä, projektin kaikki kuvat pakataan, kolmannen osapuolen skriptit käydään läpi, paketoidaan ja liitetään projektiin. Kaikki tämä tapahtuu automatisoidusti Grunt työkalulla ja kehittäjä voi keskittyä ainoastaan luovaan työhön, eli uuden luomiseen.
+JavaScript-koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään LESS-formaatista selaimen ymmärtämään CSS-muotoon. Kaikki tyylitiedostot paketoidaan myös yhdeksi kokonaisuudeksi ja sitten ne pienennetään automaattisella työkalulla. Lisäksi suoritetaan lukuisia muita toimenpiteitä, projektin kaikki kuvat pakataan, kolmannen osapuolen skriptit käydään läpi, paketoidaan ja liitetään projektiin.
 
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=angulararkkitehtuuri.jpg,  width=0.9\textwidth}
-\caption{Sovelluksen arkkitehtuuri. Sovellus koostuu ulkoisista kirjastoista, sekä lähdekoodista. Grunt huolehtii sovelluksen paketoimisesta ja serveristä. Selain tekee kutsuja joko taustapalveluihin, tai Service Workerin kautta lokaaleihin tiedostoihin. Sen jälkeen selain evaluoi skriptit ja kääntää ne näkymäksi.}
+\caption{Sovelluksen arkkitehtuuri. Sovellus koostuu ulkoisista kirjastoista, sekä lähdekoodista. Selain tekee kutsuja joko taustapalveluihin, tai Service Workerin kautta lokaaleihin tiedostoihin. Sen jälkeen selain evaluoi skriptit ja kääntää ne näkymäksi.}
 \label{angulararkkitehtuuri}
 \end{center}
 \end{figure}
 
 \textbf{Webpack}. Joulukuussa 2018 projektiin asennettiin Gruntin tilalle Webpack, joka on modulaarinen paketointityökalu nykyaikaisille web-sovelluksille \cite{subramanian2017modularization}. Webpackin avulla kirjastoja voidaan ladata modulaarisesti projektin käyttöön. Ennen kirjastoja ylläpiti kehittäjä lisäämällä <script> tagin aina HTML sivun alkuun. Nyt Webpack huolehtii moduulien lataamisesta. Ainoa työvaihe on lisätä moduulien lataaminen automaatiotyökaluun, Webpackkiin, joka valitsee oikeat moduulit. Valitsemalla mitä palasia moduuleista ladataan saadaan sovelluksen kokoa pienennettyä. Tämä vaikuttaa suoraan sovelluksen nopeuteen.
 
-\begin{figure}[h]
-\begin{center}
-\epsfig{figure=what-is-webpack.png,  width=0.9\textwidth}
-\caption{Webpackin perusperiaate on yksinkertainen. Sovellus koostuu moduuleista ja on ikäänkuin modulaarinen puu, jonka perusteella Webpack osaa rakentaa selaimen ymmärtämän rakenteen ja suorittaa tarvittavat toimenpiteet tiedostoille. Kuva: webpack.github.io}
-\label{whatiswebpack}
-\end{center}
-\end{figure}
-
-
 
 \subsection{PWA:n käyttöönotto projektissa}
 
-Telian alkuperäinen tarkoitus oli laajentaa IoT projektin käyttöliittymää myös mobiililaitteille. Projektissa tehtiin nopea katsaus nykyisistä teknologioista ja lopulta päädyttiin tekemään sovelluksesta PWA-sovellus. Android ja IOS sovellusten haittapuolena olisi ollut kokonaan uusien kehittäjien haaliminen, sekä usean koodin ylläpitäminen. Hybridisovellukselle ei myöskään nähty tarvetta sen hitauden takia. IoT Dashboard sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin, kuten kalenteriin, tai yhteystietoihin, joten PWA-sovellus oli luonnollinen valinta. Lisäksi osa PWA-sovelluksen vaiheista oli jo täytettynä. Palvelua tarjotaan Telian asiakkaille salattuna HTTPS-protokollan ylitse, sovellus on responsiivinen Bootstrap kirjaston ansiosta ja sovellus käyttää tarpeeksi moderneja työkaluja, jotta siitä oli mahdollista tehdä PWA. Telian projektissa mobiiliteknologiaksi valittiin lopulta PWA-sovellus. 
+IoT-sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin. Lisäksi osa PWA-sovelluksen ei pakollisista vaatimuksista oli jo täytettynä, kuten responsiiviset näkymät ja salattu yhteys. Palvelua tarjotaan asiakkaille salattuna HTTPS-protokollan ylitse, mikä on yksi PWA-sovelluksen vaatimuksista. Salatun liikenteen käyttäminen laskee sovelluksen luotettavaksi. Sovellus on responsiivinen Bootstrap-kirjaston ansiosta jonka avulla sovellus muotoutuu kaikille eri laitteille ja resoluutioille. Responsiivisuus ei ole pakollinen vaatimus, mutta luokitellaan yhdeksi PWA-sovelluksen vaatimukseksi.
 
-PWA-sovelluksen kartoitus alkoi siihen tarvittavilta asioilta. Ensiksi sovellukseen luotiin projektiin sopiva sovelluskuvake ja nimi Web App Manifestiin. Seuraava vaihe, eli Service Workerin lisääminen oli isompi ja haastavampi kokonaisuus. Sovellusta päätettiin laajentaa Googlen tarjoamalla Workbox CLI työkalulla. Workbox on NodeJS pohjainen komentoriviohjelma, jolla on helppoa luoda Service Worker nykyiseen olemassa olevaan projektiin. Lisäksi ohjelma tarjoaa käteviä komentoja, joilla toimintaa voidaan mukauttaa omaan projektiin sopivaksi. Workbox asennettiin projektiin käyttämällä Yarnia.
+PWA-sovelluksen kehittäminen alkoi lisäämällä projektiin sopiva sovelluskuvake ja nimi Web App-manifestiin. PWA-sovelluksen vaatimusten mukaisesti projektiin piti lisätä Service Worker, mikä oli isompi ja haastavampi kokonaisuus. Sovellusta päätettiin laajentaa Googlen tarjoamalla Workbox CLI-työkalulla. Workbox on NodeJS pohjainen komentoriviohjelma, jolla on helppoa luoda Service Worker nykyiseen olemassa olevaan projektiin. Lisäksi ohjelma tarjoaa käteviä komentoja, joilla toimintaa voidaan mukauttaa omaan projektiin sopivaksi. Workbox asennettiin projektiin käyttämällä Yarnia.
 
-Seuraavaksi Workboxin käyttöönotossa huomattiin, että Workbox ei ole tuettuna Grunt työkalussa, sillä Grunt on liian vanha. Workboxia on kuitenkin mahdollista ajaa erikseen myös NodeJs skripteillä, joten Grunt työkalua laajennettiin "grunt-run" nimisellä paketilla, joka mahdollistaa komentojen ajamisen Gruntissa. 
+Workboxin käyttöönotossa huomattiin, että Workbox ei ole tuettuna Grunt työkalussa, sillä Grunt on liian vanha. Workboxia on kuitenkin mahdollista suorittaa erikseen myös NodeJs-skripteillä, joten Grunt-työkalua laajennettiin Grunt-run-nimisellä paketilla, joka mahdollistaa komentojen suorittamisen Gruntissa. 
 
-Grunt-run työkalu lisättiin myös Yarnia käyttämällä. Asennuksen jälkeen Gruntiin luotiin Run tehtävä, jonka tarkoitus oli ajaa Workbox skriptit. Tärkeää run komennossa on liittää argumenteiksi “inject:manifest“ \cite{Googlec}, jolloin ohjelma tietää liittää lopulliseen Service Worker tiedostoon kaikki tiedostot, jotka pitää lisätä välimuistiin. Näin jokaista tiedostoa tai polkua ei tarvitse kirjoittaa itse. Riittää että konfiguraatiotiedostossa on määritelty välimuistiin tallennettavien tiedostojen päätteet. Injektointikomento on Workboxin mukana tuleva natiivi komento.
+Gruntiin luotiin run-tehtävä \ref{gruntrunkomento}, jonka tarkoitus oli ajaa Workbox-skriptit. Tärkeää run-komennossa on liittää argumenteiksi “inject:manifest“ \cite{Googlec}, jolloin ohjelma tietää liittää lopulliseen Service Worker tiedostoon kaikki tiedostot, jotka pitää lisätä välimuistiin. Näin jokaista tiedostoa tai polkua ei tarvitse kirjoittaa itse. Riittää että konfiguraatiotiedostossa on määritelty välimuistiin tallennettavien tiedostojen päätteet. Injektointikomento on Workboxin mukana tuleva natiivi komento.
 
 \begin{lstlisting}[
      language=JavaScript,
      gobble=4,
-     frame=single
+     frame=single,
+     label={gruntrunkomento},
+     caption={Grunt run-komento.}
    ]
     module.exports = {
       options: {},
@@ -675,12 +657,14 @@ Grunt-run työkalu lisättiin myös Yarnia käyttämällä. Asennuksen jälkeen 
     };
 \end{lstlisting}
 
-Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lopussa run tehtävän, joka taas ajaa Workbox skriptin. Skripti käyttää projektin juureen generoitua Service Worker konfiguraatiotiedostoa, joka saatiin alunperin käyttämällä Workboxissa toimitettua asennusvelhoa. Workboxin asennusvelho on automaattinen työkalu konfiguraation luomiseen. Konfiguraatiossa määritellään esimerkiksi mistä kansiosta tiedostoja otetaan mukaan Service Workeriin ja millä tiedostopäätteellä olevat tiedostot lasketaan mukaan. Esimerkkinä IoT projektin Service Worker konfiguraatio
+Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lopussa run-tehtävän, joka taas ajaa Workbox-skriptin. Skripti käyttää projektin juureen generoitua Service Worker konfiguraatiotiedostoa, joka saatiin alunperin käyttämällä Workboxissa toimitettua asennusvelhoa. Workboxin asennusvelho on automaattinen työkalu konfiguraation luomiseen. Konfiguraatiossa määritellään esimerkiksi mistä kansiosta tiedostoja otetaan mukaan Service Workeriin ja millä tiedostopäätteellä olevat tiedostot lasketaan mukaan. Esimerkkinä IoT-projektin Service Worker konfiguraatio \ref{service worker konfiguraatio}.
 
 \begin{lstlisting}[
      language=JavaScript,
      gobble=4,
-     frame=single
+     frame=single,
+     label={service worker konfiguraatio},
+     caption={Service Worker konfiguraatio IoT-projektissa. }
    ]
     module.exports = {
       globDirectory: 'dist/',
@@ -697,12 +681,14 @@ Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lop
 \end{lstlisting}
 
 
-Projektissa on käsin kirjoitettu Service Worker pohja, joka on määritetty konfiguraatiotiedostossa. Tähän varsinaiseen Service Worker tiedostoon Workbox osaa konfiguraation pohjalta liittää tarvittavat tiedostot. Alla pala käsinkirjoitettua Service Workeria, jota Workbox laajentaa automaattisesti injektiokomennolla.
+Projektissa Service Worker pohja, joka on määritetty konfiguraatiotiedostossa. Tähän varsinaiseen Service Worker tiedostoon Workbox osaa konfiguraation pohjalta liittää tarvittavat tiedostot. Koodi \ref{serviceworkerbase} on Service Worker-pohja jota Workbox laajentaa automaattisesti injektiokomennolla.
 
 \begin{lstlisting}[
      language=JavaScript,
      gobble=4,
-     frame=single
+     frame=single,
+     label={serviceworkerbase},
+     caption={Service Worker-tiedoston runko mitä Workbox laajentaa. }
    ]
     workboxSW.precache([]);
     
@@ -728,9 +714,9 @@ Projektissa on käsin kirjoitettu Service Worker pohja, joka on määritetty kon
     );
 \end{lstlisting}
 
-Service Workerissa on määritelty workboxSW.precache([]); funktio, jonka parametrina on tyhjä taulukko. Taulukkoon Workbox laajentaa konfiguraatiossa mainitut tiedostot, jotta ne voidaan ottaa Service Workerin cachessa talteen. Service Workeriin on myös määritelty yhden viikon cache strategia ja esimerkiksi Googlen fontit on lisätty tähän yhden viikon strategiaan. Fontit eivät päivity kovin usein ja siksi on hyödyllistä laittaa niille hieman pidempi cache. Itse varsinaiselle sovellukselle taas on laitettu strategiaksi “network first“, eli verkko ensin. Koska sovellus tarvitsee käytännössä aina verkkoyhteyden datan hakemiseksi, ei ole järkevää asettaa strategiaksi cachea, vaan käyttäjälle halutaan aina näyttää ensiksi verkosta saatavilla oleva uusin tieto. Vasta verkkoyhteyden ollessa poissa käytöstä, voidaan cachesta näyttää tietoja. 
+Service Workerissa on määritelty workboxSW.precache([]); funktio, jonka parametrina on tyhjä taulukko. Taulukkoon Workbox laajentaa konfiguraatiossa mainitut tiedostot, jotta ne voidaan ottaa Service Workerin välimuistissa talteen. Service Workeriin on myös määritelty yhden viikon välimuististrategia ja esimerkiksi Googlen tekstityypit on lisätty tähän yhden viikon strategiaan. Tekstityypit eivät päivity kovin usein ja siksi on hyödyllistä laittaa niille hieman pidempi välimuistitallennus. Itse varsinaiselle sovellukselle taas on laitettu strategiaksi verkko edellä. Koska sovellus tarvitsee käytännössä aina verkkoyhteyden datan hakemiseksi, ei ole järkevää asettaa strategiaksi välimuistia, vaan käyttäjälle halutaan aina näyttää ensiksi verkosta saatavilla oleva uusin tieto. Vasta verkkoyhteyden ollessa poissa käytöstä, voidaan välimuistista näyttää tietoja. 
 
-Manifestin toimintaa sovelluksessa voitiin tarkastella Google-Chrome selaimen kehittäjäkonsolista sovellusvalikon alta löytyvältä Manifest välilehdeltä. Välilehdeltä selviää heti toimiiko manifesti oletetulla tavalla. Mikäli virheitä ilmenee, ne ilmoitetaan tällä sivulla. Sovelluksen identiteetti tiedoissa tulee lukea manifestin vaatimuksissa määritellyt kentät: sovelluksen nimi, sekä lyhytnimi. Presentaatio kohdassa tulee olla määriteltynä sovelluksen käynnistys osoite, teeman väri, sovelluksen orientaatio mobiililaitteella, sekä näyttömuoto. Ikoni kentissä tulee olla sovelluksen ikoni, joka näytetään käyttäjän mobiililaitteella asennuksen jälkeen. Ikoneita tulee olla useammassa eri resoluutiossa. 
+Manifestin toimintaa sovelluksessa voitiin tarkastella Google-Chrome selaimen kehittäjäkonsolista \ref{Manifest.json} sovellusvalikon alta löytyvältä Manifest välilehdeltä. Välilehdeltä selviää heti toimiiko manifesti oletetulla tavalla. Mikäli virheitä ilmenee ne ilmoitetaan tällä sivulla. Sovelluksen identiteetti tiedoissa tulee lukea manifestin vaatimuksissa määritellyt kentät: sovelluksen nimi, sekä lyhytnimi. Presentaatio kohdassa tulee olla määriteltynä sovelluksen käynnistys-osoite, teeman väri, sovelluksen orientaatio mobiililaitteella, sekä näyttömuoto. Ikoni-kentissä tulee olla sovelluksen ikoni, joka näytetään käyttäjän mobiililaitteella asennuksen jälkeen. Ikoneita tulee olla useammassa eri resoluutiossa. 
 
 \begin{figure}[h]
 \begin{center}
