@@ -69,7 +69,7 @@ Tässä työssä käydään läpi PWA-sovelluksen rakennustekniikoita ja määri
 
 Projektista otetaan Google Chromen Lighthouse-työkalua käyttäen metriikat sovelluksen progressiivisuuden ja nopeuden mittaamiseksi. Lisäksi sovellusta vasten ajetaan Puppeteer-kirjastoa hyödyntäen latausnopeuden laskeva testi useita kertoja ja tarkastellaan PWA-sovelluksen Service Workerin välimuistin hyödyllisyyttä suorituskyvyn ja latausajan kannalta. Jotta Service Workerin välimuistin käytöstä voidaan tehdä johtopäätökset, nopeuden muutosta tarkastellaan progressiivisten ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä. Lisäksi tarkastellaan Googlen tapaustutkimuksen kautta Service Workerin vaikutuksia sovelluksen nopeuteen. 
 
-Testitulokset osoittavat että Service Workerin välimuistin hyödyntäminen on nopeampaa kaikissa tapauksissa. Service Workerin välimuisti on nopeampi kuin selaimen oma välimuisti. Service Worker voi myös olla pysähtynyt ja odotustilassa käyttäjän selaimessa. Silti Service Workerin aktivoiminen ja välimuistin käyttäminen on nopeampaa kuin selaimen välimuistista tai suoraan verkosta lataaminen. 
+Testitulokset osoittavat että Service Workerin välimuistin hyödyntäminen on nopeampaa kaikissa tapauksissa. Service Workerin välimuisti on nopeampi kuin selaimen oma välimuisti. Service Worker voi myös olla pysähtynyt ja odotustilassa käyttäjän selaimessa. Silti Service Workerin aktivoiminen ja välimuistin käyttäminen on nopeampaa kuin selaimen välimuistista-, tai suoraan verkosta lataaminen. 
 
 
 \end{abstract}
@@ -95,7 +95,7 @@ Tässä tutkielmassa selvitetään millaisia vaikutuksia sovelluksen nopeuteen p
 Tämä työ on jaettu kuuteen päälukuun. Luvussa kaksi esitellään PWA:n vaatimukset, toteutustekniikoita ja selvennetään termin määritelmää. Luvussa tarkastellaan myös muita mobiilikehitys-teknologioita. Luvussa kolme käydään läpi tutkimusongelma ja luvussa neljä tehdään sovellukseen tekninen toteutus. Projektissa asennetaan tarvittavat työkalut PWA-sovelluksen kehittämiseksi. Luvussa viisi suoritetaan nopeusmittaukset käyttämällä Google-Chrome selaimen Lighthouse työkalua ja arvioidaan kuinka paljon vaikutuksia progressiivisilla ominaisuuksilla oli sovelluksen nopeuteen. Luvussa kuusi pohditaan PWA:ta toteustekniikkana, sen ongelmia, kipupisteitä ja tulevaisuutta.
 
 \newpage
-\section{PWA:n esittely}
+\section{PWA-sovellusten esittely}
 
 Tässä luvussa esitellään PWA teknologia ja sen vaatimukset. Luvussa esitellään myös muita mobiiliteknologioita ja tarkastellaan niiden eroja verrattuna PWA-sovellukseen.
 
@@ -117,7 +117,7 @@ PWA-sovelluksen tulee olla:
   \item \textbf{Asennettava:} Sovelluksen voi asentaa mobiililaitteen sovellusvalikkoon pikakuvakkeeksi, jolloin se on nopeasti saatavilla.
 \end{itemize}
 
-\subsection{Miksi PWA:ta tarvitaan?}
+\subsection{Miksi PWA-sovelluksia tarvitaan}
 \enlargethispage{5mm}
 
 Tarkastellaan millaisia haasteita on nykyään natiivi- ja web-sovelluksissa.
@@ -147,7 +147,7 @@ PWA-sovellukset ovat kääntämässä suunnan. Käyttäjä voi alkaa käyttämä
 
 PWAstats \cite{PWAstats} on julkaissut tilastoja, miten yritysten nykyisten sivujen muuttaminen PWA-sovellukseksi on tuottanut lisätuloja tai käyttäjiä. Esimerkiksi Uberin PWA-sovellus on nopea jopa 2G-verkossa. Uberin PWA-sovellus latautuu 2G-verkossa alle kolmessa sekunnissa. Suosittu deittipalvelu Tinder taas pienensi latausaikaa vajaasta 12 sekunnista alle viiteen sekuntiin, joka vaikutti suoraan käyttäjäkokemukseen ja käyttäjän sitoutumiseen. Tutkimuksen mukaan \cite{Osmani} Tinderin käyttäjät pyyhkäisivät, viestittelivät ja muokkasivat tietojaan useammin PWA-sovelluksessa kuin natiivisovelluksessa. PWA-sovellusten pitäisi siis toimia nopeammin kuin tavallisten verkkosivustojen.
 
-\subsection{PWA:n vaatimukset}
+\subsection{PWA-sovelluksen vaatimukset}
 
 Google on julkaissut PWA:lle tarkastuslistan, jota noudattamalla sovelluksesta saadaan progressiivinen \cite{Google}. Periaatteessa mikä tahansa verkkosivusto voidaan tehdä progressiiviseksi sovellukseksi \cite{hiltunen2018creating} riippumatta siitä millä ohjelmistokehyksellä se on ohjelmoitu \footnote[1]{AngularJs (https://angularjs.org/), React (https://reactjs.org/), VueJs (https://vuejs.org/), Wordpress (https://wordpress.org/), Drupal (http://www.drupal.fi/)}, kunhan vain PWA-sovelluksen ehdot täyttyvät.
 
@@ -344,6 +344,13 @@ Kun kaikki PWA-sovelluksen ehdot on täytetty, tulee käyttäjän ruudulle kuvan
 \end{center}
 \end{figure}
 
+\clearpage
+
+\subsection{PWA-työasemasovellus} 
+
+PWA-työasemasovellus voidaan asentaa mille tahansa työasemalle (Linux, Windows, Mac, Chrome OS). Sovellusta voidaan käyttää käyttäjän koneella kuten muitakin työasemasovelluksia. Sovellukset tuntuvat integroiduilta ja nopeilta, sillä ne avataan käyttöjärjestelmän sovellusvalikosta, kuten mikä tahansa muukin sovellus. Sovellus avautuu käyttöjärjestelmän natiivi-ikkunassa. Service Workerin välimuisti toimii sekä työasemalla, että mobiililaitteilla, joten PWA-sovelluksen käyttäminen on luotettavaa ja nopeaa. Chrome-selaimen versiosta 70 eteenpäin PWA-sovelluksia on mahdollista asentaa myös työasemille. 
+
+Google Developer portaalin työasema-artikkelin mukaan \cite{Google} mobiililaitteiden käyttö ajoittuu yleensä iltoihin ja aamuihin kun ihmiset ovat vapaalla. Päivällä ihmisten ollessa töissä käytetään yleensä enimmäkseen työasemasovelluksia. Googlen mukaan työasemalle asennettu sovellus tuntuu käyttäjän mielestä luotettavammalta ja nopeammalta mikäli se löytyy suoraan työaseman sovellusvalikosta. Työasema sovelluksia ohjelmoitaessa tulee ottaa huomioon samat vaatimukset kuin mobiililaitteilla. Myös sovelluksen responsiiviseen suunnitteluun tulee kiinnittää huomiota, sillä käyttäjä saattaa venyttää työasemalla sovelluksen mihin tahansa kokoon.
 
 \subsection{Muut teknologiat}
 
@@ -512,11 +519,6 @@ Hybridi- natiivi ja PWA-sovellusten eroja on esitelty taulukossa \ref{table:tekn
 
 \clearpage
 
-\subsection{PWA-työasemasovellus} 
-
-PWA-työasemasovellus voidaan asentaa mille tahansa työasemalle (Linux, Windows, Mac, Chrome OS). Sovellusta voidaan käyttää käyttäjän koneella kuten muitakin työasemasovelluksia. Sovellukset tuntuvat integroiduilta ja nopeilta, sillä ne avataan käyttöjärjestelmän sovellusvalikosta, kuten mikä tahansa muukin sovellus. Sovellus avautuu käyttöjärjestelmän natiivi-ikkunassa. Service Workerin välimuisti toimii sekä työasemalla, että mobiililaitteilla, joten PWA-sovelluksen käyttäminen on luotettavaa ja nopeaa. Chrome-selaimen versiosta 70 eteenpäin PWA-sovelluksia on mahdollista asentaa myös työasemille. 
-
-Google Developer portaalin työasema-artikkelin mukaan \cite{Google} mobiililaitteiden käyttö ajoittuu yleensä iltoihin ja aamuihin kun ihmiset ovat vapaalla. Päivällä ihmisten ollessa töissä käytetään yleensä enimmäkseen työasemasovelluksia. Googlen mukaan työasemalle asennettu sovellus tuntuu käyttäjän mielestä luotettavammalta ja nopeammalta mikäli se löytyy suoraan työaseman sovellusvalikosta. Työasema sovelluksia ohjelmoitaessa tulee ottaa huomioon samat vaatimukset kuin mobiililaitteilla. Myös sovelluksen responsiiviseen suunnitteluun tulee kiinnittää huomiota, sillä käyttäjä saattaa venyttää työasemalla sovelluksen mihin tahansa kokoon.
 
 \subsection{PWA-sovelluksen suorituskyky ja mittaaminen}
 
@@ -778,7 +780,7 @@ Tuloksista nähdään kuinka paljon nopeampi PWA-sovellus on. Onko Service Worke
 
 Tässä luvussa esitellään yleisesti projektia ja sitä koskevaa arkkitehtuuria. Projektissa käytettyjä kirjastoja ja työkaluja esitellään lyhyesti. Luvussa käydään läpi miten PWA-sovellus otettiin projektissa käyttöön.
 
-\subsection{IoT Dashboard}
+\subsection{Telia IoT-sovelluksen kehittäminen}
 
 Projektin teknologiaksi valikoitui Cumulocityn kehittäjäpaketin mukana toimitettava AngularJS:n versio 1.3. AngularJS on Googlen ylläpitämä avoimen lähdekoodin JavaScript-ohjelmistokehys, joka avustaa yksisivuisten sovellusten kehittämisessä ja käytössä \cite{jain2015angularjs}. AngularJS:n tavoite on lisätä selainpohjaisiin sovelluksiin tuki MVC-arkkitehtuurille, jonka avulla sivustojen kehitys helpottuu. 
 
@@ -965,7 +967,13 @@ Webpack luo Workbox lisäosalla automaattisesti sopivan Service Worker scriptin 
 \section{Suorituskyvyn arviointi}
 
 Tässä luvussa arvioidaan PWA-sovelluksen nopeutta verrattuna normaaliin verkkosivustoon. 
-Sovellusta auditoitiin suoraan tuotantopalvelimelta. Vaihtoehtona olisi ollut auditoida sivua myös kehittäjän koneelta paikallisesta kehitysympäristöstä, mutta tällöin ei olisi saatu tarpeeksi kattavia tuloksia loppukäyttäjän näkökulmasta. Ensiksi auditoitiin sovelluksen versiota 1.7.0, joka oli kasattu vanhalla Grunt-työkalulla, sekä vanhalla Service Worker-skriptillä. 
+Sovellusta mitattiin suoraan tuotantopalvelimelta. Vaihtoehtona olisi ollut mitata sivua myös kehittäjän koneelta paikallisesta kehitysympäristöstä, mutta tällöin ei olisi saatu tarpeeksi kattavia tuloksia loppukäyttäjän näkökulmasta. Ensiksi mitattiin sovelluksen versiota 1.7.0, joka oli kasattu vanhalla Grunt-työkalulla, sekä vanhalla Service Worker-skriptillä. Seuraavaksi mitattiin sovelluksen versiota 1.7.1 jossa oli toteutettuna uusi Service Worker ja Webpack.
+
+\subsection{Lighthousen progressiivisuuspisteet ja suorituskyky}
+
+Sovelluksen koko on kasvanut vuosien aikana erittäin laajaksi lukuisten kirjastojen ja kirjoitetun koodin myötä. Isomman koodimäärän lataaminen ja kääntäminen selaimessa kestää kauemmin. Vuoden 2015 lopulla aloitettu projekti ei ole modulaarinen ja sen skriptien lataaminen on selaimessa hidasta. Lisäksi kaikki skriptit ladataan vaikka niitä ei edes heti tarvittaisi. Tästä syystä suorituskykypisteet jäivät hyvin pieniksi ensimmäisessä mittauksessa. Suorituskykypisteitä verrattiin Lighthouse-työkalun mittapisteestä: aika joka selaimelta kesti kääntää sovellus niin, että se on valmis käytettäväksi ja reagoi käyttäjän syötteisiin.
+
+Toinen pisteisiin suoraan vaikuttava asia on ensimmäinen järkevä piirto-mittapiste, joka tarkoittaa ensimmäistä järkevää näkymää käyttäjälle. PWA-sovelluksille on erittäin tärkeää latautua nopeasti.  Lighthousen tuloksista \ref{Lighthouse raportti 1} nähdään, että sovellus täyttää kaikki tarvittavat PWA-sovelluksen kriteerit, paitsi suorituskyvyn osalta, jonka takia PWA-pistemäärä jäi 73 pisteeseen.
 
 \begin{figure}[h]
 \begin{center}
@@ -977,10 +985,7 @@ Sovellusta auditoitiin suoraan tuotantopalvelimelta. Vaihtoehtona olisi ollut au
 
 \clearpage
 
-Sovelluksen koko on kasvanut vuosien aikana erittäin laajaksi lukuisten kirjastojen ja kirjoitetun koodin myötä. Isomman koodimäärän lataaminen ja kääntäminen selaimessa kestää kauemmin. Vuoden 2015 lopulla aloitettu projekti ei ole modulaarinen ja sen skriptien lataaminen on selaimessa hidasta. Tästä syystä suorituskykypisteet jäivät hyvin pieniksi. Suorituskykypisteet lasketaan Lighthouse-työkalun mittapisteestä: aika joka selaimelta kesti kääntää sovellus niin, että se on valmis käytettäväksi ja reagoi käyttäjän syötteisiin.
-
-Toinen pisteisiin suoraan vaikuttava asia on ensimmäinen järkevä piirto-mittapiste, joka tarkoittaa ensimmäistä järkevää näkymää käyttäjälle. Tuloksia analysoimalla saatiin selville, että sovellus täyttää kaikki tarvittavat kriteerit PWA-sovelluksen täyttämiseksi, paitsi suorituskyvyn osalta, jonka takia pistemäärä jäi 73 pisteeseen. PWA-sovelluksille on erittäin tärkeää latautua nopeasti. 
-
+Seuraava mittaus tehtiin Webpackia hyödyntävällä sovelluksen versiolla 1.7.1 jonka Service Worker oli generoitu Webpack-lisäosalla. Pelkästään siirtämällä muutama skripti ladattavaksi moduuleina, saatiin sovelluksen lataamista nopeammaksi. Mittauksen tuloksista \ref{Lighthouse raportti 2} nähdään, että sovelluksen kääntöaika käytettäväksi laski yli sekunnin. Myös ensimmäinen järkevä piirto tippui yli puoli sekuntia. Web-sovelluksista puhuttaessa on kyse huomattavasta ajasta. Sovelluksen kokonaiskäynnistymisaika on kuitenkin edelleen hidas verrattuna hyvin optimoituihin nykyaikaisiin modulaarisiin sivustoihin. Sekunnin nopeusmuutos antoi kuitenkin täydet 100 pistettä PWA-kategoriasta. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -992,7 +997,7 @@ Toinen pisteisiin suoraan vaikuttava asia on ensimmäinen järkevä piirto-mitta
 
 \clearpage
 
-Seuraava auditointi tehtiin Webpackin käännöksellä ja sen hyödyt nähtiin heti. Pelkästään siirtämällä muutama skripti ladattavaksi moduuleina, saatiin sovelluksen lataamista nopeammaksi. Sovelluksen kääntöaika käytettäväksi laski yli sekunnin. Myös ensimmäinen järkevä piirto tippui yli 0,5 sekuntia. Web-sovelluksista puhuttaessa on kyse huomattavasta ajasta. Sovelluksen kokonaiskäynnistymisaika on kuitenkin edelleen hidas verrattuna hyvin optimoituihin nykyaikaisiin modulaarisiin sivustoihin. Sekunnin nopeusmuutos antoi kuitenkin täydet 100 pistettä PWA-kategoriasta. Sovelluksen nopeutta mitattiin vielä uudestaan, jotta saataisiin tulokset Service Workerin muodostamasta välimuistin käytöstä.
+Sovelluksen nopeutta mitattiin vielä kolmannen kerran, jotta saataisiin tulokset Service Workerin muodostamasta välimuistin käytöstä. Kolmannella kerralla mitattaessa Lighthousesta laitettiin "Clear storage" valinta pois päältä, jotta sovelluksen välimuistia ei tyhjennettäisi. Sovellus sai toisesta auditoinnista vielä yhden pisteen lisää suorituskykyyn. Ensimmäinen järkevä piirto tippui vain 0.1 sekuntia. Tulokset ovat kuvassa \ref{Lighthouse raportti 3}.
 
 \begin{figure}[h]
 \begin{center}
@@ -1002,18 +1007,16 @@ Seuraava auditointi tehtiin Webpackin käännöksellä ja sen hyödyt nähtiin h
 \end{center}
 \end{figure}
 
-Toisella kerralla auditoitaessa Lighthousesta täpättiin "Clear storage" valinta pois päältä, jotta sovelluksen välimuistia ei tyhjennettäisi. Sovellus sai toisesta auditoinnista vielä yhden pisteen lisää suorituskykyyn. Ensimmäinen järkevä piirto tippui vain 0.1 sekunttia.
-
-\subsection{PWA-sovelluksen toistuva avaaminen välimuistista verrattuna ensimmäiseen lataukseen}
+\subsection{Puppeteer mittausten suorituskyky}
 
 Jotta Service Workerin vaikutuksista saataisiin vielä tarkempia tuloksia tehtiin seuraavaksi yksinkertainen toistuva sivulataus sovellukselle. Sovellus avattiin selaimessa ja siitä tallennettiin dokumenttioliomallin kääntöaika. Tällöin selain on parsinut päädokumentin, mutta sovellus ei ole vielä käytettävissä eikä reagoi syötteisiin. Sovellusta vasten ajettiin yksinkertainen rasitustesti kahdella eri tavalla. Ensimmäiseksi selain käynnistettiin joka kerta uudestaan, jotta selaimen välimuistissa ei olisi aikaisempaa tietoa. Seuraavaksi selainta ei käynnistetty uudestaan ja sivulataus tehtiin kun Service Workerin välimuistiin oli talletettu tietoa. 
 
-Testissä määriteltiin yksinkertaisesti kymmenen ajoa kummallekin tavalle. Selaimen objekteista löytyy suorituskyvyn ajoitustieto, josta saadaan tietoa sovelluksen vasteajoista. Testeihin määriteltiin kerättäväksi edellä mainittu dokumenttioliomallin kääntämisen aika. Jälkimmäisessä testitapauksessa jossa selainta ei käynnistetty uudestaan testit ajettiin 11 kertaa. Ensimmäistä ajokertaa ei huomioitu, sillä silloin välimuistissa ei vielä ollut mitään tietoa sivusta. Puppeteer aloittaa ajon aina oletuksena tyhjältä pöydältä. Tulokset on esitelty taulukossa \ref{table:latausajatAB}.
+Testissä määriteltiin yksinkertaisesti kymmenen ajoa kummallekin tavalle. Selaimen objekteista löytyy suorituskyvyn ajoitustieto, josta saadaan tietoa sovelluksen vasteajoista. Testeihin määriteltiin kerättäväksi edellä mainittu dokumenttioliomallin kääntämisen aika. Jälkimmäisessä testitapauksessa jossa selainta ei käynnistetty uudestaan testit ajettiin 11 kertaa. Ensimmäistä ajokertaa ei huomioitu, sillä silloin välimuistissa ei vielä ollut mitään tietoa sivusta. Puppeteer aloittaa ajon aina oletuksena tyhjältä pöydältä. Tulokset on esitelty taulukossa \ref{table:puppeteerLatausajat}.
 
 \begin{table}[!ht]
 \centering
 \begin{small}
-\caption{Sovelluksen latausajat yksinkertaisessa testissä Telia IoT-palvelussa. }
+\caption{Telia IoT-palvelun latausajat testissä. }
 \begin{tabular}{|L{3cm}|L{3cm}|L{3cm}|L{3cm}|}
 \hline
 \textbf{Grunt ei Välimuistia} & 
@@ -1046,7 +1049,7 @@ Testissä määriteltiin yksinkertaisesti kymmenen ajoa kummallekin tavalle. Sel
 494,2 &	188 & 491,9 & 182,8
 \\ \hline
 \end{tabular}
-\label{table:latausajatAB}
+\label{table:puppeteerLatausajat}
 \end{small}
 \end{table}
 
@@ -1060,7 +1063,7 @@ Testissä määriteltiin yksinkertaisesti kymmenen ajoa kummallekin tavalle. Sel
 \end{center}
 \end{figure}
 
-Service Workerin välimuistista ladattu sivu aukeaa huomattavasti nopeammin kuin ilman Service Workeria. Pyöristettynä Service Workerin välimuistista ladattava sovellus aukeaa 300 millisekuntia nopeammin. Latausaika tuntui vaihtelevan hieman suuntaan tai toiseen. Laskemalla keskiarvo kummastakin ajosta selviää, että Webpackilla tehty ratkaisu oli lopulta hieman nopeampi. Pieni ero Webpackin ja Gruntin välillä johtui siitä, että sovellusta ei oltu optimoitu tarpeeksi modulaariseksi, eikä ylimääräisiä kirjastoja jätetty lataamatta. 
+Service Workerin välimuistista ladattu sivu aukeaa huomattavasti nopeammin kuin ilman Service Workeria. Pyöristettynä Service Workerin välimuistista ladattava sovellus aukeaa 300 millisekuntia nopeammin. Keskiarvoistetut ajat on havainnollistettu kuvassa \ref{Dom Interactive keskiarvoistettu aika}. Latausaika tuntui vaihtelevan hieman suuntaan tai toiseen. Laskemalla keskiarvo kummastakin ajosta nähdään, että Webpackilla tehty ratkaisu oli lopulta hieman nopeampi. Pieni ero Webpackin ja Gruntin välillä johtui siitä, että sovellusta ei oltu optimoitu tarpeeksi modulaariseksi, eikä ylimääräisiä kirjastoja jätetty lataamatta uudessa Webpack-versiossa. Tätä ei tehty siksi, että käytetyt kirjastot olivat joko liian vanhoja ladattavaksi modulaarisesti, tai niitä ei keretty päivittää uudempiin.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -1070,8 +1073,7 @@ Service Workerin välimuistista ladattu sivu aukeaa huomattavasti nopeammin kuin
 \end{center}
 \end{figure}
 
-Testin perusteella Service Workerin välimuistia hyödyntämällä sovelluksen latausaikaa saadaan siis pienennettyä huomattavasti. 
-
+Lighthouse, sekä Puppeteer-testin perusteella Service Workerin välimuistia hyödyntämällä sovelluksen latausaikaa saadaan siis pienennettyä huomattavasti ja sen käyttäminen on järkevää. 
 
 \clearpage
 \section{Pohdinta}
