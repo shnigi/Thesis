@@ -59,7 +59,7 @@
 
 
 
-\keywords{PWA, Progressiiviset web sovellukset, mobiili selainsovellus, progressiivisuus}
+\keywords{PWA, progressiiviset web sovellukset, mobiili selainsovellus, progressiivisuus}
 
 \begin{abstract}
 
@@ -111,19 +111,19 @@ PWA-sovelluksen tulee olla:
   \item \textbf{Tuore:} Sovelluksen pitää hakea aina verkkoyhteyden ollessa päällä uusin versio käyttäjän huomaamatta.
   \item \textbf{Turvallinen:} Sovellus pitää aina tarjota salattuna Transport Layer Security-protokollaa (TLS) käyttäen.
   \item \textbf{Löydettävä:} Sovelluksen tulee noudattaa W3C-yhteisön määrityksiä ja tarjota manifesti, joka määrittää sovelluksen. Sovellus voidaan löytää tavallisista hakukoneista sovelluskauppojen sijaan. Mikäli sovellus täyttää kaikki PWA-sovelluksen kriteerit, manifestistä poimitaan sovelluksen nimi ja kuvake jos käyttäjä päättää asentaa sovelluksen laitteelleen.
-  \item \textbf{Sitouttaa käyttäjän:} Sovelluksen tulee olla mahdollista muistuttaa olemassaolostaan esimerkiksi sovellusilmoituksilla ja näin saada käyttäjä palaamaan sovelluksen pariin.
+  \item \textbf{Sitouttava:} Sovelluksen tulee olla mahdollista muistuttaa olemassaolostaan esimerkiksi sovellusilmoituksilla ja näin saada käyttäjä palaamaan sovelluksen pariin.
   \item \textbf{Asennettava:} Sovelluksen voi asentaa mobiililaitteen sovellusvalikkoon pikakuvakkeeksi, jolloin se on nopeasti saatavilla.
 \end{itemize}
 
 \subsection{Miksi PWA:ta tarvitaan?}
 \enlargethispage{5mm}
 
-Tarkastellaan ensiksi millaisia haasteita on nykyään natiivi- ja web-sovelluksissa.
+Tarkastellaan millaisia haasteita on nykyään natiivi- ja web-sovelluksissa.
 
 \begin{itemize}
-  \item \textbf{Internetin nopeus.} Internet ei ole kaikkialla maailmassa nopea. noin 60\% maailmasta käyttää yhä 2G-verkkoa \cite{Kapoor} ja paikoitellen verkko on niin ruuhkautunut, että sen tiedonsiirtokyky ei ole riittävä. Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Tutkimuksen mukaan 53\% käyttäjistä hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti \cite{Kapoor}.
-  \item \textbf{Kynnys asentaa omalle laitteelle on korkea.} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia \cite{Kapoor}. ComScoren mukaan keskimääräinen käyttäjä lataa ja asentaa laitteellensa nolla sovellusta kuukaudessa \cite{Perez}. Asennettu sovellus vie tilaa mobiililaitteelta ja sovellukselle pitää antaa lisäksi täydet käyttöoikeudet sen tarvitsemiin rajapintoihin.
-  \item \textbf{Käyttäjän sitouttaminen.} Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa. Noin 80\% ajasta käytetään kolmen tärkeimmän natiivisovelluksen parissa. Verkkosivujen käyttöäaste on noin viidesosan sovelluksiin verrattuna. Näin ollen suurin osa käyttäjistä ei ole sitoutettu palveluun \cite{Kapoor}. Väitteen esittäjältä Kapoorilta pyydettiin tarkennusta asiaan 15.3.2019 saamatta vastausta.
+  \item \textbf{Internetin nopeus:} Internet ei ole kaikkialla maailmassa nopea. noin 60\% maailmasta käyttää yhä 2G-verkkoa \cite{Kapoor} ja paikoitellen verkko on niin ruuhkautunut, että sen tiedonsiirtokyky ei ole riittävä. Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Tutkimuksen mukaan 53\% käyttäjistä hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti \cite{Kapoor}.
+  \item \textbf{Kynnys asentaa omalle laitteelle on korkea:} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia \cite{Kapoor}. ComScoren mukaan keskimääräinen käyttäjä lataa ja asentaa laitteellensa nolla sovellusta kuukaudessa \cite{Perez}. Asennettu sovellus vie tilaa mobiililaitteelta ja sovellukselle pitää antaa lisäksi täydet käyttöoikeudet sen tarvitsemiin rajapintoihin.
+  \item \textbf{Käyttäjän sitouttaminen:} Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa. Noin 80\% ajasta käytetään kolmen tärkeimmän natiivisovelluksen parissa. Verkkosivujen käyttöäaste on noin viidesosan sovelluksiin verrattuna. Näin ollen suurin osa käyttäjistä ei ole sitoutettu palveluun \cite{Kapoor}. Väitteen esittäjältä Kapoorilta pyydettiin tarkennusta asiaan 15.3.2019 saamatta vastausta.
 \end{itemize}
 
 PWA pyrkii ratkaisemaan näitä ongelmia. PWA:n käyttöön on useita syitä. Tässä muutamia:
@@ -139,7 +139,7 @@ Tal Aterin julkaisemassa kirjassa "Building Progressive Web Apps" \cite{ater2017
 
 Jotta käyttäjän saisi asentamaan mobiilisovelluksen, täytyy sovelluksesta ensin saada tietää jostain. Sen jälkeen täytyy etsiä kyseinen sovellus sovelluskaupasta, ladata ja asentaa se. Sovellukselle täytyy antaa tarvittavat käyttöoikeudet heti. Viimeiseksi käyttäjä voi vasta avata sovelluksen ja ehkä jopa tehdä sillä jotain. Näiden toimenpiteiden suorittaminen ei kuulosta pahalta, jos kyseessä on jokin käyttäjän tykkäämä ja luotettava sovellus, kuten esimerkiksi Facebook tai Twitter. Aterin kirjan mukaan \cite{ater2017building} on useita tutkimuksia jotka todistavat, että keskimäärin 20\% käyttäjistä hävitetään tässä mallissa. 
 
-Kun käyttäjä vierailee haluamansa sovelluksen sivulla, ensimmäinen asia mikä käyttäjälle näytetään on mainos uudesta mobiilisovelluksesta. Esimerkiksi jos käyttäjä haluaa tarkistaa päivän sään joltakin verkkosivulta, tulisi eteen koko ruudun kokoinen mainos sääsovelluksesta ja linkki sovelluskauppaan. Tämä peittää varsinaisen sisällön josta käyttäjä on kiinnostunut vaikka tieto olisi heti saatavilla bannerin alla. 
+Kun käyttäjä vierailee haluamansa sovelluksen sivulla, ensimmäinen asia mikä käyttäjälle näytetään, on mainos uudesta mobiilisovelluksesta. Esimerkiksi jos käyttäjä haluaa tarkistaa päivän sään joltakin verkkosivulta, tulisi eteen koko ruudun kokoinen mainos sääsovelluksesta ja linkki sovelluskauppaan. Tämä peittää varsinaisen sisällön josta käyttäjä on kiinnostunut vaikka tieto olisi heti saatavilla bannerin alla. 
 
 PWA-sovellukset ovat kääntämässä suunnan. Käyttäjä voi alkaa käyttämään palvelua heti ja sovellus pyytää lisäämään pikakuvakkeen käyttäjän työpöydälle mikäli hän vierailee sivustolla useamman kerran. Myös käyttöoikeuksia lisätään progressiivisesti sitä mukaa kun niitä tarvitaan. PWA-sovellus siis poistaa tarpeen mainostaa erikseen mobiilisovelluksia. Käyttäjiä ei tarvitse enää ohjata sovelluskauppoihin, sillä verkkosivusto alkaa itse ehdottamaan pikakuvakkeen luomista käyttäjälle. 
 
@@ -150,19 +150,19 @@ Google on julkaissut PWA:lle tarkastuslistan, jota noudattamalla sovelluksesta s
 \textbf{Web App Manifest}: Jotta projektista saataisiin sovelluksen kaltainen, tulee sovelluksen juureen määritellä manifest.json-tiedosto. Tiedosto voi pitää sisällään esimerkiksi tiedot seuraavista asioista:
 
 \begin{itemize}
-  \item sovelluksen nimi,
+  \item sovelluksen nimi ja lyhytnimi,
   \item sovelluksen teeman väri,
   \item taustaväri,
   \item sovelluksen oletus käyttöasento, joko pysty-, tai vaaka-asento,
   \item aloitustiedosto, yleensä index.html tai index.js,
   \item ikonitiedot eri resoluutioissa,
-  \item Aloitusruutu (splash screen).
+  \item Aloitusruutu.
 \end{itemize}
 
-Kyseessä on tavallinen JSON-tiedosto, joka pitää sisällään metatietoa sovelluksesta. Kun selain havaitsee manifest.json-tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöstä tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen tilapalkki sovelluksen teeman väriä vastaavaksi mikäli sellainen on määritelty. Manifestin tarkoitus on tarjota muutettavia asetuksia kehittäjille yhdessä konfiguraatiotiedostossa. \cite{biorn2017progressive} Manifestia voidaan siis käyttää määrittämään sovelluksen käyttäytyminen ja tyyli.
+Kyseessä on tavallinen JSON-tiedosto, joka pitää sisällään metatietoa sovelluksesta. Kun selain havaitsee manifest.json-tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöstä tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen tilapalkki sovelluksen teeman väriä vastaavaksi, mikäli sellainen on määritelty. Manifestin tarkoitus on tarjota muutettavia asetuksia kehittäjille yhdessä konfiguraatiotiedostossa. \cite{biorn2017progressive} Manifestia voidaan siis käyttää määrittämään sovelluksen käyttäytyminen ja tyyli.
 Kun sovelluskuvaketta klikataan mobiililaitteen sovellusvalikosta, kestää selaimen käynnistymisessä pieni hetki \cite{hiltunen2018creating}. Tänä aikana näytetään sovelluksesta aloitusruutu, joka generoituu automaattisesti. Taustavärinä on sovelluksen väri ja keskellä sovelluksen ikoni. Nämä ovat manifestissa määriteltyjä tietoja. Aloitusruudun näyttämisellä sovelluksen käytöstä saadaan parempi käyttökokemus \cite{hiltunen2018creating}. Käyttäjälle näytetään sovelluksesta heti ainakin jotain varsinaisen käyttöliittymän latautuessa taustalla. Tästä tulee käyttäjälle tunne, että sovellus toimii nopeasti.
 
-Manifestissa määritelty nimi on sovelluksen nimi mobiililaitteen valikossa. Short name tietoa käytetään silloin, kun sovellusvalikon näkymä on pieni, esimerkiksi matkapuhelimissa.
+Manifestissa määritelty nimi on sovelluksen nimi mobiililaitteen valikossa. Lyhytnimi tietoa käytetään silloin, kun sovellusvalikon näkymä on pieni, esimerkiksi matkapuhelimissa.
 
 Aloitustiedosto on usein index.html tai index.js. Joissain tapauksissa voi olla hyödyllistä ohjata käyttäjä sivulle, jossa pystyy tekemään jotakin. Esimerkiksi sellaisessa tapauksessa missä indexi sivu on esimerkiksi sisäänheittosivu tai sovelluksen mainossivu. Tässä tapauksessa voi olla järkevää ohjata käyttäjä vaikka sovelluksen kirjautumisikkunaan.
 
@@ -183,7 +183,7 @@ Service Workeriin voidaan ohjelmallisesti määrittää mitä tiedostoja tallenn
   \item tiedosto haetaan verkosta tai vaihtoehtoisesti välimuistista jos sitä ei löydy verkosta,
   \item verkon ja välimuistin kilpailu. Joskus pienten tiedostojen hakeminen verkosta voi olla nopeampaa kuin hitaalta massamuistilta,
   \item välimuisti, sitten verkko. Hyödyllinen silloin kun jokin tieto päivittyy useasti. Välimuistista voidaan nopeasti ladata vanha tieto ja taustalla päivittää uusi tieto verkosta,
-  \item Yleinen varasuunnitelma: kun tiedostoa ei löydy välimuistista eikä verkosta näytetään tilalla vaihtoehtoinen kuva tai esimerkiksi teksti: "ei käytettävissä ilman verkkoyhteyttä".
+  \item yleinen varasuunnitelma: kun tiedostoa ei löydy välimuistista eikä verkosta näytetään tilalla vaihtoehtoinen kuva tai esimerkiksi teksti: "ei käytettävissä ilman verkkoyhteyttä".
 \end{itemize}
 
 \begin{figure}[h]
@@ -236,7 +236,7 @@ Service Worker on vielä joissain selaimissa kokeellinen ominaisuus, joten ennen
     }
 \end{lstlisting}
 
-Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle kertoa mistä tiedostosta Service Worker löytyy. Service Worker APIn saatavuus tarkistetaan if-lausekkeen sisällä ja mikäli tuki löytyy selaimesta, Service Worker rekisteröidään kunnes sivu on latautunut. 
+Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle kertoa mistä tiedostosta Service Worker löytyy. Service Worker rajapinnan saatavuus tarkistetaan ehtolausekkeen sisällä ja mikäli tuki löytyy selaimesta, Service Worker rekisteröidään heti kun sivu on latautunut. 
 
 \begin{figure}[h]
 \begin{center}
@@ -250,7 +250,7 @@ Kuvaan \ref{Service workerin selaintuki} viitaten Service Worker on pääosin tu
 
 \textbf{Service Workerin tallennustila}
 
-Syksyllä 2017 Microsoft Edge Web Summitissa selainvalmistajat sopivat keskenään selaimen tallennustilan koosta. \cite{Love} Yleiskooksi sovittiin 50 megatavua aina yli 20 gigabitin tallennustilaan. 20 gigatavua ei kuitenkaan päde aina. Nyrkkisääntönä on, että kovalevyn tilasta voidaan varata korkeintaan 4\% tai 20 gigatavua, kumpi vain on pienempi. Taulukossa \ref{table:selaimentallennustila} on esitetty tallennustilan varaamista erikokoisilla kiintolevyillä. Sivuston raja tarkoittaa samasta verkkotunnuksesta olevia sovelluksia. Mikäli saman verkkotunnuksen alta asennetaan useampi sovellus on tallennustila yhteinen kaikille sen tunnuksen sovelluksille. 
+Syksyllä 2017 Microsoft Edge Web-tapahtumassa selainvalmistajat sopivat keskenään selaimen tallennustilan koosta. Yleiskooksi sovittiin 50 megatavua aina yli 20 gigabitin tallennustilaan \cite{Love}. 20 gigatavua ei kuitenkaan päde aina. Nyrkkisääntönä on, että kovalevyn tilasta voidaan varata korkeintaan 4\% tai 20 gigatavua, kumpi vain on pienempi. Taulukossa \ref{table:selaimentallennustila} on esitetty tallennustilan varaamista erikokoisilla kiintolevyillä. Sivuston raja tarkoittaa samasta verkkotunnuksesta olevia sovelluksia. Mikäli saman verkkotunnuksen alta asennetaan useampi sovellus, on tallennustila yhteinen kaikille sen tunnuksen sovelluksille. 
 
 \begin{table}[!ht]
 \begin{center}
@@ -329,7 +329,7 @@ PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyt
 \end{figure}
 \clearpage
 
-Kun kaikki PWA-sovelluksen ehdot on täytetty tulee käyttäjän ruudulle kuvan \ref{asennusbanneri} kaltainen ponnahdusikkuna.
+Kun kaikki PWA-sovelluksen ehdot on täytetty, tulee käyttäjän ruudulle kuvan \ref{asennusbanneri} kaltainen ponnahdusikkuna.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -411,7 +411,7 @@ Hybridisovellukset ovat siis web-pohjaisia HTML- ja JavaScript-sovelluksia, joll
 
 React Native on Facebookin kehittämä natiivisovelluskehys. React Nativella tehdään natiiveja sovelluksia, joiden käyttöliittymä kehitetään JavaScriptillä ja Reactilla \cite{Facebook}. React Nativella on mahdollista kirjoittaa koko sovellus käyttäen Reactia ja JavaScriptiä, tai vain osa sovelluksesta ja kirjoittaa loput natiivikoodilla. Esimerkiksi Facebook-sovellus toimii React Nativella. Muita React Nativella julkaistuja sovelluksia ovat esimerkiksi Instagram, Uber ja Skype. Tämä kertoo siitä, että teknologia on todettu hyvin toimivaksi ja se soveltuu myös vaativiin projekteihin, joissa ei ole varaa heikkoon suorituskykyyn.
 
-React Native eroaa hybridisovelluksista ja web-sovelluksista siten, että kun sovelluksen näkymä renderöidään, React Native kutsuu joko Objective C rajapintaa iOS-laitteilla, tai Java rajapintaa Android-laitteilla \cite{Aggarwal}. Tämä erottaa React Nativen hybridisovelluksista ja PWA-sovelluksista, jotka yleensä renderöivät selainpohjaisen näkymän. React Native voisi tukea Android- ja iOS-alustan lisäksi myös muita käyttöjärjestelmiä, teoriassa esimerkiksi älytelevisioita, mutta silloin jonkun täytyisi ohjelmoida puuttuva rajapinta.  
+React Native eroaa hybridisovelluksista ja web-sovelluksista siten, että kun sovelluksen näkymä renderöidään, React Native kutsuu joko Objective C rajapintaa iOS-laitteilla, tai Java rajapintaa Android-laitteilla \cite{Aggarwal}. Tämä erottaa React Nativen hybridisovelluksista ja PWA-sovelluksista, jotka yleensä renderöivät selainpohjaisen näkymän. React Native voisi tukea Android- ja iOS-alustan lisäksi myös muita käyttöjärjestelmiä, teoriassa esimerkiksi älytelevisioita, mutta silloin jonkun täytyisi ohjelmoida puuttuva rajapinta.
 
 React Nativen etuna on natiivisovelluksen nopeus sekä yksi ja sama koodipohja molemmille käyttöjärjestelmille. Sovelluksen kehittämiseen kuluu huomattavasti vähemmän aikaa ja rahaa. Sovellus voidaan luoda vain käyttäen yhtä ohjelmointikieltä, eikä ole tarvetta etsiä erikseen iOS tai Android kehittäjää. React Native on ohjelmistokehys, jota voi itse laajentaa kirjoittamalla natiivikoodia. Mikäli kehys ei suoraan tue jotain toimintoa, voidaan sellainen kirjoittaa niiden rajoitusten puitteissa mitä iOS- ja Android-alustoilla on.
 
@@ -448,7 +448,7 @@ PWA-sovellus on aina ajan tasalla, sillä käyttäjän laitteelle on asennettu a
 
 PWA- ja hybridisovellukset alkavat olla melko lähellä toisiaan. Hybridisovellukset toteuttavat Android-laitteella WebView järjestelmäkomponentin, joka mahdollistaa sovelluksen näyttää tietoa verkosta sovelluksen sisällä. Android-laitteissa on kaksi tapaa näyttää verkkosisältöä. Perinteisen verkkoselaimen kautta, tai WebView-näkymän kautta sovelluksen sisällä. Androidin versiosta 4.4 \cite{chromedeveloper} lähtien WebView-komponentti on perustunut Chromium-selaimeen. Tämä mahdollistaa uusimpien verkkotekniikoiden käyttämisen ilman että itse Android-järjestelmää päivitettäisiin. Aikaisemmin kehittäjät ovat joutuneet odottamaan WebView-komponentin päivittymistä tai keksimään muita ratkaisuja toimintojen suorittamiseksi. Hybridisovellukset eroavat PWA-sovelluksista käyttämällä natiivirajapintoja sovelluksen ja laitteen välillä. Hybridisovellus paketoidaan tietylle laitealustalle ja julkaistaan laittevalmistajan jakelukanavalla. PWA:n etuna on se, että kehittäjien ei tarvitse noudattaa minkään sovelluskaupan käyttöehtoja. Sovelluksen julkaisusta ei myöskään tarvitse maksaa mitään. PWA-sovelluksen etuna voi myös olla löydettävyys. Ihmiset etsivät useimmiten tietoa verkon hakukoneista. Jotta yksittäinen käyttäjä etsisi sovellusta sovelluskaupasta, täytyy sovelluksen olla tuttu muuta kautta. 
 
-Suuri etu PWA-sovelluksissa on niiden levytilavaatimus. Pinterestin tekemässä tapaustutkimuksessa \cite{Osmani} Pinterestin sovelluskaupoissa julkaiseman sovelluksen koko oli Android-alustalla noin 10 megatavua ja iOS alustalla 56 megatavua. Pinterestin tekemien PWA-muutosten myötä PWA-sovelluksen koko oli 150 kilotavua. Vaikka Pinterest edelleen jakelee natiivisovellusta Android- ja iOS-alustoille, he pystyivät tekemään PWA-sovelluksella saman kuin mobiilisovelluksella, mutta vain murto-osalla sovelluksen koosta. Tämä on käyttäjälle etu, suurta natiivisovellusta ei tarvitse ladata ja asentaa jotta sitä pääsee käyttämään. PWA-sovellusta voi käyttää verkossa heti, ilman että on ladannut yhtään mitään tai edes tehnyt päätöstä sovelluksen asentamisesta. Pinterestin suorituskykymittauksen mukaan \cite{Osmani} sovelluksen kääntäminen nopeutui 30\% ja parsiminen 25\% toisella vierailulla.  
+Suuri etu PWA-sovelluksissa on niiden levytilavaatimus. Pinterestin tekemässä tapaustutkimuksessa \cite{Osmani} Pinterestin sovelluskaupoissa julkaiseman sovelluksen koko oli Android-alustalla noin 10 megatavua ja iOS alustalla 56 megatavua. Pinterestin tekemien PWA-muutosten myötä PWA-sovelluksen koko oli 150 kilotavua. Vaikka Pinterest edelleen jakelee natiivisovellusta Android- ja iOS-alustoille, he pystyivät tekemään PWA-sovelluksella saman kuin mobiilisovelluksella, mutta vain murto-osalla sovelluksen koosta. Tämä on käyttäjälle etu, suurta natiivisovellusta ei tarvitse ladata ja asentaa jotta sitä pääsee käyttämään. PWA-sovellusta voi käyttää verkossa heti, ilman että on ladannut yhtään mitään tai edes tehnyt päätöstä sovelluksen asentamisesta. Pinterestin suorituskykymittauksen mukaan \cite{Osmani} sovelluksen kääntäminen nopeutui 30\% ja parsiminen 25\% toisella vierailulla.
 
 Hybridi- natiivi ja PWA-sovellusten eroja on esitelty taulukossa \ref{table:teknologiaerot}.
 
@@ -518,7 +518,7 @@ Google Developer portaalin työasema-artikkelin mukaan \cite{Google} mobiililait
 
 Telia IoT-palvelulla (Internet of Things, IoT, esineiden internet) on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telia IoT-palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen, sekä viihtyvyyteen työpaikalla. 
 
-Telia IoT-palvelun avulla voi esimerkiksi seurata lämpötilaa ja sen muutoksia. Palvelun avulla voidaan tutkia onko toimistossa esimerkiksi liian kylmä, tai nähdä nousiko lämpötila varastossa liian kuumaksi menemättä itse paikalle. Kosteutta ja hiilidioksiditasoja seuraamalla voidaan päästä jäljille sisäilman muutoksista ja seurata esimerkiksi kokoustilan ilmanlaatua. Liikesensoreilla voidaan laskea työpisteiden, tai neuvotteluhuoneiden käyttöaste. 
+Telia IoT-palvelun avulla voi esimerkiksi seurata lämpötilaa ja sen muutoksia. Palvelun avulla voidaan tutkia, onko toimistossa esimerkiksi liian kylmä, tai nähdä nousiko lämpötila varastossa liian kuumaksi menemättä itse paikalle. Kosteutta ja hiilidioksiditasoja seuraamalla voidaan päästä jäljille sisäilman muutoksista ja seurata esimerkiksi kokoustilan ilmanlaatua. Liikesensoreilla voidaan laskea työpisteiden, tai neuvotteluhuoneiden käyttöaste. 
 
 IoT-palvelu on verkkosivu IoT-laitteiden tuottaman datan tarkasteluun. Sovelluksen tulee toimia pääpiirteittäin kaikilla mahdollisilla mobiililaitteilla, sekä vähintään uusimmilla ja yleisimmillä verkkoselaimilla.
 
@@ -559,9 +559,9 @@ Valmista sovellusta mitataan välimuistitallennuksen ollessa käytössä ja ilma
 Nopeusmittausten jälkeen sovelluksen käyttäytymisesta saadaan tulokset. Kuinka paljon nopeampi PWA-sovellus on, onko Service Workerin käyttäminen järkevää ja millaisia heikkouksia tai haittoja siitä voidaan saada?
 
 
-PWAstats \cite{PWAstats} on julkaissut tilastoja miten yritysten nykyisten sivujen muuttaminen PWA-sovellukseksi on tuottanut lisätuloja tai käyttäjiä. Esimerkiksi Uberin PWA-sovellus on nopea jopa 2G-verkossa. Uberin PWA-sovellus latautuu 2G-verkossa alle kolmessa sekunnissa. Suosittu deittipalvelu Tinder taas pienensi latausaikaa vajaasta 12 sekunnista alle viiteen sekuntiin, joka vaikutti suoraan käyttäjäkokemukseen ja käyttäjän sitoutumiseen. Tutkimuksen mukaan \cite{Osmani} Tinderin käyttäjät pyyhkäisivät, viestittelivät ja muokkasivat tietojaan useammin PWA-sovelluksessa kuin natiivisovelluksessa.
+PWAstats \cite{PWAstats} on julkaissut tilastoja, miten yritysten nykyisten sivujen muuttaminen PWA-sovellukseksi on tuottanut lisätuloja tai käyttäjiä. Esimerkiksi Uberin PWA-sovellus on nopea jopa 2G-verkossa. Uberin PWA-sovellus latautuu 2G-verkossa alle kolmessa sekunnissa. Suosittu deittipalvelu Tinder taas pienensi latausaikaa vajaasta 12 sekunnista alle viiteen sekuntiin, joka vaikutti suoraan käyttäjäkokemukseen ja käyttäjän sitoutumiseen. Tutkimuksen mukaan \cite{Osmani} Tinderin käyttäjät pyyhkäisivät, viestittelivät ja muokkasivat tietojaan useammin PWA-sovelluksessa kuin natiivisovelluksessa.
 
-Kirjallisuuskatsaus tuotti syksyllä 2018 ja keväällä 2019 rajallisen määrän akateemisia hakutuloksia. Hakusanoina käytettiin "progressive web app" ja "progressive web app service worker". Tietoa haettiin Google Scholarista kumpanakin ajankohtana. Haku tuotti 4-5 kappaletta järkeviä aiheeseen liittyviä tuloksia.  IEEE Xplore tuotti saman määrän hakutuloksia ja ainakin yksi hakutulos oli molemmissa hakukoneissa sama. Hakusana "Service Worker" taas palautti suuremman määrän hakutuloksia, mutta aiheet eivät liittyneet tietotekniikkaan. Hakutuloksissa oli artikkeleita pääosin muilta aloilta. 
+Kirjallisuuskatsaus tuotti syksyllä 2018 ja keväällä 2019 rajallisen määrän akateemisia hakutuloksia. Hakusanoina käytettiin "progressive web app" ja "progressive web app service worker". Tietoa haettiin Google Scholarista kumpanakin ajankohtana. Haku tuotti 4-5 kappaletta järkeviä aiheeseen liittyviä tuloksia. IEEE Xplore tuotti saman määrän hakutuloksia ja ainakin yksi hakutulos oli molemmissa hakukoneissa sama. Hakusana "Service Worker" taas palautti suuremman määrän hakutuloksia, mutta aiheet eivät liittyneet tietotekniikkaan. Hakutuloksissa oli artikkeleita pääosin muilta aloilta. 
 
 Telia IoT-sovellukseta luotiin PWA-sovellus, jota mittaamalla saatiin tulokset PWA-sovelluksen hyödyistä. Projektin aikana saatiin myös käsitys tarvittavista työkaluista ja työmäärästä. Työssä päätettiin jättää vertailu hybridi- ja natiivisovellusten kesken pois, sillä sovelluksen muuttaminen kyseisille teknologioille sopivaksi olisi ollut liian haasteellista tai aikaa vievää.
 
@@ -617,7 +617,7 @@ Nykyiset JavaScript-pohjaiset käyttöliittymät ovat erittäin monimutkaisia. K
 
 \textbf{Less}, Leaner Style Sheets on laajennustyökalu perinteiselle CSS kielelle \cite{7476640}. Less tuo mukanaan muutamia hyödyllisiä laajennuksia, esimerkiksi muuttujat, operaatiot ja sisennykset. Muuttujilla voidaan esimerkiksi määrittää sovelluksen taustaväri, jonka jälkeen vaihtamalla muuttujan väriä saadaan sovelluksen taustaväri vaihtumaan jokaisella sivulla. Tyylien sisennyksellä taas on mahdollista kohdistaa tyylit vain tietyn muuttujan alle. Esimerkiksi hiiren hover efekti voidaan laittaa suoraan alkuperäisen tyylin sisälle, ilman että sitä varten tarvitsee luoda uutta riviä.
 
-\textbf{Babel} on uuden sukupolven JavaScript kääntäjä \cite{maynard2017getting}. Babelia käyttämällä sovelluskehittäjä voi kirjoittaa tuoreinta mahdollista JavaScript syntaksia, ilman että selainvalmistajat ovat implementoineet uusia toimintoja selaimeen. Babelin avulla uusi JavaScript syntaksi käännetään vanhojen selaimien ymmärtämään JavaScript muotoon. Babelia on myös mahdollista laajentaa liitännäisillä. Sitä mukaa kun selaimien JavaScript tuki laajenee voidaan Babelista poistaa liitännäisiä kehityksen jatkuessa.
+\textbf{Babel} on uuden sukupolven JavaScript kääntäjä \cite{maynard2017getting}. Babelia käyttämällä sovelluskehittäjä voi kirjoittaa tuoreinta mahdollista JavaScript syntaksia, ilman että selainvalmistajat ovat implementoineet uusia toimintoja selaimeen. Babelin avulla uusi JavaScript syntaksi käännetään vanhojen selaimien ymmärtämään JavaScript muotoon. Babelia on myös mahdollista laajentaa liitännäisillä. Sitä mukaa kun selaimien JavaScript tuki laajenee, voidaan Babelista poistaa liitännäisiä kehityksen jatkuessa.
 
 \textbf{Bootstrap} on tehokas käyttöliittymä kirjasto, jota käyttämällä on helppoa luoda responsiivisia, mobiili edellä kulkevia projekteja \cite{balasubramanee2013twitter}. Kirjasto tuo mukanaan esimerkiksi responsiivisen Grid systeemin ja lukuisia käyttövalmiita komponentteja, kuten kuvakarusellin ja tyylitellyt taulukot. Kirjaston käyttäminen vähentää CSS:n parissa tapahtuvaa työskentelyä, sillä käyttämällä valmiita muuttujia sovelluksesta saadaan responsiivinen, joka näyttää oikealta kaiken kokoisilla näytöillä.
 
@@ -636,7 +636,7 @@ JavaScript-koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään LESS
 
 \subsection{PWA:n käyttöönotto projektissa}
 
-IoT-sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin. Lisäksi osa PWA-sovelluksen ei pakollisista vaatimuksista oli jo täytettynä, kuten responsiiviset näkymät ja salattu yhteys. Palvelua tarjotaan asiakkaille salattuna HTTPS-protokollan ylitse, mikä on yksi PWA-sovelluksen vaatimuksista. Salatun liikenteen käyttäminen laskee sovelluksen luotettavaksi. Sovellus on responsiivinen Bootstrap-kirjaston ansiosta jonka avulla sovellus muotoutuu kaikille eri laitteille ja resoluutioille. Responsiivisuus ei ole pakollinen vaatimus, mutta luokitellaan yhdeksi PWA-sovelluksen vaatimukseksi.
+IoT-sovelluksessa ei ollut tarvetta päästä käsiksi puhelimen natiiveihin rajapintoihin. Lisäksi osa PWA-sovelluksen ei pakollisista vaatimuksista oli jo täytettynä, kuten responsiiviset näkymät ja salattu yhteys. Palvelua tarjotaan asiakkaille salattuna HTTPS-protokollan ylitse, mikä on yksi PWA-sovelluksen vaatimuksista. Salatun liikenteen käyttäminen laskee sovelluksen luotettavaksi. Sovellus on responsiivinen Bootstrap-kirjaston ansiosta, jonka avulla sovellus muotoutuu kaikille eri laitteille ja resoluutioille. Responsiivisuus ei ole pakollinen vaatimus, mutta luokitellaan yhdeksi PWA-sovelluksen vaatimukseksi.
 
 PWA-sovelluksen kehittäminen alkoi lisäämällä projektiin sopiva sovelluskuvake ja nimi Web App-manifestiin. PWA-sovelluksen vaatimusten mukaisesti projektiin piti lisätä Service Worker, mikä oli isompi ja haastavampi kokonaisuus. Sovellusta päätettiin laajentaa Googlen tarjoamalla Workbox CLI-työkalulla. Workbox on NodeJS pohjainen komentoriviohjelma, jolla on helppoa luoda Service Worker nykyiseen olemassa olevaan projektiin. Lisäksi ohjelma tarjoaa käteviä komentoja, joilla toimintaa voidaan mukauttaa omaan projektiin sopivaksi. Workbox asennettiin projektiin käyttämällä Yarnia.
 
@@ -660,7 +660,7 @@ Gruntiin luotiin run-tehtävä \ref{gruntrunkomento}, jonka tarkoitus oli ajaa W
     };
 \end{lstlisting}
 
-Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lopussa run-tehtävän, joka taas ajaa Workbox-skriptin. Skripti käyttää projektin juureen generoitua Service Worker konfiguraatiotiedostoa, joka saatiin alunperin käyttämällä Workboxissa toimitettua asennusvelhoa. Workboxin asennusvelho on automaattinen työkalu konfiguraation luomiseen. Konfiguraatiossa määritellään esimerkiksi mistä kansiosta tiedostoja otetaan mukaan Service Workeriin ja millä tiedostopäätteellä olevat tiedostot lasketaan mukaan. Esimerkkinä IoT-projektin Service Worker konfiguraatio \ref{service worker konfiguraatio}.
+Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lopussa run-tehtävän, joka taas ajaa Workbox-skriptin. Skripti käyttää projektin juureen generoitua Service Worker konfiguraatiotiedostoa, joka saatiin alun perin käyttämällä Workboxissa toimitettua asennusvelhoa. Workboxin asennusvelho on automaattinen työkalu konfiguraation luomiseen. Konfiguraatiossa määritellään esimerkiksi mistä kansiosta tiedostoja otetaan mukaan Service Workeriin ja millä tiedostopäätteellä olevat tiedostot lasketaan mukaan. Esimerkkinä IoT-projektin Service Worker konfiguraatio \ref{service worker konfiguraatio}.
 
 \begin{lstlisting}[
      language=JavaScript,
@@ -719,7 +719,7 @@ Projektissa Service Worker pohja, joka on määritetty konfiguraatiotiedostossa.
 
 Service Workerissa on määritelty workboxSW.precache([]); funktio, jonka parametrina on tyhjä taulukko. Taulukkoon Workbox laajentaa konfiguraatiossa mainitut tiedostot, jotta ne voidaan ottaa Service Workerin välimuistissa talteen. Service Workeriin on myös määritelty yhden viikon välimuististrategia ja esimerkiksi Googlen tekstityypit on lisätty tähän yhden viikon strategiaan. Tekstityypit eivät päivity kovin usein ja siksi on hyödyllistä laittaa niille hieman pidempi välimuistitallennus. Itse varsinaiselle sovellukselle taas on laitettu strategiaksi verkko edellä. Koska sovellus tarvitsee käytännössä aina verkkoyhteyden datan hakemiseksi, ei ole järkevää asettaa strategiaksi välimuistia, vaan käyttäjälle halutaan aina näyttää ensiksi verkosta saatavilla oleva uusin tieto. Vasta verkkoyhteyden ollessa poissa käytöstä, voidaan välimuistista näyttää tietoja. 
 
-Manifestin toimintaa sovelluksessa voitiin tarkastella Google-Chrome selaimen kehittäjäkonsolista \ref{Manifest.json} sovellusvalikon alta löytyvältä Manifest välilehdeltä. Välilehdeltä selviää heti toimiiko manifesti oletetulla tavalla. Mikäli virheitä ilmenee ne ilmoitetaan tällä sivulla. Sovelluksen identiteetti tiedoissa tulee lukea manifestin vaatimuksissa määritellyt kentät: sovelluksen nimi, sekä lyhytnimi. Presentaatio kohdassa tulee olla määriteltynä sovelluksen käynnistys-osoite, teeman väri, sovelluksen orientaatio mobiililaitteella, sekä näyttömuoto. Ikoni-kentissä tulee olla sovelluksen ikoni, joka näytetään käyttäjän mobiililaitteella asennuksen jälkeen. Ikoneita tulee olla useammassa eri resoluutiossa. 
+Manifestin toimintaa sovelluksessa voitiin tarkastella Google-Chrome selaimen kehittäjäkonsolista \ref{Manifest.json} sovellusvalikon alta löytyvältä Manifest välilehdeltä. Välilehdeltä selviää heti toimiiko manifesti oletetulla tavalla. Mikäli määrittelyssä on virheitä ne ilmoitetaan tällä sivulla. Sovelluksen identiteetti tiedoissa tulee lukea manifestin vaatimuksissa määritellyt kentät: sovelluksen nimi, sekä lyhytnimi. Presentaatio kohdassa tulee olla määriteltynä sovelluksen käynnistys-osoite, teeman väri, sovelluksen orientaatio mobiililaitteella, sekä näyttömuoto. Ikoni-kentissä tulee olla sovelluksen ikoni, joka näytetään käyttäjän mobiililaitteella asennuksen jälkeen. Ikoneita tulee olla useammassa eri resoluutiossa. 
 
 \begin{figure}[h]
 \begin{center}
@@ -744,7 +744,7 @@ Joulukuussa 2018 projektin kehitystyökaluja haluttiin päivittää. Projektin k
 
 Työkalujen päivitys aloitettiin siirtymällä Yarn työkalusta NPM:n käyttöön. Suurin osa paketeista asentui NPM työkalulla suoraan. Yarnilla erityisesti asennettavia pakettaja olivat erittäin vanhasta Bower työkalusta asennetut kirjastot, jotka joko korvattiin uusilla NPM rekisteristä löytyvillä paketeilla, tai asennettiin suoraan Githubin URL osoitteella. 
 
-Seuraava vaihe oli vaihtaa vanha 500 rivinen konfiguraatio Webpackille. Webpack on modulaarinen paketointityökalu. Moduulien ansiosta osa skripteistä pystyttiin lataamaan vain tarvittaessa. Ongelmaksi muodostui kuitenkin se, että osa skripteistä oli liian vanhoja ja niitä ei ollut mahdollista ladata moduuleina. Kun sovellus oli saatu kääntymään Webpackilla näitä vanhoja skriptejä lukuunottamatta otettiin sovelluksesta uudet mittaukset. Lopullisesta Webpack konfiguraatiosta tuli noin 120 riviä, eli huomattavasti yksinkertaisempi ja lisäksi Webpack toi mukanaan lukuisia uusia hyödyllisiä toimintoja. Nyt uusia kirjastoja ja moduuleita voitaisiin ottaa käyttöön suoraan NPM rekisteristä, sekä Webpackin myötä sovelluksen kokoa saataisiin hieman pienennettyä. Sovelluksen optimointiin ei käytetty kuitenkaan paljon aikaa. Tärkeimpänä uudistuksena saatiin päivitettyä Googlen Workbox kirjasto, jolla PWA:lle vaadittava Service Worker skripti saataisiin luotua automaattisesti.
+Seuraava vaihe oli vaihtaa vanha 500 rivinen konfiguraatio Webpackille. Webpack on modulaarinen paketointityökalu. Moduulien ansiosta osa skripteistä pystyttiin lataamaan vain tarvittaessa. Ongelmaksi muodostui kuitenkin se, että osa skripteistä oli liian vanhoja ja niitä ei ollut mahdollista ladata moduuleina. Kun sovellus oli saatu kääntymään Webpackilla vanhoja skriptejä lukuunottamatta, otettiin sovelluksesta uudet mittaukset. Lopullisesta Webpack konfiguraatiosta tuli noin 120 riviä, eli huomattavasti yksinkertaisempi ja lisäksi Webpack toi mukanaan lukuisia uusia hyödyllisiä toimintoja. Nyt uusia kirjastoja ja moduuleita voitaisiin ottaa käyttöön suoraan NPM rekisteristä, sekä Webpackin myötä sovelluksen kokoa saataisiin hieman pienennettyä. Sovelluksen optimointiin ei käytetty kuitenkaan paljon aikaa. Tärkeimpänä uudistuksena saatiin päivitettyä Googlen Workbox kirjasto, jolla PWA:lle vaadittava Service Worker skripti saataisiin luotua automaattisesti.
 
 \begin{lstlisting}[
      language=JavaScript,
@@ -764,14 +764,14 @@ Webpack luo Workbox lisäosalla automaattisesti sopivan Service Worker scriptin 
 \begin{figure}[!ht]
   \centering
     \includegraphics[width=0.9\textwidth]{teliaiot_puhelimessa.jpg}
-      \caption{Vasemmalla Telia IoT sovellus asennettuna Android puhelimen sovellusvalikossa. Oikealla sovellus avattuna kokonäytön tilassa.}
+      \caption{Vasemmalla Telia IoT-sovellus asennettuna Android puhelimen sovellusvalikossa ja oikealla sovellus avattuna kokonäytön tilassa.}
       \label{teliaiot_puhelimessa_asennettuna}
 \end{figure}
 
 \begin{figure}[!ht]
   \centering
       \includegraphics[width=0.9\textwidth]{teliaiot_desktop_installation.jpg}
-  \caption{Kuvakaappaus valmiista PWA toteutuksesta TeliaIoT sovelluksesta Windows työasemalla käyttäen Google Chromea.}
+  \caption{Kuvakaappaus valmiista Telia IoT-sovelluksen PWA asennuksesta Windows-työasemalla käyttäen Google Chromea.}
   \label{teliaiot_windowsissa_asennettuna}
 \end{figure}
 
@@ -791,7 +791,7 @@ Tässä luvussa arvioidaan PWA-sovelluksen nopeutta verrattuna normaaliin verkko
 
 \subsection{Lighthouse-pisteet, suorituskyky ja progressiivisuus}
 
-Lighthouse on avoimen lähdekoodin työkalu \cite{Google2}, jonka pääasiallinen tarkoitus on parantaa verkkosivujen laatua antamalla pisteytyksen erilaisista kategorioista. Kategorioita ovat: suorituskyky, PWA, hakukoneoptimointi, verkon parhaat käytännöt ja saavutettavuus. Jokaisesta kategoriasta annetaan pisteytys ja joko hylätyt, tai hyväksytyt toimenpiteet. Lighthouse generoi sivustosta raportin. Erityisesti Lighthousen hylättyihin testeihin kannattaa kiinnittää huomiota sovellusta parannettaessa. Jokaisen tarkastuksen kohdalla on myös linkki dokumentaatioon miksi kyseinen kohta on tärkeä ja miksi siihen tulisi kiinnittää huomiota. Lisäksi raportissa on mukana erityisesti kehittäjää kiinnostava tieto miten ongelman voi korjata. Lighthousea voi ajaa mitä tahansa nettisivua vasten joko Chrome-selaimen kehittäjätyökaluista, komentoriviltä tai NodeJs-moduulina.
+Lighthouse on avoimen lähdekoodin työkalu \cite{Google2}, jonka pääasiallinen tarkoitus on parantaa verkkosivujen laatua antamalla pisteytyksen erilaisista kategorioista. Kategorioita ovat: suorituskyky, PWA, hakukoneoptimointi, verkon parhaat käytännöt ja saavutettavuus. Jokaisesta kategoriasta annetaan pisteytys ja joko hylätyt, tai hyväksytyt toimenpiteet. Lighthouse generoi sivustosta raportin. Erityisesti Lighthousen hylättyihin testeihin kannattaa kiinnittää huomiota sovellusta parannettaessa. Jokaisen tarkastuksen kohdalla on myös linkki dokumentaatioon, miksi kyseinen kohta on tärkeä ja miksi siihen tulisi kiinnittää huomiota. Lisäksi raportissa on mukana erityisesti kehittäjää kiinnostava tieto miten ongelman voi korjata. Lighthousea voi ajaa mitä tahansa nettisivua vasten joko Chrome-selaimen kehittäjätyökaluista, komentoriviltä tai NodeJs-moduulina.
 
 \begin{figure}[h]
 \begin{center}
@@ -803,7 +803,7 @@ Lighthouse on avoimen lähdekoodin työkalu \cite{Google2}, jonka pääasialline
 
 \clearpage
 
-Sovellusta auditoitiin suoraan tuotantopalvelimelta. Vaihtoehtona olisi ollut auditoida sivua myös kehittäjän koneelta paikallisesta kehitysympäristöstä, mutta tällöin ei olisi saatu tarpeeksi kattavia tuloksia loppukäyttäjän näkökulmasta. Ensiksi auditoitiin sovelluksen versiota 1.7.0 joka oli kasattu vanhalla Grunt-työkalulla, sekä vanhalla Service Worker-skriptillä. 
+Sovellusta auditoitiin suoraan tuotantopalvelimelta. Vaihtoehtona olisi ollut auditoida sivua myös kehittäjän koneelta paikallisesta kehitysympäristöstä, mutta tällöin ei olisi saatu tarpeeksi kattavia tuloksia loppukäyttäjän näkökulmasta. Ensiksi auditoitiin sovelluksen versiota 1.7.0, joka oli kasattu vanhalla Grunt-työkalulla, sekä vanhalla Service Worker-skriptillä. 
 
 \begin{figure}[h]
 \begin{center}
@@ -942,7 +942,7 @@ Konferenssissä esitettyjen lukujen perusteella Service Workerin käynnistysaika
   \item Agressiivinen välimuistin käyttö Service Workerissa voi viedä kaistaa pääsivulta. Esimerkiksi jos kaikki sivuston kuvat laitetaan välimuistiin, ne voidaan ladata ennen kuin sovelluksen tärkeämmät tiedot on haettu verkosta.
 \end{itemize}
 
-Tarkastellaan Googlen tapaustutkimuksen kautta mittaustuloksia, miten sovelluksen käyttö eroaa loppukäyttäjälle Service Workerin ollessa käytössä. Google asetti Kysymykset seuraavasti.
+Tarkastellaan Googlen tapaustutkimuksen kautta mittaustuloksia, miten sovelluksen käyttö eroaa loppukäyttäjälle Service Workerin ollessa käytössä. Google asetti kysymykset seuraavasti.
 
 \textbf{1. Onko Service Workerin välimuisti parempi kuin selaimessa jo oleva HTTP välimuisti?}
 
@@ -1061,7 +1061,7 @@ Kuvasta \ref{Google AVG load times 2} huomataan, että Service Workerin ollessa 
 \end{center}
 \end{figure}
 
-Mobiililaitteella Kuvan käyrä on melko pitkä ja eroaa huomattavasti tietokoneesta. Tämä johtuu luultavasti siitä, että mobiililaitteella Service Worker skriptin uudelleenkäynnistys kestää luonnollisesti kauemmin kuin tietokoneella. Tämä antaa selityksen myös kaaviossa \ref{Google AVG load times 3} näkyvään pieneen "Ensimmäinen piirto" eroon. Tämä myös todistaa sen että testit on järkevää suorittaa oikeilla käyttäjillä oikeassa palvelussa sillä näin kaikki käyttötapaukset tulee otettua huomioon. Oikeilla käyttäjillä saadaan huomioitua tilanne jossa Service Worker on ollut esimerkiksi sammuksissa, tai että välimuistin tilanne on ollut eri kuin lokaaleissa koetilanteissa.
+Mobiililaitteella kuvan käyrä on melko pitkä ja eroaa huomattavasti tietokoneesta. Tämä johtuu luultavasti siitä, että mobiililaitteella Service Worker skriptin uudelleenkäynnistys kestää luonnollisesti kauemmin kuin tietokoneella. Tämä antaa selityksen myös kaaviossa \ref{Google AVG load times 3} näkyvään pieneen "Ensimmäinen piirto" eroon. Tämä myös todistaa sen että testit on järkevää suorittaa oikeilla käyttäjillä oikeassa palvelussa, sillä näin kaikki käyttötapaukset tulee otettua huomioon. Oikeilla käyttäjillä saadaan huomioitua tilanne, jossa Service Worker on ollut esimerkiksi sammuksissa, tai että välimuistin tilanne on ollut eri kuin lokaaleissa koetilanteissa.
 
 \begin{table}[h]
 \centering
@@ -1096,7 +1096,7 @@ PWA:n käyttöönotossa esiintyi muutamia ongelmia projektin aikana. Projektin t
 
 "Bypass for network" täpän käytöstä aiheutui kuitenkin se, että kehityksen aikana ei voitu hyödyntää Service Workerin välimuistia kun välimuistin käyttö ohitettiin. Service Workerin tuomaa nopeutta ei siis saatu hyödynnettyä kehityksen aikana.
 
-Kolmas haaste liittyi sovelluksen modulaarisuuden puuttumiseen. Nykyisessä sovelluksessa on paljon koodia joka suoritetaan ohjelman käynnistyessä, vaikka koodia ei vielä tarvittaisi. Tästä syystä Lighthousen auditointityökalu antoi huonot suorituskykypisteet sovellukselle. Koodien pakkaamiseen tehtiin joitakin muutoksia työkalujen käyttömahdollisuuksien mukaan ja tilannetta saatiin hieman parannettua. Myös tietokantakyselyitä koitettiin vähentää. Kyselyiden vähentäminen on kuitenkin haastavaa palvelussa, joka perustuu reaaliaikaiseen dataan. 
+Kolmas haaste liittyi sovelluksen modulaarisuuden puuttumiseen. Nykyisessä sovelluksessa on paljon koodia, joka suoritetaan ohjelman käynnistyessä, vaikka koodia ei vielä tarvittaisi. Tästä syystä Lighthousen auditointityökalu antoi huonot suorituskykypisteet sovellukselle. Koodien pakkaamiseen tehtiin joitakin muutoksia työkalujen käyttömahdollisuuksien mukaan ja tilannetta saatiin hieman parannettua. Myös tietokantakyselyitä koitettiin vähentää. Kyselyiden vähentäminen on kuitenkin haastavaa palvelussa, joka perustuu reaaliaikaiseen dataan. 
 
 Testit osoittavat selvästi että välimuistin käyttö nopeuttaa sovelluksen toimintaa. Puppeteer testeissä ei kuitenkaan käynyt ilmi kaikki reaalimaailman tapaukset. Esimerkiksi tilanne jossa Service Worker on sammunut selaimessa. Selain siis saattaa sammuttaa Service Workereita jos sivustolla ei ole vierailtu vähään aikaan ja Workereita on kertynyt useampia. Tällöin Service Workerin käynnistämisestä seuraa pieni latenssi, joka vaikuttaa suoraan sivuston latausaikaan. Googlen tapaustutkimuksessa on kuitenkin laskettu että Service Workerin käynnistymisaika on vähintään 100 millisekuntia mobiili laitteilla ja tietokoneilla 20-100 millisekuntia. Service Workerin käyttö ei siis ole ilmaista. Tästä huolimatta kaikki sivulataukset olivat nopeampia Googlen tapaustutkimuksessa jos Service Worker oli käytössä ja vaikka se olisi sammunut. Googlen tapaustutkimuksessa myös vertailtiin selaimen omaa välimuistin käyttöä Service Workeriin. Jokaisessa tapauksessa Service Worker oli nopeampi. 
 
@@ -1112,12 +1112,12 @@ Tämän tutkimuksen ja Googlen tapaustutkimuksen lopputuloksena:
 
 \begin{itemize}
   \item Sivut latautuivat keskimäärin huomattavasti nopeammin Service Workerin ollessa käytössä jos sen välimuistissa oli jo jotain.
-  \item Vierailut sivuille jotka Service Worker oli jo ladannut välimuistiin aukesivat melkein heti.
+  \item Vierailut sivuille jotka Service Worker oli ladannut välimuistiin aukesivat melkein heti.
   \item Googlen tutkimuksessa huomattiin että mikäli Service Worker on sammuneena selaimessa, kestää sillä pieni hetki käynnistyä. Tästä huolimatta sivusto jolla Service Worker oli käytössä ja sammuneena latautui silti nopeammin kuin sivu jolla ei ollut ollenkaan Service Workeria.
   \item Mobiililaitteilla Service Workerin käynnistyminen kestää kauemmin kuin tietokoneella.
 \end{itemize}
 
-Huomioonotettavaa on myös, että mikäli Service Workerin ja PWA sovelluksen suorituskykyä halutaan mitata, tulee suunnitella jokaista sovellusta varten oma mittausstrategia. Minkälaisia arvoja ja mittapisteitä halutaan ottaa huomioon? Jos esimerkiksi mittapisteenä halutaan käyttää "ensimmäinen piirto" arvoa, tulee huomioida ensimmäinen järkevä piirto. Joissain tapauksissa selain saattaa ilmoittaa ensimmäisen piirron arvon tyhjälle sivulle. Sivu voi olla tyhjä, riippuen tyylien ja sisällön lataustavasta. Tärkeää on tässä tapauksessa määritellä mikä on ensimmäinen järkevä näkymä sivulla.  
+Huomioonotettavaa on myös, että mikäli Service Workerin ja PWA sovelluksen suorituskykyä halutaan mitata, tulee suunnitella jokaista sovellusta varten oma mittausstrategia. Minkälaisia arvoja ja mittapisteitä halutaan ottaa huomioon? Jos esimerkiksi mittapisteenä halutaan käyttää "ensimmäinen piirto" arvoa, tulee huomioida ensimmäinen järkevä piirto. Joissain tapauksissa selain saattaa ilmoittaa ensimmäisen piirron arvon tyhjälle sivulle. Sivu voi olla tyhjä, riippuen tyylien ja sisällön lataustavasta. Tärkeää on tässä tapauksessa määritellä, mikä on ensimmäinen järkevä näkymä sivulla.  
 
 Service Workerin välimuistiin oli määritetty tallennettavaksi kaikki sovelluksen skriptit, kuvat ja näkymät etukäteen. Lisäksi olisi ollut mahdollista lähettää myös sovellusilmoituksia, mutta siihen ei ollut tarvetta. Sovellusta ei voi käyttää ilman verkkoyhteyttä, sillä suurin osa näkymistä perustuu reaaliaikaiseen tietoon. Ilman verkkoyhteyttä sovellus on mahdollista avata, mutta käyttäjä ohjataan kirjautumissivulle. Mahdollisuutena verkkoyhteydettömässä käytössä olisi ollut tallettaa datakutsuja Service Workeriin ja näyttää vanhoja mittapisteitä ilmanlaadusta. Tätä ei keretty projektissa toteuttamaan.
 
