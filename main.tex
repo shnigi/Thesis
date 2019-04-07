@@ -67,7 +67,7 @@ Mobiilisovellukset ovat jatkuvasti kehittyvää ja muuttuvaa teknologiaa, kuten 
 
 Tässä työssä käydään läpi PWA-sovelluksen rakennustekniikoita ja määritellään milloin sovellus on PWA-sovellus. Työssä mitataan PWA-sovelluksen nopeutta Service Workerin välimuistitallennusominaisuuksien ollessa käytössä ja ilman. PWA-sovelluksen luomista ja käyttöönottoa tarkastellaan olemassa olevassa yksityisessä asiakasprojektissa. Projektin tarkastelussa kiinnitetään huomiota PWA-sovelluksen tuomiin etuihin ja kipupisteisiin.
 
-Projektista otetaan Google Chromen Lighthouse -työkalua käyttäen metriikat sovelluksen progressiivisuuden ja nopeuden mittaamiseksi. Lisäksi sovellusta vasten ajetaan Puppeteer-kirjastoa hyödyntäen latausnopeuden laskeva testi useita kertoja sekä tarkastellaan PWA-sovelluksen Service Workerin välimuistin hyödyllisyyttä suorituskyvyn ja latausajan kannalta. Jotta Service Workerin välimuistin käytöstä voidaan tehdä johtopäätökset, nopeuden muutosta tarkastellaan progressiivisten ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä. Lisäksi tarkastellaan Googlen tapaustutkimuksen kautta Service Workerin vaikutuksia sovelluksen nopeuteen. 
+Tuloksen arvioimiseksi mittaukset otetaan Google Chromen Lighthouse -työkalua käyttäen metriikat sovelluksen progressiivisuudesta ja nopeudesta. Lisäksi sovellusta vasten ajetaan Puppeteer-kirjastoa hyödyntäen latausnopeuden laskeva testi useita kertoja sekä tarkastellaan PWA-sovelluksen Service Workerin välimuistin hyödyllisyyttä suorituskyvyn ja latausajan kannalta. Jotta Service Workerin välimuistin käytöstä voidaan tehdä johtopäätökset, nopeuden muutosta tarkastellaan progressiivisten ominaisuuksien ollessa käytössä ja niiden ollessa pois päältä. Lisäksi tarkastellaan Googlen tapaustutkimuksen kautta Service Workerin vaikutuksia sovelluksen nopeuteen. 
 
 Testitulokset osoittavat että Service Workerin välimuistin hyödyntäminen on nopeampaa kaikissa tapauksissa. Service Workerin välimuisti on nopeampi kuin selaimen oma välimuisti. Service Worker voi myös olla pysähtynyt ja odotustilassa käyttäjän selaimessa. Silti Service Workerin aktivoiminen ja välimuistin käyttäminen on nopeampaa kuin selaimen välimuistista tai suoraan verkosta lataaminen. 
 
@@ -77,36 +77,35 @@ Testitulokset osoittavat että Service Workerin välimuistin hyödyntäminen on 
 
 \section{Johdanto}
 
-Tämän päivän mobiilisovelluksia kehitettäessä on teknologiavaihtoehdoissa useita mahdollisuuksia. Kehittäjät voivat valita ainakin neljästä eri mallista: mobiili-web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana progressiivinen web-sovellus (Progressive Web App, PWA). Jokaisessa vaihtoehdossa on luonnollisesti etuja ja haittoja. Web-tekniikoihin panostaminen näyttäisi kuitenkin olevan järkevää, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Googlen julkaiseman tiedotteen mukaan \cite{Gambhir} PWA-sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA-sovelluskehitykseen on tutustunut, natiivisovelluskehitystä ei enää välttämättä tarvita. PWA-sovellukset käyttäytyvät kuin natiivisovellukset, eikä niiden suorituskyvyssä välttämättä huomaa eroa natiivisovellukseen verrattuna. Lisäksi PWA-sovellusten kehittäminen on nopeampaa ja halvempaa yhden ainoan koodirungon takia. 
+Tämän päivän mobiilisovelluksia kehitettäessä on teknologiavaihtoehdoissa useita mahdollisuuksia. Kehittäjät voivat valita ainakin neljästä eri mallista: mobiili-web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana progressiivinen web-sovellus (Progressive Web App, PWA). Jokaisessa vaihtoehdossa on luonnollisesti etuja ja haittoja. Web-tekniikoihin panostaminen näyttäisi kuitenkin olevan kustannustehokasta, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Googlen julkaiseman tiedotteen mukaan \cite{Gambhir} PWA-sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA-sovelluskehitykseen on tutustunut, natiivisovelluskehitystä ei enää välttämättä tarvita. PWA-sovellukset käyttäytyvät kuin natiivisovellukset, eikä niiden suorituskyvyssä välttämättä huomaa eroa natiivisovellukseen verrattuna. Lisäksi PWA-sovellusten kehittäminen on nopeampaa ja halvempaa yhden ainoan koodirungon takia. 
 
 Mobiili verkkosivu itsessään muodostuu sovellukseksi käyttäen verkon parhaita tekniikoita. Tämä tarkoittaa sitä, että verkkosivu voidaan asentaa pikakuvakkeeksi mobiililaitteen sovellusvalikkoon, jonka jälkeen sovellus on mahdollista avata samaan tapaan kuin natiivisovellus. Lisäksi sovelluksessa on mahdollista käyttää sellaisia toimintoja jotka olivat ennen mahdottomia. Esimerkiksi lähettää sovelluksen asentaneille käyttäjille sovellusilmoituksia ja tallettaa sovelluksen tietoja käyttäjän laitteen välimuistiin. PWA-sovellus on siis tavallinen verkkosivu, joka hyödyntää selainten uusimpia ominaisuuksia.
 
 PWA-termin määritteli Google Chromen insinööri Alex Russel \cite{Russell, biorn2017progressive} omassa blogikirjoituksessaan vuonna 2015 yhdessä suunnittelija Frances Berrimanin kanssa \cite{tandelimpact}. PWA voidaan määritellä Alex Russelin sanoin normaaliksi verkkosivuksi, jota on paranneltu hyödyntämällä selaimen uusimpia ominaisuuksia. Yahoo Developer-portaalissa tehdyn tutkimuksen mukaan \cite{Khalaf} 90 \% mobiililaitteilla vietetystä ajasta käytetään sovellusten parissa ja vain 10 \% ajasta mobiililaitteilla käytetään verkon selaamiseen. 
 
-PWA-sovellusten tarkoitus on hämärtää verkkosovellusten ja natiivisovellusten rajaa. Alustariippumattomassa sovelluskehityksessä etuna on, että iOS- ja Android-alustoille ei tarvitse erikseen kehittää omaa sovellusta ja ylläpitää kahta eri lähdekoodia \cite{xanthopoulos2013comparative}. Yksi ja sama ohjelma riittää kummallekin alustalle. PWA on verkkosivu, tai web-selaimella toimiva sovellus, joka muistuttaa mahdollisimman paljon natiivia mobiili-, tai työpöytäsovellusta. Perimmäisenä ajatuksena on, että käyttäjä ei tunnista eroa PWA-sovelluksen ja natiivisovelluksen välillä.
+Alustariippumattomassa sovelluskehityksessä etuna on, että iOS- ja Android-alustoille ei tarvitse erikseen kehittää omaa sovellusta ja ylläpitää kahta eri lähdekoodia \cite{xanthopoulos2013comparative}. Yksi ja sama ohjelma riittää kummallekin alustalle. PWA-sovelluksia ei tarvitse paketoida, eikä jaella sovelluskaupan kautta, sillä PWA-sovellus on verkkosivu, tai web-selaimella toimiva sovellus, joka muistuttaa mahdollisimman paljon natiivia mobiili-, tai työpöytäsovellusta ja joka on mahdollista asentaa pikakuvakkeeksi käyttäjän laitteen sovellusvalikkoon. Perimmäisenä ajatuksena on hämärtää verkkosovellusten ja natiivisovellusten rajaa niin että käyttäjä ei tunnista eroa PWA-sovelluksen ja natiivisovelluksen välillä.
 
-PWA-sovelluksia ei paketoida, eikä jaeta sovelluskaupan kautta, sillä ne ovat normaaleita verkkosivuja, jotka on mahdollista asentaa pikakuvakkeeksi käyttäjän laitteen sovellusvalikkoon. Alex  Russelin ajatuksena \cite{Russell} PWA-sovelluksissa on ollut niiden muotoutuminen sovellukseksi ilman, että käyttäjän tulee heti tehdä päätös sovelluksen asentamisesta ja käyttölupien luovuttamisesta. Esimerkiksi selaimista tuttu lupien kysyminen pysyy ennallaan. Sovellus kysyy mikrofonin, kameran, tai minkä tahansa muun ominaisuuden käyttölupaa vasta kun toimintoa tarvitaan ensimmäisen kerran. Muutaman käyttökerran jälkeen sovellus kysyy käyttäjältä, halutaanko puhelimen työpöydälle asentaa pikakuvake sovellukseen. Jos sovellus lähettää sovellusilmoituksia, nekin voidaan joko hyväksyä tai hylätä käyttäjän toimesta. Tämä siis tarkoittaa, että käytön myötä verkkosivu muuttuu käyttäjän puhelimessa natiivin mobiilisovelluksen kaltaiseksi ilman suurempaa sitoutumista sovelluksen asentamiseen ja kaikkien käyttölupien luovuttamiseen heti. 
+Alex  Russelin ajatuksena \cite{Russell} PWA-sovelluksissa on ollut niiden muotoutuminen sovellukseksi ilman, että käyttäjän tulee heti tehdä päätös sovelluksen asentamisesta ja käyttölupien luovuttamisesta. Esimerkiksi selaimista tuttu lupien kysyminen pysyy ennallaan. Sovellus kysyy mikrofonin, kameran, tai minkä tahansa muun ominaisuuden käyttölupaa vasta kun toimintoa tarvitaan ensimmäisen kerran. Muutaman käyttökerran jälkeen sovellus kysyy käyttäjältä, halutaanko puhelimen työpöydälle asentaa pikakuvake sovellukseen. Jos sovellus lähettää sovellusilmoituksia, nekin voidaan joko hyväksyä tai hylätä käyttäjän toimesta. Tämä siis tarkoittaa, että käytön myötä verkkosivu muuttuu käyttäjän puhelimessa natiivin mobiilisovelluksen kaltaiseksi ilman suurempaa sitoutumista sovelluksen asentamiseen ja kaikkien käyttölupien luovuttamiseen heti. 
 
 PWA-sovellukset eivät kuitenkaan sovellu sellaisiin käyttötarkoituksiin, joissa täytyy päästä käsiksi puhelimen rajapintoihin, kuten vaikkapa kalenteriin tai osoitekirjaan. PWA:n valintaan vaikuttaa siis sovelluksen käyttötarkoitus. 
 
-Tämän työn asiakasprojektissa valittiin toteutustekniikaksi PWA, koska se ei vaadi erillistä kehittämistä eri laitealustoille, eikä projektissa ollut tarvetta käyttää puhelimeen sidottuja rajapintoja.
-
 Tässä tutkielmassa selvitetään millaisia vaikutuksia sovelluksen nopeuteen progressiivisuudella saavutetaan ja kuinka helppoa työkalujen käyttöönotto on. Esimerkkiprojektissa mitataan sovelluksen nopeutta välimuistitallennuksen ollessa käytössä sekä ilman. Mittarina käytetään Google Chrome -selaimen kehittäjätyökaluissa toimitettavaa Lighthouse-työkalua. Lighthouse-metriikoiden lisäksi sovellusta vasten suoritetaan latausajan laskeva automatisoitu testi, jonka perusteella voidaan kuvata sovelluksen latausajat keskiarvoineen. 
 
-Tämä työ on jaettu kuuteen päälukuun. Luvussa kaksi esitellään PWA:n vaatimukset, toteutustekniikoita ja selvennetään termin määritelmää. Luvussa tarkastellaan myös muita mobiilikehitysteknologioita. Luvussa kolme esitellään testattava sovellus ja tutkimusongelma. Luvussa neljä tehdään sovelluksen tekninen toteutus. Projektissa asennetaan tarvittavat työkalut PWA-sovelluksen kehittämiseksi. Luvussa viisi suoritetaan mittaukset käyttämällä Google Chrome -selaimen Lighthouse työkalua. Nopeusmittaukset Service Workerin välimuistin käytöstä suoritetaan Puppeteer-kirjastolla. Luvussa viisi tarkastellaan kuinka paljon vaikutuksia Service Workerin välimuistilla oli sovelluksen nopeuteen. Luvussa kuusi pohditaan PWA-sovelluksia toteustekniikkana, sen ongelmia, kipupisteitä ja tulevaisuutta.
+Työ on jaettu kuuteen päälukuun. Luvussa 2 esitellään PWA-sovelluksen vaatimukset, toteutustekniikoita ja selvennetään termin määritelmää. Luvussa tarkastellaan myös muita mobiilikehitysteknologioita. Luvussa 3 esitellään testattava sovellus ja tutkimusongelma. Luvussa 4 tehdään sovelluksen tekninen toteutus. Projektissa asennetaan tarvittavat työkalut PWA-sovelluksen kehittämiseksi. Luvussa 5 suoritetaan mittaukset käyttämällä Google Chrome -selaimen Lighthouse työkalua. Nopeusmittaukset Service Workerin välimuistin käytöstä suoritetaan Puppeteer-kirjastolla. Lisäksi luvussa 5 tarkastellaan kuinka paljon vaikutuksia Service Workerin välimuistilla oli sovelluksen nopeuteen. Luvussa 6 pohditaan PWA-sovelluksia toteustekniikkana, sen ongelmia, kipupisteitä ja tulevaisuutta.
 
 \newpage
 \section{PWA-sovellusten esittely}
 
-Tässä luvussa esitellään PWA-teknologia ja sen vaatimukset. Luvussa esitellään myös muita mobiiliteknologioita ja tarkastellaan niiden eroja verrattuna PWA-sovellukseen.
+Tässä luvussa esitellään PWA-teknologia ja sen vaatimukset. Luvussa esitellään myös muita mobiiliteknologioita ja tarkastellaan niiden eroja verrattuna \ PWA-sovellukseen.
+
+\subsection{PWA-sovelluksen ominaisuudet}
 
 Vuonna 2014 verkon käyttö mobiililaitteilla ohitti työasemat \cite{tandelimpact}. Tämä osoittaa, että verkkosovellusten tekeminen mobiililaitteille sopiviksi on tärkeää. Useissa tapauksissa yrityksen täytyy kehittää erikseen natiivisovellus kullekin laitealustalle ja ohjelmoida se käyttäen laitealustalle tarkoitettua ohjelmointikieltä. Tällöin ongelmaksi muodostuu usein resurssien rajallisuus: kehittäjiä ei ole tai sovelluskehitys maksaa liikaa. Yrityksellä, jolla ei ole resursseja tai haluja palkata erikseen mobiilikehittäjiä on alustariippumattomasta kehittämisestä tullut suosittua \cite{biorn2017progressive}. Alustariippumaton kehittäminen tarkoittaa yhden sovelluksen kehittämistä usealle laitteelle yleensä perustuen web-teknologioihin \cite{heitkotter2013cross}. Sovelluskehityksen aika ja kehityskustannukset pienenevät, kun sovellusta ei tarvitse kehittää erikseen jokaiselle laitealustalle. Näin tuote saadaan nopeammin markkinoille.
 
 PWA on kokoelma verkon parhaita käytäntöjä \cite{Kapoor} ja PWA-sovellukset pyrkivät toimimaan natiivisovelluksen kaltaisesti. Ihannetilanne on sellainen, jossa käyttäjä ei pysty sanomaan, onko sovellus natiivisovellus vai verkkosovellus. PWA:n tarkoitus on hämärtää natiivisovelluksen ja web-sovelluksen rajaa. Rajaa halutaan hämärtää siksi, että yleensä natiivisovellusten julkaiseminen sovelluskauppoihin on hidasta ja aikaa vievää. Hyväksymisprosessit saattavat kestää sovelluskaupoissa pitkään ennen sovelluksen julkaisua. Lisäksi sovellusten julkaisu on maksullista. iOS kaupan lisenssi maksaa 99 dollaria vuodessa. Android-alustan Play-Storen lisenssi on kertakustanteinen ja maksaa 25 dollaria. Kehittäjän ja tilaajan näkökulmasta PWA-sovelluksen kehittäminen on siis järkevää. Kehittäjän ei tarvitse osata jokaisen laitealustan ohjelmointikieltä, eli sovellusta ei tarvitse ohjelmoida usealle eri mobiilialustalle \cite{Gazdecki}. Tilaajalle sovelluksen kehittäminen on halvempaa kun yksi ja sama kehittäjä riittää kummallekin laitealustalle. Myös sovelluksen julkaisusykli on nopeampi sillä sovellusta ei tarvitse julkaista ja hyväksyttää sovelluskaupoissa. Sovellus julkaistaan suoraan verkossa. Sovellus muotoutuu käyttäjän laitteelle alustasta riippumatta ja yksi ainoa versio riittää.
 
-Alex Russell määritteli blogikirjoituksessaan \cite{Russell} PWA:n ominaisuudet seuraavasti. 
+Alex Russell määritteli blogikirjoituksessaan \cite{Russell} millainen PWA-sovelluksen tulee olla: 
 
-PWA-sovelluksen tulee olla:
 \begin{itemize}
   \item \textbf{Responsiivinen:} Sovelluksen tulee sopia mille tahansa näytölle koosta ja resoluutiosta riippumatta.
   \item \textbf{Yhteyksistä riippumaton:} Sovelluksen tulee käynnistyä myös verkkoyhteydettömässä tilassa.
@@ -129,7 +128,7 @@ Tarkastellaan millaisia haasteita on nykyään natiivi- ja web-sovelluksissa.
   \item \textbf{Käyttäjän sitouttaminen:} Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa. Noin 80 \% ajasta käytetään kolmen tärkeimmän natiivisovelluksen parissa. Verkkosivujen käyttöäaste on noin viidesosan sovelluksiin verrattuna. Näin ollen suurin osa käyttäjistä ei ole sitoutettu palveluun \cite{Kapoor}. Väitteen esittäjältä, Kapoorilta, pyydettiin tarkennusta asiaan 15.3.2019 saamatta vastausta.
 \end{itemize}
 
-PWA pyrkii ratkaisemaan näitä ongelmia. PWA:n käyttöön on useita syitä. Tässä muutamia:
+PWA-sovelluksen käyttöön on useita syitä. Tässä muutamia:
 
 \begin{itemize}
   \item \textbf{Nopeus:} PWA tarjoaa Service Workerin avulla mahdollisuuden tallentaa tietoa välimuistiin, joka mahdollistaa sovelluksen latautumisen nopeammin käyttäjän laitteella. Sovelluksen käynnistäminen on siis erityisen nopeaa, vaikka verkkoon ei olisi vielä edes tehty kutsuja.
@@ -140,9 +139,9 @@ PWA pyrkii ratkaisemaan näitä ongelmia. PWA:n käyttöön on useita syitä. T�
 
 Tal Aterin julkaisemassa kirjassa "Building Progressive Web Apps" \cite{ater2017building} viitataan vuoden 2016 comScoren raporttiin \cite{comScore}, jonka mukaan keskiverto henkilö viettää 80-90 \% ajastaan käyttäen vain viittä tärkeintä sovellusta. Samasta raportista selviää myös, että on paljon helpompaa tavoittaa suurempi yleisö verkkosivulla, kuin natiivisovelluksella. 
 
-Jotta käyttäjän saisi asentamaan mobiilisovelluksen, täytyy sovelluksesta ensin saada tietää jostain. Sen jälkeen täytyy etsiä kyseinen sovellus sovelluskaupasta, ladata ja asentaa se. Sovellukselle täytyy antaa tarvittavat käyttöoikeudet heti. Viimeiseksi käyttäjä voi vasta avata sovelluksen ja ehkä jopa tehdä sillä jotain. Näiden toimenpiteiden suorittaminen ei kuulosta huonolta, jos kyseessä on jokin käyttäjän tykkäämä ja luotettava sovellus, kuten esimerkiksi Facebook tai Twitter. Aterin kirjan mukaan \cite{ater2017building} on useita tutkimuksia jotka todistavat, että keskimäärin 20 \% käyttäjistä hävitetään tässä mallissa. 
+Jotta käyttäjän saisi asentamaan mobiilisovelluksen, täytyy sovelluksesta ensin saada tietää jostain. Sen jälkeen täytyy etsiä kyseinen sovellus sovelluskaupasta, ladata ja asentaa se. Sovellukselle täytyy antaa tarvittavat käyttöoikeudet heti. Viimeiseksi käyttäjä voi vasta avata sovelluksen ja ehkä jopa tehdä sillä jotain. Näiden toimenpiteiden suorittaminen ei kuulosta huonolta, jos kyseessä on jokin käyttäjän pitämä ja luottama sovellus, kuten esimerkiksi Facebook tai Twitter. Aterin kirjan mukaan \cite{ater2017building} on useita tutkimuksia jotka todistavat, että keskimäärin 20 \% käyttäjistä hävitetään tässä mallissa. 
 
-Kun käyttäjä vierailee haluamansa sovelluksen sivulla, ensimmäinen asia mikä käyttäjälle näytetään, on mainos uudesta mobiilisovelluksesta. Esimerkiksi, jos käyttäjä haluaa tarkistaa päivän sään joltakin verkkosivulta, tulisi eteen koko ruudun kokoinen mainos sääsovelluksesta ja linkki sovelluskauppaan. Tämä peittää varsinaisen sisällön josta käyttäjä on kiinnostunut, vaikka tieto olisi heti saatavilla bannerin alla. 
+Kun käyttäjä vierailee haluamansa sovelluksen sivulla, ensimmäinen asia mikä käyttäjälle näytetään, on mainos uudesta mobiilisovelluksesta. Esimerkiksi, jos käyttäjä haluaa tarkistaa päivän sään joltakin verkkosivulta, tulisi eteen koko ruudun kokoinen mainos sääsovelluksesta ja linkki sovelluskauppaan. Tämä peittää varsinaisen sisällön, josta käyttäjä on kiinnostunut, vaikka tieto olisi heti saatavilla bannerin alla. 
 
 PWA-sovellukset ovat kääntämässä suunnan. Käyttäjä voi alkaa käyttämään palvelua heti ja sovellus pyytää lisäämään pikakuvakkeen käyttäjän työpöydälle mikäli hän vierailee sivustolla useamman kerran. Myös käyttöoikeuksia lisätään progressiivisesti sitä mukaa kun niitä tarvitaan. PWA-sovellus siis poistaa tarpeen mainostaa erikseen mobiilisovelluksia. Käyttäjiä ei tarvitse enää ohjata sovelluskauppoihin, sillä verkkosivusto alkaa itse ehdottaa pikakuvakkeen luomista käyttäjälle. 
 
@@ -161,43 +160,42 @@ Google on julkaissut PWA:lle tarkastuslistan, jota noudattamalla sovelluksesta s
   \item sovelluksen oletus käyttöasento, joko pysty-, tai vaaka-asento,
   \item aloitustiedosto, yleensä index.html tai index.js,
   \item ikonitiedot eri resoluutioissa,
-  \item Aloitusruutu.
+  \item aloitusruutu.
 \end{itemize}
 
-Kyseessä on tavallinen JSON-tiedosto, joka pitää sisällään metatietoa sovelluksesta. Kun selain havaitsee manifest.json-tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöstä tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen tilapalkki sovelluksen teeman väriä vastaavaksi, mikäli sellainen on määritelty. Manifestin tarkoitus on tarjota muutettavia asetuksia kehittäjille yhdessä konfiguraatiotiedostossa. \cite{biorn2017progressive} Manifestia voidaan siis käyttää määrittämään sovelluksen käyttäytyminen ja tyyli.
+Toteutuksen kannalta kyseessä on JSON-tiedosto, joka pitää sisällään metatietoa sovelluksesta. Kun selain havaitsee manifest.json-tiedoston, se tietää että kyseessä on sovelluksen kaltainen verkkosivu. Tiedostossa määritelty kuvake on se, joka luodaan käyttäjän kotinäytölle asennuspäätöstä tehtäessä. Kun sovellus avataan kuvakkeesta, muuttuu mobiililaitteen tilapalkki sovelluksen teeman väriä vastaavaksi, mikäli sellainen on määritelty. Manifestin tarkoitus on tarjota muutettavia asetuksia kehittäjille yhdessä konfiguraatiotiedostossa \cite{biorn2017progressive}. Manifestia voidaan siis käyttää määrittämään sovelluksen käyttäytyminen ja tyyli.
 Kun sovelluskuvaketta klikataan mobiililaitteen sovellusvalikosta, kestää selaimen käynnistymisessä pieni hetki \cite{hiltunen2018creating}. Tänä aikana näytetään sovelluksesta aloitusruutu, joka generoituu automaattisesti. Taustavärinä on sovelluksen väri ja keskellä sovelluksen ikoni. Nämä ovat manifestissa määriteltyjä tietoja. Aloitusruudun näyttämisellä sovelluksen käytöstä saadaan parempi käyttökokemus \cite{hiltunen2018creating}. Käyttäjälle näytetään sovelluksesta heti ainakin jotain varsinaisen käyttöliittymän latautuessa taustalla. Tästä tulee käyttäjälle tunne, että sovellus toimii nopeasti.
 
 Manifestissa määritelty nimi on sovelluksen nimi mobiililaitteen valikossa. Lyhytnimi-tietoa käytetään silloin, kun sovellusvalikon näkymä on pieni, esimerkiksi matkapuhelimissa.
 
 Aloitustiedosto on usein index.html tai index.js. Joissain tapauksissa voi olla hyödyllistä ohjata käyttäjä sivulle, jossa pystyy tekemään jotakin. Esimerkiksi sellaisessa tapauksessa, missä indexisivu on sisäänheittosivu tai sovelluksen mainossivu. Tässä tapauksessa voi olla järkevää ohjata käyttäjä vaikka sovelluksen kirjautumisikkunaan.
 
-\textbf{Ikoni, sovelluskuvake}, kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manifest.json tiedostossa määritelty ikoni käyttäjän mobiililaitteen työpöydälle tai valikkoon. Ikoniksi pitäisi käydä useampi eri kuvaformaatti, kunhan vain tiedostomuoto on määritelty erikseen. Ikoneita pitää olla lisäksi useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
+\textbf{Sovelluskuvake}, kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manifest.json tiedostossa määritelty sovelluskuvake käyttäjän mobiililaitteen työpöydälle tai valikkoon. Sovelluskuvakkeeksi pitäisi käydä useampi eri kuvaformaatti, kunhan vain tiedostomuoto on määritelty erikseen. Sovelluskuvakkeita pitää olla lisäksi useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
 
-\textbf{Service Workers} on teknologia, joka on koko PWA-sovelluksen pohja. Service Worker on uusi rajapinta verkkoselaimissa. Service Worker on kokoelma erilaisia rajapintoja \cite{malavolta2017assessing}. Service Worker toimii sovelluksen ja verkon välissä käyttäjän laitteella välittäjänä (proxy).
+\textbf{Service Worker} on teknologia, joka on koko PWA-sovelluksen pohja. Service Worker on uusi rajapinta verkkoselaimissa. Service Worker on kokoelma erilaisia rajapintoja \cite{malavolta2017assessing}. Service Worker toimii sovelluksen ja verkon välissä käyttäjän laitteella välittäjänä (proxy) kuva \ref{Service workerin toiminta}.
 
 Service Workerin päällimmäinen tarkoitus on toimia välimuistina. Service Workerilla voidaan kopioida verkosta haetut tiedot välimuistiin. Seuraavalla kerralla, kun käyttäjä pyytää samoja tietoja, ne ladataankin puhelimen välimuistista. Web-sovelluksen, joka lataa välimuistiin kaiken tiedon sivustolta, pitäisi olla huomattavasti nopeampi kuin sovelluksen, joka ei hyödynnä välimuistia \cite{Walton}.
 
 Service Workeriin voidaan ohjelmallisesti määrittää, mitä tiedostoja tallennetaan ja kuinka niitä käsitellään. Tapoja kutsutaan välimuististrategiaksi. Välimuististrategiassa voidaan käyttää esimerkiksi pelkkää välimuistia, tai pelkkää verkkoyhteyttä tiedostoa haettaessa. Mikäli pyydetty tiedosto on epäolennainen, esimerkiksi tekstityypit, eikä muutu kovin usein, voidaan pyynnöt ohjata aina välimuistiin. Välimuististrategiaan voidaan myös määrittää, että tekstityypit on kuitenkin päivitettävä kerran viikossa. Pyynnöt voidaan siis ohjata välimuististrategiasta riippuen joko välimuistiin, tai verkkoon sovelluksen palvelimelle. Service Workeria käyttämällä kehittäjä voi ohjelmallisesti määritellä välimuistiin ladattavat asiat, sekä ladata etukäteen välimuistiin määriteltyjä tiedostoja, kuten kuvia ja muuta ennalta tiedettyä dataa. Service Workeria hyödyntämällä sovellus voidaan avata myös Offline-tilassa ja näyttää pyydettävät tiedot laitteen välimuistista. Välimuististrategiassa voidaan määrittää esimerkiksi kuville, että ne haetaan aina välimuistista. Mikäli kuvaa ei löydy välimuistista se haetaankin verkosta. Välimuististrategioita ovat seuraavat \cite{Google5}:
 
 \begin{itemize}
-  \item tiedosto haetaan pelkästään välimuistista,
-  \item tiedosto haetaan pelkästään verkosta,
-  \item tiedosto haetaan välimuistista, tai vaihtoehtoisesti verkosta, jos sitä ei löydy välimuistista,
-  \item tiedosto haetaan verkosta, tai vaihtoehtoisesti välimuistista, jos sitä ei löydy verkosta,
-  \item verkon ja välimuistin kilpailu. Joskus pienten tiedostojen hakeminen verkosta voi olla nopeampaa kuin hitaalta massamuistilta,
-  \item välimuisti, sitten verkko. Hyödyllinen silloin, kun jokin tieto päivittyy useasti. Välimuistista voidaan nopeasti ladata vanha tieto ja taustalla päivittää uusi tieto verkosta,
-  \item yleinen varasuunnitelma: kun tiedostoa ei löydy välimuistista eikä verkosta, näytetään tilalla vaihtoehtoinen kuva tai esimerkiksi teksti: "ei käytettävissä ilman verkkoyhteyttä".
+  \item Tiedosto haetaan pelkästään välimuistista.
+  \item Tiedosto haetaan pelkästään verkosta.
+  \item Tiedosto haetaan välimuistista, tai vaihtoehtoisesti verkosta, jos sitä ei löydy välimuistista.
+  \item Tiedosto haetaan verkosta, tai vaihtoehtoisesti välimuistista, jos sitä ei löydy verkosta.
+  \item Verkon ja välimuistin kilpailu. Joskus pienten tiedostojen hakeminen verkosta voi olla nopeampaa kuin hitaalta massamuistilta.
+  \item Välimuisti ensin, sitten verkko. Hyödyllinen silloin, kun jokin tieto päivittyy useasti. Välimuistista voidaan nopeasti ladata vanha tieto ja taustalla päivittää uusi tieto verkosta.
+  \item Yleinen varasuunnitelma. Kun tiedostoa ei löydy välimuistista eikä verkosta, näytetään tilalla vaihtoehtoinen kuva tai esimerkiksi teksti: "ei käytettävissä ilman verkkoyhteyttä".
 \end{itemize}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \begin{center}
-\epsfig{figure=serviceworker_explained.png,  width=1.0\textwidth}
-\caption{Service Workerin toimintalogiikka. Kuvakaappaus \cite{GoogleDevSummit} }
+\epsfig{figure=serviceworker_logic.png,  width=0.8\textwidth}
+\caption{Service Workerin toimintalogiikka. }
 \label{Service workerin toiminta}
 \end{center}
 \end{figure}
 
-\clearpage
 
 Service Workerin päällimmäiset hyödyt ovat \cite{GoogleDevSummit}:
 
@@ -207,9 +205,7 @@ Service Workerin päällimmäiset hyödyt ovat \cite{GoogleDevSummit}:
   \item Service Workerilla voidaan hakea vain osittaista tietoa sen sijaan, että haettaisiin kaikki mahdollinen.
 \end{itemize}
 
-Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Koska Service Workeria suoritetaan verkkoselaimen taustapalveluna, vaikka varsinainen sovellus olisi suljettuna, voidaan Service Workerin toiminta herättää ilmoituspalvelun kautta. Jokainen web-selain hallitsee ilmoitukset oman ilmoituspalvelunsa kautta. Kun käyttäjä antaa selaimelle luvan lähettää ilmoituksia, voidaan sovellus silloin tilata selaimen ilmoituspalveluun \cite{Googleb}. Tämä luo objektin, joka sisältää päätepisteen (endpoint) tilaukselle, joka on erilainen jokaisessa selaimessa. Esimerkiksi Googlen ilmoituspalvelun osoite on https://fcm.googleapis.com ja Mozillan https://push.services.mozilla.com. Lisäksi tilaukseen tarvitaan julkinen avain (Voluntary Application Server Identification for Web Push, VAPID). Ilmoitukset lähetetään selaimen tilausosoitteeseen salattuna julkisella avaimella. Ilmoituspalvelu lähettää lopulta ilmoituksen käyttäjän mobiililaitteelle. Näin ollen sovelluksessa voidaan näyttää ilmoituksia jopa silloin, kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä hybridisovelluksissa, eli verkkosovelluksissa, jotka paketoidaan sovelluskauppoihin esimerkiksi PhoneGapilla tai Cordovalla.
-
-Sovellusilmoitukset voivat tarjota käyttäjälle aika ajoin päivityksiä tai hyödyllistä tietoa. Näin sovellusilmoitukset voivat lisätä sovelluksen käyttöä sekä sitouttaa käyttäjää sovelluksen pariin. \cite{8441701}
+Toinen Service Workerin käyttötapa liittyy notifikaatioihin. Koska Service Workeria suoritetaan verkkoselaimen taustapalveluna, vaikka varsinainen sovellus olisi suljettuna, voidaan Service Workerin toiminta herättää ilmoituspalvelun kautta. Jokainen web-selain hallitsee ilmoitukset oman ilmoituspalvelunsa kautta. Kun käyttäjä antaa selaimelle luvan lähettää ilmoituksia, voidaan sovellus silloin tilata selaimen ilmoituspalveluun \cite{Googleb}. Tämä luo objektin, joka sisältää päätepisteen (endpoint) tilaukselle, joka on erilainen jokaisessa selaimessa. Esimerkiksi Googlen ja Mozillan ilmoituspalvelut \footnote{https://fcm.googleapis.com, https://push.services.mozilla.com}. Lisäksi tilaukseen tarvitaan julkinen avain (Voluntary Application Server Identification for Web Push, VAPID). Ilmoitukset lähetetään selaimen tilausosoitteeseen salattuna julkisella avaimella. Ilmoituspalvelu lähettää lopulta ilmoituksen käyttäjän mobiililaitteelle. Näin ollen sovelluksessa voidaan näyttää ilmoituksia jopa silloin, kun sovellus itsessään on suljettuna. Näin ei ole aikaisemmin voinut tehdä verkkosovelluksissa.
 
 Service Workerin standardi on määritelty vuonna 2009 W3C:n toimesta. Service Workeria suoritetaan rinnakkain JavaScriptin pääsäikeen (main thread) kanssa. Service Workerin elinkaari on seuraavanlainen. Kun käyttäjä vierailee verkkosivustolla ensimmäisen kerran, Service Workerin olemassaolo sekä selaimen tuki Service Workerille tarkistetaan. Jos sitä ei löydy se asennetaan. Service Worker rekisteröidään toimimaan sovelluksen tietyllä osa-alueella, tai koko sovelluksessa. Tietyissä tapauksissa Service Workerin käyttöä voi olla järkevää rajoittaa sovelluksen tietylle osa-alueelle, esimerkiksi pelkkään käyttäjän näkymään \cite{hiltunen2018creating}. Rekisteröinnin, eli asentamisen jälkeen Service Worker on aktiivinen ja vastaa verkkokutsuihin. 
 
@@ -217,14 +213,13 @@ Service Workerilla on kaksi tilaa, aktiivinen ja pysäytetty. Service Worker ei 
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=serviceworker.jpg,  width=0.9\textwidth}
+\epsfig{figure=serviceworker.jpg,  width=0.8\textwidth}
 \caption{Service Workerin elinkaari yksinkertaistettuna. }
 \label{Service workerin elinkaari}
 \end{center}
 \end{figure}
-\clearpage
 
-Service Worker on vielä joissain selaimissa kokeellinen ominaisuus, joten ennen Service Workerin asentamista on syytä tarkistaa, että selain tukee ominaisuutta \cite{hiltunen2018creating}. Selaimen Service Workerin tuki ja rekisteröinti tapahtuu listauksen \ref{serviceworkerinasennus} mukaisesti. Service Workerin tukea eri selaimilla on havainnollistettu kuvassa \ref{Service workerin selaintuki}.
+Service Worker tuki eri selaimilla on kuvassa \ref{Service workerin selaintuki}. Kuvasta nähdään, että Service Worker on pääosin tuettuna kaikissa yleisimmissä selaimissa. Joissain selaimissa Service Worker on kuitenkin vielä kokeellinen ominaisuus. Jos selaimessa ei vielä ole Service Worker tukea, täytyy Service Workerin rekisteröinti jättää tekemättä. Selaimen Service Workerin tuen tarkistaminen ja rekisteröinti tapahtuu listauksen \ref{serviceworkerinasennus} mukaisesti.
 
 \begin{lstlisting} [
      language=JavaScript,
@@ -240,7 +235,7 @@ Service Worker on vielä joissain selaimissa kokeellinen ominaisuus, joten ennen
     }
 \end{lstlisting}
 
-Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle kertoa mistä tiedostosta Service Worker löytyy. Service Worker rajapinnan saatavuus tarkistetaan ehtolausekkeen sisällä. Mikäli tuki löytyy selaimesta, Service Worker rekisteröidään heti, kun sivu on latautunut. 
+Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle määritellä mistä tiedostosta Service Worker löytyy. Service Worker rajapinnan saatavuus tarkistetaan ehtolausekkeen sisällä. Mikäli tuki löytyy selaimesta, Service Worker rekisteröidään heti, kun sivu on latautunut. 
 
 \begin{figure}[h]
 \begin{center}
@@ -250,7 +245,6 @@ Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle kertoa
 \end{center}
 \end{figure}
 
-Kuvaan \ref{Service workerin selaintuki} viitaten Service Worker on pääosin tuettuna kaikissa yleisimmissä selaimissa. Selaimissa, joissa tukea ei vielä ole, täytyy Service Workerin rekisteröinti jättää tekemättä. Tuki Service Workerille on tulossa kaikkiin yleisimpiin verkkoselaimiin.
 
 \textbf{Service Workerin tallennustila}
 
@@ -258,7 +252,7 @@ Syksyllä 2017 Microsoft Edge Web -tapahtumassa selainvalmistajat sopivat kesken
 
 \begin{table}[!ht]
 \begin{center}
-  \begin{tabular}{|L{5cm}|L{5cm}|L{5cm}|}
+  \begin{tabular}{|L{4cm}|L{4cm}|L{4cm}|}
     \hline
     \textbf{Tallennustilan koko} & 
     \textbf{Sivuston raja} &
@@ -275,16 +269,18 @@ Syksyllä 2017 Microsoft Edge Web -tapahtumassa selainvalmistajat sopivat kesken
 \label{table:selaimentallennustila}
 \end{table}
 
-Service Workerin tallennustrategioita miettiessä on syytä kiinnittää huomiota tallennustilan rajallisuuteen. Kaikkea tietoa ei välttämättä ole järkevää tallettaa käyttäjän laitteelle. Esimerkiksi Apple on päättänyt rajoittaa PWA-sovellusten välimuistin koon vain 50 megatavuun \cite{Love}. Selaimen tallennusrajapintaa hyödyntämällä voidaan tarkistaa tallennustilan suuruus \ref{tallennustilankokoselaimessa}.
+Service Workerin tallennustrategioita miettiessä on syytä kiinnittää huomiota tallennustilan rajallisuuteen. Kaikkea tietoa ei välttämättä ole järkevää tallettaa käyttäjän laitteelle. Esimerkiksi Apple on päättänyt rajoittaa PWA-sovellusten välimuistin koon vain 50 megatavuun \cite{Love}. Selaimen tallennusrajapintaa hyödyntämällä voidaan tarkistaa tallennustilan suuruus listauksen \ref{tallennustilankokoselaimessa} mukaisesti.
 
+
+\vspace*{1cm}
 \begin{lstlisting} [
-     language=JavaScript,
      frame=single,
+     captionpos=b,
      caption={Selaimen tallennustilan koko tavuina. },
-     label={tallennustilankokoselaimessa},
-     gobble=4
+     label={tallennustilankokoselaimessa}
    ]
-if ('storage' in navigator && 'estimate' in navigator.storage) {
+if ('storage' in navigator && 
+    'estimate' in navigator.storage) {
     navigator.storage.estimate()
       .then(function(estimate){
         console.log(`Using ${estimate.usage} out 
@@ -292,8 +288,9 @@ if ('storage' in navigator && 'estimate' in navigator.storage) {
       });
  }
 \end{lstlisting}
+\vspace*{1cm}
 
-\textbf{HTTPS salattu liikenne}, jotta sovellus voidaan laskea PWA:ksi, tulee kaikki liikenne lähettää salattuna HTTPS:n (Hypertext Transfer Protocol Secure) ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös arvioinut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA:ksi ja sen arviointi on Googlen hakutuloksissa huonompi kuin salattua liikennettä käyttävien sivustojen. Tietoturvan takia Service Workeria ei pysty rekisteröimään mikäli liikenne ei ole salattu. \cite{biorn2017progressive} Service Workerilla voitaisiin salaamattomassa liikenteessä esimerkiksi kaapata verkkokutsuja.
+\textbf{HTTPS-liikenne.} Jotta sovellus voidaan laskea PWA-sovellukseksi, tulee kaikki liikenne lähettää salattuna HTTPS:n (Hypertext Transfer Protocol Secure) ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös arvioinut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA-sovellukseksi ja sen arviointi on Googlen hakutuloksissa huonompi kuin salattua liikennettä käyttävien sivustojen. Tietoturvan takia Service Workeria ei pysty rekisteröimään mikäli liikenne ei ole salattu. \cite{biorn2017progressive} Service Workerilla voitaisiin salaamattomassa liikenteessä esimerkiksi kaapata verkkokutsuja.
 
 Salatun liikenteen lisäksi PWA-sovellus hyödyntää niin sanottua "turvallisuus ensin" -politiikkaa. Kun PWA-sovellus käynnistetään, sillä ei ole mitään oikeuksia käyttäjän laitteeseen \cite{8287006}. Tarvittavat oikeudet tulevat käyttöön sitä mukaa, kun niitä tarvitaan ja käyttäjä antaa sovellukselle tarvittavat luvat. Esimerkiksi siirryttäessä GPS:ää käyttävään kohtaan sovelluksessa tulee käyttäjälle pyyntö päästä GPS-anturiin käsiksi. Mikäli käyttäjä sallii tämän, saadaan sovellukselle käyttöokeuksia lisää. Sivusto siis muodostuu vähitellen täysiveriseksi sovellukseksi, kun se saa käyttöoikeuksia lisää selaimen tukemien PWA-ominaisuuksien rajoissa \cite{von2018progressive}.
 
@@ -960,7 +957,7 @@ Webpack luo Workbox lisäosalla automaattisesti sopivan Service Worker scriptin,
 
 \clearpage
 \newpage
-\section{Suorituskyvyn arviointi}
+\section{Arviointi}
 
 Tässä luvussa arvioidaan PWA-sovelluksen nopeutta verrattuna normaaliin verkkosivustoon. 
 Sovellusta mitattiin suoraan tuotantopalvelimelta. Vaihtoehtona olisi ollut mitata sivua myös kehittäjän koneelta paikallisesta kehitysympäristöstä, mutta tällöin ei olisi saatu tarpeeksi kattavia tuloksia loppukäyttäjän näkökulmasta. Ensiksi mitattiin sovelluksen versiota 1.7.0, joka oli kasattu vanhalla Grunt-työkalulla, sekä vanhalla Service Worker-skriptillä. Seuraavaksi mitattiin sovelluksen versiota 1.7.1, jossa oli toteutettuna uusi Service Worker ja Webpack.
@@ -1072,7 +1069,7 @@ Service Workerin välimuistista ladattu sivu aukeaa huomattavasti nopeammin kuin
 Lighthouse, sekä Puppeteer-testin perusteella Service Workerin välimuistia hyödyntämällä sovelluksen latausaikaa saadaan siis pienennettyä huomattavasti ja sen käyttäminen on järkevää. 
 
 \clearpage
-\section{Pohdinta}
+\subsection{Pohdinta}
 
 PWA-sovelluksen käyttöönotossa esiintyi muutamia ongelmia projektin aikana. Projektin työkalut olivat vanhentuneet, joten ensimmäinen varsinainen ongelma oli yhteensopivuusongelma Service Workerin luomisessa. Toinen kehityksen aikana ilmennyt ongelma oli sovelluksen näyttäytyminen välimuistista, kun Service Worker oli saatu käyttöön. Google Chromen kehittäjäkonsolissa on Service Worker -välilehdellä valinnat “update on reload“ ja “Bypass for network“ jotka ruksattiin käyttöön. Näin kehittäjä näkee aina uusimmat muutokset selaimessaan. Muutoin koodiin tehdyillä muutoksilla ei välttämättä olisi vaikutusta, sillä Service Worker näyttäisi tiedostoja ja koodia välimuistista eikä suoraan paikalliselta kehityspalvelimelta. 
 
@@ -1104,6 +1101,10 @@ Service Workerin välimuistiin oli määritetty tallennettavaksi kaikki sovelluk
 Yksi mielenkiintoinen PWA-sovelluksien käyttökohde on älytelevisiot. Älytelevisioiden sovelluskehitys on hyvin pirstoutunutta tällä hetkellä. Jokaisella laitevalmistajalla on oma käyttöliittymä ja ohjelmistokehys. Lisäksi televisioita voidaan laajentaa erilaisilla lisävarusteilla, kuten Apple TV tai Chromecast-tyyppisillä suoratoistolaitteilla. Lähes jokaisessa modernissa televisiossa on kuitenkin verkkoselain. PWA voisi olla yksi ratkaisu televisioden sovellukseksi. Jokaiselle televisiolle voitaisiin järkevästi kehittää sovelluksia hyödyntämällä selainta.
 
 Samalla tavalla PWA-sovelluksia voisi hyödyntää autoissa, tai muissa kodin esineiden internet-tyyppisissä laitteissa. Laitevalmistajien yhteistyö olisi tärkeää, koska mikään ekosysteemi tai yritys ei voi tehdä kaikkea itse. Myös käyttöliittymät ja käyttökokemus kulkevat käsi kädessä suorituskyvyn ja laitealustojen kanssa. PWA:n käyttömahdollisuudet ovat tulevaisuudessa lähes rajattomat, mikäli laitevalmistajat ja yritykset ymmärtävät tehdä yhteistyötä ja omaksua uuden teknologian. 
+
+\newpage
+\section{Yhteenveto}
+
 
 % yksi näistä tai ...
 %\bibliographystyle{plain}
