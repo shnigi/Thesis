@@ -96,7 +96,7 @@ Työ on jaettu kuuteen päälukuun. Luvussa 2 esitellään PWA-sovelluksen vaati
 \newpage
 \section{PWA-sovellusten esittely}
 
-Tässä luvussa esitellään PWA-teknologia ja sen vaatimukset. Luvussa esitellään myös muita mobiiliteknologioita ja tarkastellaan niiden eroja verrattuna \ PWA-sovellukseen.
+Tässä luvussa esitellään PWA-teknologia ja sen vaatimukset. Luvussa esitellään myös muita mobiiliteknologioita ja tarkastellaan niiden eroja verrattuna  PWA-sovellukseen.
 
 \subsection{PWA-sovelluksen ominaisuudet}
 
@@ -128,7 +128,7 @@ Tarkastellaan millaisia haasteita on nykyään natiivi- ja web-sovelluksissa.
   \item \textbf{Käyttäjän sitouttaminen:} Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa. Noin 80 \% ajasta käytetään kolmen tärkeimmän natiivisovelluksen parissa. Verkkosivujen käyttöäaste on noin viidesosan sovelluksiin verrattuna. Näin ollen suurin osa käyttäjistä ei ole sitoutettu palveluun \cite{Kapoor}. Väitteen esittäjältä, Kapoorilta, pyydettiin tarkennusta asiaan 15.3.2019 saamatta vastausta.
 \end{itemize}
 
-PWA-sovelluksen käyttöön on useita syitä. Tässä muutamia:
+PWA-sovellukset pyrkivät ratkaisemaan näitä ongelmia.
 
 \begin{itemize}
   \item \textbf{Nopeus:} PWA tarjoaa Service Workerin avulla mahdollisuuden tallentaa tietoa välimuistiin, joka mahdollistaa sovelluksen latautumisen nopeammin käyttäjän laitteella. Sovelluksen käynnistäminen on siis erityisen nopeaa, vaikka verkkoon ei olisi vielä edes tehty kutsuja.
@@ -200,8 +200,8 @@ Service Workeriin voidaan ohjelmallisesti määrittää, mitä tiedostoja tallen
 Service Workerin päällimmäiset hyödyt ovat \cite{GoogleDevSummit}:
 
 \begin{itemize}
-  \item kaikki uudet pyynnöt voivat suoraan ohittaa verkon, mikäli pyydettävä tiedosto on tallennettu käyttäjän laitteen välimuistiin,
-  \item vanhat välimuistissa olevat asiat voidaan näyttää heti, sillä aikaa, kun uusia tietoja haetaan taustalla,
+  \item Kaikki uudet pyynnöt voivat suoraan ohittaa verkon, mikäli pyydettävä tiedosto on tallennettu käyttäjän laitteen välimuistiin.
+  \item Vanhat välimuistissa olevat asiat voidaan näyttää heti, sillä aikaa, kun uusia tietoja haetaan taustalla.
   \item Service Workerilla voidaan hakea vain osittaista tietoa sen sijaan, että haettaisiin kaikki mahdollinen.
 \end{itemize}
 
@@ -251,6 +251,8 @@ Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle määr
 
 Syksyllä 2017 Microsoft Edge Web -tapahtumassa selainvalmistajat sopivat keskenään selaimen tallennustilan koosta. Yleiskooksi sovittiin 50 megatavua aina yli 20 gigabitin tallennustilaan \cite{Love}. 20 gigatavua ei kuitenkaan päde aina. Nyrkkisääntönä on, että kovalevyn tilasta voidaan varata korkeintaan 4 \% tai 20 gigatavua, kumpi vain on pienempi. Taulukossa \ref{table:selaimentallennustila} on esitetty tallennustilan varaamista erikokoisilla kiintolevyillä. Sivuston raja tarkoittaa samasta verkkotunnuksesta olevia sovelluksia. Mikäli saman verkkotunnuksen alta asennetaan useampi sovellus, on tallennustila yhteinen kaikille sen tunnuksen sovelluksille. 
 
+Service Workerin tallennustrategioita miettiessä on syytä kiinnittää huomiota tallennustilan rajallisuuteen. Kaikkea tietoa ei välttämättä ole järkevää tallettaa käyttäjän laitteelle. Esimerkiksi Apple on päättänyt rajoittaa PWA-sovellusten välimuistin koon vain 50 megatavuun \cite{Love}. Selaimen tallennusrajapintaa hyödyntämällä voidaan tarkistaa tallennustilan suuruus listauksen \ref{tallennustilankokoselaimessa} mukaisesti.
+
 \begin{table}[h]
 \begin{center}
   \begin{tabular}{|L{4cm}|L{4cm}|L{4cm}|}
@@ -270,10 +272,6 @@ Syksyllä 2017 Microsoft Edge Web -tapahtumassa selainvalmistajat sopivat kesken
 \label{table:selaimentallennustila}
 \end{table}
 
-Service Workerin tallennustrategioita miettiessä on syytä kiinnittää huomiota tallennustilan rajallisuuteen. Kaikkea tietoa ei välttämättä ole järkevää tallettaa käyttäjän laitteelle. Esimerkiksi Apple on päättänyt rajoittaa PWA-sovellusten välimuistin koon vain 50 megatavuun \cite{Love}. Selaimen tallennusrajapintaa hyödyntämällä voidaan tarkistaa tallennustilan suuruus listauksen \ref{tallennustilankokoselaimessa} mukaisesti.
-
-
-\vspace*{1cm}
 \begin{lstlisting} [
      frame=single,
      captionpos=b,
@@ -289,9 +287,8 @@ if ('storage' in navigator &&
       });
  }
 \end{lstlisting}
-\vspace*{1cm}
 
-\textbf{HTTPS-liikenne.} Jotta sovellus voidaan laskea PWA-sovellukseksi, tulee kaikki liikenne lähettää salattuna HTTPS:n (Hypertext Transfer Protocol Secure) ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös arvioinut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA-sovellukseksi ja sen arviointi on Googlen hakutuloksissa huonompi kuin salattua liikennettä käyttävien sivustojen. Tietoturvan takia Service Workeria ei pysty rekisteröimään mikäli liikenne ei ole salattu. \cite{biorn2017progressive} Service Workerilla voitaisiin salaamattomassa liikenteessä esimerkiksi kaapata verkkokutsuja.
+\textbf{HTTPS-liikenne.} Jotta sovellus voidaan laskea PWA-sovellukseksi, tulee kaikki liikenne lähettää salattuna HTTPS:n (Hypertext Transfer Protocol Secure) ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös arvioinut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA-sovellukseksi ja sen arviointi on Googlen hakutuloksissa huonompi kuin salattua liikennettä käyttävien sivustojen. Tietoturvan takia Service Workeria ei pysty rekisteröimään mikäli liikenne ei ole salattu \cite{biorn2017progressive}. Service Workerilla voitaisiin salaamattomassa liikenteessä esimerkiksi kaapata verkkokutsuja.
 
 Salatun liikenteen lisäksi PWA-sovellus hyödyntää niin sanottua "turvallisuus ensin" -politiikkaa. Kun PWA-sovellus käynnistetään, sillä ei ole mitään oikeuksia käyttäjän laitteeseen \cite{8287006}. Tarvittavat oikeudet tulevat käyttöön sitä mukaa, kun niitä tarvitaan ja käyttäjä antaa sovellukselle tarvittavat luvat. Esimerkiksi siirryttäessä GPS:ää käyttävään kohtaan sovelluksessa tulee käyttäjälle pyyntö päästä GPS-anturiin käsiksi. Mikäli käyttäjä sallii tämän, saadaan sovellukselle käyttöokeuksia lisää. Sivusto siis muodostuu vähitellen täysiveriseksi sovellukseksi, kun se saa käyttöoikeuksia lisää selaimen tukemien PWA-ominaisuuksien rajoissa \cite{von2018progressive}.
 
@@ -304,7 +301,7 @@ PWA-sovelluksen on tarkoitus lyhentää latausaikaa jokaisella kerralla, kun kä
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=appshell.png,  width=0.8\textwidth}
-\caption{App Shell määritys. \cite{Google4}. }
+\caption{App Shell määrityksen mukaan navigaatio ja sisältönäkymä ovat erillisiä näkymiä. \cite{Google4}. }
 \label{App shell}
 \end{center}
 \end{figure}
@@ -354,7 +351,7 @@ Google Developer -portaalin työasema-artikkelin mukaan \cite{Google} mobiililai
 \end{figure}
 
 
-\subsection{Muut teknologiat}
+\subsection{Vertailua muihin teknologioihin}
 
 Mobiililaitteiden kenttä muuttui täysin Applen julkaistua iPhonen. Applen alkuperäinen idea oli käyttää nimenomaan web-teknologioita \cite{charland2011mobile}. Kuitenkin kolme vuotta julkaisun jälkeen natiivisovellukset olivat ottaneet vallan, yleensä suorituskyvyn takia. Tästä seurasi aiemmin mainittu ongelma; sovelluksia tuli kehittää erikseen jokaiselle laitealustalle \cite{charland2011mobile}. Sovelluksen kehittäminen erikseen jokaiselle laitteelle on kalliimpaa ja pienemmillä yrityksillä ei välttämättä ollut rahaa tukea kuin vain toista laitealustaa, iOS- tai Android-alustaa. Lisäksi ohjelmistojen ylläpito usealle laitteelle on kallista.
 
@@ -489,7 +486,7 @@ Googlen developer dokumentaatiossa tapaustutkimusten osastolla Phil Waltonin art
 
 Konferenssissä esitettyjen lukujen perusteella Service Workerin käynnistysaika on tietokoneella keskimäärin 20-100 millisekuntia ja mobiililaitteella enemmän kuin 100 millisekuntia. Service Worker ei siis ole aina aktiivinen, mikä hidastaa sen käyttöä. Suorituskyvyn kannalta Service Workerin käynnistysaika ei ole ilmaista. Välimuistiluku ei ole aina välitöntä. Agressiivinen välimuistin käyttö Service Workerissa voi viedä kaistaa pääsivulta. Jos esimerkiksi kaikki sivuston kuvat laitetaan välimuistiin, ne voidaan ladata ennen kuin sovelluksen tärkeämmät tiedot on haettu verkosta.
 
-Tarkastellaan Googlen tapaustutkimuksen kautta mittaustuloksia, miten sovelluksen käyttö eroaa loppukäyttäjälle Service Workerin ollessa käytössä. Google asetti kysymykset seuraavasti.
+Tarkastellaan Googlen tapaustutkimuksen kautta mittaustuloksia, miten sovelluksen käyttö eroaa loppukäyttäjälle Service Workerin ollessa käytössä.
 
 \textbf{1. Onko Service Workerin välimuisti parempi kuin selaimessa jo oleva HTTP välimuisti?}
 
@@ -682,7 +679,7 @@ Sovelluksen muuttaminen PWA-sovellukseksi toi mukanaan useita kysymyksiä. Ovatk
 Tutkielman tutkimuskysymykset ovat seuraavat:
 
 \begin{itemize}
-  \item \textbf{TK1:} Kuinka paljon nopeampi PWA-sovelluksen Service Workerin välimuisti on kuin sivu, joka ei hyödynnä Service Workerin välimuistia?
+  \item \textbf{TK1:} Kuinka paljon nopeampi Service Workerin välimuisti on kuin verkkosivu, joka ei hyödynnä Service Workerin välimuistia?
   \item \textbf{TK2:} Miten olemassa oleva verkkosivu voidaan muokata PWA-sovellukseksi?
   \item \textbf{TK3:} Minkälaisia hyötyjä tai haittoja saadaan käyttämällä PWA-sovellusta?
 \end{itemize}
@@ -749,12 +746,12 @@ Nykyiset JavaScript-pohjaiset käyttöliittymät ovat erittäin monimutkaisia. K
 
 \textbf{Webpack}. Joulukuussa 2018 projektiin asennettiin Gruntin tilalle Webpack, joka on modulaarinen paketointityökalu nykyaikaisille web-sovelluksille \cite{subramanian2017modularization}. Webpackin avulla kirjastoja voidaan ladata modulaarisesti projektin käyttöön. Ennen kirjastoja ylläpiti kehittäjä lisäämällä <script> tagin aina HTML-sivun alkuun. Nyt Webpack huolehtii moduulien lataamisesta. Ainoa työvaihe on lisätä moduulien lataaminen automaatiotyökaluun, Webpackkiin, joka valitsee oikeat moduulit. Sovelluksen kokoa saadaan pienennettyä valitsemalla moduuleista ladattavat palaset. Tämä vaikuttaa suoraan sovelluksen nopeuteen.
 
-Sovellusta käännettäessä JavaScript-koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään LESS-formaatista selaimen ymmärtämään CSS-muotoon. Kaikki tyylitiedostot paketoidaan myös yhdeksi kokonaisuudeksi ja sitten ne pienennetään automaattisella työkalulla. Lisäksi suoritetaan lukuisia muita toimenpiteitä, projektin kaikki kuvat pakataan, kolmannen osapuolen skriptit käydään läpi, paketoidaan ja liitetään projektiin. Sovelluksen arkkitehtuuria on havainnollistettu kuvassa \ref{angulararkkitehtuuri}.
+Sovellusta käännettäessä JavaScript-koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään LESS-formaatista selaimen ymmärtämään CSS-muotoon. Kaikki tyylitiedostot paketoidaan myös yhdeksi kokonaisuudeksi ja sitten ne pienennetään automaattisella työkalulla. Lisäksi suoritetaan lukuisia muita toimenpiteitä, projektin kaikki kuvat pakataan, kolmannen osapuolen skriptit käydään läpi, paketoidaan ja liitetään projektiin. Sovellus koostuu ulkoisista kirjastoista, sekä lähdekoodista. Selain tekee kutsuja joko taustapalveluihin, tai Service Workerin kautta lokaaleihin tiedostoihin. Sen jälkeen selain evaluoi skriptit ja kääntää ne näkymäksi. Sovelluksen arkkitehtuuria on havainnollistettu kuvassa \ref{angulararkkitehtuuri}.
 
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=angulararkkitehtuuri.jpg,  width=1.0\textwidth}
-\caption{Sovelluksen arkkitehtuuri. Sovellus koostuu ulkoisista kirjastoista, sekä lähdekoodista. Selain tekee kutsuja joko taustapalveluihin, tai Service Workerin kautta lokaaleihin tiedostoihin. Sen jälkeen selain evaluoi skriptit ja kääntää ne näkymäksi.}
+\caption{Telia IoT-sovelluksen arkkitehtuuri.}
 \label{angulararkkitehtuuri}
 \end{center}
 \end{figure}
@@ -856,7 +853,7 @@ Manifestin toimintaa sovelluksessa voitiin tarkastella Google Chrome -selaimen k
 \end{figure}
 \clearpage
 
-Google Chromen kehittäjäkonsolin sovellusvälilehdeltä löytyy myös Service Worker -ikkuna, josta voidaan tarkistaa Service Workerin asentuminen. Välilehdeltä selviää Service Workerin lähdeskripti sekä tila. Mikäli Service Worker on tilassa “activated and running“ on se asentunut oikein ja käytössä. Service Workerin yhteyteen on myös liitetty valinnat “Offline“ “Update on reload“ ja “Bypass for network“ -valintaruudut. Update on reload ja Bypass for network onkin järkevää asettaa päälle, kun sovellusta ollaan kehittämässä. Muuten sovellus saattaa näyttää kehittäjälle vanhaa välimuistissa olevaa tietoa. Valintaruutujen toiminta on loogista, Service Worker päivitetään aina sivuston latautuessa uudestaan “Update on reload“ -valinnan ollessa päällä ja välimuisti saadaan ohitettua “Bypass for network“ -valinnalla. "Bypass for network" -valinta tulee kuitenkin ottaa pois päältä, kun välimuistia ja sovelluksen nopeutta halutaan taas testata.
+Google Chromen kehittäjäkonsolin sovellusvälilehdeltä löytyy myös Service Worker -ikkuna, josta voidaan tarkistaa Service Workerin asentuminen. Välilehdeltä selviää Service Workerin lähdeskripti sekä tila. Mikäli Service Worker on tilassa “activated and running“ on se asentunut oikein ja käytössä. Service Workerin yhteyteen on myös liitetty valinnat “Offline“ “Update on reload“ ja “Bypass for network“ -valintaruudut. "Update on reload" ja "Bypass for network" onkin järkevää asettaa päälle, kun sovellusta ollaan kehittämässä. Muuten sovellus saattaa näyttää kehittäjälle vanhaa välimuistissa olevaa tietoa. Valintaruutujen toiminta on loogista, Service Worker päivitetään aina sivuston latautuessa uudestaan “Update on reload“ -valinnan ollessa päällä ja välimuisti saadaan ohitettua “Bypass for network“ -valinnalla. "Bypass for network" -valinta tulee kuitenkin ottaa pois päältä, kun välimuistia ja sovelluksen nopeutta halutaan taas testata.
 
 \begin{figure}[h]
 \begin{center}
