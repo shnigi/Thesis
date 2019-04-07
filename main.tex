@@ -307,12 +307,10 @@ PWA-sovelluksen on tarkoitus lyhentää latausaikaa jokaisella kerralla, kun kä
 \label{App shell}
 \end{center}
 \end{figure}
-\clearpage
-
 
 \subsection{Näyttötilat}
 
-PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyttäjältä ylimääräiset valikot ja luoda sovelluksesta näin natiivisovelluksen kaltainen. Näyttötiloja on neljä erilaista \cite{Mozilla}:
+PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyttäjältä ylimääräiset valikot ja luoda sovelluksesta näin natiivisovelluksen kaltainen. Näyttötilojen esimerkit kuvassa \ref{Näyttötilat}. Näyttötiloja on neljä erilaista \cite{Mozilla}:
 
 \begin{itemize}
   \item Koko näytön tila (fullscreen), jolloin laitteen koko näyttö on käytössä ja selaimen user agent on piilotettuna.
@@ -323,19 +321,18 @@ PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyt
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=nayttotilat.png,  width=0.9\textwidth}
+\epsfig{figure=nayttotilat.png,  width=0.8\textwidth}
 \caption{Näyttötilat vasemmalta oikealle: Browser, standalone / minimal-ui, fullscreen}
 \label{Näyttötilat}
 \end{center}
 \end{figure}
-\clearpage
 
 Kun kaikki PWA-sovelluksen ehdot on täytetty, tulee käyttäjän ruudulle kuvan \ref{asennusbanneri} kaltainen ponnahdusikkuna.
 
-\begin{figure}[!ht]
+\begin{figure}[h]
 \begin{center}
 \epsfig{figure=install_banners.jpg,  width=0.7\textwidth}
-\caption{Telia IoT PWA sovelluksen ponnahdusikkuna Google-Chrome ja Firefox mobiiliselaimissa.}
+\caption{Telia IoT PWA-sovelluksen ponnahdusikkuna Google-Chrome ja Firefox mobiiliselaimissa.}
 \label{asennusbanneri}
 \end{center}
 \end{figure}
@@ -344,9 +341,17 @@ Kun kaikki PWA-sovelluksen ehdot on täytetty, tulee käyttäjän ruudulle kuvan
 
 \subsection{PWA-työasemasovellus} 
 
-PWA-työasemasovellus voidaan asentaa mille tahansa työasemalle (Linux, Windows, Mac, Chrome OS). Sovellusta voidaan käyttää käyttäjän koneella kuten muitakin työasemasovelluksia. Sovellukset tuntuvat integroiduilta ja nopeilta, sillä ne avataan käyttöjärjestelmän sovellusvalikosta, kuten mikä tahansa muukin sovellus. Sovellus avautuu käyttöjärjestelmän natiivi-ikkunassa. Service Workerin välimuisti toimii sekä työasemalla että mobiililaitteilla, joten PWA-sovelluksen käyttäminen on luotettavaa ja nopeaa. Chrome-selaimen versiosta 70 eteenpäin PWA-sovelluksia on mahdollista asentaa myös työasemille. 
+Chrome-selaimen versiosta 70 eteenpäin PWA-sovelluksia on mahdollista asentaa myös työasemille. PWA-työasemasovellus voidaan asentaa mille tahansa työasemalle (Linux, Windows, Mac, Chrome OS). Sovellusta voidaan käyttää käyttäjän koneella kuten muitakin työasemasovelluksia. Sovellukset tuntuvat integroiduilta ja nopeilta, sillä ne avataan käyttöjärjestelmän sovellusvalikosta, kuten mikä tahansa muukin sovellus. Esimerkki asennetusta PWA-sovelluksesta Windows-työasemalla kuvassa \ref{teliaiot_windowsissa_asennettuna}. Sovellus avautuu käyttöjärjestelmän natiivi-ikkunassa. Service Workerin välimuisti toimii sekä työasemalla että mobiililaitteilla, joten PWA-sovelluksen käyttäminen on luotettavaa ja nopeaa. PWA-teknologialla saadaan asennettava sovellus mobiililaitteille ja työasemille.
 
-Google Developer -portaalin työasema-artikkelin mukaan \cite{Google} mobiililaitteiden käyttö ajoittuu yleensä iltoihin ja aamuihin, kun ihmiset ovat vapaalla. Päivällä ihmisten ollessa töissä käytetään yleensä enimmäkseen työasemasovelluksia. Googlen mukaan työasemalle asennettu sovellus tuntuu käyttäjän mielestä luotettavammalta ja nopeammalta mikäli se löytyy suoraan työaseman sovellusvalikosta. Työasema sovelluksia ohjelmoitaessa tulee ottaa huomioon samat vaatimukset kuin mobiililaitteilla. Myös sovelluksen responsiiviseen suunnitteluun tulee kiinnittää huomiota, sillä käyttäjä saattaa venyttää työasemalla sovelluksen mihin tahansa kokoon.
+Google Developer -portaalin työasema-artikkelin mukaan \cite{Google} mobiililaitteiden käyttö ajoittuu yleensä iltoihin ja aamuihin, kun ihmiset ovat vapaalla. Päivällä ihmisten ollessa töissä käytetään yleensä enimmäkseen työasemasovelluksia. Googlen mukaan työasemalle asennettu sovellus tuntuu käyttäjän mielestä luotettavammalta ja nopeammalta, mikäli se löytyy suoraan työaseman sovellusvalikosta. Työasema sovelluksia ohjelmoitaessa tulee ottaa huomioon samat vaatimukset kuin mobiililaitteilla. Myös sovelluksen responsiiviseen suunnitteluun tulee kiinnittää huomiota, sillä käyttäjä saattaa venyttää työasemalla sovelluksen mihin tahansa kokoon.
+
+\begin{figure}[h]
+  \centering
+      \includegraphics[width=1.0\textwidth]{teliaiot_desktop_installation1.png}
+  \caption{Kuvakaappaus valmiista Telia IoT -sovelluksen PWA asennuksesta Windows-työasemalla.}
+  \label{teliaiot_windowsissa_asennettuna}
+\end{figure}
+
 
 \subsection{Muut teknologiat}
 
@@ -357,50 +362,6 @@ Mobiililaitteiden kenttä muuttui täysin Applen julkaistua iPhonen. Applen alku
 Yhteistä kaikille natiivisti tai natiivin kaltaisesti julkaistaville sovelluksille: natiivisovellus, hybridisovellus, tai React Native sovellus on se, että ne julkaistaan ja jaellaan jonkun sovelluskaupan kautta \cite{xanthopoulos2013comparative}. iOS-käyttöjärjestelmällä Apple App Store, Androidilla Google Play, Microsoftilla Windows Phone Store ja BlackBerryllä App World. Jokainen laitevalmistaja omistaa luonnollisesti oman sovelluskauppansa. Monopoliasemassa ovat kuitenkin Android 69,6 \% asennuksien määrässä ja toisena iOS 20.9 \% asennusmäärällä \cite{xanthopoulos2013comparative}. Sovelluksia kehitettäessä ja julkaistaessa tulee noudattaa käyttöjärjestelmävalmistajien ehtoja ja ohjelmointimalleja. Tästä syystä on muodostunut ilmiö nimeltään pirstoutuminen, sillä sovelluksia tulee kehittää ja ylläpitää usealle alustalle. Uusia toimintoja voi olla vaikeaa kehittää ja julkaista samaan aikaan eri laitteille, jos kyseessä on natiivisovellus.
 
 Hybridisovellukset tulivat paikkaamaan tätä pirstoutumista. Hybridisovellusten idea on yksinkertaistaa kehitystyötä ja ylläpitoa, sekä säästää aikaa ja rahaa. Hybridisovelluksen tarkoituksena on tarjota lähes natiivisovelluksen kaltainen käyttökokemus ja toimia mahdollisimman monella laitteella. Hybridisovellukset siis kirjoitetaan kerran ja käännetään sen jälkeen mahdollisimman monelle laitteelle. 
-
-Taulukossa \ref{table:mobiilikäyttöjärjestelmät} on lueteltuna eri mobiililaitteille vaadittavat ohjelmointikielet.
-
-\begin{table}[!ht]
-\centering
-\begin{small}
-\caption{Mobiilikäyttöjärjestelmät ja niiden natiiviohjelmointikieli. \cite{charland2011mobile} }
-\begin{tabular}{|L{7cm}|L{7cm}|}
-\hline
-\textbf{Käyttöjärjestelmä} & 
-\textbf{Ohjelmointikieli}
-\\ \hline
-Apple iOS & 
- C, Objective C
-\\ \hline
-Google Android & 
-Java (Harmony flavored, Dalvik VM) \\ 
-\hline
-RIM BlackBerry & 
-Java (J2ME flavored) \\ 
-\hline
-Symbian & 
-C, C++, Python, HTML/CSS/JS \\ 
-\hline
-Windows Mobile & 
-.NET \\ 
-\hline
-Window 7 Phone & 
-.NET \\ 
-\hline
-HP Palm webOS & 
-HTML/CSS/JS \\ 
-\hline
-MeeGo & 
-C, C++, HTML/CSS/JS \\ 
-\hline
-Samsung bada & 
-C++ \\ 
-\hline
-\end{tabular}
-\label{table:mobiilikäyttöjärjestelmät}
-\end{small}
-\end{table}
-
 
 \subsubsection{Hybridisovellukset}
 
@@ -416,7 +377,7 @@ Hybridisovellukset ovat siis web-pohjaisia HTML- ja JavaScript-sovelluksia, joll
 
 React Native on Facebookin kehittämä natiivisovelluskehys. React Nativella tehdään natiiveja sovelluksia, joiden käyttöliittymä kehitetään JavaScriptillä ja Reactilla \cite{Facebook}. React Nativella on mahdollista kirjoittaa koko sovellus käyttäen Reactia ja JavaScriptiä, tai vain osa sovelluksesta ja kirjoittaa loput natiivikoodilla. Esimerkiksi Facebook-sovellus toimii React Nativella. Muita React Nativella julkaistuja sovelluksia ovat esimerkiksi Instagram, Uber ja Skype. Tämä kertoo siitä, että teknologia on todettu hyvin toimivaksi ja se soveltuu myös vaativiin projekteihin, joissa ei ole varaa heikkoon suorituskykyyn.
 
-React Native eroaa hybridisovelluksista ja web-sovelluksista siten, että kun sovelluksen näkymä renderöidään, React Native kutsuu joko Objective C -rajapintaa iOS-laitteilla, tai Java-rajapintaa Android-laitteilla \cite{Aggarwal}. Tämä erottaa React Nativen hybridisovelluksista ja PWA-sovelluksista, jotka yleensä renderöivät selainpohjaisen näkymän. React Native voisi tukea Android- ja iOS-alustan lisäksi myös muita käyttöjärjestelmiä, teoriassa esimerkiksi älytelevisioita, mutta silloin jonkun täytyisi ohjelmoida puuttuva rajapinta.
+React Native eroaa hybridisovelluksista ja web-sovelluksista siten, että sovelluksen näkymän renderöimisessä React Native kutsuu joko Objective C -rajapintaa iOS-laitteilla, tai Java-rajapintaa Android-laitteilla \cite{Aggarwal}. Tämä erottaa React Nativen hybridisovelluksista ja PWA-sovelluksista, jotka yleensä renderöivät selainpohjaisen näkymän. React Native voisi tukea Android- ja iOS-alustan lisäksi myös muita käyttöjärjestelmiä, teoriassa esimerkiksi älytelevisioita, mutta silloin jonkun täytyisi ohjelmoida puuttuva rajapinta.
 
 React Nativen etuna on natiivisovelluksen nopeus sekä yksi ja sama koodipohja molemmille käyttöjärjestelmille. Sovelluksen kehittämiseen kuluu huomattavasti vähemmän aikaa ja rahaa. Sovellus voidaan luoda vain käyttäen yhtä ohjelmointikieltä, eikä ole tarvetta etsiä erikseen iOS tai Android kehittäjää. React Native on ohjelmistokehys, jota voi itse laajentaa kirjoittamalla natiivikoodia. Mikäli kehys ei suoraan tue jotain toimintoa, voidaan sellainen kirjoittaa niiden rajoitusten puitteissa kuin iOS- ja Android-alustoilla on.
 
@@ -934,25 +895,11 @@ Seuraava vaihe oli vaihtaa vanha 500 rivinen konfiguraatio Webpackille. Webpack 
 Webpack luo Workbox lisäosalla automaattisesti sopivan Service Worker scriptin, kun Webpack käynnistetään. Parametreiksi on asetettu skipWaiting, joka pakottaa odottavan Service Workerin aktivoitumaan, Service Workerin nimeksi on asetettu sw.js ja etukäteisvälimuistiin talletettaviksi tiedostoiksi on määritelty kaikki .html, .js, .png ja .jpg päätteiset tiedostot. Näillä tiedoilla Service Worker generoituu automaattisesti ja sen välimuistissa on valmiiksi sovelluksen tiedostot. Aikaisempi usean rivin konfiguraatio saatiin nyt mahtumaan vain neljälle riville. 
 
 
-\begin{figure}[!ht]
+\begin{figure}[h]
   \centering
     \includegraphics[width=0.9\textwidth]{teliaiot_puhelimessa.jpg}
       \caption{Vasemmalla Telia IoT -sovellus asennettuna Android puhelimen sovellusvalikossa ja oikealla sovellus avattuna kokonäytön tilassa.}
       \label{teliaiot_puhelimessa_asennettuna}
-\end{figure}
-
-\begin{figure}[!ht]
-  \centering
-      \includegraphics[width=0.9\textwidth]{teliaiot_desktop_installation.jpg}
-  \caption{Kuvakaappaus valmiista Telia IoT -sovelluksen PWA asennuksesta Windows-työasemalla käyttäen Google Chromea.}
-  \label{teliaiot_windowsissa_asennettuna}
-\end{figure}
-
-\begin{figure}[!ht]
-  \centering
-      \includegraphics[width=0.9\textwidth]{windows_valikossa.jpg}
-  \caption{Telia IoT sovelluskuvake Windows työaseman valikossa asennuksen jälkeen.}
-  \label{teliaiot_windowsvalikossa}
 \end{figure}
 
 \clearpage
