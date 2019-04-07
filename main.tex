@@ -224,6 +224,7 @@ Service Worker tuki eri selaimilla on kuvassa \ref{Service workerin selaintuki}.
 \begin{lstlisting} [
      language=JavaScript,
      frame=single,
+     captionpos=b,
      caption={Service Workerin tuen tarkistus ja rekisteröinti selaimessa. },
      label={serviceworkerinasennus},
      gobble=4
@@ -250,7 +251,7 @@ Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle määr
 
 Syksyllä 2017 Microsoft Edge Web -tapahtumassa selainvalmistajat sopivat keskenään selaimen tallennustilan koosta. Yleiskooksi sovittiin 50 megatavua aina yli 20 gigabitin tallennustilaan \cite{Love}. 20 gigatavua ei kuitenkaan päde aina. Nyrkkisääntönä on, että kovalevyn tilasta voidaan varata korkeintaan 4 \% tai 20 gigatavua, kumpi vain on pienempi. Taulukossa \ref{table:selaimentallennustila} on esitetty tallennustilan varaamista erikokoisilla kiintolevyillä. Sivuston raja tarkoittaa samasta verkkotunnuksesta olevia sovelluksia. Mikäli saman verkkotunnuksen alta asennetaan useampi sovellus, on tallennustila yhteinen kaikille sen tunnuksen sovelluksille. 
 
-\begin{table}[!ht]
+\begin{table}[h]
 \begin{center}
   \begin{tabular}{|L{4cm}|L{4cm}|L{4cm}|}
     \hline
@@ -348,7 +349,7 @@ Google Developer -portaalin työasema-artikkelin mukaan \cite{Google} mobiililai
 \begin{figure}[h]
   \centering
       \includegraphics[width=1.0\textwidth]{teliaiot_desktop_installation1.png}
-  \caption{Kuvakaappaus valmiista Telia IoT -sovelluksen PWA asennuksesta Windows-työasemalla.}
+  \caption{Kuvakaappaus Telia IoT -sovelluksen PWA asennuksesta Windows-työasemalla.}
   \label{teliaiot_windowsissa_asennettuna}
 \end{figure}
 
@@ -419,7 +420,7 @@ Suuri etu PWA-sovelluksissa on niiden levytilavaatimus. Pinterestin tekemässä 
 Hybridi- natiivi ja PWA-sovellusten eroja on esitelty taulukossa \ref{table:teknologiaerot}.
 
 \begin{landscape}
-\begin{table}[!ht]
+\begin{table}[h]
 \centering
 \begin{small}
 \caption{ Teknologioiden erot \cite{biorn2017progressive} }
@@ -476,25 +477,15 @@ Hybridi- natiivi ja PWA-sovellusten eroja on esitelty taulukossa \ref{table:tekn
 
 \subsection{PWA-sovelluksen suorituskyky ja mittaaminen}
 
-Googlen developer dokumentaatiossa tapaustutkimusten osastolla Phil Waltonin artikkelissa \cite{Walton} on mitattu Google Analyticsiä hyödyntäen Googlen omaa I/O web-sovelluksen nopeutta tuotannossa oikeilla käyttäjillä. Hyödyntämällä Google Analytics -työkalua yhdessä Service Workerin kanssa saadaan vastaus, miten Service Workerin käyttö näkyy loppukäyttäjälle. Pelkästään Lighthouse-työkalua hyödyntämällä, tai ajamalla kehittäjän koneella testejä, ei saada tarpeeksi kattavia vastauksia. Testien tuloksiin vaikuttaa esimerkiksi se, onko käyttäjän Service Worker aktiivinen selaimessa. Mikäli selain on tallettanut useita Service Workereita se sammuttaa niitä tarpeen mukaan. Kun käyttäjä palaa takaisin sivulle, jonka Service Worker on jo olemassa, menee sen käynnistymisessä pieni hetki, joka taas hetkellisesti nostaa latausaikaa. Chrome Dev Summit-tapahtumassa oli mitattu Service Workerin käynnistysaikaa sekä tietokoneella että mobiililaitteella \cite{GoogleDevSummit}. 
+Googlen developer dokumentaatiossa tapaustutkimusten osastolla Phil Waltonin artikkelissa \cite{Walton} on mitattu Google Analyticsiä hyödyntäen Googlen omaa I/O web-sovelluksen nopeutta tuotannossa oikeilla käyttäjillä. Hyödyntämällä Google Analytics -työkalua yhdessä Service Workerin kanssa saadaan vastaus, miten Service Workerin käyttö näkyy loppukäyttäjälle. Pelkästään Lighthouse-työkalua hyödyntämällä, tai ajamalla kehittäjän koneella testejä, ei saada tarpeeksi kattavia vastauksia. Testien tuloksiin vaikuttaa esimerkiksi se, onko käyttäjän Service Worker aktiivinen selaimessa. Mikäli selain on tallettanut useita Service Workereita se sammuttaa niitä tarpeen mukaan. Kun käyttäjä palaa takaisin sivulle, jonka Service Worker on jo olemassa, menee sen käynnistymisessä pieni hetki, joka taas hetkellisesti nostaa latausaikaa. Chrome Dev Summit-tapahtumassa oli mitattu Service Workerin käynnistysaikaa sekä tietokoneella että mobiililaitteella \cite{GoogleDevSummit}. Mittausten tuloksia on esitelty kuvassa \ref{serviceworker_starttime}.
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=sw_bootuptime.png,  width=0.8\textwidth}
-\caption{Service Workerin käynnistysaika. Kuvakaappaus \cite{GoogleDevSummit}}
-\label{SW bootup time}
+\epsfig{figure=serviceworker_starttime.png,  width=1.0\textwidth}
+\caption{Service Workerin käynnistysaika eri tilanteissa, sekä käynnistysaika keskimäärin mobiililaitteella ja työasemalla.}
+\label{serviceworker_starttime}
 \end{center}
 \end{figure}
-
-\begin{figure}[h]
-\begin{center}
-\epsfig{figure=serviceworker_bootuptime.png,  width=0.8\textwidth}
-\caption{Service Workerin käynnistysaika millisekunteina eri laitteilla. Kuvakaappaus \cite{GoogleDevSummit}}
-\label{SW bootup time on device}
-\end{center}
-\end{figure}
-
-\clearpage
 
 Konferenssissä esitettyjen lukujen perusteella Service Workerin käynnistysaika on tietokoneella keskimäärin 20-100 millisekuntia ja mobiililaitteella enemmän kuin 100 millisekuntia. Service Worker ei siis ole aina aktiivinen, mikä hidastaa sen käyttöä. Suorituskyvyn kannalta Service Workerin käynnistysaika ei ole ilmaista. Välimuistiluku ei ole aina välitöntä. Agressiivinen välimuistin käyttö Service Workerissa voi viedä kaistaa pääsivulta. Jos esimerkiksi kaikki sivuston kuvat laitetaan välimuistiin, ne voidaan ladata ennen kuin sovelluksen tärkeämmät tiedot on haettu verkosta.
 
@@ -526,7 +517,7 @@ Latausajan mittaukset jaettiin tapaustutkimuksessa kolmeen eri kategoriaan.
 \end{center}
 \end{figure}
 
-Kuvaajasta \ref{Google AVG load times} nähdään, että Service Workerin hallitsema välimuisti (sininen pylväs) lataa sivut nopeammin kuin käyttäjillä, joilla on selaimen välimuistissa jo tietoa (punainen pylväs). Mielenkiintoista on myös huomata, että mobiilikäyttäjillä latausaika on Service Workerin ollessa käytössä lyhyempi, kuin uusilla tietokonekäyttäjillä. 
+Kuvasta \ref{Google AVG load times} nähdään, että Service Workerin hallitsema välimuisti (sininen pylväs) lataa sivut nopeammin kuin käyttäjillä, joilla on selaimen välimuistissa jo tietoa (punainen pylväs). Mielenkiintoista on myös huomata, että mobiilikäyttäjillä latausaika on Service Workerin ollessa käytössä lyhyempi, kuin uusilla tietokonekäyttäjillä. 
 
 \begin{table}[h]
 \centering
@@ -586,7 +577,7 @@ Uusi käyttäjä &
 
 Taulukoiden latausajoista nähdään, että ero Service Workerin ollessa päällä mobiililaitteella ja verrattuna uuteen työasemavierailijaan on noin sekunnin nopeampaa mobiililaitteella. Vastatakseen toiseen kysymykseen, kuinka paljon Service Worker vaikuttaa sovelluksen käytettävyyteen, Waltonin \cite{Walton} tapaustutkimuksessa otettiin mittaukset "Ensimmäinen piirto" -mittapisteestä.
 
-\begin{figure}[!ht]
+\begin{figure}[h]
 \begin{center}
 \epsfig{figure=google_case_study_2.png,  width=0.7\textwidth}
 \caption{Keskimääräiset ensimmäisen piirron ajat Googlen IOWA sovelluksessa. Kuvakaappaus Google Developer portaalista.}
@@ -616,8 +607,6 @@ Kuvasta \ref{Google AVG load times 2} huomataan, että Service Workerin ollessa 
 \end{center}
 \end{figure}
 
-Mobiililaitteella kuvan käyrä on melko pitkä ja eroaa huomattavasti tietokoneesta. Tämä johtuu luultavasti siitä, että mobiililaitteella Service Workerin uudelleenkäynnistys kestää luonnollisesti kauemmin kuin tietokoneella. Tämä antaa selityksen myös kuvassa \ref{Google AVG load times 3} näkyvään pieneen "Ensimmäinen piirto" eroon. Tämä myös todistaa sen, että testit on järkevää suorittaa oikeilla käyttäjillä oikeassa palvelussa, jotta kaikki käyttötapaukset tulee otettua huomioon. Oikeilla käyttäjillä saadaan huomioitua tilanne, jossa Service Worker on ollut esimerkiksi sammuksissa, tai että välimuistin tilanne on ollut eri kuin lokaaleissa koetilanteissa.
-
 \begin{table}[h]
 \centering
 \begin{small}
@@ -640,6 +629,8 @@ Tuettu, ei käytössä &
 \label{table:median first paint}
 \end{small}
 \end{table}
+
+Mobiililaitteella kuvan käyrä on melko pitkä ja eroaa huomattavasti tietokoneesta. Tämä johtuu luultavasti siitä, että mobiililaitteella Service Workerin uudelleenkäynnistys kestää luonnollisesti kauemmin kuin tietokoneella. Tämä antaa selityksen myös kuvassa \ref{Google AVG load times 3} näkyvään pieneen "Ensimmäinen piirto" eroon. Tämä myös todistaa sen, että testit on järkevää suorittaa oikeilla käyttäjillä oikeassa palvelussa, jotta kaikki käyttötapaukset tulee otettua huomioon. Oikeilla käyttäjillä saadaan huomioitua tilanne, jossa Service Worker on ollut esimerkiksi sammuksissa, tai että välimuistin tilanne on ollut eri kuin lokaaleissa koetilanteissa.
 
 Taulukosta \ref{table:median first paint} nähdään, mikä vaikutus Service Workerilla on sovelluksen nopeuteen. Nopeus taas vaikuttaa suoraan sovelluksen käyttökokemukseen. Niin tietokoneella kuin mobiililaitteella sovelluksen latausaika on lyhyempi, mikäli Service Worker on käytössä ja ladannut välimuistiin tietoa. Kun Service Workerista ladataan tietoa, laitteen ei tarvitse myöskään kuluttaa virtaa verkkopyyntöihin \cite{8456349}. Service Workerin käyttö säästi noin 25 \% dataliikenteestä ja antoi myös verkkoyhteydettömän tuen sovelluksille. Service Workerin käyttö kuluttaa kuitenkin enemmän virtaa laitteesta \cite{malavolta2017assessing}. Vaikka verkkoliikenne pienenee, käyttää Service Worker enemmän virtaa laitteesta. Työssä tutkittiin 28 erilaista tapausta. Seitsemän eri PWA-sovellusta, kaksi eri laitetta ja kaksi eri verkkoa, Wifi ja 2G. Kahdessakymmenessä tapauksessa Service Workerin käyttö PWA-sovelluksessa lisäsi laitteen virrankulutusta. Kahdeksassa tapauksessa virrankulutus oli kuitenkin pienempää. Tutkimuksen tulos osoittaa, että kehittäjän tulee olla varovainen teknologiaa hyödyntäessä. Useimmiten virrankäytön lisääminen on kuitenkin järkevää käyttökokemuksen kannalta. Lisäksi virrankulutuksen lisääntyminen oli hyvin pientä verrattuna sivustoon, joka ei käyttänyt Service Workeria.
 
@@ -723,11 +714,9 @@ Kirjallisuuskatsaus tuotti syksyllä 2018 ja keväällä 2019 rajallisen määr�
 Tutkimuksen suunnitteluvaiheessa sovelluksen arvioimisen laatumittareiksi valittiin nopeus ja progresiivisuus. Progressiivisuuden mittaamistyökaluksi valittiin Googlen Lighthouse-työkalu. Lighthouse antaa sovellukselle myös suorituskykypisteet, mutta ne eivät ole helposti verrannollisia keskenään, koska tulokset vaihtelevat hieman palvelimen ja testiä suorittavan koneen tehoista riippuen. 
 PWA-sovelluksen nopeutta mitataan Puppeteer-kirjaston tallentamilla latausajoilla. Puppeteer-kirjasto valittiin nopeuden mittaamiseen, sillä rajapinnat vaikuttivat selkeiltä ja helppokäyttöisiltä. Puppeteer-kirjastoa hyödyntämällä latausaikoja voidaan tallentaa useita ja niistä voidaan laskea keskiarvo. Keskiarvoistettu data on luotettavampaa kuin Lighthousen yksitäinen ajo.
 
-Työssä päätettiin jättää vertailu hybridi- ja natiivisovellusten kesken pois, sillä sovelluksen muuttaminen kyseisille teknologioille sopivaksi olisi ollut liian haasteellista tai aikaa vievää.
-
 Toteutusvaiheessa sovelluksesta rakennetaan PWA-sovellus ja siihen liittyvät työkalut liitetään osaksi nykyisiä työkaluja. Valmista sovellusta mitataan välimuistitallennuksen ollessa käytössä ja ilman. Service Workerin vaikutuksia tarkastellaan Puppeteer-nopeusmittauksen tuloksista. Tuloksia havainnollistetaan kaavioilla ja taulukoilla. Progressiivisuutta ja PWA-sovelluksen kriteereitä tarkastellaan Lighthouse-raporteista.
 
-Tuloksista nähdään kuinka paljon nopeampi PWA-sovellus on. Onko Service Workerin käyttäminen järkevää ja millaisia heikkouksia tai haittoja Service Workerin käytöstä voidaan koitua.
+Tuloksista nähdään kuinka paljon nopeampi PWA-sovellus on. Työssä tutkitaan mitä Service Workerin käyttämisessä tulee ottaa huomioon ja millaisia heikkouksia tai haittoja Service Workerin käytöstä voi koitua.
 
 \newpage
 \section{Tekninen toteutus}
@@ -752,19 +741,19 @@ Nykyiset JavaScript-pohjaiset käyttöliittymät ovat erittäin monimutkaisia. K
 
 \textbf{Yarn} on riippuvuuksien hallinta työkalu \cite{McKenzie}. Yarn toimii pohjana projektille. Yarnin avulla kaikki kehityksen aikaiseen toimintaan liittyvät skriptit ladataan kehittäjän koneelle. Myös sovelluksessa tarvittavat riippuvuudet ladataan Yarnilla. Yarn on Facebookin kehittäjien luoma työkalu. Sen tarkoitus on yhdenmukaistaa riippuvuuksien hallintaa, jolloin jokaisella kehittäjällä olisi käytössään juuri sama versio projektille määritellystä paketista. Yarn valittiin projektin riippuvuuksien hallintatyökaluksi lähinnä siksi, että projektin kehitystyön aikana siirryttiin pois Bower-nimisestä Front-End riippuvuuksien hallintatyökalusta. Yarn osaa automaattisesti asentaa Bower-riippuvuuksia ja Bowerin sivuilla on suositeltu Yarnia sen korvaajaksi.
 
-\textbf{Less}, Leaner Style Sheets on laajennustyökalu perinteiselle CSS-kielelle \cite{7476640}. Less tuo mukanaan muutamia hyödyllisiä laajennuksia, esimerkiksi muuttujat, operaatiot ja sisennykset. Muuttujilla voidaan esimerkiksi määrittää sovelluksen taustaväri, jonka jälkeen vaihtamalla muuttujan väriä saadaan sovelluksen taustaväri vaihtumaan jokaisella sivulla. Tyylien sisennyksellä taas on mahdollista kohdistaa tyylit vain tietyn muuttujan alle. Esimerkiksi hiiren hover efekti voidaan laittaa suoraan alkuperäisen tyylin sisälle, ilman että sitä varten tarvitsee luoda uutta riviä.
+\textbf{Less} (Leaner Style Sheets), on laajennustyökalu perinteiselle CSS-kielelle \cite{7476640}. Less tuo mukanaan muutamia hyödyllisiä laajennuksia, esimerkiksi muuttujat, operaatiot ja sisennykset. Muuttujilla voidaan esimerkiksi määrittää sovelluksen taustaväri, jonka jälkeen vaihtamalla muuttujan väriä saadaan sovelluksen taustaväri vaihtumaan jokaisella sivulla. Tyylien sisennyksellä taas on mahdollista kohdistaa tyylit vain tietyn muuttujan alle. Esimerkiksi hiiren hover efekti voidaan laittaa suoraan alkuperäisen tyylin sisälle, ilman että sitä varten tarvitsee luoda uutta riviä.
 
 \textbf{Babel} on uuden sukupolven JavaScript-kääntäjä \cite{maynard2017getting}. Babelia käyttämällä sovelluskehittäjä voi kirjoittaa tuoreinta mahdollista JavaScript syntaksia, ilman että selainvalmistajat ovat implementoineet uusia toimintoja selaimeen. Babelin avulla uusi JavaScript syntaksi käännetään vanhojen selaimien ymmärtämään JavaScript muotoon. Babelia on myös mahdollista laajentaa liitännäisillä. Sitä mukaa kun selaimien JavaScript tuki laajenee, voidaan Babelista poistaa liitännäisiä kehityksen jatkuessa.
 
 \textbf{Bootstrap} on tehokas käyttöliittymäkirjasto, jota käyttämällä on helppoa luoda responsiivisia, mobiili edellä kulkevia projekteja \cite{balasubramanee2013twitter}. Kirjasto tuo mukanaan esimerkiksi responsiivisen Grid-systeemin ja lukuisia käyttövalmiita komponentteja, kuten kuvakarusellin ja tyylitellyt taulukot. Kirjaston käyttäminen vähentää CSS:n parissa tapahtuvaa työskentelyä, sillä käyttämällä valmiita muuttujia sovelluksesta saadaan responsiivinen, joka näyttää oikealta kaiken kokoisilla näytöillä.
 
-JavaScript-koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään LESS-formaatista selaimen ymmärtämään CSS-muotoon. Kaikki tyylitiedostot paketoidaan myös yhdeksi kokonaisuudeksi ja sitten ne pienennetään automaattisella työkalulla. Lisäksi suoritetaan lukuisia muita toimenpiteitä, projektin kaikki kuvat pakataan, kolmannen osapuolen skriptit käydään läpi, paketoidaan ja liitetään projektiin. Sovelluksen arkkitehtuuria on havainnollistettu kuvassa \ref{angulararkkitehtuuri}.
-
 \textbf{Webpack}. Joulukuussa 2018 projektiin asennettiin Gruntin tilalle Webpack, joka on modulaarinen paketointityökalu nykyaikaisille web-sovelluksille \cite{subramanian2017modularization}. Webpackin avulla kirjastoja voidaan ladata modulaarisesti projektin käyttöön. Ennen kirjastoja ylläpiti kehittäjä lisäämällä <script> tagin aina HTML-sivun alkuun. Nyt Webpack huolehtii moduulien lataamisesta. Ainoa työvaihe on lisätä moduulien lataaminen automaatiotyökaluun, Webpackkiin, joka valitsee oikeat moduulit. Sovelluksen kokoa saadaan pienennettyä valitsemalla moduuleista ladattavat palaset. Tämä vaikuttaa suoraan sovelluksen nopeuteen.
+
+Sovellusta käännettäessä JavaScript-koodin toimenpiteiden jälkeen CSS-tyylitiedostot käännetään LESS-formaatista selaimen ymmärtämään CSS-muotoon. Kaikki tyylitiedostot paketoidaan myös yhdeksi kokonaisuudeksi ja sitten ne pienennetään automaattisella työkalulla. Lisäksi suoritetaan lukuisia muita toimenpiteitä, projektin kaikki kuvat pakataan, kolmannen osapuolen skriptit käydään läpi, paketoidaan ja liitetään projektiin. Sovelluksen arkkitehtuuria on havainnollistettu kuvassa \ref{angulararkkitehtuuri}.
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=angulararkkitehtuuri.jpg,  width=0.9\textwidth}
+\epsfig{figure=angulararkkitehtuuri.jpg,  width=1.0\textwidth}
 \caption{Sovelluksen arkkitehtuuri. Sovellus koostuu ulkoisista kirjastoista, sekä lähdekoodista. Selain tekee kutsuja joko taustapalveluihin, tai Service Workerin kautta lokaaleihin tiedostoihin. Sen jälkeen selain evaluoi skriptit ja kääntää ne näkymäksi.}
 \label{angulararkkitehtuuri}
 \end{center}
@@ -777,12 +766,13 @@ PWA-sovelluksen kehittäminen alkoi lisäämällä projektiin sopiva sovelluskuv
 
 Workboxin käyttöönotossa huomattiin, että Workbox ei ole tuettuna Grunt-työkalussa, sillä Grunt on liian vanha. Workboxia on kuitenkin mahdollista suorittaa erikseen myös NodeJs-skripteillä, joten Grunt-työkalua laajennettiin Grunt-run-nimisellä paketilla, joka mahdollistaa komentojen suorittamisen Gruntissa. 
 
-Gruntiin luotiin run-tehtävä \ref{gruntrunkomento}, jonka tarkoitus oli ajaa Workbox-skriptit. Tärkeää run-komennossa on liittää argumenteiksi “inject:manifest“ \cite{Googlec}, jolloin ohjelma tietää liittää lopulliseen Service Worker -tiedostoon kaikki tiedostot, jotka pitää lisätä välimuistiin. Näin jokaista tiedostoa tai polkua ei tarvitse kirjoittaa itse. Riittää, että konfiguraatiotiedostossa on määritelty välimuistiin tallennettavien tiedostojen päätteet. Injektointikomento on Workboxin mukana tuleva natiivi komento.
+Gruntiin luotiin run-tehtävä listauksessa \ref{gruntrunkomento}, jonka tarkoitus oli ajaa Workbox-skriptit. Tärkeää run-komennossa on liittää argumenteiksi “inject:manifest“ \cite{Googlec}, jolloin ohjelma tietää liittää lopulliseen Service Worker -tiedostoon kaikki tiedostot, jotka pitää lisätä välimuistiin. Näin jokaista tiedostoa tai polkua ei tarvitse kirjoittaa itse. Riittää, että konfiguraatiotiedostossa on määritelty välimuistiin tallennettavien tiedostojen päätteet. Injektointikomento on Workboxin mukana tuleva natiivi komento.
 
 \begin{lstlisting}[
      language=JavaScript,
      gobble=4,
      frame=single,
+     captionpos=b,
      label={gruntrunkomento},
      caption={Grunt run-komento.}
    ]
@@ -795,13 +785,14 @@ Gruntiin luotiin run-tehtävä \ref{gruntrunkomento}, jonka tarkoitus oli ajaa W
     };
 \end{lstlisting}
 
-Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lopussa run-tehtävän, joka taas ajaa Workbox-skriptin. Skripti käyttää projektin juureen generoitua Service Worker konfiguraatiotiedostoa, joka saatiin alun perin käyttämällä Workboxissa toimitettua asennusvelhoa. Workboxin asennusvelho on automaattinen työkalu konfiguraation luomiseen. Konfiguraatiossa määritellään esimerkiksi, mistä kansiosta tiedostoja otetaan mukaan Service Workeriin ja millä tiedostopäätteellä olevat tiedostot lasketaan mukaan. Esimerkkinä IoT-projektin Service Worker konfiguraatio \ref{service worker konfiguraatio}.
+Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lopussa run-tehtävän, joka taas ajaa Workbox-skriptin. Skripti käyttää projektin juureen generoitua Service Worker konfiguraatiotiedostoa, joka saatiin alun perin käyttämällä Workboxissa toimitettua asennusvelhoa. Workboxin asennusvelho on automaattinen työkalu konfiguraation luomiseen. Konfiguraatiossa määritellään esimerkiksi, mistä kansiosta tiedostoja otetaan mukaan Service Workeriin ja millä tiedostopäätteellä olevat tiedostot lasketaan mukaan. Esimerkkinä IoT-projektin Service Worker konfiguraatio listauksessa \ref{service worker konfiguraatio}.
 
 \begin{lstlisting}[
      language=JavaScript,
      gobble=4,
      frame=single,
      label={service worker konfiguraatio},
+     captionpos=b,
      caption={Service Worker konfiguraatio IoT-projektissa. }
    ]
     module.exports = {
@@ -818,12 +809,13 @@ Kun Grunt on ajanut sovelluksen rakentamiseen liittyvät tehtävät, ajaa se lop
     };
 \end{lstlisting}
 
-Projektissa Service Worker pohja, joka on määritetty konfiguraatiotiedostossa. Tähän varsinaiseen Service Worker -tiedostoon Workbox osaa konfiguraation pohjalta liittää tarvittavat tiedostot. Koodi \ref{serviceworkerbase} on Service Worker-pohja, jota Workbox laajentaa automaattisesti injektiokomennolla.
+Projektissa Service Worker pohja, joka on määritetty konfiguraatiotiedostossa. Tähän varsinaiseen Service Worker -tiedostoon Workbox osaa konfiguraation pohjalta liittää tarvittavat tiedostot. Listaus \ref{serviceworkerbase} on Service Worker-pohja, jota Workbox laajentaa automaattisesti injektiokomennolla.
 
 \begin{lstlisting}[
      language=JavaScript,
      gobble=4,
      frame=single,
+     captionpos=b,
      label={serviceworkerbase},
      caption={Service Worker-tiedoston runko mitä Workbox laajentaa. }
    ]
@@ -858,7 +850,7 @@ Manifestin toimintaa sovelluksessa voitiin tarkastella Google Chrome -selaimen k
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=manifest_console.PNG,  width=0.9\textwidth}
-\caption{Manifest.json tiedosto Google-Chrome kehittäjäkonsolissa.}
+\caption{Manifest.json-tiedosto Google-Chrome kehittäjäkonsolissa.}
 \label{Manifest.json}
 \end{center}
 \end{figure}
@@ -878,12 +870,15 @@ Joulukuussa 2018 projektin kehitystyökaluja haluttiin päivittää. Projektin k
 
 Työkalujen päivitys aloitettiin siirtymällä Yarn-työkalusta NPM:n käyttöön. Suurin osa paketeista asentui NPM-työkalulla suoraan. Yarnilla erityisesti asennettavia pakettaja olivat erittäin vanhasta Bower-työkalusta asennetut kirjastot, jotka joko korvattiin uusilla NPM-rekisteristä löytyvillä paketeilla, tai asennettiin suoraan Githubin URL osoitteella. 
 
-Seuraava vaihe oli vaihtaa vanha 500 rivinen konfiguraatio Webpackille. Webpack on modulaarinen paketointityökalu. Moduulien ansiosta osa skripteistä pystyttiin lataamaan vain tarvittaessa. Ongelmaksi muodostui kuitenkin se, että osa skripteistä oli liian vanhoja ja niitä ei ollut mahdollista ladata moduuleina. Kun sovellus oli saatu kääntymään Webpackilla vanhoja skriptejä lukuun ottamatta, otettiin sovelluksesta uudet mittaukset. Lopullisesta Webpack konfiguraatiosta tuli noin 120 riviä, eli huomattavasti yksinkertaisempi. Lisäksi Webpack toi mukanaan lukuisia uusia hyödyllisiä toimintoja. Nyt uusia kirjastoja ja moduuleita voitaisiin ottaa käyttöön suoraan NPM-rekisteristä, sekä Webpackin myötä sovelluksen kokoa saataisiin hieman pienennettyä. Sovelluksen optimointiin ei käytetty kuitenkaan paljon aikaa. Tärkeimpänä uudistuksena saatiin päivitettyä Googlen Workbox kirjasto, jolla PWA:lle vaadittava Service Worker skripti saataisiin luotua automaattisesti.
+Seuraava vaihe oli vaihtaa vanha 500 rivinen konfiguraatio Webpackille. Webpack on modulaarinen paketointityökalu. Moduulien ansiosta osa skripteistä pystyttiin lataamaan vain tarvittaessa. Ongelmaksi muodostui kuitenkin se, että osa skripteistä oli liian vanhoja ja niitä ei ollut mahdollista ladata moduuleina. Kun sovellus oli saatu kääntymään Webpackilla vanhoja skriptejä lukuun ottamatta, otettiin sovelluksesta uudet mittaukset. Lopullisesta Webpack konfiguraatiosta tuli noin 120 riviä, eli huomattavasti yksinkertaisempi. Lisäksi Webpack toi mukanaan lukuisia uusia hyödyllisiä toimintoja. Nyt uusia kirjastoja ja moduuleita voitaisiin ottaa käyttöön suoraan NPM-rekisteristä, sekä Webpackin myötä sovelluksen kokoa saataisiin hieman pienennettyä. Sovelluksen optimointiin ei käytetty kuitenkaan paljon aikaa. Tärkeimpänä uudistuksena saatiin päivitettyä Googlen Workbox kirjasto, jolla PWA-sovelluksille vaadittava Service Worker skripti saataisiin luotua automaattisesti. Listauksessa \ref{webpackserviceworker} Webpackille luotu Service Worker konfiguraatio.
 
 \begin{lstlisting}[
      language=JavaScript,
      gobble=4,
-     frame=single
+     captionpos=b,
+     frame=single,
+     label={webpackserviceworker},
+     caption={Webpack konfiguraatio Service Workerin luomiseksi. }
    ]
     new GenerateSW({
       skipWaiting: true,
@@ -927,7 +922,7 @@ Toinen pisteisiin suoraan vaikuttava asia on ensimmäinen järkevä piirto-mitta
 
 Seuraava mittaus tehtiin Webpackia hyödyntävällä sovelluksen versiolla 1.7.1, jonka Service Worker oli generoitu Webpack-lisäosalla. Pelkästään siirtämällä muutama skripti ladattavaksi moduuleina, saatiin sovelluksen lataamista nopeammaksi. Mittauksen tuloksista \ref{Lighthouse raportti 2} nähdään, että sovelluksen kääntöaika käytettäväksi laski yli sekunnin. Myös ensimmäinen järkevä piirto tippui yli puoli sekuntia. Web-sovelluksista puhuttaessa on kyse huomattavasta ajasta. Sovelluksen kokonaiskäynnistymisaika on kuitenkin edelleen hidas verrattuna hyvin optimoituihin nykyaikaisiin modulaarisiin sivustoihin. Sekunnin nopeusmuutos antoi kuitenkin täydet 100 pistettä PWA-kategoriasta. 
 
-\begin{figure}[!ht]
+\begin{figure}[h]
 \begin{center}
 \epsfig{figure=audit1_webpack.png,  width=0.9\textwidth}
 \caption{Lighthouse raportti Webpack-työkalulla paketoidusta sovelluksesta uudella Workboxin generoimalla Service Worker skriptillä.}
@@ -947,13 +942,13 @@ Sovelluksen nopeutta mitattiin vielä kolmannen kerran, jotta saataisiin tulokse
 \end{center}
 \end{figure}
 
-\subsection{Puppeteer mittausten suorituskyky}
+\subsection{Puppeteer mittausten-suorituskyky}
 
 Jotta Service Workerin vaikutuksista saataisiin vielä tarkempia tuloksia tehtiin seuraavaksi yksinkertainen toistuva sivulataus sovellukselle. Sovellus avattiin selaimessa ja siitä tallennettiin dokumenttioliomallin kääntöaika. Tällöin selain on parsinut päädokumentin, mutta sovellus ei ole vielä käytettävissä eikä reagoi syötteisiin. Sovellusta vasten ajettiin yksinkertainen rasitustesti kahdella eri tavalla. Ensimmäiseksi selain käynnistettiin joka kerta uudestaan, jotta selaimen välimuistissa ei olisi aikaisempaa tietoa. Seuraavaksi selainta ei käynnistetty uudestaan ja sivulataus tehtiin, kun Service Workerin välimuistiin oli talletettu tietoa. 
 
 Testissä määriteltiin yksinkertaisesti kymmenen ajoa kummallekin tavalle. Selaimen objekteista löytyy suorituskyvyn ajoitustieto, josta saadaan tietoa sovelluksen vasteajoista. Testeihin määriteltiin kerättäväksi edellä mainittu dokumenttioliomallin kääntämisen aika. Jälkimmäisessä testitapauksessa, jossa selainta ei käynnistetty uudestaan, testit ajettiin 11 kertaa. Ensimmäistä ajokertaa ei huomioitu, sillä silloin välimuistissa ei vielä ollut mitään tietoa sivusta. Puppeteer aloittaa ajon aina oletuksena tyhjältä pöydältä. Tulokset on esitelty taulukossa \ref{table:puppeteerLatausajat}.
 
-\begin{table}[!ht]
+\begin{table}[h]
 \centering
 \begin{small}
 \caption{Telia IoT-palvelun latausajat testissä. }
@@ -1005,7 +1000,7 @@ Testissä määriteltiin yksinkertaisesti kymmenen ajoa kummallekin tavalle. Sel
 
 Service Workerin välimuistista ladattu sivu aukeaa huomattavasti nopeammin kuin ilman Service Workeria. Pyöristettynä Service Workerin välimuistista ladattava sovellus aukeaa 300 millisekuntia nopeammin. Keskiarvoistetut ajat on havainnollistettu kuvassa \ref{Dom Interactive keskiarvoistettu aika}. Latausaika tuntui vaihtelevan hieman suuntaan tai toiseen. Laskemalla keskiarvo kummastakin ajosta nähdään, että Webpackilla tehty ratkaisu oli lopulta hieman nopeampi. Pieni ero Webpackin ja Gruntin välillä johtui siitä, että sovellusta ei oltu optimoitu tarpeeksi modulaariseksi, eikä ylimääräisiä kirjastoja jätetty lataamatta uudessa Webpack-versiossa. Tätä ei tehty siksi, että käytetyt kirjastot olivat joko liian vanhoja ladattavaksi modulaarisesti, tai niitä ei ehditty päivittää uudempiin.
 
-\begin{figure}[!ht]
+\begin{figure}[h]
 \begin{center}
 \epsfig{figure=dominteractive.png,  width=0.7\textwidth}
 \caption{Dokumenttioliomallin kääntämisen keskiarvoistettu aika.}
@@ -1017,6 +1012,8 @@ Lighthouse, sekä Puppeteer-testin perusteella Service Workerin välimuistia hy�
 
 \clearpage
 \subsection{Pohdinta}
+
+Työssä päätettiin jättää vertailu hybridi- ja natiivisovellusten kesken pois, sillä sovelluksen muuttaminen kyseisille teknologioille sopivaksi olisi ollut liian haasteellista tai aikaa vievää.
 
 PWA-sovelluksen käyttöönotossa esiintyi muutamia ongelmia projektin aikana. Projektin työkalut olivat vanhentuneet, joten ensimmäinen varsinainen ongelma oli yhteensopivuusongelma Service Workerin luomisessa. Toinen kehityksen aikana ilmennyt ongelma oli sovelluksen näyttäytyminen välimuistista, kun Service Worker oli saatu käyttöön. Google Chromen kehittäjäkonsolissa on Service Worker -välilehdellä valinnat “update on reload“ ja “Bypass for network“ jotka ruksattiin käyttöön. Näin kehittäjä näkee aina uusimmat muutokset selaimessaan. Muutoin koodiin tehdyillä muutoksilla ei välttämättä olisi vaikutusta, sillä Service Worker näyttäisi tiedostoja ja koodia välimuistista eikä suoraan paikalliselta kehityspalvelimelta. 
 
