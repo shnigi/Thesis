@@ -1046,6 +1046,31 @@ Samalla tavalla PWA-sovelluksia voisi hyödyntää autoissa, tai muissa kodin es
 \newpage
 \section{Yhteenveto}
 
+Tässä luvussa tehdään yhteenveto PWA-sovellusten rakentamisesta ja vastataan tutkimuskysymyksiin. 
+
+Kirjallisuuskatsauksen perusteella PWA-sovelluksista ei ole vielä tehty paljon tieteellistä tutkimusta. PWA-sovellukset ovat uusi teknologia ja sitä on kokeiltu vasta muutamissa suurissa yrityksissä kuten: Tinder ja Uber. Näiden tapaustutkimusten perusteella PWA-sovellusten rakentaminen on järkevää kustannusten ja tehokkuuden takia. PWA-sovellusten käyttö on nostanut käyttäjämääriä sovellusten parissa. Sovellusten latausajat ovat pienentyneet Service Workerin välimuistin hyödyntämisen myötä ja käyttöaste on kasvanut kun käyttäjän ei tarvitse odottaa sovelluksen latautumista. Service Workerin käyttö on myös mahdollistanut sovelluksen pikakuvakkeen asentamisen suoraan verkkosivulta ja ilmoitusten näyttämisen mobiililaitteella. 
+
+PWA-sovellusten rakentaminen on järkevää tilanteissa joissa ei ole tarvetta natiivisovellusten kaltaiseen suorituskykyyn. PWA-sovellukset ovat myös hyvä keino kustannusten pienentämiseen. Sovellus kehitetään vain kerran ja se toimii kaikilla laitteilla kaikkialla missä on nykyaikainen verkkoselain: työasemilla ja mobiililaitteilla. PWA-sovellukset saattavat olla myös ratkaisu tulevaisuudessa älytelevisioiden ja autojen sovelluksiksi.
+
+\textbf{TK1:} Kuinka paljon nopeampi Service Workerin välimuisti on kuin verkkosivu, joka ei hyödynnä Service Workerin välimuistia?
+
+Googlen tapaustutkimuksen tulokset osoittavat, että Service Workerin välimuistin käyttö nopeuttaa uusiutuvaa sivulatausta noin kaksi kolmasosaa. Sivusto joka käyttää Service Workeria latautuu kolmasosassa ajasta kuin sivusto joka ei ole tallettanut mitään välimuistiin. Myös tämän työn tutkimustulokset tukevat väitettä. Service Workerin käyttö oli kaikissa lähtötilanteissa nopeampaa. Uudet sivulataukset välimuistista olivat vain kolmasosan siitä mitä sivulataukset ilman välimuistia. Sivulataukset olivat nopeampia molemmissa testitapauksissa. Service Workerin välimuistin käyttö on siis huomattavasti nopeampaa kuin ilman.
+
+\textbf{TK2:} Miten olemassa oleva verkkosivu voidaan muokata PWA-sovellukseksi?
+
+Olemassaoleva verkkosivusto voidaan muokata PWA-sovellukseksi noudattamalla Googlen tarjoamaa tarkastuslistaa. Sivustolle pitää luoda vähintään Web App Manifest, sovelluskuvake, Service Worker ja HTTPS-yhteys. Kun nämä vähimmäisvaatimukset on täytetty tulee sovelluksesta PWA-sovellus. Huomion arvoista on se, että Service Workerin ei tarvitse vähimmäisvaatimuksissa tehdä mitään. Pelkkä Service Workerin rekisteröinti selaimessa riittää. PWA-sovellusta voidaan myöhemmin laajentaa tukemaan Service Workerin välimuistikäyttöä ja näyttää sovellusilmoituksia. Lisäksi hyvän PWA-sovelluksen mittareita ovat: responsiivisuus, verkkoyhteydetön tuki, tuoreus, turvallisuus, löydettävyys, sitouttava ja asennettava.
+
+\textbf{TK3:} Minkälaisia hyötyjä tai haittoja saadaan käyttämällä PWA-sovellusta?
+
+PWA-sovellus teknologian takia ei tarvitse erikseen kehittää samaa sovellusta mobiililaitteelle natiivikielellä. Yksi ja sama sovellus käy kaikille laitteille. PWA-sovellusta ei tarvitse julkaista sovelluskaupoissa ja maksaa niihin liittyviä lisenssimaksuja. Myöskään sovelluskauppojen hyväksyntäprosesseja tai käyttöehtoja ei tarvitse hyväksyä. PWA-sovellus voidaan asentaa suoraan verkkosivulta. 
+
+PWA-sovellus teknologian avulla käyttäjälle voidaan lähettää sovellusilmoituksia vaikka sovellus olisi suljettuna. Service Workerin välimuistia hyödyntämällä sovelluksen latausaika saadaan karkeasti kolmasosaan alkuperäisestä. PWA-sovellus tuntuu ja näyttää natiivisovellukselta käyttäjän laitteella. Asennettu PWA-sovellus ei myöskään vie tilaa käyttäjän laitteelta, sillä tiedot voidaan hakea suoraan verkosta ja käyttäjän mobiililaitteella on tallennettuna vain sovelluskuvake, sekä välimuistissa olevat asiat. Käyttäjän ei ole pakko asentaa tai hyväksyä käyttöehtoja sovellusta käytettäessä. Käyttäjän ei myöskään ole pakko asentaa mitään ellei halua. PWA-sovellusta on mahdollista käyttää myös verkkoyhteydettömässä tilassa.
+
+PWA-sovelluksen haittoja on lisääntynyt työmäärä, mikäli olemassa oleva verkkosivu halutaan muokata PWA-sovellukseksi. Lisää työtä aiheuttavat kaikki toimenpiteet, jotka lasketaan PWA-sovelluksen vaatimuksiksi ja hyviksi käytännöiksi, mikäli niitä ei ole ennestään toteutettuna. Lisää työtä voi aiheuttaa myös sovelluskuvakkeen suunnittelu ja tallentaminen kaikkiin eri kokoihin. Myös Service Workerin välimuistin käyttö saattaa viedä liikaa muistia mikäli strategiaa ei ole mietitty kunnolla. Sovelluksen sitouttamisen kannalta tulee miettiä millaisia sovellusilmoituksia näytetään ja milloin. Väärät ilmoitukset väärään aikaan saattavat vähentää sovelluksen käyttöä ja kiinnostusta sitä kohtaan.
+
+
+
+
 
 % yksi näistä tai ...
 %\bibliographystyle{plain}
