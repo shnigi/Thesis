@@ -316,7 +316,7 @@ PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyt
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=nayttotilat.png,  width=0.8\textwidth}
-\caption{Näyttötilat vasemmalta oikealle: Browser, standalone / minimal-ui, fullscreen}
+\caption{Näyttötilat vasemmalta oikealle: Browser, standalone / minimal-ui ja fullscreen.}
 \label{Näyttötilat}
 \end{center}
 \end{figure}
@@ -363,7 +363,7 @@ Tässä luvussa vertaillaan PWA-sovelluksia yleisesti muihin teknologioihin. Mui
 
 \subsection{Vertailua muihin teknologioihin}
 
-Mobiililaitteiden kenttä muuttui täysin Applen julkaistua iPhonen. Applen alkuperäinen idea oli käyttää nimenomaan web-teknologioita \cite{charland2011mobile}. Kuitenkin kolme vuotta julkaisun jälkeen natiivisovellukset olivat ottaneet vallan, yleensä suorituskyvyn takia. Tästä seurasi aiemmin mainittu ongelma; sovelluksia tuli kehittää erikseen jokaiselle laitealustalle \cite{charland2011mobile}. Sovelluksen kehittäminen erikseen jokaiselle laitteelle on kalliimpaa ja pienemmillä yrityksillä ei välttämättä ollut rahaa tukea kuin vain toista laitealustaa, iOS- tai Android-alustaa. Lisäksi ohjelmistojen ylläpito usealle laitteelle on kallista.
+Mobiililaitteiden kenttä muuttui täysin Applen julkaistua iPhonen \cite{charland2011mobile}. Applen alkuperäinen idea oli käyttää nimenomaan web-teknologioita \cite{charland2011mobile}. Kuitenkin kolme vuotta julkaisun jälkeen natiivisovellukset olivat ottaneet vallan, yleensä suorituskyvyn takia. Tästä seurasi aiemmin mainittu ongelma; sovelluksia tuli kehittää erikseen jokaiselle laitealustalle \cite{charland2011mobile}. Sovelluksen kehittäminen erikseen jokaiselle laitteelle on kalliimpaa ja pienemmillä yrityksillä ei välttämättä ollut rahaa tukea kuin vain toista laitealustaa, iOS- tai Android-alustaa. Lisäksi ohjelmistojen ylläpito usealle laitteelle on kallista.
 
 3D-sovelluksissa ja peleissä natiivikielen käyttö saattaa tuoda etuja, mutta hyvin rakennetuissa verkkosovelluksissa suorituskykyeroa on miltei mahdoton huomata \cite{charland2011mobile}. Sovelluskehitystä hankaloittaa lisäksi se, että jokaisella laitteella on oltava oma kehitysympäristö ja -työkalut. Rajapinnat ovat erilaiset ja sovelluksen paketointi ei ole yhdenmukaista. Kun sovelluksen ylläpitoon ja kehitykseen täytyy käyttää useampia ympäristöjä, se nostaa sovelluskehityksen kuluja \cite{xanthopoulos2013comparative}. Loppukäyttäjän näkökulmasta natiivisovellus tarjoaa kuitenkin yleensä parhaan käyttökokemuksen.
 
@@ -401,22 +401,22 @@ Myös käyttöliittymäkirjastot ovat erilaisia. Esimerkiksi iOS-laitteilla on v
 
 Natiivisovellus on järkevä teknologia, jos tarkoituksena on käyttää paljon laitteen natiiveja rajapintoja. Natiivisovelluskehitys soveltuu hyvin peleihin parhaan suorituskyvyn takia. 
 
-\subsection{Natiivi- ja hybridisovellusten erot verrattuna PWA-sovelluksiin}
+\subsection{Natiivi- ja hybridisovellukset verrattuna PWA-sovelluksiin}
 
 PWA-sovellus on muista sovellustyypeistä erilainen, sillä sitä ei paketoida eikä jaeta sovelluskaupoissa. Sovellus voidaan löytää suoraan verkosta normaalin verkkosivun tapaan. Etuna on se, että sovellusta voidaan käyttää heti tekemättä sovelluksen asennuspäätöstä, luovuttamatta käyttöoikeuksia tai hyväksymällä sovelluksen käyttöehtoja. PWA-sovellus on siis verkkosovellus, joka voidaan asentaa käyttäjän laitteelle pikakuvakkeeksi. 
 
-Koska PWA-sovellus on vain pikakuvake, on sovelluksen asennuskoko pieni. PWA-sovellus ei vie juurikaan tallennustilaa käyttäjän laitteelta, sillä kaikki data haetaan verkosta. Ainoastaan välimuistiin tallennettavat asiat vievät tilaa käyttäjän laitteelta.
+PWA-sovellusten suurin ongelma toistaiseksi on sovelluksen pääsy laitteiden natiiveihin rajapintoihin, vaikka verkkoselaimen rajapinnat ovatkin jo kattavat. Selaimen tukemia rajapintoja on esitelty kuvassa \ref{Selaimen rajapinnat}. Mikäli sovelluksessa on tarkoitus käyttää jotain osa-aluetta jota selain ei tue, silloin on luonnollista tehdä natiivisovellus.
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=html5apis.jpg,  width=1.0\textwidth}
+\epsfig{figure=html5apis.jpg,  width=0.9\textwidth}
 \caption{Google Chrome Version 72 tukemat rajapinnat. Kuvakaappaus https://whatwebcando.today/ }
 \label{Selaimen rajapinnat}
 \end{center}
 \end{figure}
 \clearpage
 
-PWA-sovellusten suurin ongelma toistaiseksi on sen pääsy laitteiden natiiveihin rajapintoihin, vaikka verkkoselaimen rajapinnat ovatkin jo kattavat. Selaimen tukemia rajapintoja on esitelty kuvassa \ref{Selaimen rajapinnat}. Mikäli sovelluksessa on tarkoitus käyttää jotain osa-aluetta jota selain ei tue, silloin on luonnollista tehdä natiivisovellus.
+Koska PWA-sovellus on vain pikakuvake, on sovelluksen asennuskoko pieni. PWA-sovellus ei vie juurikaan tallennustilaa käyttäjän laitteelta, sillä kaikki data haetaan verkosta. Ainoastaan välimuistiin tallennettavat asiat vievät tilaa käyttäjän laitteelta.
 
 PWA-sovellus on aina ajan tasalla, sillä käyttäjän laitteelle on asennettu ainoastaan pikakuvake ja varsinaisen sovelluksen tiedot käydään hakemassa aina palvelimelta, ellei tietoa ole tallennettu välimuistiin. PWA-sovellus on myös mahdollista kääntää hybridisovellukseksi, mikäli sen haluaa julkaista sovelluskaupassa. 
 
@@ -748,7 +748,7 @@ Nykyiset JavaScript-pohjaiset käyttöliittymät ovat erittäin monimutkaisia. K
 
 \textbf{Yarn} on riippuvuuksien hallinta työkalu \cite{McKenzie}. Yarn toimii pohjana projektille. Yarnin avulla kaikki kehityksen aikaiseen toimintaan liittyvät skriptit ladataan kehittäjän koneelle. Myös sovelluksessa tarvittavat riippuvuudet ladataan Yarnilla. Yarn on Facebookin kehittäjien luoma työkalu. Sen tarkoitus on yhdenmukaistaa riippuvuuksien hallintaa, jolloin jokaisella kehittäjällä olisi käytössään juuri sama versio projektille määritellystä paketista. Yarn valittiin projektin riippuvuuksien hallintatyökaluksi lähinnä siksi, että projektin kehitystyön aikana siirryttiin pois Bower-nimisestä Front-End riippuvuuksien hallintatyökalusta. Yarn osaa automaattisesti asentaa Bower-riippuvuuksia ja Bowerin sivuilla on suositeltu Yarnia sen korvaajaksi.
 
-\textbf{Less} (Leaner Style Sheets), on laajennustyökalu perinteiselle CSS-kielelle \cite{7476640}. Less tuo mukanaan muutamia hyödyllisiä laajennuksia, esimerkiksi muuttujat, operaatiot ja sisennykset. Muuttujilla voidaan esimerkiksi määrittää sovelluksen taustaväri, jonka jälkeen vaihtamalla muuttujan väriä saadaan sovelluksen taustaväri vaihtumaan jokaisella sivulla. Tyylien sisennyksellä taas on mahdollista kohdistaa tyylit vain tietyn muuttujan alle. Esimerkiksi hiiren hover efekti voidaan laittaa suoraan alkuperäisen tyylin sisälle, ilman että sitä varten tarvitsee luoda uutta riviä.
+\textbf{Less} (Leaner Style Sheets) on laajennustyökalu perinteiselle CSS-kielelle \cite{7476640}. Less tuo mukanaan muutamia hyödyllisiä laajennuksia, esimerkiksi muuttujat, operaatiot ja sisennykset. Muuttujilla voidaan esimerkiksi määrittää sovelluksen taustaväri, jonka jälkeen vaihtamalla muuttujan väriä saadaan sovelluksen taustaväri vaihtumaan jokaisella sivulla. Tyylien sisennyksellä taas on mahdollista kohdistaa tyylit vain tietyn muuttujan alle. Esimerkiksi hiiren hover efekti voidaan laittaa suoraan alkuperäisen tyylin sisälle, ilman että sitä varten tarvitsee luoda uutta riviä.
 
 \textbf{Babel} on uuden sukupolven JavaScript-kääntäjä \cite{maynard2017getting}. Babelia käyttämällä sovelluskehittäjä voi kirjoittaa tuoreinta mahdollista JavaScript syntaksia, ilman että selainvalmistajat ovat implementoineet uusia toimintoja selaimeen. Babelin avulla uusi JavaScript syntaksi käännetään vanhojen selaimien ymmärtämään JavaScript muotoon. Babelia on myös mahdollista laajentaa liitännäisillä. Sitä mukaa kun selaimien JavaScript tuki laajenee, voidaan Babelista poistaa liitännäisiä kehityksen jatkuessa.
 
@@ -760,7 +760,7 @@ Sovellusta käännettäessä JavaScript-koodin toimenpiteiden jälkeen CSS-tyyli
 
 \begin{figure}[h]
 \begin{center}
-\epsfig{figure=angulararkkitehtuuri.jpg,  width=1.0\textwidth}
+\epsfig{figure=angulararkkitehtuuri.png,  width=1.0\textwidth}
 \caption{Telia IoT-sovelluksen arkkitehtuuri.}
 \label{angulararkkitehtuuri}
 \end{center}
