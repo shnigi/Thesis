@@ -63,7 +63,7 @@
 
 \begin{abstract}
 
-Mobiilisovellukset ovat jatkuvasti kehittyvää ja muuttuvaa teknologiaa, kuten myös strategiat niiden kehittämiseksi. Progressiivisen web-sovelluksen (Progressive Web Application, PWA) tarkoitus on hämärtää, tai jopa poistaa raja sovelluskaupasta ladattavan sovelluksen ja normaalin verkkosivuston välillä. PWA on kuin mikä tahansa normaali verkkosivusto, mutta se täyttää lisäksi seuraavat mittapuut: Sovellus skaalautuu mille tahansa laitteelle. Sovellus tarjoillaan salatun yhteyden yli. Sovellus on mahdollista asentaa puhelimen kotinäytölle pikakuvakkeeksi, jolloin sovellus avautuu ilman selaimesta tuttuja navigointityökaluja ja lisäksi sovelluksen voi myös avata ilman verkkoyhteyttä. 
+Progressiivisen web-sovelluksen (Progressive Web Application, PWA) tarkoitus on hämärtää tai jopa poistaa raja sovelluskaupasta ladattavan sovelluksen ja normaalin verkkosivuston välillä. PWA on kuin mikä tahansa normaali verkkosivusto, mutta se täyttää lisäksi seuraavat mittapuut: Sovellus skaalautuu mille tahansa laitteelle. Sovellus tarjotaan salatun yhteyden yli. Sovellus on mahdollista asentaa puhelimen kotinäytölle pikakuvakkeeksi, jolloin sovellus avautuu ilman selaimesta tuttuja navigointityökaluja ja lisäksi sovelluksen voi myös avata ilman verkkoyhteyttä. 
 
 Tässä työssä käydään läpi PWA-sovelluksen rakennustekniikoita ja määritellään milloin sovellus on PWA-sovellus. Työssä mitataan PWA-sovelluksen nopeutta Service Workerin välimuistitallennusominaisuuksien ollessa käytössä ja ilman. PWA-sovelluksen luomista ja käyttöönottoa tarkastellaan olemassa olevassa yksityisessä asiakasprojektissa. Projektin tarkastelussa kiinnitetään huomiota PWA-sovelluksen tuomiin etuihin ja kipupisteisiin.
 
@@ -77,7 +77,7 @@ Testitulokset osoittavat että Service Workerin välimuistin hyödyntäminen on 
 
 \section{Johdanto}
 
-Tämän päivän mobiilisovelluksia kehitettäessä on teknologiavaihtoehdoissa useita mahdollisuuksia. Kehittäjät voivat valita ainakin neljästä eri mallista: mobiili-web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana progressiivinen web-sovellus (Progressive Web App, PWA). Jokaisessa vaihtoehdossa on etuja ja haittoja. Web-tekniikoihin panostaminen näyttäisi kuitenkin olevan kustannustehokasta, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Googlen julkaiseman tiedotteen mukaan \cite{Gambhir} PWA-sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA-sovelluskehitykseen on tutustunut, natiivisovelluskehitystä ei enää välttämättä tarvita. PWA-sovellukset käyttäytyvät kuin natiivisovellukset, eikä niiden suorituskyvyssä välttämättä huomaa eroa natiivisovellukseen verrattuna. Lisäksi PWA-sovellusten kehittäminen on nopeampaa ja halvempaa yhden ainoan koodirungon takia. 
+Mobiilisovellukset ovat jatkuvasti kehittyvää ja muuttuvaa teknologiaa, kuten myös strategiat niiden kehittämiseksi. Tämän päivän mobiilisovelluksia kehitettäessä on teknologiavaihtoehdoissa useita vaihtoehtoja. Kehittäjät voivat valita ainakin neljästä eri mallista: mobiili-web-sovellus, natiivisovellus, hybridisovellus, tai uusimpana progressiivinen web-sovellus (Progressive Web App, PWA). Jokaisessa vaihtoehdossa on etuja ja haittoja. Web-tekniikoihin panostaminen näyttäisi kuitenkin olevan kustannustehokasta, sillä nykyiset sovelluskaupat on jaettu eri laitealustojen kesken. Googlen julkaiseman tiedotteen mukaan \cite{Gambhir} PWA-sovellus käyttää moderneja web-tekniikoita saavuttaakseen sovelluksen kaltaisen käytöksen. Kun PWA-sovelluskehitykseen on tutustunut, natiivisovelluskehitystä ei enää välttämättä tarvita. PWA-sovellukset käyttäytyvät kuin natiivisovellukset, eikä niiden suorituskyvyssä välttämättä huomaa eroa natiivisovellukseen verrattuna. Lisäksi PWA-sovellusten kehittäminen on nopeampaa ja halvempaa yhden ainoan koodirungon takia. 
 
 Mobiili verkkosivu itsessään muodostuu sovellukseksi käyttäen verkon parhaita tekniikoita. Tämä tarkoittaa sitä, että verkkosivu voidaan asentaa pikakuvakkeeksi mobiililaitteen sovellusvalikkoon, jonka jälkeen sovellus on mahdollista avata samaan tapaan kuin natiivisovellus. Lisäksi sovelluksessa on mahdollista käyttää sellaisia toimintoja jotka olivat ennen mahdottomia. Esimerkiksi lähettää sovelluksen asentaneille käyttäjille sovellusilmoituksia ja tallettaa sovelluksen tietoja käyttäjän laitteen välimuistiin. PWA-sovellus on siis tavallinen verkkosivu, joka hyödyntää selainten uusimpia ominaisuuksia.
 
@@ -96,7 +96,7 @@ Työ on jaettu kuuteen päälukuun. Luvussa 2 esitellään PWA-sovelluksen vaati
 \newpage
 \section{PWA-sovellusten esittely}
 
-Tässä luvussa esitellään PWA-teknologia ja sen vaatimukset. Luvussa esitellään myös muita mobiiliteknologioita ja tarkastellaan niiden eroja verrattuna  PWA-sovellukseen.
+Tässä luvussa esitellään PWA-teknologia ja sen vaatimukset. Luvussa esitellään lisäksi muita mobiiliteknologioita ja tarkastellaan niiden eroja verrattuna PWA-sovellukseen.
 
 \subsection{PWA-sovelluksen ominaisuudet}
 
@@ -120,15 +120,13 @@ Alex Russell määritteli blogikirjoituksessaan \cite{Russell} millainen PWA-sov
 \subsection{Miksi PWA-sovelluksia tarvitaan}
 \enlargethispage{5mm}
 
-Tarkastellaan millaisia haasteita on nykyään natiivi- ja web-sovelluksissa.
+Natiivi- ja web-sovelluksissa on monenlaisia haasteita. Yksi haasteista on Internetin nopeus. Internet ei ole kaikkialla maailmassa nopea. Noin 60 \% maailmasta käyttää yhä 2G-verkkoa \cite{Kapoor} ja paikoitellen verkko on niin ruuhkautunut, että sen tiedonsiirtokyky ei ole riittävä. Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Tutkimuksen mukaan 53 \% käyttäjistä hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti \cite{Kapoor}.
 
-\begin{itemize}
-  \item \textbf{Internetin nopeus:} Internet ei ole kaikkialla maailmassa nopea. Noin 60 \% maailmasta käyttää yhä 2G-verkkoa \cite{Kapoor} ja paikoitellen verkko on niin ruuhkautunut, että sen tiedonsiirtokyky ei ole riittävä. Verkkosivun tulee latautua tarpeeksi nopeasti. Yhä useammin sivuilla on erilaisia bannereita, multimediaa ja moderneja animaatioita. Tutkimuksen mukaan 53 \% käyttäjistä hylkää sivun, mikäli se latautuu ja käyttäytyy liian hitaasti \cite{Kapoor}.
-  \item \textbf{Kynnys asentaa omalle laitteelle on korkea:} Ihmiset eivät halua asentaa omille laitteilleen sovelluksia \cite{Kapoor}. ComScoren mukaan keskimääräinen käyttäjä lataa ja asentaa laitteellensa nolla sovellusta kuukaudessa \cite{Perez}. Asennettu sovellus vie tilaa mobiililaitteelta ja sovellukselle pitää antaa lisäksi täydet käyttöoikeudet sen tarvitsemiin rajapintoihin.
-  \item \textbf{Käyttäjän sitouttaminen:} Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa. Noin 80 \% ajasta käytetään kolmen tärkeimmän natiivisovelluksen parissa. Verkkosivujen käyttöäaste on noin viidesosan sovelluksiin verrattuna. Näin ollen suurin osa käyttäjistä ei ole sitoutettu palveluun \cite{Kapoor}. Väitteen esittäjältä, Kapoorilta, pyydettiin tarkennusta asiaan 15.3.2019 saamatta vastausta.
-\end{itemize}
+Toinen haaste on saada käyttäjä asentamaan sovellus omalle laitteellen. Kapoorin tutkimuksen mukaan \cite{Kapoor} kynnys asentaa sovellus omalle laitteelle on korkea, sillä asennettu sovellus vie tilaa mobiililaitteelta ja sovellukselle pitää antaa lisäksi täydet käyttöoikeudet sen tarvitsemiin rajapintoihin. ComScoren mukaan keskimääräinen käyttäjä lataa ja asentaa laitteellensa nolla sovellusta kuukaudessa \cite{Perez}.
 
-PWA-sovellukset pyrkivät ratkaisemaan näitä ongelmia.
+Kolmas haaste on käyttäjän sitouttaminen. Mobiilikäyttäjät viettävät suurimman osan ajastaan natiivisovelluksissa. Noin 80 \% ajasta käytetään kolmen tärkeimmän natiivisovelluksen parissa. Verkkosivujen käyttöäaste on noin viidesosan sovelluksiin verrattuna. Näin ollen suurin osa käyttäjistä ei ole sitoutettu palveluun \cite{Kapoor}. Väitteen esittäjältä, Kapoorilta, pyydettiin tarkennusta asiaan 15.3.2019 saamatta vastausta.
+
+PWA-sovellukset pyrkivät ratkaisemaan näitä ongelmia seuraavilla keinoilla.
 
 \begin{itemize}
   \item \textbf{Nopeus:} PWA tarjoaa Service Workerin avulla mahdollisuuden tallentaa tietoa välimuistiin, joka mahdollistaa sovelluksen latautumisen nopeammin käyttäjän laitteella. Sovelluksen käynnistäminen on siis erityisen nopeaa, vaikka verkkoon ei olisi vielä edes tehty kutsuja.
@@ -151,7 +149,7 @@ PWAstats \cite{PWAstats} on julkaissut tilastoja, miten yritysten nykyisten sivu
 
 Google on julkaissut PWA:lle tarkastuslistan, jota noudattamalla sovelluksesta saadaan progressiivinen \cite{Google}. Periaatteessa mikä tahansa verkkosivusto voidaan tehdä progressiiviseksi sovellukseksi \cite{hiltunen2018creating} riippumatta siitä, millä ohjelmistokehyksellä se on ohjelmoitu \footnote[1]{AngularJs (https://angularjs.org/), React (https://reactjs.org/), VueJs (https://vuejs.org/), Wordpress (https://wordpress.org/), Drupal (http://www.drupal.fi/)}, kunhan vain PWA-sovelluksen ehdot täyttyvät.
 
-\textbf{Web App Manifest}: Jotta projektista saataisiin sovelluksen kaltainen, tulee sovelluksen juureen määritellä manifest.json-tiedosto. Tiedosto voi pitää sisällään esimerkiksi tiedot seuraavista asioista:
+\textbf{Web App Manifest} on sovelluksen juureen määritettävä manifest.json-tiedosto, jolla projektista saadaan sovelluksen kaltainen. Tiedosto voi pitää sisällään esimerkiksi tiedot seuraavista asioista:
 
 \begin{itemize}
   \item sovelluksen nimi ja lyhytnimi,
@@ -170,7 +168,7 @@ Manifestissa määritelty nimi on sovelluksen nimi mobiililaitteen valikossa. Ly
 
 Aloitustiedosto on usein index.html tai index.js. Joissain tapauksissa voi olla hyödyllistä ohjata käyttäjä sivulle, jossa pystyy tekemään jotakin. Esimerkiksi sellaisessa tapauksessa, missä indexisivu on sisäänheittosivu tai sovelluksen mainossivu. Tässä tapauksessa voi olla järkevää ohjata käyttäjä vaikka sovelluksen kirjautumisikkunaan.
 
-\textbf{Sovelluskuvake}, kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa, luodaan manifest.json tiedostossa määritelty sovelluskuvake käyttäjän mobiililaitteen työpöydälle tai valikkoon. Sovelluskuvakkeeksi pitäisi käydä useampi eri kuvaformaatti, kunhan vain tiedostomuoto on määritelty erikseen. Sovelluskuvakkeita pitää olla lisäksi useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
+\textbf{Sovelluskuvake} tarvitaan kun käyttäjä tekee päätöksen asentaa sovellus puhelimeensa. Käytettävälle laitteelle luodaan manifest.json tiedostossa määritelty sovelluskuvake joko työpöydälle tai sovellusvalikkoon. Sovelluskuvakkeeksi pitäisi käydä useampi eri kuvaformaatti, kunhan vain tiedostomuoto on määritelty erikseen. Sovelluskuvakkeita pitää olla lisäksi useita eri kokoja, jotta resoluutio riittää kaikenkokoisille näytöille.
 
 \textbf{Service Worker} on teknologia, joka on koko PWA-sovelluksen pohja. Service Worker on uusi rajapinta verkkoselaimissa. Service Worker on kokoelma erilaisia rajapintoja \cite{malavolta2017assessing}. Service Worker toimii sovelluksen ja verkon välissä käyttäjän laitteella välittäjänä (proxy) kuva \ref{Service workerin toiminta}.
 
@@ -247,9 +245,7 @@ Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle määr
 \end{figure}
 
 
-\textbf{Service Workerin tallennustila}
-
-Syksyllä 2017 Microsoft Edge Web -tapahtumassa selainvalmistajat sopivat keskenään selaimen tallennustilan koosta. Yleiskooksi sovittiin 50 megatavua aina yli 20 gigabitin tallennustilaan \cite{Love}. 20 gigatavua ei kuitenkaan päde aina. Nyrkkisääntönä on, että kovalevyn tilasta voidaan varata korkeintaan 4 \% tai 20 gigatavua, kumpi vain on pienempi. Taulukossa \ref{table:selaimentallennustila} on esitetty tallennustilan varaamista erikokoisilla kiintolevyillä. Sivuston raja tarkoittaa samasta verkkotunnuksesta olevia sovelluksia. Mikäli saman verkkotunnuksen alta asennetaan useampi sovellus, on tallennustila yhteinen kaikille sen tunnuksen sovelluksille. 
+\textbf{Service Workerin tallennustila} sovittiin Syksyllä 2017 Microsoft Edge Web -tapahtumassa. Selainvalmistajat sopivat keskenään selaimen tallennustilan koosta. Yleiskooksi sovittiin 50 megatavua aina yli 20 gigabitin tallennustilaan \cite{Love}. 20 gigatavua ei kuitenkaan päde aina. Nyrkkisääntönä on, että kovalevyn tilasta voidaan varata korkeintaan 4 \% tai 20 gigatavua, kumpi vain on pienempi. Taulukossa \ref{table:selaimentallennustila} on esitetty tallennustilan varaamista erikokoisilla kiintolevyillä. Sivuston raja tarkoittaa samasta verkkotunnuksesta olevia sovelluksia. Mikäli saman verkkotunnuksen alta asennetaan useampi sovellus, on tallennustila yhteinen kaikille sen tunnuksen sovelluksille. 
 
 Service Workerin tallennustrategioita miettiessä on syytä kiinnittää huomiota tallennustilan rajallisuuteen. Kaikkea tietoa ei välttämättä ole järkevää tallettaa käyttäjän laitteelle. Esimerkiksi Apple on päättänyt rajoittaa PWA-sovellusten välimuistin koon vain 50 megatavuun \cite{Love}. Selaimen tallennusrajapintaa hyödyntämällä voidaan tarkistaa tallennustilan suuruus listauksen \ref{tallennustilankokoselaimessa} mukaisesti.
 
@@ -288,7 +284,7 @@ if ('storage' in navigator &&
  }
 \end{lstlisting}
 
-\textbf{HTTPS-liikenne.} Jotta sovellus voidaan laskea PWA-sovellukseksi, tulee kaikki liikenne lähettää salattuna HTTPS:n (Hypertext Transfer Protocol Secure) ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös arvioinut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA-sovellukseksi ja sen arviointi on Googlen hakutuloksissa huonompi kuin salattua liikennettä käyttävien sivustojen. Tietoturvan takia Service Workeria ei pysty rekisteröimään mikäli liikenne ei ole salattu \cite{biorn2017progressive}. Service Workerilla voitaisiin salaamattomassa liikenteessä esimerkiksi kaapata verkkokutsuja.
+\textbf{HTTPS-liikenne} tarvitaan, jotta sovellus voidaan laskea PWA-sovellukseksi. Kaikki PWA-sovelluksen liikenne tulee aina lähettää salattuna HTTPS:n (Hypertext Transfer Protocol Secure) ylitse. Salatun liikenteen käyttäminen on nykyisin hyvä tapa, jotta sovellus voidaan laskea luotettavaksi. Vuodesta 2018 eteenpäin Google on myös arvioinut verkkosivuja sen perusteella käyttävätkö ne HTTPS-protokollaa \cite{Eisworth}. Ilman salatun yhteyden käyttämistä sovellusta ei lasketa PWA-sovellukseksi ja sen arviointi on Googlen hakutuloksissa huonompi kuin salattua liikennettä käyttävien sivustojen. Tietoturvan takia Service Workeria ei pysty rekisteröimään mikäli liikenne ei ole salattu \cite{biorn2017progressive}. Service Workerilla voitaisiin salaamattomassa liikenteessä esimerkiksi kaapata verkkokutsuja.
 
 Salatun liikenteen lisäksi PWA-sovellus hyödyntää niin sanottua "turvallisuus ensin" -politiikkaa. Kun PWA-sovellus käynnistetään, sillä ei ole mitään oikeuksia käyttäjän laitteeseen \cite{8287006}. Tarvittavat oikeudet tulevat käyttöön sitä mukaa, kun niitä tarvitaan ja käyttäjä antaa sovellukselle tarvittavat luvat. Esimerkiksi siirryttäessä GPS:ää käyttävään kohtaan sovelluksessa tulee käyttäjälle pyyntö päästä GPS-anturiin käsiksi. Mikäli käyttäjä sallii tämän, saadaan sovellukselle käyttöokeuksia lisää. Sivusto siis muodostuu vähitellen täysiveriseksi sovellukseksi, kun se saa käyttöoikeuksia lisää selaimen tukemien PWA-ominaisuuksien rajoissa \cite{von2018progressive}.
 
@@ -311,7 +307,7 @@ PWA-sovelluksen on tarkoitus lyhentää latausaikaa jokaisella kerralla, kun kä
 PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyttäjältä ylimääräiset valikot ja luoda sovelluksesta näin natiivisovelluksen kaltainen. Näyttötilojen esimerkit kuvassa \ref{Näyttötilat}. Näyttötiloja on neljä erilaista \cite{Mozilla}:
 
 \begin{itemize}
-  \item Koko näytön tila (fullscreen), jolloin laitteen koko näyttö on käytössä ja selaimen user agent on piilotettuna.
+  \item Koko näytön tila (fullscreen) on tila jolloin laitteen koko näyttö on käytössä ja selaimen user agent on piilotettuna.
   \item Erillistilassa (standalone) sovellus näyttää ja tuntuu omalta sovellukseltaan. Sovellusta voidaan ajaa omassa ikkunassaan ja sillä voi olla oma ikoni käynnistysvalikossa. Selaimen käyttöliittymä on piilotettuna, mutta mobiililaitteen omat valikot ovat esillä, kuten tilapalkki. 
   \item Pienin mahdollinen käyttöliittymätila (minimal-ui) on sama kuin erillistila, mutta mukana on vain minimaalinen määrä käyttöliittymäelementtejä navigointia varten. Käyttöliittymäelementtien määrä riippuu laitteella käytettävästä selaimesta. 
   \item Selaintila (browser) on oletustila, jolloin sovellus aukeaa selaimen välilehdellä, tai uudessa ikkunassa, riippuen selaimesta ja laitealustasta. 
@@ -361,7 +357,7 @@ Google Developer -portaalin työasema-artikkelin mukaan \cite{Google} mobiililai
 
 \clearpage
 
-\section{Kuinka hyvä PWA-sovellus on}
+\section{PWA-sovellusten ominaispiirteet}
 
 Tässä luvussa vertaillaan PWA-sovelluksia yleisesti muihin teknologioihin. Muita mobiiliteknologioita ovat hybridisovellukset, React Native sovellukset ja natiivisovellukset. PWA-sovellusten mittaamista ja nopeutta tarkastellaan Googlen tapaustutkimuksen kautta. 
 
@@ -650,7 +646,7 @@ Taulukosta \ref{table:median first paint} nähdään, mikä vaikutus Service Wor
 
 Tässä luvussa esitellään Telia-IoT palvelu, tutkimusongelma ja -menetelmät. Lähtökohtainen tutkimuskysymys muodostui Telian tarpeista saada nykyisestä toteutuksesta mobiilisovellus. Teknologiaksi valittiin kuitenkin PWA-sovellus, sillä sen kehittäminen olisi halvempaa ja nopeampaa. Tutkimuskysymykseksi muodostui millaisia etuja PWA-sovellus tuo mukanaan sovelluksen käyttäjille? Onko PWA-sovellus nopeampi kuin normaali verkkosivusto? Miten nopeuden vaikutusta tarkasteltaisiin?
 
-\subsection{Telia IoT}
+\subsection{Tutkimusasetelma}
 
 Telia IoT-palvelulla (Internet of Things, IoT, esineiden internet) on helppoa seurata huoneilman lämpötila-, kosteus- ja hiilidioksiditasoja. Lisäksi on mahdollista tarkastella kuinka paljon työpisteitä tai neuvotteluhuoneita käytetään. Telia IoT-palvelu on hanke, jonka sovelluskehitys on käynnistetty vuoden 2016 alussa. Sovelluksen avulla on mahdollista parantaa viihtyvyyttä ja tehokkuutta toimiston työympäristössä. Moni viettää suuren osan päivästä sisätiloissa, erityisesti toimistossa. Sisäilman laadulla onkin huomattava vaikutus työhyvinvointiin, terveyteen, työtehokkuuteen sekä viihtyvyyteen työpaikalla. 
 
