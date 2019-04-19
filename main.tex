@@ -31,7 +31,7 @@
 
 
 \usepackage{xcolor}
-\usepackage{listings}% http://ctan.org/pkg/listings
+\usepackage{listings, chngcntr}% http://ctan.org/pkg/listings
 \input{code/languageDefinitions}
 
 \renewcommand\lstlistingname{Listaus}
@@ -40,6 +40,8 @@
 
 
 \begin{document}
+\counterwithin{lstlisting}{section}
+\counterwithin{table}{section}
 %\doublespacing  joskus halutaan enemmän kommentointitilaa rivien väliin
 %\onehalfspacing joskus halutaan enemmän kommentointitilaa rivien väliin
 \singlespacing
