@@ -252,7 +252,8 @@ Jotta Service Worker saadaan asennettua ja aktiiviseksi, tulee selaimelle määr
 Service Workerin tallennustrategioita miettiessä on syytä kiinnittää huomiota tallennustilan rajallisuuteen. Kaikkea tietoa ei välttämättä ole järkevää tallettaa käyttäjän laitteelle. Esimerkiksi Apple on päättänyt rajoittaa PWA-sovellusten välimuistin koon vain 50 megatavuun \cite{Love}. Selaimen tallennusrajapintaa hyödyntämällä voidaan tarkistaa tallennustilan suuruus listauksen \ref{tallennustilankokoselaimessa} mukaisesti.
 
 \begin{table}[h]
-\begin{center}
+\centering
+\begin{small}
   \begin{tabular}{|L{4cm}|L{4cm}|L{4cm}|}
     \hline
     \textbf{Tallennustilan koko} & 
@@ -265,7 +266,7 @@ Service Workerin tallennustrategioita miettiessä on syytä kiinnittää huomiot
     > 128GB & 20\% & 4\% tai 20GB (kumpi on pienempi) \\
     \hline
   \end{tabular}
-\end{center}
+\end{small}
 \caption{Service Workerin tallennustilan koko massamuistista riippuen \cite{Love}.}
 \label{table:selaimentallennustila}
 \end{table}
@@ -953,7 +954,6 @@ Testissä määriteltiin yksinkertaisesti kymmenen ajoa kummallekin tavalle. Sel
 \begin{table}[h]
 \centering
 \begin{small}
-\caption{Telia IoT-palvelun latausajat testissä. }
 \begin{tabular}{|L{3cm}|L{3cm}|L{3cm}|L{3cm}|}
 \hline
 \textbf{Grunt ei Välimuistia} & 
@@ -986,6 +986,7 @@ Testissä määriteltiin yksinkertaisesti kymmenen ajoa kummallekin tavalle. Sel
 494,2 &	188 & 491,9 & 182,8
 \\ \hline
 \end{tabular}
+\caption{Telia IoT-palvelun latausajat testissä. }
 \label{table:puppeteerLatausajat}
 \end{small}
 \end{table}
