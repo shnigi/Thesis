@@ -188,7 +188,7 @@ Service Workeriin voidaan ohjelmallisesti määrittää, mitä tiedostoja tallen
   \item Yleinen varasuunnitelma. Kun tiedostoa ei löydy välimuistista eikä verkosta, näytetään tilalla vaihtoehtoinen kuva tai esimerkiksi teksti: "ei käytettävissä ilman verkkoyhteyttä".
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[hbt!]
 \begin{center}
 \epsfig{figure=serviceworker_logic.png,  width=0.8\textwidth}
 \caption{Service Workerin toimintalogiikka. }
@@ -211,15 +211,15 @@ Service Workerin standardi on määritelty vuonna 2009 W3C:n toimesta. Service W
 
 Service Workerilla on kaksi tilaa, aktiivinen ja pysäytetty. Service Worker ei ole aina aktiivisena selaimessa vaan se menee lepotilaan kunnes sitä tarvitaan uudestaan. Service Worker aktivoituu uudestaan verkkopyynnöistä. Service Workerin elinkaari on havainnollistettu kuvassa \ref{Service workerin elinkaari}.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \begin{center}
-\epsfig{figure=serviceworker.jpg,  width=0.8\textwidth}
+\epsfig{figure=serviceworker.png,  width=0.5\textwidth}
 \caption{Service Workerin elinkaari yksinkertaistettuna. }
 \label{Service workerin elinkaari}
 \end{center}
 \end{figure}
 
-Service Worker tuki eri selaimilla on kuvassa \ref{Service workerin selaintuki}. Kuvasta nähdään, että Service Worker on pääosin tuettuna kaikissa yleisimmissä selaimissa. Joissain selaimissa Service Worker on kuitenkin vielä kokeellinen ominaisuus. Jos selaimessa ei vielä ole Service Worker tukea, täytyy Service Workerin rekisteröinti jättää tekemättä. Selaimen Service Workerin tuen tarkistaminen ja rekisteröinti tapahtuu listauksen \ref{serviceworkerinasennus} mukaisesti.
+Service Workerin tuki eri selaimilla on kuvassa \ref{Service workerin selaintuki}. Kuvasta nähdään, että Service Worker on pääosin tuettuna kaikissa yleisimmissä selaimissa. Joissain selaimissa Service Worker on kuitenkin vielä kokeellinen ominaisuus. Jos selaimessa ei vielä ole Service Worker tukea, täytyy Service Workerin rekisteröinti jättää tekemättä. Selaimen Service Workerin tuen tarkistaminen ja rekisteröinti tapahtuu listauksen \ref{serviceworkerinasennus} mukaisesti.
 
 \begin{lstlisting} [
      language=JavaScript,
@@ -296,9 +296,9 @@ Yksi PWA-sovelluksen keskeisimmistä arkkitehtuurillisista suunnittelumalleista 
 
 PWA-sovelluksen on tarkoitus lyhentää latausaikaa jokaisella kerralla, kun käyttäjä vierailee sivustolla. Behlin ja Rajn työssä \cite{8441701} oli otettu mittaukset viidestä eri PWA-sovelluksesta ja latausajat oli otettu talteen jokaiselta kerralta. Työssä esiteltiin kuva, josta nähtiin, että latausaika peräkkäisillä vierailuilla tippui jokaisella kerralla vähän. Riippuen verkkoyhteydestä ja palvelimesta, latausaika saattoi hieman vaihdella. Kehyksen tarkoitus on siis tarjota käyttöliittymä lähes välittömästi käyttäjän laitteen välimuistista, ja vain data on tarkoitus hakea dynaamisesti palvelimelta. Kehysmalli tekee sovelluksesta nopean ja luotettavan, kun valikoita ei tarvitse joka kerta ladata palvelimelta uudestaan. Verkkoyhteydettömässä tilassa valikot voidaan näyttää välimuistista, ja kehyksen sisällä voidaan esittää esimerkiksi virheviesti.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \begin{center}
-\epsfig{figure=app_shell.png,  width=1.1\textwidth}
+\epsfig{figure=app_shell.png,  width=0.85\textwidth}
 \caption{Service Workerin välimuistiin tallennettu kehys latautuu välittömästi toistuvilla latauksilla ja näkymään voidaan ladata dynaamisesti sisältöä käytön aikana. }
 \label{App shell}
 \end{center}
@@ -306,7 +306,7 @@ PWA-sovelluksen on tarkoitus lyhentää latausaikaa jokaisella kerralla, kun kä
 
 \subsection{Näyttötilat}
 
-PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyttäjältä ylimääräiset valikot ja luoda sovelluksesta näin natiivisovelluksen kaltainen. Näyttötilojen esimerkit kuvassa \ref{Näyttötilat}. Näyttötiloja on neljä erilaista \cite{Mozilla}:
+PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyttäjältä ylimääräiset valikot ja luoda sovelluksesta näin natiivisovelluksen kaltainen. Näyttötilojen esimerkit ovat kuvassa \ref{Näyttötilat}. Näyttötiloja on neljä erilaista \cite{Mozilla}:
 
 \begin{itemize}
   \item Koko näytön tila (fullscreen) on tila jolloin laitteen koko näyttö on käytössä ja selaimen user agent on piilotettuna.
@@ -315,7 +315,7 @@ PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyt
   \item Selaintila (browser) on oletustila, jolloin sovellus aukeaa selaimen välilehdellä, tai uudessa ikkunassa, riippuen selaimesta ja laitealustasta. 
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \begin{center}
 \epsfig{figure=nayttotilat.png,  width=0.8\textwidth}
 \caption{Näyttötilat vasemmalta oikealle: Browser, standalone / minimal-ui ja fullscreen.}
@@ -325,7 +325,7 @@ PWA tuo mukanaan niin sanotut näyttötilat, joiden tarkoitus on piilottaa käyt
 
 Kun kaikki PWA-sovelluksen ehdot on täytetty, tulee käyttäjän ruudulle kuvan \ref{asennusbanneri} kaltainen ponnahdusikkuna.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \begin{center}
 \epsfig{figure=install_banners.jpg,  width=0.7\textwidth}
 \caption{Telia IoT PWA-sovelluksen ponnahdusikkuna Google-Chrome ja Firefox mobiiliselaimissa.}
@@ -335,9 +335,9 @@ Kun kaikki PWA-sovelluksen ehdot on täytetty, tulee käyttäjän ruudulle kuvan
 
 Kun PWA-sovellus on asennettu mobiililaitteelle, tulee sovellusvalikkoon sovelluksen pikakuvake josta sovellus avautuu manifestissä määritellyllä näyttötilalla. Esimerkki kuvassa \ref{teliaiot_puhelimessa_asennettuna}.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
-    \includegraphics[width=0.9\textwidth]{teliaiot_puhelimessa.jpg}
+    \includegraphics[width=0.7\textwidth]{teliaiot_puhelimessa.jpg}
       \caption{Vasemmalla Telia IoT -sovellus asennettuna Android puhelimen sovellusvalikossa ja oikealla sovellus avattuna kokonäytön tilassa.}
       \label{teliaiot_puhelimessa_asennettuna}
 \end{figure}
@@ -412,7 +412,7 @@ PWA-sovellusten suurin ongelma toistaiseksi on sovelluksen pääsy laitteiden na
 \begin{figure}[h]
 \begin{center}
 \epsfig{figure=html5apis.jpg,  width=0.9\textwidth}
-\caption{Google Chrome Version 72 tukemat rajapinnat. Kuvakaappaus https://whatwebcando.today/ }
+\caption{Google Chrome Version 72 tukemat rajapinnat. Kuvakaappaus sivulta https://whatwebcando.today/ }
 \label{Selaimen rajapinnat}
 \end{center}
 \end{figure}
@@ -432,7 +432,6 @@ Hybridi- natiivi ja PWA-sovellusten eroja on esitelty taulukossa \ref{table:tekn
 \begin{table}[h]
 \centering
 \begin{small}
-\caption{ Teknologioiden erot \cite{biorn2017progressive} }
 \begin{tabular}{|L{4cm}|L{4cm}|L{4cm}|L{4cm}| L{4cm}|}
 \hline
 \textbf{} &
@@ -474,6 +473,7 @@ Hybridi- natiivi ja PWA-sovellusten eroja on esitelty taulukossa \ref{table:tekn
 \textbf{Synkronointi taustalla} & Kyllä & Kyllä & Kyllä & Kyllä
 \\ \hline
 \end{tabular}
+\caption{ Teknologioiden erot \cite{biorn2017progressive} }
 \label{table:teknologiaerot}
 \end{small}
 \end{table}
@@ -518,7 +518,9 @@ Latausajan mittaukset jaettiin tapaustutkimuksessa kolmeen eri kategoriaan.
   \item \textbf{Unsupported:} Käyttäjä, jonka selain ei tue Service Workeria ollenkaan. 
 \end{itemize}
 
-\begin{figure}[h]
+Kuvasta \ref{Google AVG load times} nähdään, että Service Workerin hallitsema välimuisti (sininen pylväs) lataa sivut nopeammin kuin käyttäjillä, joilla on selaimen välimuistissa jo tietoa (punainen pylväs). Mielenkiintoista on myös huomata, että mobiilikäyttäjillä latausaika on Service Workerin ollessa käytössä lyhyempi, kuin uusilla tietokonekäyttäjillä. 
+
+\begin{figure}[!htbp]
 \begin{center}
 \epsfig{figure=google_case_study_1.png,  width=1.0\textwidth}
 \caption{Keskimääräiset latausajat Googlen IOWA sovelluksessa. Kuvakaappaus Google Developer portaalista \cite{Walton}}
@@ -526,12 +528,10 @@ Latausajan mittaukset jaettiin tapaustutkimuksessa kolmeen eri kategoriaan.
 \end{center}
 \end{figure}
 
-Kuvasta \ref{Google AVG load times} nähdään, että Service Workerin hallitsema välimuisti (sininen pylväs) lataa sivut nopeammin kuin käyttäjillä, joilla on selaimen välimuistissa jo tietoa (punainen pylväs). Mielenkiintoista on myös huomata, että mobiilikäyttäjillä latausaika on Service Workerin ollessa käytössä lyhyempi, kuin uusilla tietokonekäyttäjillä. 
 
-\begin{table}[h]
+\begin{table}[!htbp]
 \centering
 \begin{small}
-\caption{Keskimääräinen sivuston lataamisaika tietokoneella IOWA tapaustutkimuksessa \cite{Walton}. }
 \begin{tabular}{|L{5cm}|L{4cm}|L{4cm}|}
 \hline
 \textbf{Service Workerin tila} & 
@@ -551,16 +551,16 @@ Uusi käyttäjä &
 4664
 \\ \hline
 \end{tabular}
+\caption{Keskimääräinen sivuston lataamisaika tietokoneella IOWA tapaustutkimuksessa \cite{Walton}. }
 \label{table:loading time on pc}
 \end{small}
 \end{table}
 
 \clearpage
 
-\begin{table}[h]
+\begin{table}[!htbp]
 \centering
 \begin{small}
-\caption{Keskimääräinen sivuston lataamisaika mobiililaitteella IOWA tapaustutkimuksessa \cite{Walton} }
 \begin{tabular}{|L{5cm}|L{4cm}|L{4cm}|}
 \hline
 \textbf{Service Workerin tila} & 
@@ -580,13 +580,14 @@ Uusi käyttäjä &
 6158
 \\ \hline
 \end{tabular}
+\caption{Keskimääräinen sivuston lataamisaika mobiililaitteella IOWA tapaustutkimuksessa \cite{Walton} }
 \label{table:loading time on mobile}
 \end{small}
 \end{table}
 
-Taulukoiden latausajoista nähdään, että ero Service Workerin ollessa päällä mobiililaitteella ja verrattuna uuteen työasemavierailijaan on noin sekunnin nopeampaa mobiililaitteella. Vastatakseen toiseen kysymykseen, kuinka paljon Service Worker vaikuttaa sovelluksen käytettävyyteen, Waltonin \cite{Walton} tapaustutkimuksessa otettiin mittaukset "Ensimmäinen piirto" -mittapisteestä.
+Taulukoiden \ref{table:loading time on pc} ja \ref{table:loading time on mobile} latausajoista nähdään, että ero Service Workerin ollessa päällä mobiililaitteella ja verrattuna uuteen työasemavierailijaan on noin sekunnin nopeampaa mobiililaitteella. Vastatakseen toiseen kysymykseen, kuinka paljon Service Worker vaikuttaa sovelluksen käytettävyyteen, Waltonin \cite{Walton} tapaustutkimuksessa otettiin mittaukset "Ensimmäinen piirto" -mittapisteestä.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \begin{center}
 \epsfig{figure=google_case_study_2.png,  width=0.7\textwidth}
 \caption{Keskimääräiset ensimmäisen piirron ajat Googlen IOWA sovelluksessa. Kuvakaappaus Google Developer portaalista \cite{Walton}}
@@ -596,7 +597,7 @@ Taulukoiden latausajoista nähdään, että ero Service Workerin ollessa pääll
 
 Kuvasta \ref{Google AVG load times 1} käy ilmi, että Service Workerilla on paljon pienempi vaikutus "Ensimmäinen piirto"-mittapisteessä mobiililaitteella. Dataa täytyy kuitenkin vielä tarkastella lisää, jotta saadaan käsitys miksi asia on näin. "Ensimmäinen piirto"-tuloksista on poimittu joka ikinen sivulataus ja muodostettu kuvaaja, joka esitellään kuvassa \ref{Google AVG load times 2}.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \begin{center}
 \epsfig{figure=google_case_study_3.png,  width=0.9\textwidth}
 \caption{Ensimmäinen piirto Service Workerilla ja ilman (Tietokone). Kuvakaappaus Google Developer portaalista \cite{Walton}}
@@ -604,11 +605,11 @@ Kuvasta \ref{Google AVG load times 1} käy ilmi, että Service Workerilla on pal
 \end{center}
 \end{figure}
 
-Kuvasta \ref{Google AVG load times 2} huomataan, että Service Workerin ollessa käytössä ensimmäinen piirtoaika on pienentynyt noin puoli sekuntia. Lisäksi Service Workerin ollessa käytössä saatiin "ensimmäinen piirto" melkein heti työasemakäytössä. Mielenkiintoista kuvan graafissa on se, että Service Workerin ollessa käytössä on jakauma kellon muotoinen, eikä laskeva. Waltonin tutkittua asiaa selvisi jakauman johtuvan siitä, että Service Worker ei ole aina aktiivinen selaimessa. Selain lopettaa Service Worker -säikeen ajamisen säästääkseen resursseja. Jokaista Service Workeria ei olisikaan järkevää pitää aktiivisena, jos olisi vieraillut sadoilla eri verkkosivuilla. Tämä selittää jakauman. Joillakin käyttäjillä Service Worker on saattanut olla sammunut ja sen uudelleen käynnistämisessä on kestänyt pieni hetki. Kuvasta  nähdään myös, että vaikka Service Worker olisi sammuksissa, saadaan sen avulla ladattua sivusto nopeammin kuin selaimen tehdessä kaikki kyselyt puhtaasti verkosta. 
+Kuvasta \ref{Google AVG load times 2} nähdään, että Service Workerin ollessa käytössä ensimmäinen piirtoaika on pienentynyt noin puoli sekuntia. Lisäksi Service Workerin ollessa käytössä saatiin "ensimmäinen piirto" melkein heti työasemakäytössä. Mielenkiintoista kuvan graafissa on se, että Service Workerin ollessa käytössä on jakauma kellon muotoinen, eikä laskeva. Waltonin tutkittua asiaa selvisi jakauman johtuvan siitä, että Service Worker ei ole aina aktiivinen selaimessa. Selain lopettaa Service Worker -säikeen ajamisen säästääkseen resursseja. Jokaista Service Workeria ei olisikaan järkevää pitää aktiivisena, jos olisi vieraillut sadoilla eri verkkosivuilla. Tämä selittää jakauman. Joillakin käyttäjillä Service Worker on saattanut olla sammunut ja sen uudelleen käynnistämisessä on kestänyt pieni hetki. Kuvasta  nähdään myös, että vaikka Service Worker olisi sammuksissa, saadaan sen avulla ladattua sivusto nopeammin kuin selaimen tehdessä kaikki kyselyt puhtaasti verkosta. 
 
 \clearpage
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \begin{center}
 \epsfig{figure=google_case_study_4.png,  width=0.9\textwidth}
 \caption{Ensimmäinen piirto Service Workerilla ja ilman (Mobiililaite). Kuvakaappaus Google Developer portaalista \cite{Walton}}
@@ -616,10 +617,9 @@ Kuvasta \ref{Google AVG load times 2} huomataan, että Service Workerin ollessa 
 \end{center}
 \end{figure}
 
-\begin{table}[h]
+\begin{table}[!htbp]
 \centering
 \begin{small}
-\caption{Mediaani ensimmäiselle piirrolle (ms) }
 \begin{tabular}{|L{5cm}|L{3cm}|L{3cm}|}
 \hline
 \textbf{Service Workerin tila} & 
@@ -635,6 +635,7 @@ Tuettu, ei käytössä &
 1933
 \\ \hline
 \end{tabular}
+\caption{Mediaani ensimmäiselle piirrolle (ms) }
 \label{table:median first paint}
 \end{small}
 \end{table}
@@ -660,7 +661,7 @@ Sensorit saavat virtansa kahdesta AA-paristosta. Yanzi lupaa sensoreiden käytt�
 
 Taustapalvelut toimittaa saksalainen Cumulocity GmbH. Cumulocityn toimittamaa rajapintaa hyödyntäen IoT-käyttöliittymän data haetaan JavaScriptillä. Cumulocity toimittaa palvelun mukana myös kattavan hallintapaneelin sekä työpöytänäkymän. Sovelluksen käyttö osoittautui kuitenkin hankalaksi. Tämän seurauksena Telia käynnisti vuoden 2016 alussa projektin helposta käyttöliittymästä IoT-laitteille. 
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \begin{center}
 \epsfig{figure=cumulocity_architecture.png,  width=1.0\textwidth}
 \caption{Telia IoT-arkkitehtuurikuvaus. Tämä työ koskee punaisella ympyrällä merkittyä osaa.}
@@ -668,7 +669,7 @@ Taustapalvelut toimittaa saksalainen Cumulocity GmbH. Cumulocityn toimittamaa ra
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \begin{center}
 \epsfig{figure=yanzisensori.jpg,  width=0.5\textwidth}
 \caption{Yanzi motion sensori, joka mittaa: liikettä, kosteutta, lämpötilaa, valoisuutta ja äänenvoimakkuutta.}
@@ -909,7 +910,7 @@ Sovellusta mitattiin suoraan tuotantopalvelimelta. Vaihtoehtona olisi ollut mita
 
 Sovelluksen koko on kasvanut vuosien aikana erittäin laajaksi lukuisten kirjastojen ja kirjoitetun koodin myötä. Isomman koodimäärän lataaminen ja kääntäminen selaimessa kestää kauemmin. Vuoden 2015 lopulla aloitettu projekti ei ole modulaarinen ja sen skriptien lataaminen on selaimessa hidasta. Lisäksi kaikki skriptit ladataan, vaikka niitä ei edes heti tarvittaisi. Tästä syystä suorituskykypisteet jäivät hyvin pieniksi ensimmäisessä mittauksessa. Suorituskykypisteitä verrattiin Lighthouse-työkalun mittapisteestä: aika joka selaimelta kesti kääntää sovellus niin, että se on valmis käytettäväksi ja reagoi käyttäjän syötteisiin.
 
-Toinen pisteisiin suoraan vaikuttava asia on ensimmäinen järkevä piirto-mittapiste, joka tarkoittaa ensimmäistä järkevää näkymää käyttäjälle. PWA-sovelluksille on erittäin tärkeää latautua nopeasti.  Lighthousen tuloksista \ref{Lighthouse raportti 1} nähdään, että sovellus täyttää kaikki tarvittavat PWA-sovelluksen kriteerit, paitsi suorituskyvyn osalta, jonka takia PWA-pistemäärä jäi 73 pisteeseen.
+Toinen pisteisiin suoraan vaikuttava asia on ensimmäinen järkevä piirto-mittapiste, joka tarkoittaa ensimmäistä järkevää näkymää käyttäjälle. PWA-sovelluksille on erittäin tärkeää latautua nopeasti.  Lighthousen tuloksista, kuva \ref{Lighthouse raportti 1} nähdään, että sovellus täyttää kaikki tarvittavat PWA-sovelluksen kriteerit, paitsi suorituskyvyn osalta, jonka takia PWA-pistemäärä jäi 73 pisteeseen.
 
 \begin{figure}[h]
 \begin{center}
@@ -921,7 +922,7 @@ Toinen pisteisiin suoraan vaikuttava asia on ensimmäinen järkevä piirto-mitta
 
 \clearpage
 
-Seuraava mittaus tehtiin Webpackia hyödyntävällä sovelluksen versiolla 1.7.1, jonka Service Worker oli generoitu Webpack-lisäosalla. Pelkästään siirtämällä muutama skripti ladattavaksi moduuleina, saatiin sovelluksen lataamista nopeammaksi. Mittauksen tuloksista \ref{Lighthouse raportti 2} nähdään, että sovelluksen kääntöaika käytettäväksi laski yli sekunnin. Myös ensimmäinen järkevä piirto tippui yli puoli sekuntia. Web-sovelluksista puhuttaessa on kyse huomattavasta ajasta. Sovelluksen kokonaiskäynnistymisaika on kuitenkin edelleen hidas verrattuna hyvin optimoituihin nykyaikaisiin modulaarisiin sivustoihin. Sekunnin nopeusmuutos antoi kuitenkin täydet 100 pistettä PWA-kategoriasta. 
+Seuraava mittaus tehtiin Webpackia hyödyntävällä sovelluksen versiolla 1.7.1, jonka Service Worker oli generoitu Webpack-lisäosalla. Pelkästään siirtämällä muutama skripti ladattavaksi moduuleina, saatiin sovelluksen lataamista nopeammaksi. Mittauksen tuloksista kuvassa \ref{Lighthouse raportti 2} nähdään, että sovelluksen kääntöaika käytettäväksi laski yli sekunnin. Myös ensimmäinen järkevä piirto tippui yli puoli sekuntia. Web-sovelluksista puhuttaessa on kyse huomattavasta ajasta. Sovelluksen kokonaiskäynnistymisaika on kuitenkin edelleen hidas verrattuna hyvin optimoituihin nykyaikaisiin modulaarisiin sivustoihin. Sekunnin nopeusmuutos antoi kuitenkin täydet 100 pistettä PWA-kategoriasta. 
 
 \begin{figure}[h]
 \begin{center}
